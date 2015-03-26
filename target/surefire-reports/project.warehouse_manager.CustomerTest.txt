@@ -1,0 +1,48 @@
+-------------------------------------------------------------------------------
+Test set: project.warehouse_manager.CustomerTest
+-------------------------------------------------------------------------------
+Tests run: 11, Failures: 0, Errors: 11, Skipped: 0, Time elapsed: 0.036 sec <<< FAILURE! - in project.warehouse_manager.CustomerTest
+testGetEmail(project.warehouse_manager.CustomerTest)  Time elapsed: 0.031 sec  <<< ERROR!
+java.lang.RuntimeException: null
+	at project.warehouse_manager.CustomerTest.testGetEmail(CustomerTest.java:41)
+
+testAddUnit(project.warehouse_manager.CustomerTest)  Time elapsed: 0 sec  <<< ERROR!
+java.lang.RuntimeException: null
+	at project.warehouse_manager.CustomerTest.testAddUnit(CustomerTest.java:56)
+
+testGetId(project.warehouse_manager.CustomerTest)  Time elapsed: 0 sec  <<< ERROR!
+java.lang.RuntimeException: null
+	at project.warehouse_manager.CustomerTest.testGetId(CustomerTest.java:21)
+
+testSetId(project.warehouse_manager.CustomerTest)  Time elapsed: 0 sec  <<< ERROR!
+java.lang.RuntimeException: null
+	at project.warehouse_manager.CustomerTest.testSetId(CustomerTest.java:26)
+
+testGetName(project.warehouse_manager.CustomerTest)  Time elapsed: 0 sec  <<< ERROR!
+java.lang.RuntimeException: null
+	at project.warehouse_manager.CustomerTest.testGetName(CustomerTest.java:31)
+
+testIsUnitOwned(project.warehouse_manager.CustomerTest)  Time elapsed: 0 sec  <<< ERROR!
+java.lang.RuntimeException: null
+	at project.warehouse_manager.CustomerTest.testIsUnitOwned(CustomerTest.java:66)
+
+testGetUnitsOwned(project.warehouse_manager.CustomerTest)  Time elapsed: 0 sec  <<< ERROR!
+java.lang.RuntimeException: null
+	at project.warehouse_manager.CustomerTest.testGetUnitsOwned(CustomerTest.java:51)
+
+testRemoveUnit(project.warehouse_manager.CustomerTest)  Time elapsed: 0.001 sec  <<< ERROR!
+java.lang.RuntimeException: null
+	at project.warehouse_manager.CustomerTest.testRemoveUnit(CustomerTest.java:61)
+
+testCustomer(project.warehouse_manager.CustomerTest)  Time elapsed: 0 sec  <<< ERROR!
+java.lang.RuntimeException: null
+	at project.warehouse_manager.CustomerTest.testCustomer(CustomerTest.java:16)
+
+testSetName(project.warehouse_manager.CustomerTest)  Time elapsed: 0.001 sec  <<< ERROR!
+java.lang.RuntimeException: null
+	at project.warehouse_manager.CustomerTest.testSetName(CustomerTest.java:36)
+
+testSetEmail(project.warehouse_manager.CustomerTest)  Time elapsed: 0 sec  <<< ERROR!
+java.lang.RuntimeException: null
+	at project.warehouse_manager.CustomerTest.testSetEmail(CustomerTest.java:46)
+

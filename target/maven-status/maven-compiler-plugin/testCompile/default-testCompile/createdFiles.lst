@@ -1,0 +1,6 @@
+project\warehouse_manager\DatabaseHandlerTest.class
+project\warehouse_manager\CustomerTest.class
+project\warehouse_manager\UnitTest.class
+project\warehouse_manager\FixedUnitWarehouseTest.class
+project\warehouse_manager\DualWarehouseManagerTest.class
+project\warehouse_manager\DateTest.class

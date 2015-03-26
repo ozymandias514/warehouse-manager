@@ -1,0 +1,40 @@
+-------------------------------------------------------------------------------
+Test set: project.warehouse_manager.DualWarehouseManagerTest
+-------------------------------------------------------------------------------
+Tests run: 9, Failures: 0, Errors: 9, Skipped: 0, Time elapsed: 0 sec <<< FAILURE! - in project.warehouse_manager.DualWarehouseManagerTest
+testAddCustomer(project.warehouse_manager.DualWarehouseManagerTest)  Time elapsed: 0 sec  <<< ERROR!
+java.lang.RuntimeException: null
+	at project.warehouse_manager.DualWarehouseManagerTest.testAddCustomer(DualWarehouseManagerTest.java:36)
+
+testGetLargeWarehouse(project.warehouse_manager.DualWarehouseManagerTest)  Time elapsed: 0 sec  <<< ERROR!
+java.lang.RuntimeException: null
+	at project.warehouse_manager.DualWarehouseManagerTest.testGetLargeWarehouse(DualWarehouseManagerTest.java:26)
+
+testWarehouseManager(project.warehouse_manager.DualWarehouseManagerTest)  Time elapsed: 0 sec  <<< ERROR!
+java.lang.RuntimeException: null
+	at project.warehouse_manager.DualWarehouseManagerTest.testWarehouseManager(DualWarehouseManagerTest.java:16)
+
+testAddUnitToCustomer(project.warehouse_manager.DualWarehouseManagerTest)  Time elapsed: 0 sec  <<< ERROR!
+java.lang.RuntimeException: null
+	at project.warehouse_manager.DualWarehouseManagerTest.testAddUnitToCustomer(DualWarehouseManagerTest.java:46)
+
+testDeleteUnitFromCustomer(project.warehouse_manager.DualWarehouseManagerTest)  Time elapsed: 0 sec  <<< ERROR!
+java.lang.RuntimeException: null
+	at project.warehouse_manager.DualWarehouseManagerTest.testDeleteUnitFromCustomer(DualWarehouseManagerTest.java:51)
+
+testMoveUnit(project.warehouse_manager.DualWarehouseManagerTest)  Time elapsed: 0 sec  <<< ERROR!
+java.lang.RuntimeException: null
+	at project.warehouse_manager.DualWarehouseManagerTest.testMoveUnit(DualWarehouseManagerTest.java:56)
+
+testGetSmallWarehouse(project.warehouse_manager.DualWarehouseManagerTest)  Time elapsed: 0 sec  <<< ERROR!
+java.lang.RuntimeException: null
+	at project.warehouse_manager.DualWarehouseManagerTest.testGetSmallWarehouse(DualWarehouseManagerTest.java:21)
+
+testDeleteCustomer(project.warehouse_manager.DualWarehouseManagerTest)  Time elapsed: 0 sec  <<< ERROR!
+java.lang.RuntimeException: null
+	at project.warehouse_manager.DualWarehouseManagerTest.testDeleteCustomer(DualWarehouseManagerTest.java:41)
+
+testGetCustomer(project.warehouse_manager.DualWarehouseManagerTest)  Time elapsed: 0 sec  <<< ERROR!
+java.lang.RuntimeException: null
+	at project.warehouse_manager.DualWarehouseManagerTest.testGetCustomer(DualWarehouseManagerTest.java:31)
+

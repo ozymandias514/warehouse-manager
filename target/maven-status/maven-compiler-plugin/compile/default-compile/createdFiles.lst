@@ -1,0 +1,15 @@
+project\warehouse_manager\exceptions\CustomerAlreadyExistsException.class
+project\warehouse_manager\exceptions\CustomerNotFoundException.class
+project\warehouse_manager\testingstuff.class
+project\warehouse_manager\Date.class
+project\warehouse_manager\Warehouse.class
+project\warehouse_manager\exceptions\UnitNotOwnedException.class
+project\warehouse_manager\DualWarehouseManager.class
+project\warehouse_manager\DatabaseHandlerImpl.class
+project\warehouse_manager\FixedUnitWarehouse.class
+project\warehouse_manager\exceptions\UnitAlreadyOwnedException.class
+project\warehouse_manager\Unit.class
+project\warehouse_manager\exceptions\UnitDoesNotExistException.class
+project\warehouse_manager\Customer.class
+project\warehouse_manager\WarehouseManager.class
+project\warehouse_manager\DatabaseHandler.class
