@@ -1,10 +1,5 @@
 package project.warehouse_manager;
 import java.sql.*;
-<<<<<<< HEAD
-
-import java.sql.*;
-=======
->>>>>>> f5852d7c0f0330c47ff5f1da1840a77b1eba839f
 
 public class DatabaseHandlerImpl {
 	private Connection con;

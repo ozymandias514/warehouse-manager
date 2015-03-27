@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="project.warehouse_manager.DatabaseHandlerTest" time="0.019" tests="9" errors="9" skipped="0" failures="0">
+<testsuite name="project.warehouse_manager.DatabaseHandlerTest" time="0" tests="9" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.7.0_51\jre\bin"/>
@@ -59,49 +59,13 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase name="testUpdateDeliveryDate" classname="project.warehouse_manager.DatabaseHandlerTest" time="0.017">
-    <error type="java.lang.RuntimeException:">java.lang.RuntimeException: null
-	at project.warehouse_manager.DatabaseHandlerTest.testUpdateDeliveryDate(DatabaseHandlerTest.java:26)
-</error>
-  </testcase>
-  <testcase name="testUpdateDescription" classname="project.warehouse_manager.DatabaseHandlerTest" time="0">
-    <error type="java.lang.RuntimeException:">java.lang.RuntimeException: null
-	at project.warehouse_manager.DatabaseHandlerTest.testUpdateDescription(DatabaseHandlerTest.java:21)
-</error>
-  </testcase>
-  <testcase name="testModifyCustomer" classname="project.warehouse_manager.DatabaseHandlerTest" time="0">
-    <error type="java.lang.RuntimeException:">java.lang.RuntimeException: null
-	at project.warehouse_manager.DatabaseHandlerTest.testModifyCustomer(DatabaseHandlerTest.java:41)
-</error>
-  </testcase>
-  <testcase name="testRemoveUnit" classname="project.warehouse_manager.DatabaseHandlerTest" time="0.001">
-    <error type="java.lang.RuntimeException:">java.lang.RuntimeException: null
-	at project.warehouse_manager.DatabaseHandlerTest.testRemoveUnit(DatabaseHandlerTest.java:56)
-</error>
-  </testcase>
-  <testcase name="testCustomerSearch" classname="project.warehouse_manager.DatabaseHandlerTest" time="0">
-    <error type="java.lang.RuntimeException:">java.lang.RuntimeException: null
-	at project.warehouse_manager.DatabaseHandlerTest.testCustomerSearch(DatabaseHandlerTest.java:36)
-</error>
-  </testcase>
-  <testcase name="testInsertCustomer" classname="project.warehouse_manager.DatabaseHandlerTest" time="0">
-    <error type="java.lang.RuntimeException:">java.lang.RuntimeException: null
-	at project.warehouse_manager.DatabaseHandlerTest.testInsertCustomer(DatabaseHandlerTest.java:51)
-</error>
-  </testcase>
-  <testcase name="testUpdateDatabase" classname="project.warehouse_manager.DatabaseHandlerTest" time="0.001">
-    <error type="java.lang.RuntimeException:">java.lang.RuntimeException: null
-	at project.warehouse_manager.DatabaseHandlerTest.testUpdateDatabase(DatabaseHandlerTest.java:31)
-</error>
-  </testcase>
-  <testcase name="testDeleteCustomer" classname="project.warehouse_manager.DatabaseHandlerTest" time="0">
-    <error type="java.lang.RuntimeException:">java.lang.RuntimeException: null
-	at project.warehouse_manager.DatabaseHandlerTest.testDeleteCustomer(DatabaseHandlerTest.java:46)
-</error>
-  </testcase>
-  <testcase name="testFullUnit" classname="project.warehouse_manager.DatabaseHandlerTest" time="0">
-    <error type="java.lang.RuntimeException:">java.lang.RuntimeException: null
-	at project.warehouse_manager.DatabaseHandlerTest.testFullUnit(DatabaseHandlerTest.java:16)
-</error>
-  </testcase>
+  <testcase name="testUpdateDeliveryDate" classname="project.warehouse_manager.DatabaseHandlerTest" time="0"/>
+  <testcase name="testUpdateDescription" classname="project.warehouse_manager.DatabaseHandlerTest" time="0"/>
+  <testcase name="testModifyCustomer" classname="project.warehouse_manager.DatabaseHandlerTest" time="0"/>
+  <testcase name="testRemoveUnit" classname="project.warehouse_manager.DatabaseHandlerTest" time="0"/>
+  <testcase name="testCustomerSearch" classname="project.warehouse_manager.DatabaseHandlerTest" time="0"/>
+  <testcase name="testInsertCustomer" classname="project.warehouse_manager.DatabaseHandlerTest" time="0"/>
+  <testcase name="testUpdateDatabase" classname="project.warehouse_manager.DatabaseHandlerTest" time="0"/>
+  <testcase name="testDeleteCustomer" classname="project.warehouse_manager.DatabaseHandlerTest" time="0"/>
+  <testcase name="testFullUnit" classname="project.warehouse_manager.DatabaseHandlerTest" time="0"/>
 </testsuite>

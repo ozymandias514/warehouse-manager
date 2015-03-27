@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="project.warehouse_manager.FixedUnitWarehouseTest" time="0" tests="6" errors="6" skipped="0" failures="0">
+<testsuite name="project.warehouse_manager.FixedUnitWarehouseTest" time="0" tests="6" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.7.0_51\jre\bin"/>
@@ -59,34 +59,10 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase name="testGetUnits" classname="project.warehouse_manager.FixedUnitWarehouseTest" time="0">
-    <error type="java.lang.RuntimeException:">java.lang.RuntimeException: null
-	at project.warehouse_manager.FixedUnitWarehouseTest.testGetUnits(FixedUnitWarehouseTest.java:21)
-</error>
-  </testcase>
-  <testcase name="testWarehouse" classname="project.warehouse_manager.FixedUnitWarehouseTest" time="0">
-    <error type="java.lang.RuntimeException:">java.lang.RuntimeException: null
-	at project.warehouse_manager.FixedUnitWarehouseTest.testWarehouse(FixedUnitWarehouseTest.java:16)
-</error>
-  </testcase>
-  <testcase name="testClearUnit" classname="project.warehouse_manager.FixedUnitWarehouseTest" time="0">
-    <error type="java.lang.RuntimeException:">java.lang.RuntimeException: null
-	at project.warehouse_manager.FixedUnitWarehouseTest.testClearUnit(FixedUnitWarehouseTest.java:36)
-</error>
-  </testcase>
-  <testcase name="testGetUnit" classname="project.warehouse_manager.FixedUnitWarehouseTest" time="0">
-    <error type="java.lang.RuntimeException:">java.lang.RuntimeException: null
-	at project.warehouse_manager.FixedUnitWarehouseTest.testGetUnit(FixedUnitWarehouseTest.java:26)
-</error>
-  </testcase>
-  <testcase name="testGetNumberOfUnitsInUse" classname="project.warehouse_manager.FixedUnitWarehouseTest" time="0">
-    <error type="java.lang.RuntimeException:">java.lang.RuntimeException: null
-	at project.warehouse_manager.FixedUnitWarehouseTest.testGetNumberOfUnitsInUse(FixedUnitWarehouseTest.java:41)
-</error>
-  </testcase>
-  <testcase name="testOccupyUnit" classname="project.warehouse_manager.FixedUnitWarehouseTest" time="0">
-    <error type="java.lang.RuntimeException:">java.lang.RuntimeException: null
-	at project.warehouse_manager.FixedUnitWarehouseTest.testOccupyUnit(FixedUnitWarehouseTest.java:31)
-</error>
-  </testcase>
+  <testcase name="testGetUnits" classname="project.warehouse_manager.FixedUnitWarehouseTest" time="0"/>
+  <testcase name="testWarehouse" classname="project.warehouse_manager.FixedUnitWarehouseTest" time="0"/>
+  <testcase name="testClearUnit" classname="project.warehouse_manager.FixedUnitWarehouseTest" time="0"/>
+  <testcase name="testGetUnit" classname="project.warehouse_manager.FixedUnitWarehouseTest" time="0"/>
+  <testcase name="testGetNumberOfUnitsInUse" classname="project.warehouse_manager.FixedUnitWarehouseTest" time="0"/>
+  <testcase name="testOccupyUnit" classname="project.warehouse_manager.FixedUnitWarehouseTest" time="0"/>
 </testsuite>

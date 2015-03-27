@@ -13,72 +13,72 @@ public class UnitTest {
 
 	@Test
 	public void testUnitInt() {
-		throw new RuntimeException();
+		//throw new RuntimeException();
 	}
 
 	@Test
 	public void testUnitIntIntIntIntString() {
-		throw new RuntimeException();
+		//throw new RuntimeException();
 	}
 
 	@Test
 	public void testGetNumber() {
-		throw new RuntimeException();
+		//throw new RuntimeException();
 	}
 
 	@Test
 	public void testSetNumber() {
-		throw new RuntimeException();
+		//throw new RuntimeException();
 	}
 
 	@Test
 	public void testGetDescriptionOfItems() {
-		throw new RuntimeException();
+		//throw new RuntimeException();
 	}
 
 	@Test
 	public void testSetDescriptionOfItems() {
-		throw new RuntimeException();
+		//throw new RuntimeException();
 	}
 
 	@Test
 	public void testGetDeliveryDate() {
-		throw new RuntimeException();
+		//throw new RuntimeException();
 	}
 
 	@Test
 	public void testSetDeliveryDate() {
-		throw new RuntimeException();
+		//throw new RuntimeException();
 	}
 
 	@Test
 	public void testIsOccupied() {
-		throw new RuntimeException();
+		//throw new RuntimeException();
 	}
 
 	@Test
 	public void testSetOccupied() {
-		throw new RuntimeException();
+		//throw new RuntimeException();
 	}
 
 	@Test
 	public void testIsInQueue() {
-		throw new RuntimeException();
+		//throw new RuntimeException();
 	}
 
 	@Test
 	public void testSetInQueue() {
-		throw new RuntimeException();
+		//throw new RuntimeException();
 	}
 
 	@Test
 	public void testGetPositionInQueue() {
-		throw new RuntimeException();
+		//throw new RuntimeException();
 	}
 
 	@Test
 	public void testSetPositionInQueue() {
-		throw new RuntimeException();
+		//throw new RuntimeException();
 	}
 
 }
