@@ -1,7 +1,7 @@
 -------------------------------------------------------------------------------
 Test set: project.warehouse_manager.DualWarehouseManagerTest
 -------------------------------------------------------------------------------
-Tests run: 9, Failures: 0, Errors: 9, Skipped: 0, Time elapsed: 0 sec <<< FAILURE! - in project.warehouse_manager.DualWarehouseManagerTest
+Tests run: 9, Failures: 0, Errors: 9, Skipped: 0, Time elapsed: 0.001 sec <<< FAILURE! - in project.warehouse_manager.DualWarehouseManagerTest
 testAddCustomer(project.warehouse_manager.DualWarehouseManagerTest)  Time elapsed: 0 sec  <<< ERROR!
 java.lang.RuntimeException: null
 	at project.warehouse_manager.DualWarehouseManagerTest.testAddCustomer(DualWarehouseManagerTest.java:36)

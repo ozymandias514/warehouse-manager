@@ -1,8 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: project.warehouse_manager.DatabaseHandlerTest
 -------------------------------------------------------------------------------
-Tests run: 9, Failures: 0, Errors: 9, Skipped: 0, Time elapsed: 0.001 sec <<< FAILURE! - in project.warehouse_manager.DatabaseHandlerTest
-testUpdateDeliveryDate(project.warehouse_manager.DatabaseHandlerTest)  Time elapsed: 0 sec  <<< ERROR!
+Tests run: 9, Failures: 0, Errors: 9, Skipped: 0, Time elapsed: 0.03 sec <<< FAILURE! - in project.warehouse_manager.DatabaseHandlerTest
+testUpdateDeliveryDate(project.warehouse_manager.DatabaseHandlerTest)  Time elapsed: 0.017 sec  <<< ERROR!
 java.lang.RuntimeException: null
 	at project.warehouse_manager.DatabaseHandlerTest.testUpdateDeliveryDate(DatabaseHandlerTest.java:26)
 
@@ -14,7 +14,7 @@ testModifyCustomer(project.warehouse_manager.DatabaseHandlerTest)  Time elapsed:
 java.lang.RuntimeException: null
 	at project.warehouse_manager.DatabaseHandlerTest.testModifyCustomer(DatabaseHandlerTest.java:41)
 
-testRemoveUnit(project.warehouse_manager.DatabaseHandlerTest)  Time elapsed: 0 sec  <<< ERROR!
+testRemoveUnit(project.warehouse_manager.DatabaseHandlerTest)  Time elapsed: 0.001 sec  <<< ERROR!
 java.lang.RuntimeException: null
 	at project.warehouse_manager.DatabaseHandlerTest.testRemoveUnit(DatabaseHandlerTest.java:56)
 
@@ -26,7 +26,7 @@ testInsertCustomer(project.warehouse_manager.DatabaseHandlerTest)  Time elapsed:
 java.lang.RuntimeException: null
 	at project.warehouse_manager.DatabaseHandlerTest.testInsertCustomer(DatabaseHandlerTest.java:51)
 
-testUpdateDatabase(project.warehouse_manager.DatabaseHandlerTest)  Time elapsed: 0 sec  <<< ERROR!
+testUpdateDatabase(project.warehouse_manager.DatabaseHandlerTest)  Time elapsed: 0.001 sec  <<< ERROR!
 java.lang.RuntimeException: null
 	at project.warehouse_manager.DatabaseHandlerTest.testUpdateDatabase(DatabaseHandlerTest.java:31)
 
