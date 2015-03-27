@@ -105,6 +105,7 @@ public class DualWarehouseManager implements WarehouseManager {
 	public void assignUnitToCustomer(int unitNumber, String customerEmail, Warehouse warehouse) 
 			throws UnitAlreadyOwnedException, CustomerNotFoundException, UnitDoesNotExistException {
 		//if (warehouse.getNumberOfUnitsInUse() < warehouse.getTotalNumberOfUnits())
+		//if unitnotoccupied...
 		getCustomer(customerEmail).addUnit(unitNumber); //TEST THIS
 		warehouse.occupyUnit(unitNumber);
 		

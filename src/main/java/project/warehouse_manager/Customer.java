@@ -7,7 +7,6 @@ import project.warehouse_manager.exceptions.UnitNotOwnedException;
 import project.warehouse_manager.exceptions.UnitAlreadyOwnedException;
 
 public class Customer {
-	private int id;
 	private String name;
     private String email;
     private List<Integer> unitsOwned;
@@ -17,24 +16,9 @@ public class Customer {
      * @param 
      */
     public Customer(String name, String email) {
-    	this.id = 0;
     	this.name = name;
     	this.email = email;
     	unitsOwned = new ArrayList<Integer>();
-    }
-
-    /**
-     * @return
-     */
-    public int getId() {
-    	return id;
-    }
-
-    /**
-     * @param 
-     */
-    public void setId(int id) {
-    	this.id = id;
     }
 
     /**
