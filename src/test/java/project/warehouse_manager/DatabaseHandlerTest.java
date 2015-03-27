@@ -13,47 +13,47 @@ public class DatabaseHandlerTest {
 
 	@Test
 	public void testFullUnit() {
-		//throw new RuntimeException();
+		throw new RuntimeException();
 	}
 
 	@Test
 	public void testUpdateDescription() {
-		//throw new RuntimeException();
+		throw new RuntimeException();
 	}
 
 	@Test
 	public void testUpdateDeliveryDate() {
-		//throw new RuntimeException();
+		throw new RuntimeException();
 	}
 
 	@Test
 	public void testUpdateDatabase() {
-		//throw new RuntimeException();
+		throw new RuntimeException();
 	}
 
 	@Test
 	public void testCustomerSearch() {
-		//throw new RuntimeException();
+		throw new RuntimeException();
 	}
 
 	@Test
 	public void testModifyCustomer() {
-		//throw new RuntimeException();
+		throw new RuntimeException();
 	}
 
 	@Test
 	public void testDeleteCustomer() {
-		//throw new RuntimeException();
+		throw new RuntimeException();
 	}
 
 	@Test
 	public void testInsertCustomer() {
-		//throw new RuntimeException();
+		throw new RuntimeException();
 	}
 
 	@Test
 	public void testRemoveUnit() {
-		//throw new RuntimeException();
+		throw new RuntimeException();
 	}
 
 }

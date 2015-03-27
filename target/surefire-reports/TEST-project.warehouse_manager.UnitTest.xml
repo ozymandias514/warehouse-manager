@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="project.warehouse_manager.UnitTest" time="0.001" tests="14" errors="0" skipped="0" failures="0">
+<testsuite name="project.warehouse_manager.UnitTest" time="0" tests="14" errors="14" skipped="0" failures="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.7.0_51\jre\bin"/>
@@ -59,18 +59,74 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase name="testSetPositionInQueue" classname="project.warehouse_manager.UnitTest" time="0"/>
-  <testcase name="testSetDeliveryDate" classname="project.warehouse_manager.UnitTest" time="0.001"/>
-  <testcase name="testSetDescriptionOfItems" classname="project.warehouse_manager.UnitTest" time="0"/>
-  <testcase name="testIsOccupied" classname="project.warehouse_manager.UnitTest" time="0"/>
-  <testcase name="testUnitInt" classname="project.warehouse_manager.UnitTest" time="0"/>
-  <testcase name="testSetInQueue" classname="project.warehouse_manager.UnitTest" time="0"/>
-  <testcase name="testUnitIntIntIntIntString" classname="project.warehouse_manager.UnitTest" time="0"/>
-  <testcase name="testGetDescriptionOfItems" classname="project.warehouse_manager.UnitTest" time="0"/>
-  <testcase name="testSetNumber" classname="project.warehouse_manager.UnitTest" time="0"/>
-  <testcase name="testGetNumber" classname="project.warehouse_manager.UnitTest" time="0"/>
-  <testcase name="testGetPositionInQueue" classname="project.warehouse_manager.UnitTest" time="0"/>
-  <testcase name="testIsInQueue" classname="project.warehouse_manager.UnitTest" time="0"/>
-  <testcase name="testSetOccupied" classname="project.warehouse_manager.UnitTest" time="0"/>
-  <testcase name="testGetDeliveryDate" classname="project.warehouse_manager.UnitTest" time="0"/>
+  <testcase name="testSetPositionInQueue" classname="project.warehouse_manager.UnitTest" time="0">
+    <error type="java.lang.RuntimeException:">java.lang.RuntimeException: null
+	at project.warehouse_manager.UnitTest.testSetPositionInQueue(UnitTest.java:81)
+</error>
+  </testcase>
+  <testcase name="testSetDeliveryDate" classname="project.warehouse_manager.UnitTest" time="0">
+    <error type="java.lang.RuntimeException:">java.lang.RuntimeException: null
+	at project.warehouse_manager.UnitTest.testSetDeliveryDate(UnitTest.java:51)
+</error>
+  </testcase>
+  <testcase name="testSetDescriptionOfItems" classname="project.warehouse_manager.UnitTest" time="0">
+    <error type="java.lang.RuntimeException:">java.lang.RuntimeException: null
+	at project.warehouse_manager.UnitTest.testSetDescriptionOfItems(UnitTest.java:41)
+</error>
+  </testcase>
+  <testcase name="testIsOccupied" classname="project.warehouse_manager.UnitTest" time="0">
+    <error type="java.lang.RuntimeException:">java.lang.RuntimeException: null
+	at project.warehouse_manager.UnitTest.testIsOccupied(UnitTest.java:56)
+</error>
+  </testcase>
+  <testcase name="testUnitInt" classname="project.warehouse_manager.UnitTest" time="0">
+    <error type="java.lang.RuntimeException:">java.lang.RuntimeException: null
+	at project.warehouse_manager.UnitTest.testUnitInt(UnitTest.java:16)
+</error>
+  </testcase>
+  <testcase name="testSetInQueue" classname="project.warehouse_manager.UnitTest" time="0">
+    <error type="java.lang.RuntimeException:">java.lang.RuntimeException: null
+	at project.warehouse_manager.UnitTest.testSetInQueue(UnitTest.java:71)
+</error>
+  </testcase>
+  <testcase name="testUnitIntIntIntIntString" classname="project.warehouse_manager.UnitTest" time="0">
+    <error type="java.lang.RuntimeException:">java.lang.RuntimeException: null
+	at project.warehouse_manager.UnitTest.testUnitIntIntIntIntString(UnitTest.java:21)
+</error>
+  </testcase>
+  <testcase name="testGetDescriptionOfItems" classname="project.warehouse_manager.UnitTest" time="0">
+    <error type="java.lang.RuntimeException:">java.lang.RuntimeException: null
+	at project.warehouse_manager.UnitTest.testGetDescriptionOfItems(UnitTest.java:36)
+</error>
+  </testcase>
+  <testcase name="testSetNumber" classname="project.warehouse_manager.UnitTest" time="0">
+    <error type="java.lang.RuntimeException:">java.lang.RuntimeException: null
+	at project.warehouse_manager.UnitTest.testSetNumber(UnitTest.java:31)
+</error>
+  </testcase>
+  <testcase name="testGetNumber" classname="project.warehouse_manager.UnitTest" time="0">
+    <error type="java.lang.RuntimeException:">java.lang.RuntimeException: null
+	at project.warehouse_manager.UnitTest.testGetNumber(UnitTest.java:26)
+</error>
+  </testcase>
+  <testcase name="testGetPositionInQueue" classname="project.warehouse_manager.UnitTest" time="0">
+    <error type="java.lang.RuntimeException:">java.lang.RuntimeException: null
+	at project.warehouse_manager.UnitTest.testGetPositionInQueue(UnitTest.java:76)
+</error>
+  </testcase>
+  <testcase name="testIsInQueue" classname="project.warehouse_manager.UnitTest" time="0">
+    <error type="java.lang.RuntimeException:">java.lang.RuntimeException: null
+	at project.warehouse_manager.UnitTest.testIsInQueue(UnitTest.java:66)
+</error>
+  </testcase>
+  <testcase name="testSetOccupied" classname="project.warehouse_manager.UnitTest" time="0">
+    <error type="java.lang.RuntimeException:">java.lang.RuntimeException: null
+	at project.warehouse_manager.UnitTest.testSetOccupied(UnitTest.java:61)
+</error>
+  </testcase>
+  <testcase name="testGetDeliveryDate" classname="project.warehouse_manager.UnitTest" time="0">
+    <error type="java.lang.RuntimeException:">java.lang.RuntimeException: null
+	at project.warehouse_manager.UnitTest.testGetDeliveryDate(UnitTest.java:46)
+</error>
+  </testcase>
 </testsuite>

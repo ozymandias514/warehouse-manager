@@ -1,4 +1,28 @@
 -------------------------------------------------------------------------------
 Test set: project.warehouse_manager.FixedUnitWarehouseTest
 -------------------------------------------------------------------------------
-Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.001 sec - in project.warehouse_manager.FixedUnitWarehouseTest
+Tests run: 6, Failures: 0, Errors: 6, Skipped: 0, Time elapsed: 0.001 sec <<< FAILURE! - in project.warehouse_manager.FixedUnitWarehouseTest
+testGetUnits(project.warehouse_manager.FixedUnitWarehouseTest)  Time elapsed: 0 sec  <<< ERROR!
+java.lang.RuntimeException: null
+	at project.warehouse_manager.FixedUnitWarehouseTest.testGetUnits(FixedUnitWarehouseTest.java:21)
+
+testWarehouse(project.warehouse_manager.FixedUnitWarehouseTest)  Time elapsed: 0 sec  <<< ERROR!
+java.lang.RuntimeException: null
+	at project.warehouse_manager.FixedUnitWarehouseTest.testWarehouse(FixedUnitWarehouseTest.java:16)
+
+testClearUnit(project.warehouse_manager.FixedUnitWarehouseTest)  Time elapsed: 0 sec  <<< ERROR!
+java.lang.RuntimeException: null
+	at project.warehouse_manager.FixedUnitWarehouseTest.testClearUnit(FixedUnitWarehouseTest.java:36)
+
+testGetUnit(project.warehouse_manager.FixedUnitWarehouseTest)  Time elapsed: 0 sec  <<< ERROR!
+java.lang.RuntimeException: null
+	at project.warehouse_manager.FixedUnitWarehouseTest.testGetUnit(FixedUnitWarehouseTest.java:26)
+
+testGetNumberOfUnitsInUse(project.warehouse_manager.FixedUnitWarehouseTest)  Time elapsed: 0 sec  <<< ERROR!
+java.lang.RuntimeException: null
+	at project.warehouse_manager.FixedUnitWarehouseTest.testGetNumberOfUnitsInUse(FixedUnitWarehouseTest.java:41)
+
+testOccupyUnit(project.warehouse_manager.FixedUnitWarehouseTest)  Time elapsed: 0 sec  <<< ERROR!
+java.lang.RuntimeException: null
+	at project.warehouse_manager.FixedUnitWarehouseTest.testOccupyUnit(FixedUnitWarehouseTest.java:31)
+

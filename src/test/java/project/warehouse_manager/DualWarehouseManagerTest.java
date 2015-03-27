@@ -13,47 +13,47 @@ public class DualWarehouseManagerTest {
 
 	@Test
 	public void testWarehouseManager() {
-		//throw new RuntimeException();
+		throw new RuntimeException();
 	}
 
 	@Test
 	public void testGetSmallWarehouse() {
-		//throw new RuntimeException();
+		throw new RuntimeException();
 	}
 
 	@Test
 	public void testGetLargeWarehouse() {
-		//throw new RuntimeException();
+		throw new RuntimeException();
 	}
 
 	@Test
 	public void testGetCustomer() {
-		//throw new RuntimeException();
+		throw new RuntimeException();
 	}
 
 	@Test
 	public void testAddCustomer() {
-		//throw new RuntimeException();
+		throw new RuntimeException();
 	}
 
 	@Test
 	public void testDeleteCustomer() {
-		//throw new RuntimeException();
+		throw new RuntimeException();
 	}
 
 	@Test
 	public void testAddUnitToCustomer() {
-		//throw new RuntimeException();
+		throw new RuntimeException();
 	}
 
 	@Test
 	public void testDeleteUnitFromCustomer() {
-		//throw new RuntimeException();
+		throw new RuntimeException();
 	}
 
 	@Test
 	public void testMoveUnit() {
-		//throw new RuntimeException();
+		throw new RuntimeException();
 	}
 
 }

@@ -7,7 +7,6 @@ public class Unit {
 	private Date deliveryDate;
 	private boolean occupied;
 	private boolean inQueue;
-	private int positionInQueue;
 	
 	/**
 	 * @param number
@@ -18,7 +17,6 @@ public class Unit {
 		this.deliveryDate = null;
 		this.occupied = false;
 		this.inQueue = false;
-		this.positionInQueue = 0;
 	}
 	
 	/**
@@ -32,7 +30,6 @@ public class Unit {
 		this.deliveryDate = deliveryDate;
 		this.occupied = false;
 		this.inQueue = false;
-		this.positionInQueue = 0;
 	}
 	
 	/**
@@ -103,20 +100,6 @@ public class Unit {
 	 */
 	public void setInQueue(boolean inQueue) {
 		this.inQueue = inQueue;
-	}
-	
-	/**
-	 * @return
-	 */
-	public int getPositionInQueue() {
-		return positionInQueue;
-	}
-	
-	/**
-	 * @param 
-	 */
-	public void setPositionInQueue(int pos) {
-		this.positionInQueue = pos;
 	}
 
 }

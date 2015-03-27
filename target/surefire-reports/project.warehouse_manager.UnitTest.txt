@@ -1,4 +1,60 @@
 -------------------------------------------------------------------------------
 Test set: project.warehouse_manager.UnitTest
 -------------------------------------------------------------------------------
-Tests run: 14, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.001 sec - in project.warehouse_manager.UnitTest
+Tests run: 14, Failures: 0, Errors: 14, Skipped: 0, Time elapsed: 0 sec <<< FAILURE! - in project.warehouse_manager.UnitTest
+testSetPositionInQueue(project.warehouse_manager.UnitTest)  Time elapsed: 0 sec  <<< ERROR!
+java.lang.RuntimeException: null
+	at project.warehouse_manager.UnitTest.testSetPositionInQueue(UnitTest.java:81)
+
+testSetDeliveryDate(project.warehouse_manager.UnitTest)  Time elapsed: 0 sec  <<< ERROR!
+java.lang.RuntimeException: null
+	at project.warehouse_manager.UnitTest.testSetDeliveryDate(UnitTest.java:51)
+
+testSetDescriptionOfItems(project.warehouse_manager.UnitTest)  Time elapsed: 0 sec  <<< ERROR!
+java.lang.RuntimeException: null
+	at project.warehouse_manager.UnitTest.testSetDescriptionOfItems(UnitTest.java:41)
+
+testIsOccupied(project.warehouse_manager.UnitTest)  Time elapsed: 0 sec  <<< ERROR!
+java.lang.RuntimeException: null
+	at project.warehouse_manager.UnitTest.testIsOccupied(UnitTest.java:56)
+
+testUnitInt(project.warehouse_manager.UnitTest)  Time elapsed: 0 sec  <<< ERROR!
+java.lang.RuntimeException: null
+	at project.warehouse_manager.UnitTest.testUnitInt(UnitTest.java:16)
+
+testSetInQueue(project.warehouse_manager.UnitTest)  Time elapsed: 0 sec  <<< ERROR!
+java.lang.RuntimeException: null
+	at project.warehouse_manager.UnitTest.testSetInQueue(UnitTest.java:71)
+
+testUnitIntIntIntIntString(project.warehouse_manager.UnitTest)  Time elapsed: 0 sec  <<< ERROR!
+java.lang.RuntimeException: null
+	at project.warehouse_manager.UnitTest.testUnitIntIntIntIntString(UnitTest.java:21)
+
+testGetDescriptionOfItems(project.warehouse_manager.UnitTest)  Time elapsed: 0 sec  <<< ERROR!
+java.lang.RuntimeException: null
+	at project.warehouse_manager.UnitTest.testGetDescriptionOfItems(UnitTest.java:36)
+
+testSetNumber(project.warehouse_manager.UnitTest)  Time elapsed: 0 sec  <<< ERROR!
+java.lang.RuntimeException: null
+	at project.warehouse_manager.UnitTest.testSetNumber(UnitTest.java:31)
+
+testGetNumber(project.warehouse_manager.UnitTest)  Time elapsed: 0 sec  <<< ERROR!
+java.lang.RuntimeException: null
+	at project.warehouse_manager.UnitTest.testGetNumber(UnitTest.java:26)
+
+testGetPositionInQueue(project.warehouse_manager.UnitTest)  Time elapsed: 0 sec  <<< ERROR!
+java.lang.RuntimeException: null
+	at project.warehouse_manager.UnitTest.testGetPositionInQueue(UnitTest.java:76)
+
+testIsInQueue(project.warehouse_manager.UnitTest)  Time elapsed: 0 sec  <<< ERROR!
+java.lang.RuntimeException: null
+	at project.warehouse_manager.UnitTest.testIsInQueue(UnitTest.java:66)
+
+testSetOccupied(project.warehouse_manager.UnitTest)  Time elapsed: 0 sec  <<< ERROR!
+java.lang.RuntimeException: null
+	at project.warehouse_manager.UnitTest.testSetOccupied(UnitTest.java:61)
+
+testGetDeliveryDate(project.warehouse_manager.UnitTest)  Time elapsed: 0 sec  <<< ERROR!
+java.lang.RuntimeException: null
+	at project.warehouse_manager.UnitTest.testGetDeliveryDate(UnitTest.java:46)
+

@@ -80,6 +80,12 @@
 									<exclude>**/UnitAlreadyOwnedException*</exclude>
 									<exclude>**/UnitDoesNotExistException*</exclude>
 									<exclude>**/UnitNotOwnedException*</exclude>
+									<exclude>**/DatebaseHandler*</exclude>
+									<exclude>**/DualWarehouseManager*</exclude>
+									<exclude>**/FixedUnitWarehouse*</exclude>
+									<exclude>**/DatebaseHandlerTest*</exclude>
+									<exclude>**/DualWarehouseManagerTest*</exclude>
+									<exclude>**/FixedUnitWarehouseTest*</exclude>
 								</excludes>
 							</configuration>
 	                      <goals>
@@ -98,6 +104,12 @@
 									<exclude>**/UnitAlreadyOwnedException*</exclude>
 									<exclude>**/UnitDoesNotExistException*</exclude>
 									<exclude>**/UnitNotOwnedException*</exclude>
+									<exclude>**/DatebaseHandler*</exclude>
+									<exclude>**/DualWarehouseManager*</exclude>
+									<exclude>**/FixedUnitWarehouse*</exclude>
+									<exclude>**/DatebaseHandlerTest*</exclude>
+									<exclude>**/DualWarehouseManagerTest*</exclude>
+									<exclude>**/FixedUnitWarehouseTest*</exclude>
 								</excludes>
 							</configuration>
 	                  </execution>
