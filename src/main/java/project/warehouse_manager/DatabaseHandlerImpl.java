@@ -8,6 +8,7 @@ public class DatabaseHandlerImpl {
 	
 	public DatabaseHandlerImpl(){
 		try{
+			// database connection
 			Class.forName("com.mysql.jdbc.Driver");
 			con = DriverManager.getConnection("jdbc:mysql://192.185.5.78:3306/jfgonzal_test","jfgonzal_zera", "murtas12");
 			System.out.println ("Database connection established");
