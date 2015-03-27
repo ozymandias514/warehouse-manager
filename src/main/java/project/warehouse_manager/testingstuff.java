@@ -1,10 +1,14 @@
 package project.warehouse_manager;
 
+
 import project.warehouse_manager.exceptions.*;
 
 public class testingstuff {
 
 	public static void main(String[] args) {
+		DatabaseHandlerImpl connect = new DatabaseHandlerImpl();
+		connect.getData();
+		/*
 		DualWarehouseManager wm  = new DualWarehouseManager(100, 1000);
 		String testName = "carson";
 		String testEmail = "thug@thug.life";
@@ -29,8 +33,9 @@ public class testingstuff {
 			e.printStackTrace();
 		}
 		
-		
+		*/
 		
 	}
+	
 
 }
