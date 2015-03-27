@@ -5,7 +5,6 @@ public class Unit {
 	private int number;
 	private String descriptionOfItems;
 	private Date deliveryDate;
-	private int customerId;
 	private boolean occupied;
 	private boolean inQueue;
 	private int positionInQueue;
@@ -17,7 +16,6 @@ public class Unit {
 		this.number = number;
 		this.descriptionOfItems = null;
 		this.deliveryDate = null;
-		this.customerId = 0;
 		this.occupied = false;
 		this.inQueue = false;
 		this.positionInQueue = 0;
@@ -32,7 +30,6 @@ public class Unit {
 		this.number = number;
 		this.descriptionOfItems = descriptionOfItems;
 		this.deliveryDate = deliveryDate;
-		this.customerId = 0;
 		this.occupied = false;
 		this.inQueue = false;
 		this.positionInQueue = 0;
@@ -78,20 +75,6 @@ public class Unit {
 	 */
 	public void setDeliveryDate(Date deliveryDate) {
 		this.deliveryDate = deliveryDate;
-	}
-	
-	/**
-	 * @return 
-	 */
-	public int getCustomerId() {
-		return customerId;
-	}
-	
-	/**
-	 * @param 
-	 */
-	public void setCustomerId(int customerId) {
-		this.customerId = customerId;
 	}
 	
 	/**

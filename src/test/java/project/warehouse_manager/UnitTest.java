@@ -52,16 +52,6 @@ public class UnitTest {
 	}
 
 	@Test
-	public void testGetCustomerId() {
-		throw new RuntimeException();
-	}
-
-	@Test
-	public void testSetCustomerId() {
-		throw new RuntimeException();
-	}
-
-	@Test
 	public void testIsOccupied() {
 		throw new RuntimeException();
 	}

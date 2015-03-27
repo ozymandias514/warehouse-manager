@@ -63,39 +63,42 @@ public class Date {
 	 * @return
 	 */
 	public int getDateInDays() {
+		int yearInDays = year*365;
+		int monthInDays = 0;
+		
 		if (month == 1)
-			return day;
+			monthInDays = 0;
 		if (month == 2)
-			return 31+day;
+			monthInDays = 31;
 		if (month == 3)
-			return 31+28+day;
+			monthInDays = 31+28;
 		if (month == 4)
-			return 31+28+31+day;
+			monthInDays = 31+28+31;
 		if (month == 5)
-			return 31+28+31+30+day;
+			monthInDays = 31+28+31+30;
 		if (month == 6)
-			return 31+28+31+30+31+day;
+			monthInDays = 31+28+31+30+31;
 		if (month == 7)
-			return 31+28+31+30+31+30+day;
+			monthInDays = 31+28+31+30+31+30;
 		if (month == 8)
-			return 31+28+31+30+31+30+31+day;
+			monthInDays = 31+28+31+30+31+30+31;
 		if (month == 9)
-			return 31+28+31+30+31+30+31+31+day;
+			monthInDays = 31+28+31+30+31+30+31+31;
 		if (month == 10)
-			return 31+28+31+30+31+30+31+31+30+day;
+			monthInDays = 31+28+31+30+31+30+31+31+30;
 		if (month == 11)
-			return 31+28+31+30+31+30+31+31+30+31+day;
+			monthInDays = 31+28+31+30+31+30+31+31+30+31;
 		if (month == 12)
-			return 31+28+31+30+31+30+31+31+30+31+30+day;
-		else
-			return 0;
+			monthInDays = 31+28+31+30+31+30+31+31+30+31+30;
+		
+		return yearInDays+monthInDays+day;
 	}
 	
 	/**
 	 * @return
 	 */
 	public String getDateAsString() {
-		return String.format("%i/%i/%i", month, day, year);
+		return String.format("%d/%d/%d", month, day, year);
 	}
 
 }
