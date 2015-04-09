@@ -12,5 +12,5 @@ public interface WarehouseManager {
 	void removeUnitFromCustomer(int unitNumber, String customerEmail, Warehouse warehouse) 
 			throws UnitNotOwnedException, CustomerNotFoundException, UnitDoesNotExistException;
 	void moveUnitContents(Warehouse warehouse1, Warehouse warehouse2, 
-			int unitNumber1, int unitNumber2);
+			int unitNumber1, int unitNumber2) throws UnitDoesNotExistException, UnitAlreadyOwnedException;
 }
