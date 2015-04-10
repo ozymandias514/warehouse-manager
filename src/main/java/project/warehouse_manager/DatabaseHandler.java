@@ -12,7 +12,7 @@ public class DatabaseHandler {
 	try {
 		
 		Class.forName("org.sqlite.JDBC");
-		con = DriverManager.getConnection("jdbc:sqlite:C:\\sqlite\\warehouse.db");
+		con = DriverManager.getConnection("jdbc:sqlite:warehouse.db");
 		st = con.createStatement();
 	}catch(Exception e){
 		
