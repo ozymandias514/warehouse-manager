@@ -28,7 +28,7 @@ public class UnitTest {
 	
 	@Test
 	public void testConstructor2() {
-		unit = new Unit(testNumber, testDate, testDescription);
+		unit = new Unit();
 		assertEquals(unit.getNumber(), testNumber);
 		assertEquals(unit.getDeliveryDate(), testDate);
 		assertEquals(unit.getDescriptionOfItems(), testDescription);
@@ -36,46 +36,46 @@ public class UnitTest {
 
 	@Test
 	public void testGetNumber() {
-		unit = new Unit(testNumber, testDate, testDescription);
+		unit = new Unit();
 		assertEquals(unit.getNumber(), testNumber);
 	}
 
 	@Test
 	public void testSetNumber() {
-		unit = new Unit(testNumber, testDate, testDescription);
+		unit = new Unit();
 		unit.setNumber(8);
 		assertEquals(unit.getNumber(), 8);
 	}
 
 	@Test
 	public void testGetDescriptionOfItems() {
-		unit = new Unit(testNumber, testDate, testDescription);
+		unit = new Unit();
 		assertEquals(unit.getDescriptionOfItems(), testDescription);
 	}
 
 	@Test
 	public void testSetDescriptionOfItems() {
-		unit = new Unit(testNumber, testDate, testDescription);
+		unit = new Unit();
 		unit.setDescriptionOfItems("HELLO");
 		assertEquals(unit.getDescriptionOfItems(), "HELLO");
 	}
 
 	@Test
 	public void testGetDeliveryDate() {
-		unit = new Unit(testNumber, testDate, testDescription);
+		unit = new Unit();
 		assertEquals(unit.getDeliveryDate(), testDate);
 	}
 
 	@Test
 	public void testSetDeliveryDate() {
-		unit = new Unit(testNumber, testDate, testDescription);
+		unit = new Unit();
 		unit.setDeliveryDate(testDate2);
 		assertEquals(unit.getDeliveryDate(), testDate2);
 	}
 
 	@Test
 	public void testIsOccupied() {
-		unit = new Unit(testNumber, testDate, testDescription);
+		unit = new Unit();
 		assertFalse(unit.isOccupied());
 		unit.setOccupied(true);
 		assertTrue(unit.isOccupied());
@@ -83,7 +83,7 @@ public class UnitTest {
 
 	@Test
 	public void testSetOccupied() {
-		unit = new Unit(testNumber, testDate, testDescription);
+		unit = new Unit();
 		unit.setOccupied(true);
 		assertTrue(unit.isOccupied());
 		unit.setOccupied(false);
@@ -92,7 +92,7 @@ public class UnitTest {
 
 	@Test
 	public void testIsInQueue() {
-		unit = new Unit(testNumber, testDate, testDescription);
+		unit = new Unit();
 		assertFalse(unit.isInQueue());
 		unit.setInQueue(true);
 		assertTrue(unit.isInQueue());
@@ -100,7 +100,7 @@ public class UnitTest {
 
 	@Test
 	public void testSetInQueue() {
-		unit = new Unit(testNumber, testDate, testDescription);
+		unit = new Unit();
 		unit.setInQueue(true);
 		assertTrue(unit.isInQueue());
 		unit.setInQueue(false);

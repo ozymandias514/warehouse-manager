@@ -28,20 +28,20 @@ public class CustomerTest {
 
 	@Test
 	public void testConstructor() {
-		customer = new Customer(testName1, testEmail1);
+		customer = new Customer();
 		assertEquals(customer.getName(), testName1);
 		assertEquals(customer.getEmail(), testEmail1);
 	}
 
 	@Test
 	public void testGetName() {
-		customer = new Customer(testName1, testEmail1);
+		customer = new Customer();
 		assertEquals(customer.getName(), testName1);
 	}
 
 	@Test
 	public void testSetName() {
-		customer = new Customer(testName1, testEmail1);
+		customer = new Customer();
 		customer.setName(testName2);
 		assertEquals(customer.getName(), testName2);
 		
@@ -49,20 +49,20 @@ public class CustomerTest {
 
 	@Test
 	public void testGetEmail() {
-		customer = new Customer(testName1, testEmail1);
+		customer = new Customer();
 		assertEquals(customer.getEmail(), testEmail1);
 	}
 
 	@Test
 	public void testSetEmail() {
-		customer = new Customer(testName1, testEmail1);
+		customer = new Customer();
 		customer.setEmail(testEmail2);
 		assertEquals(customer.getEmail(), testEmail2);
 	}
 
 	@Test
 	public void testGetUnitsOwned() throws UnitAlreadyOwnedException {
-		customer = new Customer(testName1, testEmail1);
+		customer = new Customer();
 		customer.addUnit(1);
 		assertTrue(Arrays.deepEquals(customer.getUnitsOwned(), new Integer[]{1}));
 		customer.addUnit(567);
@@ -71,21 +71,21 @@ public class CustomerTest {
 
 	@Test
 	public void testAddUnit() throws UnitAlreadyOwnedException {
-		customer = new Customer(testName1, testEmail1);
+		customer = new Customer();
 		customer.addUnit(1);
 		assertTrue(customer.isUnitOwned(1));
 	}
 	
 	@Test (expected = UnitAlreadyOwnedException.class)
 	public void testAddUnitWithException() throws UnitAlreadyOwnedException {
-		customer = new Customer(testName1, testEmail1);
+		customer = new Customer();
 		customer.addUnit(1);
 		customer.addUnit(1);
 	}
 
 	@Test
 	public void testRemoveUnit() throws UnitAlreadyOwnedException, UnitNotOwnedException {
-		customer = new Customer(testName1, testEmail1);
+		customer = new Customer();
 		customer.addUnit(1);
 		customer.addUnit(2);
 		customer.removeUnit(1);
@@ -94,13 +94,13 @@ public class CustomerTest {
 	
 	@Test (expected = UnitNotOwnedException.class)
 	public void testRemoveUnitWithException() throws UnitNotOwnedException {
-		customer = new Customer(testName1, testEmail1);
+		customer = new Customer();
 		customer.removeUnit(5);
 	}
 
 	@Test
 	public void testIsUnitOwned() throws UnitAlreadyOwnedException {
-		customer = new Customer(testName1, testEmail1);
+		customer = new Customer();
 		customer.addUnit(1);
 		assertTrue(customer.isUnitOwned(1));
 	}
