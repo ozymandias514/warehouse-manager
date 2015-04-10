@@ -1,6 +1,5 @@
 project\warehouse_manager\exceptions\CustomerAlreadyExistsException.class
 project\warehouse_manager\exceptions\CustomerNotFoundException.class
-project\warehouse_manager\testingstuff.class
 project\warehouse_manager\Date.class
 project\warehouse_manager\Warehouse.class
 project\warehouse_manager\exceptions\UnitNotOwnedException.class

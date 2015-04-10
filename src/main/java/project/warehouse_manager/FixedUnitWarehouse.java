@@ -61,7 +61,6 @@ public class FixedUnitWarehouse implements Warehouse {
 		getUnit(unitNumber).setOccupied(false);
 		getUnit(unitNumber).setDescriptionOfItems(null);
 		getUnit(unitNumber).setDeliveryDate(null);
-		getUnit(unitNumber).setCustomerId(0);
 		numberOfUnitsInUse--;
 	}
 	

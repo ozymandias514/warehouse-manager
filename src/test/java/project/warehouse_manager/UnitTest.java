@@ -6,89 +6,105 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class UnitTest {
-
+	Unit unit;
+	int testNumber;
+	Date testDate;
+	Date testDate2;
+	String testDescription;
+	
 	@Before
 	public void setUp() throws Exception {
+		testNumber = 5;
+		testDate = new Date(1,27,2015);
+		testDate2 = new Date(1,1,1);
+		testDescription = "this is a description";
 	}
 
 	@Test
-	public void testUnitInt() {
-		throw new RuntimeException();
+	public void testConstructor1() {
+		unit = new Unit(testNumber);
+		assertEquals(unit.getNumber(), testNumber);
 	}
-
+	
 	@Test
-	public void testUnitIntIntIntIntString() {
-		throw new RuntimeException();
+	public void testConstructor2() {
+		unit = new Unit(testNumber, testDate, testDescription);
+		assertEquals(unit.getNumber(), testNumber);
+		assertEquals(unit.getDeliveryDate(), testDate);
+		assertEquals(unit.getDescriptionOfItems(), testDescription);
 	}
 
 	@Test
 	public void testGetNumber() {
-		throw new RuntimeException();
+		unit = new Unit(testNumber, testDate, testDescription);
+		assertEquals(unit.getNumber(), testNumber);
 	}
 
 	@Test
 	public void testSetNumber() {
-		throw new RuntimeException();
+		unit = new Unit(testNumber, testDate, testDescription);
+		unit.setNumber(8);
+		assertEquals(unit.getNumber(), 8);
 	}
 
 	@Test
 	public void testGetDescriptionOfItems() {
-		throw new RuntimeException();
+		unit = new Unit(testNumber, testDate, testDescription);
+		assertEquals(unit.getDescriptionOfItems(), testDescription);
 	}
 
 	@Test
 	public void testSetDescriptionOfItems() {
-		throw new RuntimeException();
+		unit = new Unit(testNumber, testDate, testDescription);
+		unit.setDescriptionOfItems("HELLO");
+		assertEquals(unit.getDescriptionOfItems(), "HELLO");
 	}
 
 	@Test
 	public void testGetDeliveryDate() {
-		throw new RuntimeException();
+		unit = new Unit(testNumber, testDate, testDescription);
+		assertEquals(unit.getDeliveryDate(), testDate);
 	}
 
 	@Test
 	public void testSetDeliveryDate() {
-		throw new RuntimeException();
-	}
-
-	@Test
-	public void testGetCustomerId() {
-		throw new RuntimeException();
-	}
-
-	@Test
-	public void testSetCustomerId() {
-		throw new RuntimeException();
+		unit = new Unit(testNumber, testDate, testDescription);
+		unit.setDeliveryDate(testDate2);
+		assertEquals(unit.getDeliveryDate(), testDate2);
 	}
 
 	@Test
 	public void testIsOccupied() {
-		throw new RuntimeException();
+		unit = new Unit(testNumber, testDate, testDescription);
+		assertFalse(unit.isOccupied());
+		unit.setOccupied(true);
+		assertTrue(unit.isOccupied());
 	}
 
 	@Test
 	public void testSetOccupied() {
-		throw new RuntimeException();
+		unit = new Unit(testNumber, testDate, testDescription);
+		unit.setOccupied(true);
+		assertTrue(unit.isOccupied());
+		unit.setOccupied(false);
+		assertFalse(unit.isOccupied());
 	}
 
 	@Test
 	public void testIsInQueue() {
-		throw new RuntimeException();
+		unit = new Unit(testNumber, testDate, testDescription);
+		assertFalse(unit.isInQueue());
+		unit.setInQueue(true);
+		assertTrue(unit.isInQueue());
 	}
 
 	@Test
 	public void testSetInQueue() {
-		throw new RuntimeException();
-	}
-
-	@Test
-	public void testGetPositionInQueue() {
-		throw new RuntimeException();
-	}
-
-	@Test
-	public void testSetPositionInQueue() {
-		throw new RuntimeException();
+		unit = new Unit(testNumber, testDate, testDescription);
+		unit.setInQueue(true);
+		assertTrue(unit.isInQueue());
+		unit.setInQueue(false);
+		assertFalse(unit.isInQueue());
 	}
 
 }
