@@ -73,6 +73,19 @@ public class Unit extends DatabaseHandler{
 		}
 	}
 	
+	// returns the amount of large warehouse units that are currently empty
+	public int getNumberOfEmptyUnitsInLarge(){
+		int emptyLargeWare = 9000;
+		try {
+			rs = st.executeQuery("SELECT COUNT(*) AS total FROM units WHERE warehouseID = 1 AND occupied = 0;");
+			emptyLargeWare = rs.getInt("total");
+			
+			return emptyLargeWare;
+		}catch (SQLException e) {
+			e.printStackTrace();
+			return emptyLargeWare;
+		}
+	}
 	
 	// Displays the empty units in the small warehouse
 	public void getEmptyUnitsInSmall(){
@@ -93,6 +106,22 @@ public class Unit extends DatabaseHandler{
 				}
 		}catch (SQLException e) {
 			e.printStackTrace();
+		}
+	}
+	
+	// returns the amount of small warehouses that are currently empty
+	public int getNumberOfEmptyUnitsInSmall(){
+		int emptySmallWare = 9000;
+		try {
+			rs = st.executeQuery("SELECT COUNT(*) AS total FROM units WHERE warehouseID = 2 AND occupied = 0;");
+
+			emptySmallWare = rs.getInt("total");
+			
+			return emptySmallWare;
+			
+		}catch (SQLException e) {
+			e.printStackTrace();
+			return emptySmallWare;
 		}
 	}
 	
@@ -196,6 +225,37 @@ public class Unit extends DatabaseHandler{
 				}
 		}catch (SQLException e) {
 			e.printStackTrace();
+		}
+		
+	}
+	
+	public int numberOfItemsInQueue(){
+		int queued = 9000;
+		try {
+			rs = st.executeQuery("SELECT COUNT(*)  AS total FROM units WHERE inQueue = 1;");
+			queued = rs.getInt("total");
+			/*
+			System.out.println("Units Data");
+			System.out.print("----------");
+			while (rs.next()) {
+				  int id 				= rs.getInt("id");
+				  int customerId 		= rs.getInt("customerId");
+				  int priority 			= rs.getInt("priority");
+				  int inQueue 			= rs.getInt("inQueue");
+				  int positionInQueue 	= rs.getInt("positionInQueue");
+				  
+				  System.out.println( "\nid		: " + id 
+						  			+ "\ncustomerId	: " + customerId
+						  			+ "\npriority	: " + priority
+						  			+ "\ninQueue		: " + inQueue
+						  			+ "\npositionInQueue	: " + positionInQueue
+						  			+ "\n--------------------------------------");
+				}
+			*/
+			return queued;
+		}catch (SQLException e) {
+			e.printStackTrace();
+			return queued;
 		}
 		
 	}
