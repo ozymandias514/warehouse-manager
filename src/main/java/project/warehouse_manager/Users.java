@@ -22,7 +22,15 @@ public class Users extends DatabaseHandler{
 				}
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}
+		}finally{
+  			try{
+  				rs.close();
+  				st.close();
+  				}
+  			catch(Exception e){
+  				System.out.println("Error closing the database");
+  			}
+  		}	
 	}
 	
 	//authenticate the user
@@ -40,7 +48,15 @@ public class Users extends DatabaseHandler{
 		}catch (SQLException e){
 			e.printStackTrace();
 			return false;
-		}
+		}finally{
+  			try{
+  				rs.close();
+  				st.close();
+  				}
+  			catch(Exception e){
+  				System.out.println("Error closing the database");
+  			}
+  		}	
 	}
 	
 	public int getIdFromUsername(String username){
@@ -52,7 +68,15 @@ public class Users extends DatabaseHandler{
 			return userId;
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}
+		}finally{
+  			try{
+  				rs.close();
+  				st.close();
+  				}
+  			catch(Exception e){
+  				System.out.println("Error closing the database");
+  			}
+  		}	
 			return 0;
 	}
 	
@@ -64,7 +88,15 @@ public class Users extends DatabaseHandler{
 			return data;
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}
+		}finally{
+  			try{
+  				rs.close();
+  				st.close();
+  				}
+  			catch(Exception e){
+  				System.out.println("Error closing the database");
+  			}
+  		}	
 			return fluke;
 	}
 }

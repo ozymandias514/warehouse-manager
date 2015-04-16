@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -15,12 +16,13 @@ import javax.swing.JTextField;
 public class CustomerAlter extends JFrame{
 	JButton changeFirstBut, changeLastBut, changeEmail, goBackBut;
 	JTextField idField,valueField;
+	Customer theCustomer = new Customer();
 	
 	int userSession;
 	public CustomerAlter(int userId){
 		
 		userSession = userId;
-		this.setSize(500,600);
+		this.setSize(500,300);
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setTitle("Customer Alter Page");
@@ -86,9 +88,40 @@ public class CustomerAlter extends JFrame{
 	private class ListenForButton implements ActionListener{
 
 		public void actionPerformed(ActionEvent e) {
+				//go back button ---------------------------
 			if(e.getSource() == goBackBut){
 				dispose();
 				new CustomerLanding(userSession);
+				//change first name button------------------
+			}else if(e.getSource() == changeFirstBut){
+				int customerId = Integer.parseInt(idField.getText());
+				String newFirstName = valueField.getText();
+				if(idField.getText().isEmpty() || newFirstName.isEmpty()){
+					JOptionPane.showMessageDialog(CustomerAlter.this, "Fields cannot be empty, Input required: ID, First Name", "Error"
+							, JOptionPane.ERROR_MESSAGE);
+				}else{
+					theCustomer.changeCustomerFirstName(customerId, newFirstName);
+				}
+				// change last name button------------------
+			}else if(e.getSource() == changeLastBut){
+				int customerId = Integer.parseInt(idField.getText());
+				String newLastName = valueField.getText();
+				if(idField.getText().isEmpty() || newLastName.isEmpty()){
+					JOptionPane.showMessageDialog(CustomerAlter.this, "Fields cannot be empty, Input required: ID, Last Name", "Error"
+							, JOptionPane.ERROR_MESSAGE);
+				}else{
+					theCustomer.changeCustomerLastName(customerId, newLastName);
+				}
+				//change email button-----------------------
+			}else if(e.getSource() == changeEmail){
+				int customerId = Integer.parseInt(idField.getText());
+				String newEmail = valueField.getText();
+				if(idField.getText().isEmpty() || newEmail.isEmpty()){
+					JOptionPane.showMessageDialog(CustomerAlter.this, "Fields cannot be empty, Input required: ID, email", "Error"
+							, JOptionPane.ERROR_MESSAGE);
+				}else{
+					theCustomer.changeCustomerEmail(customerId, newEmail);
+				}
 			}
 		}
 	}

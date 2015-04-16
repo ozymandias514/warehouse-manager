@@ -9,11 +9,14 @@ import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class CustomerLanding extends JFrame {
 
 	JButton emailButton, idButton, listButton, 
-	alterButton, addRemoveBut, unitsOwnedButton, 
+	alterButton, addRemoveBut, clearFields, 
 	goBackBut;
 	
 	JTextField textResult;
@@ -66,7 +69,7 @@ public class CustomerLanding extends JFrame {
 		alterButton = new JButton("Alter records");
 		alterButton.setToolTipText("allows you to change First name, Last name, or email");
 		addRemoveBut = new JButton("Add/Delete customer");
-		unitsOwnedButton = new JButton("units owned by ID");
+		clearFields = new JButton("Clear Fields");
 		goBackBut = new JButton("Go Back");
 		goBackBut.setToolTipText("sends you back to the previous screen");
 		
@@ -75,7 +78,7 @@ public class CustomerLanding extends JFrame {
 		listButton.addActionListener(lForButton);
 		alterButton.addActionListener(lForButton);
 		addRemoveBut.addActionListener(lForButton);
-		unitsOwnedButton.addActionListener(lForButton);
+		clearFields.addActionListener(lForButton);
 		goBackBut.addActionListener(lForButton);
 
 		
@@ -97,7 +100,7 @@ public class CustomerLanding extends JFrame {
 		gridConstraints.gridx = 5;
 		thePanel.add(addRemoveBut,gridConstraints);
 		gridConstraints.gridx = 9;
-		thePanel.add(unitsOwnedButton,gridConstraints);
+		thePanel.add(clearFields,gridConstraints);
 		gridConstraints.gridwidth = 20;
 		gridConstraints.gridx = 1;
 		gridConstraints.gridy = 4;
@@ -118,27 +121,109 @@ public class CustomerLanding extends JFrame {
 	private class ListenForButton implements ActionListener{
 
 		public void actionPerformed(ActionEvent e) {
+				//go back button -----------------------------------
 			if(e.getSource() == goBackBut){
 				dispose();
 				new LoggedInFrame(userSession);
+				// add and remove button ------------------------------
 			}else if(e.getSource() == addRemoveBut){
 				dispose();
 				new CustomerAddRemove(userSession);
+				// take to alter screen button ------------------------
 			}else if(e.getSource() == alterButton){
 				dispose();
 				new CustomerAlter(userSession);
+				// list all items button ------------------------------
 			}else if(e.getSource() == listButton){
-				textArea1.setText("This will work soon");
+				ArrayList<String> userData = new ArrayList<String>();
+				userData = theCustomer.displayData();
+			
+		  		textArea1.setText("Customers in the system\n");
+		  		textArea1.append("-----------------------------------------------------------");
+					
+		  		for(int i = 0; i < userData.size(); i++){
+	  				textArea1.append("\nid	:  " + userData.get(i));
+	  				i++;
+	  				textArea1.append("\nfirst Name	:  " + userData.get(i));
+	  				i++;
+	  				textArea1.append("\nLast Name	:  " + userData.get(i));
+	  				i++;
+	  				textArea1.append("\nemail	:  " + userData.get(i));
+	  				textArea1.append("\n-----------------------------------------------------------");
+		  		}
+		  		
+		  				//int id = rs.getInt("id");
+		  				//String firstName = rs.getString("firstName");
+		  				//String lastName = rs.getString("lastName");
+		  				//String email = rs.getString("email");
+		  				//textArea1.append("\nid	:  " + id 
+				  	//		+ "\nfirst Name	:  " + firstName
+				  	//		+ "\nLast Name	:  " + lastName
+				  	//		+ "\nemail	:  " + email
+				  	//		+ "\n-----------------------------------------------------------");
+					
+		
+				//get by email button ------------------------------------------
 			}else if(e.getSource() == emailButton){
+				
 				String email = textResult.getText();
-				int userId = theCustomer.getIdByEmail(email);
-				textArea1.setText("The user id pertaining to that email is: " + userId);
+				
+				if(email.isEmpty()){
+					JOptionPane.showMessageDialog(CustomerLanding.this, "Fields cannot be empty, Input required: email", "Error"
+							, JOptionPane.ERROR_MESSAGE);
+				}else{
+					String data[] = theCustomer.getDataByEmail(email);
+					textArea1.setText("The user id pertaining to that email is: " + data[0] +
+						"\nFirst Name: " + data[1] + "\nLast Name: " + data[2] + "\nemail: " + data[3]);	
+				}
+				// get by id button ----------------------------------
 			}else if(e.getSource() == idButton){
+				
 				int userId = Integer.parseInt(textResult.getText());
-				String[] customerData = theCustomer.getCustomerData(userId);
-				textArea1.setText("First Name: "+ customerData[0] + "\nLast Name : " 
-				+ customerData[1] + "\nemail: " +customerData[2]);
-			}	
+				if(textResult.getText().isEmpty()){
+					JOptionPane.showMessageDialog(CustomerLanding.this, "Fields cannot be empty, Input required: Customer ID", "Error"
+							, JOptionPane.ERROR_MESSAGE);
+				}else{
+					int[] largeWare= theCustomer.largeUnitsByCustomer(userId);
+					int[] smallWare= theCustomer.smallUnitsByCustomer(userId);
+					String[] customerData = theCustomer.getCustomerData(userId);
+					int largeLength = largeWare.length;
+					int smallLength = smallWare.length;
+					
+					textArea1.setText("First Name: "+ customerData[0] + "\nLast Name : " 
+					+ customerData[1] + "\nemail: " +customerData[2]);
+					
+					textArea1.append("\nLarge Units owned by this customer: ");
+					int zero= 0;
+					for(int x = 0;x < largeLength; x++){
+						if(largeWare[x] != 0){
+							zero++;
+							textArea1.append(largeWare[x] + ", ");
+						}
+					}
+					if(zero == 0){
+						textArea1.append("none");
+					}
+					
+					textArea1.append("\nSmall Units owned by this customer: ");
+					int zero2= 0;
+					for(int y = 0;y < smallLength; y++){
+						if(smallWare[y] != 0){
+							zero2++;
+							textArea1.append(smallWare[y] + ", ");
+						}
+					}
+					if(zero2 == 0){
+						textArea1.append("none");
+					}
+				}
+					// clear screen button ------------------------------------
+				}else if(e.getSource() == clearFields){
+					textArea1.setText("");
+					textResult.setText("");
+					 JOptionPane.showMessageDialog(CustomerLanding.this,"All fields have now been cleared",
+							 "Solution", JOptionPane.INFORMATION_MESSAGE);
+				}
 		}
 	}
 }

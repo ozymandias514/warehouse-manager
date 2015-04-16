@@ -47,7 +47,15 @@ public class Unit extends DatabaseHandler{
 				}
 		}catch (SQLException e) {
 			e.printStackTrace();
-		}
+		}finally{
+  			try{
+  				rs.close();
+  				st.close();
+  				}
+  			catch(Exception e){
+  				System.out.println("Error closing the database");
+  			}
+  		}
 	}
 	
 	
@@ -70,7 +78,15 @@ public class Unit extends DatabaseHandler{
 				}
 		}catch (SQLException e) {
 			e.printStackTrace();
-		}
+		}finally{
+  			try{
+  				rs.close();
+  				st.close();
+  				}
+  			catch(Exception e){
+  				System.out.println("Error closing the database");
+  			}
+  		}
 	}
 	
 	// returns the amount of large warehouse units that are currently empty
@@ -84,7 +100,15 @@ public class Unit extends DatabaseHandler{
 		}catch (SQLException e) {
 			e.printStackTrace();
 			return emptyLargeWare;
-		}
+		}finally{
+  			try{
+  				rs.close();
+  				st.close();
+  				}
+  			catch(Exception e){
+  				System.out.println("Error closing the database");
+  			}
+  		}
 	}
 	
 	// Displays the empty units in the small warehouse
@@ -106,7 +130,15 @@ public class Unit extends DatabaseHandler{
 				}
 		}catch (SQLException e) {
 			e.printStackTrace();
-		}
+		}finally{
+  			try{
+  				rs.close();
+  				st.close();
+  				}
+  			catch(Exception e){
+  				System.out.println("Error closing the database");
+  			}
+  		}
 	}
 	
 	// returns the amount of small warehouses that are currently empty
@@ -122,7 +154,15 @@ public class Unit extends DatabaseHandler{
 		}catch (SQLException e) {
 			e.printStackTrace();
 			return emptySmallWare;
-		}
+		}finally{
+  			try{
+  				rs.close();
+  				st.close();
+  				}
+  			catch(Exception e){
+  				System.out.println("Error closing the database");
+  			}
+  		}
 	}
 	
 	
@@ -138,7 +178,15 @@ public class Unit extends DatabaseHandler{
 							 date + "', pickupDate ='" + pickupDate + "'WHERE id =" + unitId + ";");			
 		}catch (SQLException e) {
 			e.printStackTrace();
-		}	
+		}finally{
+  			try{
+  				rs.close();
+  				st.close();
+  				}
+  			catch(Exception e){
+  				System.out.println("Error closing the database");
+  			}
+  		}	
 	}
 	
 	
@@ -182,7 +230,15 @@ public class Unit extends DatabaseHandler{
 				}
 		}catch (SQLException e) {
 			e.printStackTrace();
-		}
+		}finally{
+  			try{
+  				rs.close();
+  				st.close();
+  				}
+  			catch(Exception e){
+  				System.out.println("Error closing the database");
+  			}
+  		}
 	}
 	
 	// alters the pickup date of a occupied unit
@@ -191,7 +247,15 @@ public class Unit extends DatabaseHandler{
 			st.executeUpdate("UPDATE units SET pickupDate ='" + pickupDate + "' WHERE id = " + unitId + ";");			
 		}catch (SQLException e) {
 			e.printStackTrace();
-		}	
+		}finally{
+  			try{
+  				rs.close();
+  				st.close();
+  				}
+  			catch(Exception e){
+  				System.out.println("Error closing the database");
+  			}
+  		}	
 	}
 	
 	//allows for the altering of description
@@ -200,7 +264,15 @@ public class Unit extends DatabaseHandler{
 			st.executeUpdate("UPDATE units SET description ='" + description + "' WHERE id = " + unitId + ";");			
 		}catch (SQLException e) {
 			e.printStackTrace();
-		}			
+		}finally{
+  			try{
+  				rs.close();
+  				st.close();
+  				}
+  			catch(Exception e){
+  				System.out.println("Error closing the database");
+  			}
+  		}			
 	}
 	
 	//retrieves all the items currently in queue
@@ -225,7 +297,15 @@ public class Unit extends DatabaseHandler{
 				}
 		}catch (SQLException e) {
 			e.printStackTrace();
-		}
+		}finally{
+  			try{
+  				rs.close();
+  				st.close();
+  				}
+  			catch(Exception e){
+  				System.out.println("Error closing the database");
+  			}
+  		}
 		
 	}
 	
@@ -234,29 +314,19 @@ public class Unit extends DatabaseHandler{
 		try {
 			rs = st.executeQuery("SELECT COUNT(*)  AS total FROM units WHERE inQueue = 1;");
 			queued = rs.getInt("total");
-			/*
-			System.out.println("Units Data");
-			System.out.print("----------");
-			while (rs.next()) {
-				  int id 				= rs.getInt("id");
-				  int customerId 		= rs.getInt("customerId");
-				  int priority 			= rs.getInt("priority");
-				  int inQueue 			= rs.getInt("inQueue");
-				  int positionInQueue 	= rs.getInt("positionInQueue");
-				  
-				  System.out.println( "\nid		: " + id 
-						  			+ "\ncustomerId	: " + customerId
-						  			+ "\npriority	: " + priority
-						  			+ "\ninQueue		: " + inQueue
-						  			+ "\npositionInQueue	: " + positionInQueue
-						  			+ "\n--------------------------------------");
-				}
-			*/
 			return queued;
 		}catch (SQLException e) {
 			e.printStackTrace();
 			return queued;
-		}
+		}finally{
+  			try{
+  				rs.close();
+  				st.close();
+  				}
+  			catch(Exception e){
+  				System.out.println("Error closing the database");
+  			}
+  		}
 		
 	}
 	
@@ -266,7 +336,15 @@ public class Unit extends DatabaseHandler{
 				st.executeUpdate("DELETE FROM units WHERE warehouseId = 2");			
 			}catch (SQLException e) {
 				e.printStackTrace();
-			}	
+			}finally{
+	  			try{
+	  				rs.close();
+	  				st.close();
+	  				}
+	  			catch(Exception e){
+	  				System.out.println("Error closing the database");
+	  			}
+	  		}	
 		}
 		
 		// empties the large warehouse
@@ -275,7 +353,15 @@ public class Unit extends DatabaseHandler{
 				st.executeUpdate("DELETE FROM units WHERE warehouseId = 1");			
 			}catch (SQLException e) {
 				e.printStackTrace();
-			}	
+			}finally{
+	  			try{
+	  				rs.close();
+	  				st.close();
+	  				}
+	  			catch(Exception e){
+	  				System.out.println("Error closing the database");
+	  			}
+	  		}		
 		}
 		
 		//increases the priority in the row
@@ -289,7 +375,15 @@ public class Unit extends DatabaseHandler{
 					  		
 			}catch (SQLException e) {
 				e.printStackTrace();
-			}
+			}finally{
+	  			try{
+	  				rs.close();
+	  				st.close();
+	  				}
+	  			catch(Exception e){
+	  				System.out.println("Error closing the database");
+	  			}
+	  		}	
 			
 		}
 		
@@ -309,7 +403,15 @@ public class Unit extends DatabaseHandler{
 				st.executeUpdate("UPDATE units SET inQueue = " + queueStatus + " WHERE id=" + unitId + ";");
 			} catch (SQLException e) {
 				e.printStackTrace();
-			}			
+			}finally{
+	  			try{
+	  				rs.close();
+	  				st.close();
+	  				}
+	  			catch(Exception e){
+	  				System.out.println("Error closing the database");
+	  			}
+	  		}				
 		}
 		
 		// moves an item from a large warehouse unit to a small one
@@ -332,16 +434,34 @@ public class Unit extends DatabaseHandler{
 						
 			}catch (SQLException e) {
 				e.printStackTrace();
-			}
+			}finally{
+	  			try{
+	  				rs.close();
+	  				st.close();
+	  				}
+	  			catch(Exception e){
+	  				System.out.println("Error closing the database");
+	  			}
+	  		}	
 		}
 		
 		//empties all units pertaining to a specific customer
-		public void emptyUnitByCustomer(int customerId){
+		public boolean emptyUnitByCustomer(int customerId){
 			try {
 				st.executeUpdate("UPDATE units SET description = 'empty unit', occupied = 0, dateReceived = 'null', pickupDate = 'null' WHERE customerId =" + customerId + ";");
-			} catch (SQLException e) {
+				return true;
+			}catch (SQLException e) {
 				e.printStackTrace();
-			}	
+				return false;
+			}finally{
+	  			try{
+	  				rs.close();
+	  				st.close();
+	  				}
+	  			catch(Exception e){
+	  				System.out.println("Error closing the database");
+	  			}
+	  		}		
 			
 		}
 	/**
