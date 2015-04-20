@@ -59,6 +59,7 @@ public class Users extends DatabaseHandler{
   		}	
 	}
 	
+	// gets the user id from the username
 	public int getIdFromUsername(String username){
 		
 		try {
@@ -80,7 +81,9 @@ public class Users extends DatabaseHandler{
 			return 0;
 	}
 	
+	// gets the user data from the user id
 	public String[] getDataFromId(int userId){
+
 		String[] fluke = null;
 		try {
 			rs = st.executeQuery("SELECT * FROM users WHERE id =" + userId + ";");
@@ -90,6 +93,7 @@ public class Users extends DatabaseHandler{
 			e.printStackTrace();
 		}finally{
   			try{
+  				
   				rs.close();
   				st.close();
   				}

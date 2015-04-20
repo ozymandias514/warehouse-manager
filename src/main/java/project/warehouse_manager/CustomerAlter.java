@@ -19,8 +19,11 @@ public class CustomerAlter extends JFrame{
 	Customer theCustomer = new Customer();
 	
 	int userSession;
-	public CustomerAlter(int userId){
+	String[] userSessionData = new String[5];
+	
+	public CustomerAlter(int userId, String[] userData){
 		
+		System.arraycopy(userData, 0, userSessionData, 0, userData.length);
 		userSession = userId;
 		this.setSize(500,300);
 		this.setLocationRelativeTo(null);
@@ -91,36 +94,53 @@ public class CustomerAlter extends JFrame{
 				//go back button ---------------------------
 			if(e.getSource() == goBackBut){
 				dispose();
-				new CustomerLanding(userSession);
+				new CustomerLanding(userSession, userSessionData);
 				//change first name button------------------
 			}else if(e.getSource() == changeFirstBut){
-				int customerId = Integer.parseInt(idField.getText());
-				String newFirstName = valueField.getText();
-				if(idField.getText().isEmpty() || newFirstName.isEmpty()){
+				if(idField.getText().isEmpty() || valueField.getText().isEmpty()){
 					JOptionPane.showMessageDialog(CustomerAlter.this, "Fields cannot be empty, Input required: ID, First Name", "Error"
 							, JOptionPane.ERROR_MESSAGE);
 				}else{
-					theCustomer.changeCustomerFirstName(customerId, newFirstName);
+					try{
+						String newFirstName = valueField.getText();
+						int customerId = Integer.parseInt(idField.getText());
+						theCustomer.changeCustomerFirstName(customerId, newFirstName);
+					}catch(Exception NumberFormatException){
+						JOptionPane.showMessageDialog(CustomerAlter.this, "Field Customer Id cannot be empty, Input required: Customer ID", "Error"
+								, JOptionPane.ERROR_MESSAGE);
+					}
 				}
 				// change last name button------------------
 			}else if(e.getSource() == changeLastBut){
-				int customerId = Integer.parseInt(idField.getText());
-				String newLastName = valueField.getText();
-				if(idField.getText().isEmpty() || newLastName.isEmpty()){
+
+				if(idField.getText().isEmpty() || valueField.getText().isEmpty()){
 					JOptionPane.showMessageDialog(CustomerAlter.this, "Fields cannot be empty, Input required: ID, Last Name", "Error"
 							, JOptionPane.ERROR_MESSAGE);
 				}else{
-					theCustomer.changeCustomerLastName(customerId, newLastName);
+					try{
+						int customerId = Integer.parseInt(idField.getText());
+						String newLastName = valueField.getText();
+						theCustomer.changeCustomerLastName(customerId, newLastName);
+					}catch(Exception NumberFormatException){
+						JOptionPane.showMessageDialog(CustomerAlter.this, "Field cannot be a String, Input required: Customer ID", "Error"
+								, JOptionPane.ERROR_MESSAGE);
+					}
 				}
 				//change email button-----------------------
 			}else if(e.getSource() == changeEmail){
-				int customerId = Integer.parseInt(idField.getText());
-				String newEmail = valueField.getText();
-				if(idField.getText().isEmpty() || newEmail.isEmpty()){
+
+				if(idField.getText().isEmpty() || valueField.getText().isEmpty()){
 					JOptionPane.showMessageDialog(CustomerAlter.this, "Fields cannot be empty, Input required: ID, email", "Error"
 							, JOptionPane.ERROR_MESSAGE);
 				}else{
-					theCustomer.changeCustomerEmail(customerId, newEmail);
+					try{
+						int customerId = Integer.parseInt(idField.getText());
+						String newEmail = valueField.getText();
+						theCustomer.changeCustomerEmail(customerId, newEmail);
+					}catch(Exception NumberFormatException){
+						JOptionPane.showMessageDialog(CustomerAlter.this, "Field cannot be a String, Input required: Customer ID", "Error"
+								, JOptionPane.ERROR_MESSAGE);
+					}
 				}
 			}
 		}

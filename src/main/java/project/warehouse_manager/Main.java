@@ -6,15 +6,6 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
-import java.awt.BorderLayout;
-
-import javax.swing.event.*;
-
-import java.util.Calendar;
-import java.util.Date;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-
 public class Main extends JFrame{
 	
 	JLabel userLabel, passwordLabel;
@@ -23,29 +14,16 @@ public class Main extends JFrame{
 	JButton acceptButton;
 	JPanel mainPanel, loginPanel, loggedPanel;
 	String outputString, password, username;
-	static Users theUser = new Users();
-	static Customer theCustomer = new Customer();
-	static Unit theUnit = new Unit();
+	Users theUser = new Users();
+	Customer theCustomer = new Customer();
+	Unit theUnit = new Unit();
 	
 	public static void main(String[] args) {
-		//tableCreation creator = new tableCreation();
-		//unit theUnit = new unit();
-		//Customer theCustomer = new Customer();
-		
-		//customer theCustomer = new customer();
-		//theCustomer.getDataFromCustomer();
+
 		
 		new Main();
 		
-		//theCustomer.getDataFromCustomer();
-		
-		//theuser.displayDataFromUsers();
-		//theUnit.getData();
-		//theUnit.getEmptyUnitsInSmall();
-		//System.out.println(Connection.userExist("this should not work"));
-		
-		//creator.generateSmallWarehouseUnitsInsertStatements();
-		//creator.generateLargeWarehouseUnitsInsertStatements();
+
 	}
 	
 	public Main(){
@@ -64,7 +42,7 @@ public class Main extends JFrame{
 		acceptButton = new JButton("OK");
 		ListenForButton lForButton = new ListenForButton();
 		acceptButton.addActionListener(lForButton);
-		loginPanel.add(acceptButton);
+		
 		// adding the user Label
 		userLabel = new JLabel("Username");
 		passwordLabel = new JLabel("Password");
@@ -77,7 +55,7 @@ public class Main extends JFrame{
 		loginPanel.add(userTextField);
 		loginPanel.add(passwordLabel);
 		loginPanel.add(passwordField);
-		
+		loginPanel.add(acceptButton);
 		this.add(loginPanel);
 		this.setVisible(true);
 	}
@@ -98,85 +76,14 @@ public class Main extends JFrame{
 							JOptionPane.showMessageDialog(Main.this, outputString, "Information", JOptionPane.INFORMATION_MESSAGE);
 							outputString = "";
 							
-							
 							dispose();
-							new LoggedInFrame(userId);
+							new LoggedInFrame(userId, data);
 						}else{
-							outputString = "Invalid login id, please try again";
+							outputString = "Invalid login id or password, please try again";
 							JOptionPane.showMessageDialog(Main.this, outputString, "Information", JOptionPane.INFORMATION_MESSAGE);
 							outputString = "";
 					}
 				}
-			}
-		}
-	}
-}
-
-
-class LoggedInFrame extends JFrame{
-	
-	static Users theUser = new Users();
-	static Unit theUnit = new Unit();
-	JPanel mainPanel, loginPanel, loggedPanel;
-	JButton customerButton, unitButton, adminButton;
-	JLabel username, emptyUnits;
-	int userSession, queuedUnits, smallEmpty, largeEmpty;
-	String[] data;
-	
-	public LoggedInFrame(int userId){
-		
-		
-		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-		Calendar cal = Calendar.getInstance();
-		String date = dateFormat.format(cal.getTime());
-		
-		userSession = userId;
-		this.setSize(400,200);
-		this.setLocationRelativeTo(null);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setTitle("Warehouse Management");
-		loggedPanel = new JPanel();
-		loggedPanel.setPreferredSize(new Dimension(480,280));
-		loggedPanel.setLayout(new BorderLayout());
-		
-		
-		data = theUser.getDataFromId(userId);
-		queuedUnits = theUnit.numberOfItemsInQueue();
-		smallEmpty= theUnit.getNumberOfEmptyUnitsInSmall();
-		largeEmpty = theUnit.getNumberOfEmptyUnitsInLarge();
-		
-		username = new JLabel("Logged in as: " + data[2] + "          	           	  " + "       Today's date is: " + date);
-		emptyUnits = new JLabel("Empty Large Units: " + largeEmpty  +"     Empty Small Units: " + smallEmpty + "     Items in Queue: " + queuedUnits);
-		
-		ListenForButton lForButton = new ListenForButton();
-		customerButton = new JButton("Customer Options");
-		customerButton.addActionListener(lForButton);
-		
-		unitButton = new JButton("Unit Options");
-		unitButton.addActionListener(lForButton);
-		
-		adminButton = new JButton("Admin Panel");
-		adminButton.addActionListener(lForButton);
-		
-		loggedPanel.add(username, BorderLayout.NORTH);
-		loggedPanel.add(adminButton, BorderLayout.WEST);
-		loggedPanel.add(unitButton, BorderLayout.CENTER);
-		loggedPanel.add(customerButton, BorderLayout.EAST);
-		loggedPanel.add(emptyUnits, BorderLayout.SOUTH);
-		
-		this.add(loggedPanel);
-		this.setVisible(true);
-	}
-	
-	private class ListenForButton implements ActionListener{
-
-		public void actionPerformed(ActionEvent e) {
-			if(e.getSource() == customerButton){
-				dispose();
-				new CustomerLanding(userSession);
-			}else{
-				dispose();
-				new UnitLanding(userSession);
 			}
 		}
 	}

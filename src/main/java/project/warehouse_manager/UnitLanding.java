@@ -9,6 +9,7 @@ import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class UnitLanding extends JFrame{
 
@@ -16,14 +17,20 @@ public class UnitLanding extends JFrame{
 	vacantSmallBut, vacantLargeBut, alterBut, 
 			removeBut, fillBut, goBackBut;
 	
-	JTextField textResult;
+	JTextField text;
 	
 	JTextArea textArea1;
 	
 	int userSession;
+	String[] userSessionData = new String[5];
 	
-	public UnitLanding(int userId){
+	Unit theUnit = new Unit();
+	Customer theCustomer = new Customer();
+	Users theUser = new Users();
+	
+	public UnitLanding(int userId, String[] userData){
 		
+		System.arraycopy(userData, 0, userSessionData, 0, userData.length );
 		userSession=userId;
 		
 		this.setSize(500,600);
@@ -47,7 +54,7 @@ public class UnitLanding extends JFrame{
 		gridConstraints.anchor = gridConstraints.CENTER;
 		gridConstraints.fill = gridConstraints.BOTH;
 		
-		textResult = new JTextField("",20);
+		text = new JTextField("",20);
 		textArea1 = new JTextArea(15,20);
 		textArea1.setLineWrap(true);
 		textArea1.setWrapStyleWord(true);
@@ -66,7 +73,7 @@ public class UnitLanding extends JFrame{
 		vacantLargeBut = new JButton("find large vacant");
 		alterBut = new JButton("alter");
 		removeBut = new JButton("remove");
-		fillBut = new JButton("fill");
+		fillBut = new JButton("Fill Unit");
 		goBackBut = new JButton("go back");
 		
 		byIdBut.addActionListener(lForButton);
@@ -84,7 +91,7 @@ public class UnitLanding extends JFrame{
 		gridConstraints.gridwidth = 20;
 		gridConstraints.gridx = 1;
 		gridConstraints.gridy = 1;
-		thePanel.add(textResult, gridConstraints);
+		thePanel.add(text, gridConstraints);
 		gridConstraints.gridwidth = 1;
 		gridConstraints.gridx = 1;
 		gridConstraints.gridy = 2;
@@ -120,22 +127,191 @@ public class UnitLanding extends JFrame{
 		
 		this.setVisible(true);
 		
-		textResult.requestFocus();
+		text.requestFocus();
 		
 	}
 
 	private class ListenForButton implements ActionListener{
 
 		public void actionPerformed(ActionEvent e) {
+				//go back button----------------------
 			if(e.getSource() == goBackBut){
 				dispose();
-				new LoggedInFrame(userSession);
+				new LoggedInFrame(userSession, userSessionData);
+				//fill unit button--------------------
 			}else if(e.getSource() == fillBut){
 				dispose();
-				new UnitFill(userSession);
+				new UnitFill(userSession, userSessionData);
+				//alter unit button-------------------
 			}else if(e.getSource() == alterBut){
 				dispose();
-				new UnitAlter(userSession);
+				new UnitAlter(userSession, userSessionData);
+				//find unit by id button--------------
+			}else if(e.getSource() == byIdBut){
+				if(text.getText().isEmpty()){
+					 JOptionPane.showMessageDialog(UnitLanding.this,"Fields cannot be empty, Input required: unit ID ",
+							 "Solution", JOptionPane.INFORMATION_MESSAGE);
+				}else{
+					try{
+						int unitId = Integer.parseInt(text.getText());
+						ArrayList<String> unitData = new ArrayList<String>();
+						unitData = theUnit.unitsById(unitId);
+							
+						// unit id
+						textArea1.setText("Unit id	: " + unitId);
+			  			//description
+		  				textArea1.append("\nDescription	:  " + unitData.get(0));
+		  				//warehouse Id
+		  				textArea1.append("\nwarehouse Id	:  " + unitData.get(1));
+		  				// occupied
+		  				textArea1.append("\noccupied	:  " + unitData.get(2));
+		  				// date Received
+		  				textArea1.append("\ndate Received	:  " + unitData.get(3));
+		  				// pickup date
+		  				textArea1.append("\nPickup Date	:  " + unitData.get(4));
+		  				// priority
+		  				textArea1.append("\nPriority	:  " + unitData.get(5));
+		  				// inQueue
+		  				textArea1.append("\ninQueue	:  " + unitData.get(6));
+		  				// position in queue
+		  				textArea1.append("\nplace In Queue	:  " + unitData.get(7));
+					}catch(Exception NumberFormatException){
+						 JOptionPane.showMessageDialog(UnitLanding.this,"Fields cannot be Strings, Input required: unit ID ",
+								 "Error", JOptionPane.INFORMATION_MESSAGE);
+					}
+				}
+				
+				//find by customer id button----------
+			}else if(e.getSource() == byCustomerBut){
+				if(text.getText().isEmpty()){
+					JOptionPane.showMessageDialog(UnitLanding.this, "Fields cannot be empty, or strings, Input required: Customer ID (integer)", "Error"
+							, JOptionPane.ERROR_MESSAGE);
+				}else{
+					try{
+						ArrayList<Integer> customerSmallUnits = new ArrayList<Integer>();
+						ArrayList<Integer> customerLargeUnits = new ArrayList<Integer>();
+						String[] customerData = new String[]{"","",""};
+						int customerId = Integer.parseInt(text.getText());
+						int numberOfLargeOwned = theUnit.getNumberOfUnitsOwnedInLargeByCustomerId(customerId);
+						int numberOfSmallOwned = theUnit.getNumberOfUnitsOwnedInSmallByCustomerId(customerId);
+						customerSmallUnits = theUnit.getCustomerUnitsInSmall(customerId);
+						customerLargeUnits = theUnit.getCustomerUnitsInLarge(customerId);
+						customerData = theCustomer.getCustomerData(customerId);
+						
+						textArea1.setText("Customer # " + customerId + "\n" + customerData[0] + " "  + customerData[1] + "\n" +
+								customerData[2]);
+						textArea1.append("\nCurrently owns " + numberOfLargeOwned + " in the large warehouse");
+						textArea1.append("\nCurrently owns " + numberOfSmallOwned + " in the small warehouse");
+						
+						if(numberOfLargeOwned > 0){
+							textArea1.append("\nLarge units owned: ");
+							for(int i = 0; i < customerLargeUnits.size(); i++){
+								textArea1.append(customerLargeUnits.get(i) + ", ");
+							}
+						}
+						
+						if(numberOfSmallOwned > 0){
+							textArea1.append("\nSmall units owned: ");
+							for(int i = 0; i < customerSmallUnits.size(); i++){
+								textArea1.append(customerSmallUnits.get(i) + ", ");
+							}
+						}
+					}catch(Exception NumberFormatException){
+						JOptionPane.showMessageDialog(UnitLanding.this, "Fields cannot strings, Input required: Customer ID (integer)", "Error"
+								, JOptionPane.ERROR_MESSAGE);
+					}
+				}
+				
+				//get data button---------------------
+			}else if(e.getSource() == getDataBut){
+				ArrayList<String> largeUnitData = new ArrayList<String>();
+				largeUnitData = theUnit.displayLargeWarehouseData();
+							
+		  		textArea1.setText("Large Units in the system\n");
+		  		textArea1.append("-----------------------------------------------------------");
+					
+		  		for(int i = 0; i < largeUnitData.size(); i++){
+	  				textArea1.append("\nid	:  " + largeUnitData.get(i));
+	  				i++;
+	  				textArea1.append("\ndescription	:  " + largeUnitData.get(i));
+	  				i++;
+	  				textArea1.append("\ncustomer Id	:  " + largeUnitData.get(i));
+	  				i++;
+	  				textArea1.append("\nwarehouse Id	:  " + largeUnitData.get(i));
+	  				i++;
+	  				textArea1.append("\noccupied	:  " + largeUnitData.get(i));
+	  				i++;
+	  				textArea1.append("\ndate Received	:  " + largeUnitData.get(i));
+	  				i++;
+	  				textArea1.append("\nPickup date	:  " + largeUnitData.get(i));
+	  				i++;
+	  				textArea1.append("\nPriority	:  " + largeUnitData.get(i));
+	  				i++;
+	  				textArea1.append("\ninQueue	:  " + largeUnitData.get(i));
+	  				i++;
+	  				textArea1.append("\nnPlaceInQueue	:  " + largeUnitData.get(i));
+	  				textArea1.append("\n-----------------------------------------------------------");
+		  		}
+		  		
+				ArrayList<String> smallUnitData = new ArrayList<String>();
+				smallUnitData = theUnit.displaySmallWarehouseData();
+				
+		  		textArea1.append("\nSmall Units in the system\n");
+		  		
+		  		for(int i = 0; i < smallUnitData.size(); i++){
+	  				textArea1.append("\nid	:  " + smallUnitData.get(i));
+	  				i++;
+	  				textArea1.append("\ndescription	:  " + smallUnitData.get(i));
+	  				i++;
+	  				textArea1.append("\ncustomer Id	:  " + smallUnitData.get(i));
+	  				i++;
+	  				textArea1.append("\nwarehouse Id	:  " + smallUnitData.get(i));
+	  				i++;
+	  				textArea1.append("\noccupied	:  " + smallUnitData.get(i));
+	  				i++;
+	  				textArea1.append("\ndate Received	:  " + smallUnitData.get(i));
+	  				i++;
+	  				textArea1.append("\nPickup date	:  " + smallUnitData.get(i));
+	  				i++;
+	  				textArea1.append("\nPriority	:  " + smallUnitData.get(i));
+	  				i++;
+	  				textArea1.append("\ninQueue	:  " + smallUnitData.get(i));
+	  				i++;
+	  				textArea1.append("\nPlaceInQueue	:  " + smallUnitData.get(i));
+	  				textArea1.append("\n-----------------------------------------------------------");
+		  		}
+		  		
+				// find small vacants button-----------
+			}else if(e.getSource() == vacantSmallBut){
+				ArrayList<Integer> smallUnitEmpty = new ArrayList<Integer>();
+				smallUnitEmpty = theUnit.getEmptyUnitsInSmall();
+				textArea1.setText("The following units are empty in the small warehouse: \n");
+				for(int i = 0; i < smallUnitEmpty.size(); i++){
+					textArea1.append(smallUnitEmpty.get(i) + ", ");
+				}
+				//find large vacants button------------
+			}else if(e.getSource() == vacantLargeBut){
+				ArrayList<Integer> largeUnitEmpty = new ArrayList<Integer>();
+				largeUnitEmpty = theUnit.getEmptyUnitsInLarge();
+				textArea1.setText("The following units are empty in the large warehouse: \n");
+				for(int i = 0; i < largeUnitEmpty.size(); i++){
+					textArea1.append(largeUnitEmpty.get(i) + ", ");
+				}
+			}else if(e.getSource() == removeBut){
+				int unitId = Integer.parseInt(text.getText());
+				if(text.getText().isEmpty()){
+					JOptionPane.showMessageDialog(UnitLanding.this, "Fields cannot be empty, Input required: Unit ID", "Error"
+							, JOptionPane.ERROR_MESSAGE);
+				}else{
+					boolean check = theUnit.removeUnit(unitId);
+					if(check == true){
+						 JOptionPane.showMessageDialog(UnitLanding.this,"The unit was sucessfully cleared ",
+								 "Solution", JOptionPane.INFORMATION_MESSAGE);
+					}else{
+						JOptionPane.showMessageDialog(UnitLanding.this, "Something went wrong in the database, please try again later", "Error"
+								, JOptionPane.ERROR_MESSAGE);
+					}
+				}
 			}
 		}
 	}

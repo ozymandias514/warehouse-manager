@@ -20,12 +20,14 @@ public class CustomerAddRemove extends JFrame{
 	JTextField firstNameField,lastNameField, emailField, idField;
 	
 	int userSession;
+	String[] userSessionData = new String[5];
 	
 	Customer theCustomer = new Customer();
 	Unit theUnit = new Unit();
 	
-	public CustomerAddRemove(int userId){
+	public CustomerAddRemove(int userId,  String[] userData){
 		
+		System.arraycopy(userData, 0, userSessionData, 0, userData.length);
 		userSession = userId;
 		this.setSize(500,300);
 		this.setLocationRelativeTo(null);
@@ -100,17 +102,18 @@ public class CustomerAddRemove extends JFrame{
 				//go back button -----------------------------
 			if(e.getSource() == goBackBut){
 				dispose();
-				new CustomerLanding(userSession);
+				new CustomerLanding(userSession, userSessionData);
 				//add customer button-------------------------
 			}else if(e.getSource() == addCustomerBut){
-				String userFirstName = firstNameField.getText();
-				String userLastName = lastNameField.getText();
-				String userEmail = emailField.getText();
-				if(userFirstName.isEmpty() || userLastName.isEmpty() || userEmail.isEmpty()){
+
+				if(firstNameField.getText().isEmpty() || lastNameField.getText().isEmpty() || emailField.getText().isEmpty()){
 					JOptionPane.showMessageDialog(CustomerAddRemove.this,
 							"Fields cannot be empty, Input required: First Name, Last Name, Email",
 							"Error" , JOptionPane.ERROR_MESSAGE);
 				}else{
+					String userFirstName = firstNameField.getText();
+					String userLastName = lastNameField.getText();
+					String userEmail = emailField.getText();
 					String answer = theCustomer.addCustomer(userFirstName, userLastName, userEmail);
 					 JOptionPane.showMessageDialog(CustomerAddRemove.this,"The customer insertion " + answer,
 							 "Solution", JOptionPane.INFORMATION_MESSAGE);
@@ -118,25 +121,32 @@ public class CustomerAddRemove extends JFrame{
 				
 				//delete customer button---------------------------
 			}else if(e.getSource() == deleteBut){
-				int customerId = Integer.parseInt(idField.getText());
+				
 				if(idField.getText().isEmpty()){
 					JOptionPane.showMessageDialog(CustomerAddRemove.this,
 							"Fields cannot be empty, Input required: ID",
 							"Error" , JOptionPane.ERROR_MESSAGE);
 				}else{
-					 boolean checker = theUnit.emptyUnitByCustomer(customerId);
-					 if(checker){
-						 String answer = theCustomer.deleteCustomer(customerId);	
-						 JOptionPane.showMessageDialog(CustomerAddRemove.this,"The customer deletion " + answer,
-								 "Solution", JOptionPane.INFORMATION_MESSAGE);
-						 
-
-					 }else{
+					try{
+						int customerId = Integer.parseInt(idField.getText());
+						 boolean checker = theUnit.emptyUnitByCustomer(customerId);
+						 if(checker){
+							 String answer = theCustomer.deleteCustomer(customerId);	
+							 JOptionPane.showMessageDialog(CustomerAddRemove.this,"The customer deletion " + answer,
+									 "Solution", JOptionPane.INFORMATION_MESSAGE);
+							 
+	
+						 }else{
+							JOptionPane.showMessageDialog(CustomerAddRemove.this,
+									"We are currently experiencing database problems please try again later",
+									"Error" , JOptionPane.ERROR_MESSAGE);
+						 }
+				 }catch(Exception NumberFormatException){
 						JOptionPane.showMessageDialog(CustomerAddRemove.this,
-								"We are currently experiencing database problems please try again later",
+								"Field Cannot be a string, Input Required: Customer ID",
 								"Error" , JOptionPane.ERROR_MESSAGE);
-					 }
-				 }
+				 	}
+				}
 			}
 		}
 	}

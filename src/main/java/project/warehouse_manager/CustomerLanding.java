@@ -24,11 +24,15 @@ public class CustomerLanding extends JFrame {
 	JTextArea textArea1;
 	
 	int userSession;
+	String[] userSessionData = new String[5];
 	
 	Customer theCustomer = new Customer();
+	Users theUser = new Users();
 	
-	public CustomerLanding(int userId){
+	public CustomerLanding(int userId, String[] userData){
+		// clone the data array
 		
+		System.arraycopy(userData, 0, userSessionData, 0, userData.length );
 		
 		userSession = userId;
 		this.setSize(500,600);
@@ -124,15 +128,15 @@ public class CustomerLanding extends JFrame {
 				//go back button -----------------------------------
 			if(e.getSource() == goBackBut){
 				dispose();
-				new LoggedInFrame(userSession);
+				new LoggedInFrame(userSession, userSessionData);
 				// add and remove button ------------------------------
 			}else if(e.getSource() == addRemoveBut){
 				dispose();
-				new CustomerAddRemove(userSession);
+				new CustomerAddRemove(userSession, userSessionData);
 				// take to alter screen button ------------------------
 			}else if(e.getSource() == alterButton){
 				dispose();
-				new CustomerAlter(userSession);
+				new CustomerAlter(userSession, userSessionData);
 				// list all items button ------------------------------
 			}else if(e.getSource() == listButton){
 				ArrayList<String> userData = new ArrayList<String>();
@@ -166,12 +170,11 @@ public class CustomerLanding extends JFrame {
 				//get by email button ------------------------------------------
 			}else if(e.getSource() == emailButton){
 				
-				String email = textResult.getText();
-				
-				if(email.isEmpty()){
+				if(textResult.getText().isEmpty()){
 					JOptionPane.showMessageDialog(CustomerLanding.this, "Fields cannot be empty, Input required: email", "Error"
 							, JOptionPane.ERROR_MESSAGE);
 				}else{
+					String email = textResult.getText();
 					String data[] = theCustomer.getDataByEmail(email);
 					textArea1.setText("The user id pertaining to that email is: " + data[0] +
 						"\nFirst Name: " + data[1] + "\nLast Name: " + data[2] + "\nemail: " + data[3]);	
@@ -179,42 +182,48 @@ public class CustomerLanding extends JFrame {
 				// get by id button ----------------------------------
 			}else if(e.getSource() == idButton){
 				
-				int userId = Integer.parseInt(textResult.getText());
+				
 				if(textResult.getText().isEmpty()){
 					JOptionPane.showMessageDialog(CustomerLanding.this, "Fields cannot be empty, Input required: Customer ID", "Error"
 							, JOptionPane.ERROR_MESSAGE);
 				}else{
-					int[] largeWare= theCustomer.largeUnitsByCustomer(userId);
-					int[] smallWare= theCustomer.smallUnitsByCustomer(userId);
-					String[] customerData = theCustomer.getCustomerData(userId);
-					int largeLength = largeWare.length;
-					int smallLength = smallWare.length;
-					
-					textArea1.setText("First Name: "+ customerData[0] + "\nLast Name : " 
-					+ customerData[1] + "\nemail: " +customerData[2]);
-					
-					textArea1.append("\nLarge Units owned by this customer: ");
-					int zero= 0;
-					for(int x = 0;x < largeLength; x++){
-						if(largeWare[x] != 0){
-							zero++;
-							textArea1.append(largeWare[x] + ", ");
+					try{
+						int userId = Integer.parseInt(textResult.getText());
+						int[] largeWare= theCustomer.largeUnitsByCustomer(userId);
+						int[] smallWare= theCustomer.smallUnitsByCustomer(userId);
+						String[] customerData = theCustomer.getCustomerData(userId);
+						int largeLength = largeWare.length;
+						int smallLength = smallWare.length;
+						
+						textArea1.setText("First Name: "+ customerData[0] + "\nLast Name : " 
+						+ customerData[1] + "\nemail: " +customerData[2]);
+						
+						textArea1.append("\nLarge Units owned by this customer: ");
+						int zero= 0;
+						for(int x = 0;x < largeLength; x++){
+							if(largeWare[x] != 0){
+								zero++;
+								textArea1.append(largeWare[x] + ", ");
+							}
 						}
-					}
-					if(zero == 0){
-						textArea1.append("none");
-					}
-					
-					textArea1.append("\nSmall Units owned by this customer: ");
-					int zero2= 0;
-					for(int y = 0;y < smallLength; y++){
-						if(smallWare[y] != 0){
-							zero2++;
-							textArea1.append(smallWare[y] + ", ");
+						if(zero == 0){
+							textArea1.append("none");
 						}
-					}
-					if(zero2 == 0){
-						textArea1.append("none");
+						
+						textArea1.append("\nSmall Units owned by this customer: ");
+						int zero2= 0;
+						for(int y = 0;y < smallLength; y++){
+							if(smallWare[y] != 0){
+								zero2++;
+								textArea1.append(smallWare[y] + ", ");
+							}
+						}
+						if(zero2 == 0){
+							textArea1.append("none");
+						}
+					}catch(Exception numberFormatException){
+						JOptionPane.showMessageDialog(CustomerLanding.this, "Field cannot be string, Input required: Customer ID", "Error"
+								, JOptionPane.ERROR_MESSAGE);
 					}
 				}
 					// clear screen button ------------------------------------

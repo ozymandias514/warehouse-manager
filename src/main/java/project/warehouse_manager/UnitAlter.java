@@ -5,20 +5,33 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JSpinner;
 import javax.swing.JTextField;
+import javax.swing.SpinnerDateModel;
 
 class UnitAlter extends JFrame{
 	JButton changeDescBut, changePickBut, goBackBut;
 	JTextField idField,valueField;
+	JSpinner spinner;
+	
+	Unit theUnit = new Unit();
 	
 	int userSession;
-	public UnitAlter(int userId){
+	String[] userSessionData = new String[5];
+	
+	public UnitAlter(int userId, String[] userData){
 		
-		this.setSize(500,600);
+		System.arraycopy(userData, 0, userSessionData, 0, userData.length);
+		this.setSize(500,300);
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setTitle("Warehouse");
@@ -41,8 +54,15 @@ class UnitAlter extends JFrame{
 		
 		ListenForButton lForButton = new ListenForButton();
 		
+		Date todaysDate = new Date();
+		spinner = new JSpinner(new SpinnerDateModel(todaysDate, null, null, Calendar.DAY_OF_MONTH));
+		
+		JSpinner.DateEditor dateEditor = new JSpinner.DateEditor(spinner, "dd/MM/yyyy");
+		dateEditor.getTextField().setEditable(false);
+		spinner.setEditor(dateEditor);
+		
 		idField = new JTextField("ID",3);
-		valueField = new JTextField("",10);
+		valueField = new JTextField("value field",40);
 		
 		changeDescBut = new JButton("Change Description");
 		changePickBut = new JButton("Change pickup");
@@ -52,22 +72,25 @@ class UnitAlter extends JFrame{
 		changePickBut.addActionListener(lForButton);
 		goBackBut.addActionListener(lForButton);
 		
-		gridConstraints.gridwidth = 1;
+		gridConstraints.gridwidth = 20;
 		gridConstraints.gridx = 1;
 		gridConstraints.gridy = 1;
+		thePanel.add(valueField,gridConstraints);
+		gridConstraints.gridwidth = 1;
+		gridConstraints.gridy = 2;
+		gridConstraints.gridx = 1;
 		thePanel.add(idField,gridConstraints);
 		gridConstraints.gridwidth = 10;
 		gridConstraints.gridx = 5;
-		thePanel.add(valueField,gridConstraints);
-		gridConstraints.gridwidth = 10;
-		gridConstraints.gridx = 1;
-		gridConstraints.gridy = 2;
 		thePanel.add(changeDescBut,gridConstraints);
-		gridConstraints.gridx = 6;
-		thePanel.add(changePickBut,gridConstraints);
-		gridConstraints.gridwidth = 20;
-		gridConstraints.gridx = 1;
+		gridConstraints.gridwidth = 1;
 		gridConstraints.gridy = 3;
+		gridConstraints.gridx = 1;
+		thePanel.add(spinner,gridConstraints);
+		gridConstraints.gridx = 5;
+		thePanel.add(changePickBut,gridConstraints);
+		gridConstraints.gridwidth = 1;
+		gridConstraints.gridx = 9;
 		thePanel.add(goBackBut,gridConstraints);
 		
 		this.add(thePanel);
@@ -82,7 +105,51 @@ class UnitAlter extends JFrame{
 		public void actionPerformed(ActionEvent e) {
 			if(e.getSource() == goBackBut){
 				dispose();
-				new UnitLanding(userSession);
+				new UnitLanding(userSession, userSessionData);
+			}else if(e.getSource() == changeDescBut){
+				if(idField.getText().isEmpty() || valueField.getText().isEmpty()){
+					JOptionPane.showMessageDialog(UnitAlter.this, "Fields cannot be empty, Input required: ID, Description", "Error"
+							, JOptionPane.ERROR_MESSAGE);
+				}else{
+					try{					
+						int unitId = Integer.parseInt(idField.getText());
+						String newDescription = valueField.getText();
+						boolean check = theUnit.changeDescription(newDescription, unitId);
+						if(check == true){
+							JOptionPane.showMessageDialog(UnitAlter.this, "The description for Unit " + unitId + " was sucesfully updated", "Information", JOptionPane.INFORMATION_MESSAGE);
+						}else{
+							JOptionPane.showMessageDialog(UnitAlter.this, "There was an error connecting to the database, Please try again", "Error"
+									, JOptionPane.ERROR_MESSAGE);
+						}
+					}catch(Exception NumberFormatException){
+						JOptionPane.showMessageDialog(UnitAlter.this, "ID field must be numeric: ID", "Error"
+								, JOptionPane.ERROR_MESSAGE);
+					}
+				}
+			}else if(e.getSource() == changePickBut){
+				Date todaysDate = new Date();
+				DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+				Calendar cal = Calendar.getInstance();
+				
+				if(idField.getText().isEmpty()){
+					JOptionPane.showMessageDialog(UnitAlter.this, "Field cannot be empty, Input required: ID", "Error"
+							, JOptionPane.ERROR_MESSAGE);
+				}else{
+					try{
+						String newPickupDate = dateFormat.format((spinner.getValue()));
+						int unitId = Integer.parseInt(idField.getText());
+						boolean check = theUnit.changePickupDate(newPickupDate, unitId);
+						if(check == true){
+							JOptionPane.showMessageDialog(UnitAlter.this, "The pick up date for Unit " + unitId + " was sucesfully updated", "Information", JOptionPane.INFORMATION_MESSAGE);
+						}else{
+							JOptionPane.showMessageDialog(UnitAlter.this, "There was an error connecting to the database, Please try again", "Error"
+									, JOptionPane.ERROR_MESSAGE);
+						}
+					}catch(Exception NumberFormatException){
+						JOptionPane.showMessageDialog(UnitAlter.this, "ID field must be numeric: ID", "Error"
+								, JOptionPane.ERROR_MESSAGE);
+					}	
+				}
 			}
 		}
 	}
