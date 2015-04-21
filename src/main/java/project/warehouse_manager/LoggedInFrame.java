@@ -79,7 +79,8 @@ public class LoggedInFrame extends JFrame{
 				dispose();
 				new UnitLanding(userSession, userSessionData);
 			}else{
-				
+				dispose();
+				new AdminLanding(userSession, userSessionData);
 			}
 		}
 	}

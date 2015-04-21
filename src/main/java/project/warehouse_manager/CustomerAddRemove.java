@@ -16,8 +16,8 @@ import javax.swing.JTextField;
 //add remove section ----------------------------------------------
 public class CustomerAddRemove extends JFrame{
 	
-	JButton addCustomerBut, deleteBut, goBackBut;
-	JTextField firstNameField,lastNameField, emailField, idField;
+	JButton addCustomerBut, deleteBut, goBackBut, clearAll;
+	JTextField firstNameField,lastNameField, emailField, idField, emailFieldErase;
 	
 	int userSession;
 	String[] userSessionData = new String[5];
@@ -56,14 +56,17 @@ public class CustomerAddRemove extends JFrame{
 		firstNameField = new JTextField("First Name",10);
 		lastNameField = new JTextField("Last Name",10);
 		emailField = new JTextField("email",10);
+		emailFieldErase = new JTextField("email", 10);
 		
 		addCustomerBut = new JButton("add customer");
 		deleteBut = new JButton("delete customer");
 		goBackBut = new JButton("go back");
+		clearAll = new JButton("Clear All");
 		
 		addCustomerBut.addActionListener(lForButton);
 		deleteBut.addActionListener(lForButton);
 		goBackBut.addActionListener(lForButton);
+		clearAll.addActionListener(lForButton);
 		
 		gridConstraints.gridwidth = 1;
 		gridConstraints.gridy = 1;
@@ -73,16 +76,22 @@ public class CustomerAddRemove extends JFrame{
 		thePanel.add(lastNameField, gridConstraints);
 		gridConstraints.gridx = 9;
 		thePanel.add(emailField, gridConstraints);
-		gridConstraints.gridwidth = 20;
+		gridConstraints.gridwidth = 1;
 		gridConstraints.gridy = 2;
 		gridConstraints.gridx = 1;
+		thePanel.add(clearAll, gridConstraints);
+		gridConstraints.gridwidth = 10;
+		gridConstraints.gridx = 5;
 		thePanel.add(addCustomerBut, gridConstraints);
 		gridConstraints.gridwidth = 1;
 		gridConstraints.gridy = 3;
 		gridConstraints.gridx = 1;
 		thePanel.add(idField, gridConstraints);
-		gridConstraints.gridwidth = 10;
+		gridConstraints.gridwidth = 1;
 		gridConstraints.gridx = 5;
+		thePanel.add(emailFieldErase, gridConstraints);
+		gridConstraints.gridwidth = 1;
+		gridConstraints.gridx = 9;
 		thePanel.add(deleteBut, gridConstraints);
 		gridConstraints.gridwidth = 20;
 		gridConstraints.gridy = 4;
@@ -122,20 +131,20 @@ public class CustomerAddRemove extends JFrame{
 				//delete customer button---------------------------
 			}else if(e.getSource() == deleteBut){
 				
-				if(idField.getText().isEmpty()){
+				if(idField.getText().isEmpty() && emailFieldErase.getText().isEmpty()){
 					JOptionPane.showMessageDialog(CustomerAddRemove.this,
-							"Fields cannot be empty, Input required: ID",
+							"Both Fields cannot be empty atleast one input is required, Input required: ID, or Email",
 							"Error" , JOptionPane.ERROR_MESSAGE);
-				}else{
+				}else if(!idField.getText().isEmpty() && emailFieldErase.getText().isEmpty() || !idField.getText().isEmpty() && !emailFieldErase.getText().isEmpty()){
 					try{
-						int customerId = Integer.parseInt(idField.getText());
+						 int customerId = Integer.parseInt(idField.getText());
+						 
 						 boolean checker = theUnit.emptyUnitByCustomer(customerId);
+						 
 						 if(checker){
 							 String answer = theCustomer.deleteCustomer(customerId);	
 							 JOptionPane.showMessageDialog(CustomerAddRemove.this,"The customer deletion " + answer,
 									 "Solution", JOptionPane.INFORMATION_MESSAGE);
-							 
-	
 						 }else{
 							JOptionPane.showMessageDialog(CustomerAddRemove.this,
 									"We are currently experiencing database problems please try again later",
@@ -146,7 +155,28 @@ public class CustomerAddRemove extends JFrame{
 								"Field Cannot be a string, Input Required: Customer ID",
 								"Error" , JOptionPane.ERROR_MESSAGE);
 				 	}
+				}else if(idField.getText().isEmpty() && !emailFieldErase.getText().isEmpty()){
+					String customerEmail = emailFieldErase.getText();
+					int customerId = theCustomer.getIdByEmail(customerEmail);
+					boolean checker = theUnit.emptyUnitByCustomer(customerId);
+					 if(checker){
+						 String answer = theCustomer.deleteCustomer(customerId);	
+						 JOptionPane.showMessageDialog(CustomerAddRemove.this,"The customer deletion " + answer,
+								 "Solution", JOptionPane.INFORMATION_MESSAGE);
+					 }else{
+						JOptionPane.showMessageDialog(CustomerAddRemove.this,
+								"We are currently experiencing database problems please try again later",
+								"Error" , JOptionPane.ERROR_MESSAGE);
+					 }	
 				}
+			}else if(e.getSource() == clearAll){
+				 firstNameField.setText("");
+				 lastNameField.setText("");
+				 emailField.setText("");
+				 idField.setText("");
+				 emailFieldErase.setText("");
+				 JOptionPane.showMessageDialog(CustomerAddRemove.this,"All fields have now been cleared",
+						 "Solution", JOptionPane.INFORMATION_MESSAGE);
 			}
 		}
 	}

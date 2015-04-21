@@ -199,6 +199,29 @@ public class Customer extends DatabaseHandler{
   		return dataByEmail;
   	}
   	
+  //gets the customer id with the email
+  	public int getIdByEmail(String email){
+  		int userId= 0;
+  		try {
+  			rs = st.executeQuery("SELECT * FROM customer WHERE email = '" + email + "';");
+  			System.out.println();
+  			userId = rs.getInt("id");
+  			return userId;
+  		
+  		} catch (SQLException e) {
+  			e.printStackTrace();
+  		}finally{
+  			try{
+  				rs.close();
+  				st.close();
+  				}
+  			catch(Exception e){
+  		
+  			}
+  		}
+  		return userId;
+  	}
+  	
   	//retrieves all customer data with an id
   	public String[] getCustomerData(int customerId){
   		String[] customerDataString = {"","",""};
