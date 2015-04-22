@@ -376,13 +376,15 @@ public class Unit extends DatabaseHandler{
 			for (UnitData unitData : largeWarehouseUnitList) {
 				st.executeUpdate("UPDATE units SET description ='" + unitData.getDescription() + 
 						 "', customerId = " + unitData.getCustomerId() + ", occupied = " + unitData.getOccupied() 
-						 + ", dateReceived ='" + unitData.getDateReceived() + "'WHERE id =" + unitData.getId() + ";");
+						 + ", dateReceived ='" + unitData.getDateReceived() + "', pickUpDate = '" + unitData.getPickUpDate() 
+						 + "' WHERE id =" + unitData.getId() + ";");
 			}
 			
 			for (UnitData unitData : smallWarehouseUnitList) {
 				st.executeUpdate("UPDATE units SET description ='" + unitData.getDescription() + 
 						 "', customerId = " + unitData.getCustomerId() + ", occupied = " + unitData.getOccupied() 
-						 + ", dateReceived ='" + unitData.getDateReceived() + "'WHERE id =" + unitData.getId() + ";");
+						 + ", dateReceived ='" + unitData.getDateReceived() + "', pickUpDate = '" + unitData.getPickUpDate() 
+						 + "' WHERE id =" + unitData.getId() + ";");
 			}
 			
 						

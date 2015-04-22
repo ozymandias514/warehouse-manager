@@ -10,7 +10,7 @@ public class UnitData {
 	private int warehouseId;
 	private int occupied;
 	private String dateReceived;
-	private Date pickUpDate;
+	private String pickUpDate;
 	private int priority;
 	private int inQueue;
 	private int positionInQueue;
@@ -27,11 +27,7 @@ public class UnitData {
 		if (pickUpDate == null || pickUpDate.equals("null")) {
 			this.pickUpDate = null;
 		} else {
-			String[] splitDate = pickUpDate.split("/");
-			int day   = Integer.parseInt(splitDate[0]);
-			int month = Integer.parseInt(splitDate[1]);
-			int year  = Integer.parseInt(splitDate[2]);
-			this.pickUpDate = new Date(year, month, day);
+			this.pickUpDate = pickUpDate;
 		}
 		this.inQueue = inQueue;
 	}
@@ -91,12 +87,13 @@ public class UnitData {
 	}
 	
 	// pick up date methods ----------------------------------------------
-	public void setPickUpDate(String date){
+	public void setPickUpDate(String pickUpDate){
 		//this.pickUpDate = new Date(pickUpDate);
-		this.pickUpDate.setTime(Date.parse(date));
+		//this.pickUpDate.setTime(Date.parse(date));
+		this.pickUpDate = pickUpDate;
 	}
 	
-	public Date getPickUpDate(){
+	public String getPickUpDate(){
 		return pickUpDate;
 	}
 	
