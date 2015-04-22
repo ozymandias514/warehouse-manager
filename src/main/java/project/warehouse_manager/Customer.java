@@ -91,28 +91,20 @@ public class Customer extends DatabaseHandler{
   	}
   	
   	//deletes a customer
-  	public String deleteCustomer(int customerId){
-  		String taskAchieved = "has failed";
+  	public boolean deleteCustomer(int customerId){
+  		boolean taskAchieved = false;
   		try {
   			//empties the units associated with the customer first
   			//emptyUnitByCustomer(customerId);
   			// Need to purge the customers
   			// then deletes the customer from the database
   			st.executeUpdate("DELETE FROM customer WHERE id="+ customerId +";");		
-  			taskAchieved = "was succesful";
+  			taskAchieved = true;
   			return taskAchieved;
   		}catch (SQLException e) {
   			e.printStackTrace();
   			return taskAchieved;
-  		}finally{
-  			try{
-  				rs.close();
-  				st.close();
-  				}
-  			catch(Exception e){
-  				System.out.println("Error closing the database");
-  			}
-  		}			
+  		}
   	}
   	
   	//sets a new first name for an existing customer
@@ -122,15 +114,7 @@ public class Customer extends DatabaseHandler{
   					"' WHERE id = "+ customerId +";");			
   		}catch (SQLException e) {
   			e.printStackTrace();
-  		}finally{
-  			try{
-  				rs.close();
-  				st.close();
-  				}
-  			catch(Exception e){
-  				System.out.println("Error closing the database");
-  			}
-  		}	
+  		}
   	}
   	
   	//sets a new last name for an existing customer
@@ -140,16 +124,7 @@ public class Customer extends DatabaseHandler{
   					"' WHERE id = "+ customerId +";");			
   		}catch (SQLException e) {
   			e.printStackTrace();
-  		}finally{
-  			try{
-  				rs.close();
-  				st.close();
-  				}
-  			catch(Exception e){
-  				System.out.println("Error closing the database");
-  			}
-  		}	
-  		
+  		}  		
   	}
   	
   	//sets a new email for an existing customer
@@ -159,15 +134,7 @@ public class Customer extends DatabaseHandler{
   					"' WHERE id = "+ customerId +";");			
   		}catch (SQLException e) {
   			e.printStackTrace();
-  		}finally{
-  			try{
-  				rs.close();
-  				st.close();
-  				}
-  			catch(Exception e){
-  				System.out.println("Error closing the database");
-  			}
-  		}			
+  		}	
   	}
   	
   	//gets the customer id with the email
@@ -210,16 +177,8 @@ public class Customer extends DatabaseHandler{
   		
   		} catch (SQLException e) {
   			e.printStackTrace();
-  		}finally{
-  			try{
-  				rs.close();
-  				st.close();
-  				}
-  			catch(Exception e){
-  		
-  			}
-  		}
-  		return userId;
+  			return userId;
+  		}  		
   	}
   	
   	//retrieves all customer data with an id
