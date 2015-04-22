@@ -367,6 +367,40 @@ public class Unit extends DatabaseHandler{
   		}
 	}
 	
+	// adds a customer and their belongings to a unit
+	public boolean repopulateTables(ArrayList<UnitData> largeWarehouseUnitList,
+			ArrayList<UnitData> smallWarehouseUnitList){
+			
+		try {
+
+			for (UnitData unitData : largeWarehouseUnitList) {
+				st.executeUpdate("UPDATE units SET description ='" + unitData.getDescription() + 
+						 "', customerId = " + unitData.getCustomerId() + ", occupied = " + unitData.getOccupied() 
+						 + ", dateReceived ='" + unitData.getDateReceived() + "', pickupDate ='" + unitData.getPickUpDate() 
+						 + "'WHERE id =" + unitData.getId() + ";");
+			}
+			
+			for (UnitData unitData : smallWarehouseUnitList) {
+				st.executeUpdate("UPDATE units SET description ='" + unitData.getDescription() + 
+						 "', customerId = " + unitData.getCustomerId() + ", occupied = " + unitData.getOccupied() 
+						 + ", dateReceived ='" + unitData.getDateReceived() + "', pickupDate ='" + unitData.getPickUpDate() 
+						 + "'WHERE id =" + unitData.getId() + ";");
+			}
+			
+						
+			return true;
+		}catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}finally{
+  			try{
+  				rs.close();
+  				//st.close();
+  				}
+  			catch(Exception e){
+  			}
+  		}
+	}
 	
 	//empties a unit, leaving it ready for more items
 	public boolean removeUnit(int unitId){
@@ -680,5 +714,4 @@ public class Unit extends DatabaseHandler{
 	  		}		
 			
 		}
-
 }

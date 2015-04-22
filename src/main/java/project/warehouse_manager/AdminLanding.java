@@ -144,8 +144,9 @@ public class AdminLanding extends JFrame{
 						}
 					}
 					
-	
-			        for (UnitData unitData : queue) {
+					theUnit.repopulateTables(largeWarehouseUnitList, smallWarehouseUnitList);
+			       // for (UnitData unitData : largeWarehouseUnitList) {  	
+			        	
 			        	/*
 			            Object rowData[] = {unitData.getId(), 
 						            		unitData.getDescription(), 
@@ -158,6 +159,7 @@ public class AdminLanding extends JFrame{
 						            		unitData.getInQueue(),
 						            		unitData.getPositionInQueue()};
 			            */
+			        	/*
 			        	System.out.println("Unit Number: " + unitData.getId());
 			        	System.out.println(unitData.getDescription());
 			        	System.out.print(unitData.getCustomerId() + " ");
@@ -172,8 +174,8 @@ public class AdminLanding extends JFrame{
 			        	System.out.print(" Position In Queue: " + unitData.getPositionInQueue());
 			        	System.out.println();
 			        	System.out.println();
-			        }
-					
+			        	*/
+			       // }
 					
 					
 				} catch (ClassNotFoundException e1) {
