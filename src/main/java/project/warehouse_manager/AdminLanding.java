@@ -5,6 +5,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 
 import java.awt.Font;
 import java.awt.GridBagConstraints;
@@ -95,7 +96,59 @@ public class AdminLanding extends JFrame{
 					 JOptionPane.showMessageDialog(AdminLanding.this,"Small warehouse has been emptied",
 							 "Solution", JOptionPane.INFORMATION_MESSAGE);
 			}else if(e.getSource() == runQueue){
+				
+				 try {
+					ArrayList<UnitData> UnitList = null;
+					UnitList = theUnit.getAllUnits();
 					
+	
+					
+	
+			        
+			        for (UnitData unitData : UnitList) {
+			        	/*
+			            Object rowData[] = {unitData.getId(), 
+						            		unitData.getDescription(), 
+						            		unitData.getCustomerId(), 
+						            		unitData.getWarehouseId(),
+						            		unitData.getOccupied(),
+						            		unitData.getDateReceived(),
+						            		unitData.getPickUpDate(),
+						            		unitData.getPriority(),
+						            		unitData.getInQueue(),
+						            		unitData.getPositionInQueue()};
+			            */
+
+			  
+			        	System.out.println("Unit Number: " + unitData.getId());
+			        	System.out.println(unitData.getDescription());
+			        	System.out.print(unitData.getCustomerId() + " ");
+			        	System.out.print(unitData.getWarehouseId() + " Occupied: ");
+			        	System.out.print(unitData.getOccupied());
+			        	
+			        	System.out.println();
+			        	
+			        	System.out.print("date received: " + unitData.getDateReceived());
+			        	System.out.print(" Pick up date: " + unitData.getPickUpDate());
+			        	
+			        	System.out.println();
+			        	
+			        	System.out.print("priority: " + unitData.getPriority());
+			        	System.out.print("  inQueue: " + unitData.getInQueue());
+			        	System.out.print(" Position In Queue: " + unitData.getPositionInQueue());
+			        	System.out.println();
+			        	System.out.println();
+			        }
+					
+					
+					
+				} catch (ClassNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				
 			}
 		}

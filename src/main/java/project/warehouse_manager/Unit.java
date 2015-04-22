@@ -46,6 +46,30 @@ public class Unit extends DatabaseHandler{
   		}
   	}
   	
+  	public ArrayList<UnitData> getAllUnits() throws ClassNotFoundException, SQLException{
+		
+  		String sql = "SELECT * FROM units WHERE warehouseId = 1";
+  	    ResultSet rst;
+  	    rst = st.executeQuery(sql);
+  	    ArrayList<UnitData> UnitsList = new ArrayList<>();
+  		while(rst.next()){
+  			UnitData unitData = new UnitData(rst.getInt("id")
+  					,rst.getString("description")
+  					,rst.getInt("customerId")
+  					,rst.getInt("warehouseId")
+  					,rst.getInt("occupied")
+  					,rst.getString("dateReceived")
+  					,rst.getString("pickupDate")
+  					,rst.getInt("priority")
+  					,rst.getInt("inQueue")
+  					,rst.getInt("positionInQueue")
+  					);
+  			UnitsList.add(unitData);
+  		}
+  		
+  		return UnitsList;
+  	}
+  	
   	public ArrayList<String> displaySmallWarehouseData(){
   		ArrayList<String> smallUnitData = new ArrayList<String>();
   		try {
