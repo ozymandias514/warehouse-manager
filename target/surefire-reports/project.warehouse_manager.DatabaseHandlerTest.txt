@@ -1,40 +1,10 @@
 -------------------------------------------------------------------------------
 Test set: project.warehouse_manager.DatabaseHandlerTest
 -------------------------------------------------------------------------------
-Tests run: 9, Failures: 0, Errors: 9, Skipped: 0, Time elapsed: 0.038 sec <<< FAILURE! - in project.warehouse_manager.DatabaseHandlerTest
-testUpdateDeliveryDate(project.warehouse_manager.DatabaseHandlerTest)  Time elapsed: 0.029 sec  <<< ERROR!
-java.lang.RuntimeException: null
-	at project.warehouse_manager.DatabaseHandlerTest.testUpdateDeliveryDate(DatabaseHandlerTest.java:26)
-
-testUpdateDescription(project.warehouse_manager.DatabaseHandlerTest)  Time elapsed: 0.001 sec  <<< ERROR!
-java.lang.RuntimeException: null
-	at project.warehouse_manager.DatabaseHandlerTest.testUpdateDescription(DatabaseHandlerTest.java:21)
-
-testModifyCustomer(project.warehouse_manager.DatabaseHandlerTest)  Time elapsed: 0 sec  <<< ERROR!
-java.lang.RuntimeException: null
-	at project.warehouse_manager.DatabaseHandlerTest.testModifyCustomer(DatabaseHandlerTest.java:41)
-
-testRemoveUnit(project.warehouse_manager.DatabaseHandlerTest)  Time elapsed: 0 sec  <<< ERROR!
-java.lang.RuntimeException: null
-	at project.warehouse_manager.DatabaseHandlerTest.testRemoveUnit(DatabaseHandlerTest.java:56)
-
-testCustomerSearch(project.warehouse_manager.DatabaseHandlerTest)  Time elapsed: 0 sec  <<< ERROR!
-java.lang.RuntimeException: null
-	at project.warehouse_manager.DatabaseHandlerTest.testCustomerSearch(DatabaseHandlerTest.java:36)
-
-testInsertCustomer(project.warehouse_manager.DatabaseHandlerTest)  Time elapsed: 0 sec  <<< ERROR!
-java.lang.RuntimeException: null
-	at project.warehouse_manager.DatabaseHandlerTest.testInsertCustomer(DatabaseHandlerTest.java:51)
-
-testUpdateDatabase(project.warehouse_manager.DatabaseHandlerTest)  Time elapsed: 0 sec  <<< ERROR!
-java.lang.RuntimeException: null
-	at project.warehouse_manager.DatabaseHandlerTest.testUpdateDatabase(DatabaseHandlerTest.java:31)
-
-testDeleteCustomer(project.warehouse_manager.DatabaseHandlerTest)  Time elapsed: 0 sec  <<< ERROR!
-java.lang.RuntimeException: null
-	at project.warehouse_manager.DatabaseHandlerTest.testDeleteCustomer(DatabaseHandlerTest.java:46)
-
-testFullUnit(project.warehouse_manager.DatabaseHandlerTest)  Time elapsed: 0 sec  <<< ERROR!
-java.lang.RuntimeException: null
-	at project.warehouse_manager.DatabaseHandlerTest.testFullUnit(DatabaseHandlerTest.java:16)
+Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0 sec <<< FAILURE! - in project.warehouse_manager.DatabaseHandlerTest
+testConstructor(project.warehouse_manager.DatabaseHandlerTest)  Time elapsed: 0 sec  <<< FAILURE!
+java.lang.AssertionError: null
+	at org.junit.Assert.fail(Assert.java:86)
+	at org.junit.Assert.fail(Assert.java:95)
+	at project.warehouse_manager.DatabaseHandlerTest.testConstructor(DatabaseHandlerTest.java:16)
 
