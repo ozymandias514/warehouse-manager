@@ -23,7 +23,6 @@ public class AdminLanding extends JFrame{
 	
 	int userSession;
 	String[] userSessionData = new String[5];
-	Unit theUnit = new Unit();
 	
 	public AdminLanding(int userId, String[] userData){
 		
@@ -91,9 +90,7 @@ public class AdminLanding extends JFrame{
 				dispose();
 				new LoggedInFrame(userSession, userSessionData);
 			}else if(e.getSource() == purgeSmallBut){
-					theUnit.purgeSmall();
-					 JOptionPane.showMessageDialog(AdminLanding.this,"Small warehouse has been emptied",
-							 "Solution", JOptionPane.INFORMATION_MESSAGE);
+					
 			}else if(e.getSource() == runQueue){
 					
 				

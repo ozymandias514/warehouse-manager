@@ -75,12 +75,9 @@ public class LoggedInFrame extends JFrame{
 			if(e.getSource() == customerButton){
 				dispose();
 				new CustomerLanding(userSession, userSessionData);
-				
-				
 			}else if(e.getSource() ==  unitButton){
 				dispose();
 				new UnitLanding(userSession, userSessionData);
-				
 			}else{
 				dispose();
 				new AdminLanding(userSession, userSessionData);

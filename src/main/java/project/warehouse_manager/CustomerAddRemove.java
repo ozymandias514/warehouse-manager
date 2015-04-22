@@ -137,17 +137,13 @@ public class CustomerAddRemove extends JFrame{
 							"Error" , JOptionPane.ERROR_MESSAGE);
 				}else if(!idField.getText().isEmpty() && emailFieldErase.getText().isEmpty() || !idField.getText().isEmpty() && !emailFieldErase.getText().isEmpty()){
 					try{
-						
 						 int customerId = Integer.parseInt(idField.getText());
-						 int totalUnits = theUnit.totalUnitsByCustomer(customerId);
 						 
-						 if(totalUnits > 0){
-							 theUnit.emptyUnitByCustomer(customerId);
-						 }
+						 boolean checker = theUnit.emptyUnitByCustomer(customerId);
 						 
-						 boolean answer = theCustomer.deleteCustomer(customerId);	
-						 if(answer = true){
-							 JOptionPane.showMessageDialog(CustomerAddRemove.this,"The customer deletion succesful",
+						 if(checker){
+							 String answer = theCustomer.deleteCustomer(customerId);	
+							 JOptionPane.showMessageDialog(CustomerAddRemove.this,"The customer deletion " + answer,
 									 "Solution", JOptionPane.INFORMATION_MESSAGE);
 						 }else{
 							JOptionPane.showMessageDialog(CustomerAddRemove.this,
@@ -162,15 +158,10 @@ public class CustomerAddRemove extends JFrame{
 				}else if(idField.getText().isEmpty() && !emailFieldErase.getText().isEmpty()){
 					String customerEmail = emailFieldErase.getText();
 					int customerId = theCustomer.getIdByEmail(customerEmail);
-					int totalUnits = theUnit.totalUnitsByCustomer(customerId);
-					
-					if(totalUnits > 0){
-						theUnit.emptyUnitByCustomer(customerId);
-					}
-					
-					boolean answer = theCustomer.deleteCustomer(customerId);
-					 if(answer == true){
-						 JOptionPane.showMessageDialog(CustomerAddRemove.this,"The customer deletion was sucesful",
+					boolean checker = theUnit.emptyUnitByCustomer(customerId);
+					 if(checker){
+						 String answer = theCustomer.deleteCustomer(customerId);	
+						 JOptionPane.showMessageDialog(CustomerAddRemove.this,"The customer deletion " + answer,
 								 "Solution", JOptionPane.INFORMATION_MESSAGE);
 					 }else{
 						JOptionPane.showMessageDialog(CustomerAddRemove.this,
