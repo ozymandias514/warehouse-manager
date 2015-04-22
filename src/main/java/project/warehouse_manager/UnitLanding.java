@@ -298,11 +298,11 @@ public class UnitLanding extends JFrame{
 					textArea1.append(largeUnitEmpty.get(i) + ", ");
 				}
 			}else if(e.getSource() == removeBut){
-				int unitId = Integer.parseInt(text.getText());
 				if(text.getText().isEmpty()){
 					JOptionPane.showMessageDialog(UnitLanding.this, "Fields cannot be empty, Input required: Unit ID", "Error"
 							, JOptionPane.ERROR_MESSAGE);
 				}else{
+					int unitId = Integer.parseInt(text.getText());
 					boolean check = theUnit.removeUnit(unitId);
 					if(check == true){
 						 JOptionPane.showMessageDialog(UnitLanding.this,"The unit was sucessfully cleared ",

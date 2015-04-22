@@ -1,6 +1,7 @@
 package project.warehouse_manager;
 
 import java.util.Date;
+import java.util.Calendar;
 
 public class UnitData {
 	private int id;
@@ -23,7 +24,15 @@ public class UnitData {
 		this.warehouseId = warehouseId;
 		this.occupied = occupied;
 		this.dateReceived = dateReceived;
-		this.pickUpDate = new Date(pickUpDate);
+		if (pickUpDate == null || pickUpDate.equals("null")) {
+			this.pickUpDate = null;
+		} else {
+			String[] splitDate = pickUpDate.split("/");
+			int day   = Integer.parseInt(splitDate[0]);
+			int month = Integer.parseInt(splitDate[1]);
+			int year  = Integer.parseInt(splitDate[2]);
+			this.pickUpDate = new Date(year, month, day);
+		}
 		this.inQueue = inQueue;
 	}
 

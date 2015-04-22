@@ -17,7 +17,7 @@ import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Queue;
@@ -108,12 +108,14 @@ public class AdminLanding extends JFrame{
 					
 					ArrayList<UnitData> largeWarehouseUnitList = theUnit.getAllLargeWarehouseUnits();
 					ArrayList<UnitData> smallWarehouseUnitList = theUnit.getAllSmallWarehouseUnits();
+					Date now = new Date();
 					
 					for (UnitData unit : largeWarehouseUnitList) {
-						if (unit.getPickUpDate().getTime() <= Calendar.getInstance().getTimeInMillis()) {
-							queue.add(unit);
-							//unit.setInQueue(1); //set to "true"
-						}
+						if (!(unit.getPickUpDate() == null))
+							if (unit.getPickUpDate().getTime() <= now.getTime()) {
+								queue.add(unit);
+								//unit.setInQueue(1); //set to "true"
+							}
 					}
 
 					List<Integer> openUnits = new ArrayList<Integer>();
@@ -145,21 +147,8 @@ public class AdminLanding extends JFrame{
 					}
 					
 					theUnit.repopulateTables(largeWarehouseUnitList, smallWarehouseUnitList);
-			       // for (UnitData unitData : largeWarehouseUnitList) {  	
-			        	
-			        	/*
-			            Object rowData[] = {unitData.getId(), 
-						            		unitData.getDescription(), 
-						            		unitData.getCustomerId(), 
-						            		unitData.getWarehouseId(),
-						            		unitData.getOccupied(),
-						            		unitData.getDateReceived(),
-						            		unitData.getPickUpDate(),
-						            		unitData.getPriority(),
-						            		unitData.getInQueue(),
-						            		unitData.getPositionInQueue()};
-			            */
-			        	/*
+					
+					for (UnitData unitData : queue) {
 			        	System.out.println("Unit Number: " + unitData.getId());
 			        	System.out.println(unitData.getDescription());
 			        	System.out.print(unitData.getCustomerId() + " ");
@@ -174,8 +163,8 @@ public class AdminLanding extends JFrame{
 			        	System.out.print(" Position In Queue: " + unitData.getPositionInQueue());
 			        	System.out.println();
 			        	System.out.println();
-			        	*/
-			       // }
+			        	
+					}
 					
 					
 				} catch (ClassNotFoundException e1) {
