@@ -14,7 +14,7 @@ import javax.swing.JTextField;
 
 //customer alter section --------------------------------------------------
 public class CustomerAlter extends JFrame{
-	JButton changeFirstBut, changeLastBut, changeEmail, goBackBut;
+	JButton changeFirstBut, changeLastBut, changeEmail, goBackBut, clearBut;
 	JTextField idField,valueField;
 	Customer theCustomer = new Customer();
 	
@@ -51,6 +51,7 @@ public class CustomerAlter extends JFrame{
 		
 		ListenForButton lForButton = new ListenForButton();
 		
+		clearBut = new JButton("Clear Fields");
 		changeFirstBut = new JButton("Change First Name");
 		changeLastBut = new JButton("Change Last Name");
 		changeEmail = new JButton("Change Email");
@@ -60,6 +61,7 @@ public class CustomerAlter extends JFrame{
 		changeLastBut.addActionListener(lForButton);
 		changeEmail.addActionListener(lForButton);
 		goBackBut.addActionListener(lForButton);
+		clearBut.addActionListener(lForButton);
 		
 		gridConstraints.gridwidth = 1;
 		gridConstraints.gridx = 1;
@@ -76,10 +78,14 @@ public class CustomerAlter extends JFrame{
 		thePanel.add(changeLastBut,gridConstraints);
 		gridConstraints.gridx = 9;
 		thePanel.add(changeEmail,gridConstraints);
-		gridConstraints.gridwidth = 20;
+		gridConstraints.gridwidth = 1;
 		gridConstraints.gridx = 1;
 		gridConstraints.gridy = 3;
+		thePanel.add(clearBut,gridConstraints);
+		gridConstraints.gridwidth = 10;
+		gridConstraints.gridx = 5;
 		thePanel.add(goBackBut,gridConstraints);
+
 		
 		this.add(thePanel);
 		
@@ -105,6 +111,8 @@ public class CustomerAlter extends JFrame{
 						String newFirstName = valueField.getText();
 						int customerId = Integer.parseInt(idField.getText());
 						theCustomer.changeCustomerFirstName(customerId, newFirstName);
+						 JOptionPane.showMessageDialog(CustomerAlter.this,"The customer First Name has been succesfully changed",
+								 "Solution", JOptionPane.INFORMATION_MESSAGE);
 					}catch(Exception NumberFormatException){
 						JOptionPane.showMessageDialog(CustomerAlter.this, "Field Customer Id cannot be empty, Input required: Customer ID", "Error"
 								, JOptionPane.ERROR_MESSAGE);
@@ -121,6 +129,8 @@ public class CustomerAlter extends JFrame{
 						int customerId = Integer.parseInt(idField.getText());
 						String newLastName = valueField.getText();
 						theCustomer.changeCustomerLastName(customerId, newLastName);
+						 JOptionPane.showMessageDialog(CustomerAlter.this,"The customer Last Name has been succesfully changed",
+								 "Solution", JOptionPane.INFORMATION_MESSAGE);
 					}catch(Exception NumberFormatException){
 						JOptionPane.showMessageDialog(CustomerAlter.this, "Field cannot be a String, Input required: Customer ID", "Error"
 								, JOptionPane.ERROR_MESSAGE);
@@ -137,11 +147,18 @@ public class CustomerAlter extends JFrame{
 						int customerId = Integer.parseInt(idField.getText());
 						String newEmail = valueField.getText();
 						theCustomer.changeCustomerEmail(customerId, newEmail);
+						 JOptionPane.showMessageDialog(CustomerAlter.this,"The customer email has been succesfully changed",
+								 "Solution", JOptionPane.INFORMATION_MESSAGE);
 					}catch(Exception NumberFormatException){
 						JOptionPane.showMessageDialog(CustomerAlter.this, "Field cannot be a String, Input required: Customer ID", "Error"
 								, JOptionPane.ERROR_MESSAGE);
 					}
 				}
+			}else if(e.getSource() == clearBut){
+				idField.setText("");
+				valueField.setText("");
+				 JOptionPane.showMessageDialog(CustomerAlter.this,"All fields have now been cleared",
+						 "Solution", JOptionPane.INFORMATION_MESSAGE);
 			}
 		}
 	}

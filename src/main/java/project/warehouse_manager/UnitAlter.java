@@ -19,7 +19,7 @@ import javax.swing.JTextField;
 import javax.swing.SpinnerDateModel;
 
 class UnitAlter extends JFrame{
-	JButton changeDescBut, changePickBut, goBackBut;
+	JButton changeDescBut, changePickBut, goBackBut, clearBut;
 	JTextField idField,valueField;
 	JSpinner spinner;
 	
@@ -64,6 +64,7 @@ class UnitAlter extends JFrame{
 		idField = new JTextField("ID",3);
 		valueField = new JTextField("value field",40);
 		
+		clearBut = new JButton("Clear Fields");
 		changeDescBut = new JButton("Change Description");
 		changePickBut = new JButton("Change pickup");
 		goBackBut = new JButton("go back");
@@ -71,6 +72,7 @@ class UnitAlter extends JFrame{
 		changeDescBut.addActionListener(lForButton);
 		changePickBut.addActionListener(lForButton);
 		goBackBut.addActionListener(lForButton);
+		clearBut.addActionListener(lForButton);
 		
 		gridConstraints.gridwidth = 20;
 		gridConstraints.gridx = 1;
@@ -80,9 +82,12 @@ class UnitAlter extends JFrame{
 		gridConstraints.gridy = 2;
 		gridConstraints.gridx = 1;
 		thePanel.add(idField,gridConstraints);
-		gridConstraints.gridwidth = 10;
+		gridConstraints.gridwidth = 1;
 		gridConstraints.gridx = 5;
 		thePanel.add(changeDescBut,gridConstraints);
+		gridConstraints.gridwidth = 1;
+		gridConstraints.gridx = 9;
+		thePanel.add(clearBut,gridConstraints);
 		gridConstraints.gridwidth = 1;
 		gridConstraints.gridy = 3;
 		gridConstraints.gridx = 1;
@@ -150,6 +155,11 @@ class UnitAlter extends JFrame{
 								, JOptionPane.ERROR_MESSAGE);
 					}	
 				}
+			}else if(e.getSource() == clearBut){
+				idField.setText("");
+				valueField.setText("");
+				 JOptionPane.showMessageDialog(UnitAlter.this,"All fields have now been cleared",
+						 "Solution", JOptionPane.INFORMATION_MESSAGE);
 			}
 		}
 	}

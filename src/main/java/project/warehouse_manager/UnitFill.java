@@ -23,7 +23,7 @@ import javax.swing.SpinnerDateModel;
 
 class UnitFill extends JFrame{
 	Unit theUnit = new Unit();
-	JButton submitBut, goBack;
+	JButton submitBut, goBack, clearBut;
 	JTextField unitIdField,descriptionField, pickUpField, customerIdField;
 	JSpinner spinner;
 	
@@ -60,7 +60,7 @@ class UnitFill extends JFrame{
 		Date todaysDate = new Date();
 		spinner = new JSpinner(new SpinnerDateModel(todaysDate, null, null, Calendar.DAY_OF_MONTH));
 		
-		JSpinner.DateEditor dateEditor = new JSpinner.DateEditor(spinner, "dd/mm/yyyy");
+		JSpinner.DateEditor dateEditor = new JSpinner.DateEditor(spinner, "dd/MM/yyyy");
 		dateEditor.getTextField().setEditable(false);
 		spinner.setEditor(dateEditor);
 		
@@ -69,31 +69,36 @@ class UnitFill extends JFrame{
 		pickUpField = new JTextField("pick up date",20);
 		customerIdField = new JTextField("customer id",20);
 		
+		clearBut = new JButton("Clear fields");
 		submitBut = new JButton("Submit");
 		goBack = new JButton("Go back");
 		
 		submitBut.addActionListener(lForButton);
 		goBack.addActionListener(lForButton);		
+		clearBut.addActionListener(lForButton);
 		
 		gridConstraints.gridwidth = 1;
 		gridConstraints.gridx = 1;
 		gridConstraints.gridy = 1;
 		thePanel.add(unitIdField,gridConstraints);
-		gridConstraints.gridx = 4;
+		gridConstraints.gridx = 2;
 		thePanel.add(spinner,gridConstraints);
-		gridConstraints.gridx = 9;
+		gridConstraints.gridx = 3;
 		thePanel.add(customerIdField,gridConstraints);
 		gridConstraints.gridwidth = 20;
 		gridConstraints.gridx = 1;
 		gridConstraints.gridy = 2;
 		thePanel.add(descriptionField,gridConstraints);
-		gridConstraints.gridwidth = 8;
+		gridConstraints.gridwidth = 1;
 		gridConstraints.gridx = 1;
 		gridConstraints.gridy = 3;
 		thePanel.add(submitBut,gridConstraints);
-		gridConstraints.gridx = 6;
+		gridConstraints.gridwidth = 1;
+		gridConstraints.gridx = 2;
 		thePanel.add(goBack,gridConstraints);
-		
+		gridConstraints.gridwidth = 10;
+		gridConstraints.gridx = 3;
+		thePanel.add(clearBut,gridConstraints);
 		
 		this.add(thePanel);
 		
@@ -126,7 +131,7 @@ class UnitFill extends JFrame{
 						String unitDescription = descriptionField.getText();
 						boolean check = theUnit.fillUnit(unitDescription, customerId, pickupDate, unitId);
 						if(check == true){
-							JOptionPane.showMessageDialog(UnitFill.this, "Unit " + pickupDate + " was sucesfully filled", "Information",
+							JOptionPane.showMessageDialog(UnitFill.this, "Unit " + unitId + " was sucesfully filled", "Information",
 									JOptionPane.INFORMATION_MESSAGE);
 						}else{
 							JOptionPane.showMessageDialog(UnitFill.this, "Error connecting to the database, please try again later", "Error"
@@ -138,6 +143,14 @@ class UnitFill extends JFrame{
 								, JOptionPane.ERROR_MESSAGE);
 					}
 				}
+			}else if(e.getSource() == clearBut){
+				unitIdField.setText("");
+				descriptionField.setText("");
+				pickUpField.setText("");
+				customerIdField.setText("");
+				 JOptionPane.showMessageDialog(UnitFill.this,"All fields have now been cleared",
+						 "Solution", JOptionPane.INFORMATION_MESSAGE);
+				
 			}
 		}
 	}

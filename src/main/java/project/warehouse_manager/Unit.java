@@ -309,7 +309,7 @@ public class Unit extends DatabaseHandler{
 	// adds a customer and their belongings to a unit
 	public boolean fillUnit(String description, int customerId, String pickupDate, int unitId){
 		boolean status = false;
-		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 		Calendar cal = Calendar.getInstance();
 		String date = dateFormat.format(cal.getTime());
 		
@@ -355,34 +355,16 @@ public class Unit extends DatabaseHandler{
 	}
 	
 	// retrieving a unit by customer ID
-	public void unitsByCustomer(int customerId){
+	public int totalUnitsByCustomer(int customerId){
+		int totalUnits = 0;
 		try {
-			rs = st.executeQuery("SELECT * FROM units WHERE customerId = " + customerId  +";");
-			while (rs.next()) {
-				  int id 				= rs.getInt("id");
-				  String description 	= rs.getString("description");
-				  int warehouseId 		= rs.getInt("warehouseId");
-				  int occupied 			= rs.getInt("occupied");
-				  String dateReceived 	= rs.getString("dateReceived");
-				  String pickupDate		= rs.getString("pickupDate");
-				  int priority 			= rs.getInt("priority");
-				  int inQueue 			= rs.getInt("inQueue");
-				  int positionInQueue 	= rs.getInt("positionInQueue");
-				  
-				  System.out.println( "\nid		: " + id 
-						  			+ "\ndescription	: " + description
-						  			+ "\ncustomerId	: " + customerId
-						  			+ "\nwarehouseId	: " + warehouseId
-						  			+ "\noccupied	: " + occupied
-						  			+ "\ndateReceived	: " + dateReceived
-						  			+ "\npickupDate	: " + pickupDate
-						  			+ "\npriority	: " + priority
-						  			+ "\ninQueue		: " + inQueue
-						  			+ "\npositionInQueue	: " + positionInQueue
-						  			+ "\n--------------------------------------");
-				}
+			rs = st.executeQuery("SELECT COUNT(*) AS total FROM units WHERE customerId = " + customerId  +";");
+			totalUnits = rs.getInt("total");
+
+			return totalUnits;
 		}catch (SQLException e) {
 			e.printStackTrace();
+			return totalUnits;
 		}finally{
   			try{
   				rs.close();
@@ -521,38 +503,47 @@ public class Unit extends DatabaseHandler{
 	}
 	
 	// empties the small warehouse
-		public void purgeSmall(){
-			try {
-				st.executeUpdate("DELETE FROM units WHERE warehouseId = 2");			
-			}catch (SQLException e) {
-				e.printStackTrace();
-			}finally{
-	  			try{
-	  				rs.close();
-	  	//			st.close();
-	  				}
-	  			catch(Exception e){
-	  			
-	  			}
-	  		}	
-		}
-		
-		// empties the large warehouse
-		public void purgeLarge(){
-			try {
-				st.executeUpdate("DELETE FROM units WHERE warehouseId = 1");			
-			}catch (SQLException e) {
-				e.printStackTrace();
-			}finally{
-	  			try{
-	  				rs.close();
-	  	//			st.close();
-	  				}
-	  			catch(Exception e){
-	  			
-	  			}
-	  		}		
-		}
+	public boolean purgeSmall(){
+		boolean success = false;
+		try {
+			st.executeUpdate("UPDATE units SET description = 'empty unit', customerId = 0, occupied = 0, dateReceived = 'null', pickupDate = 'null' WHERE warehouseId = 2;");
+			success = true;
+			return success;
+		}catch (SQLException e) {
+			e.printStackTrace();
+			return success;
+		}finally{
+  			try{
+  				rs.close();
+  			//	st.close();
+  				}
+  			catch(Exception e){
+ 
+  			}
+  		}
+	}
+	
+	// empties the large warehouse
+	public boolean purgeLarge(){
+		boolean success = false;
+		try {
+			st.executeUpdate("UPDATE units SET description = 'empty unit', customerId = 0, occupied = 0, dateReceived = 'null', pickupDate = 'null' WHERE warehouseId = 1;");
+			success = true;
+			return success;
+		}catch (SQLException e) {
+			e.printStackTrace();
+			return success;
+		}finally{
+  			try{
+  				rs.close();
+  			//	st.close();
+  				}
+  			catch(Exception e){
+ 
+  			}
+  		}
+	}
+
 		
 		//increases the priority in the row
 		public void increasePriority(int unitId){
