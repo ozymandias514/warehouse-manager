@@ -1,20 +1,21 @@
 package project.warehouse_manager;
 
+import java.util.Date;
+
 public class UnitData {
-	
 	private int id;
 	private String description;
 	private int customerId;
 	private int warehouseId;
 	private int occupied;
 	private String dateReceived;
-	private String pickUpDate;
+	private Date pickUpDate;
 	private int priority;
 	private int inQueue;
 	private int positionInQueue;
 	
 	public UnitData(int id, String description, int customerId, int warehouseId, int occupied, 
-			String dateReceived, String pickUpDate, int priority, int inQueue, int positionInQueue){
+			String dateReceived, String pickUpDate, int inQueue){
 		
 		this.id = id;
 		this.description = description;
@@ -22,11 +23,8 @@ public class UnitData {
 		this.warehouseId = warehouseId;
 		this.occupied = occupied;
 		this.dateReceived = dateReceived;
-		this.pickUpDate = pickUpDate;
-		this.priority = priority;
+		this.pickUpDate = new Date(pickUpDate);
 		this.inQueue = inQueue;
-		this.positionInQueue = positionInQueue;		
-		
 	}
 
 	// unit id methods ------------------------------------------------------
@@ -84,11 +82,12 @@ public class UnitData {
 	}
 	
 	// pick up date methods ----------------------------------------------
-	public void setPickUpDate(String pickUpDate){
-		this.pickUpDate = pickUpDate;
+	public void setPickUpDate(String date){
+		//this.pickUpDate = new Date(pickUpDate);
+		this.pickUpDate.setTime(Date.parse(date));
 	}
 	
-	public String getPickUpDate(){
+	public Date getPickUpDate(){
 		return pickUpDate;
 	}
 	

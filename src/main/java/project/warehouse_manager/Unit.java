@@ -8,12 +8,6 @@ import java.util.Calendar;
 
 
 public class Unit extends DatabaseHandler{
-	private int number;
-	private String descriptionOfItems;
-	private Date deliveryDate;
-	private boolean occupied;
-	private boolean inQueue;
-	
 	
   	public ArrayList<String> displayLargeWarehouseData(){
   		ArrayList<String> largeUnitData = new ArrayList<String>();
@@ -46,12 +40,12 @@ public class Unit extends DatabaseHandler{
   		}
   	}
   	
-  	public ArrayList<UnitData> getAllUnits() throws ClassNotFoundException, SQLException{
+  	public ArrayList<UnitData> getAllLargeWarehouseUnits() throws ClassNotFoundException, SQLException{
 		
   		String sql = "SELECT * FROM units WHERE warehouseId = 1";
   	    ResultSet rst;
   	    rst = st.executeQuery(sql);
-  	    ArrayList<UnitData> UnitsList = new ArrayList<>();
+  	    ArrayList<UnitData> UnitsList = new ArrayList<UnitData>();
   		while(rst.next()){
   			UnitData unitData = new UnitData(rst.getInt("id")
   					,rst.getString("description")
@@ -60,9 +54,29 @@ public class Unit extends DatabaseHandler{
   					,rst.getInt("occupied")
   					,rst.getString("dateReceived")
   					,rst.getString("pickupDate")
-  					,rst.getInt("priority")
   					,rst.getInt("inQueue")
-  					,rst.getInt("positionInQueue")
+  					);
+  			UnitsList.add(unitData);
+  		}
+  		
+  		return UnitsList;
+  	}
+  	
+  	public ArrayList<UnitData> getAllSmallWarehouseUnits() throws ClassNotFoundException, SQLException{
+		
+  		String sql = "SELECT * FROM units WHERE warehouseId = 2";
+  	    ResultSet rst;
+  	    rst = st.executeQuery(sql);
+  	    ArrayList<UnitData> UnitsList = new ArrayList<UnitData>();
+  		while(rst.next()){
+  			UnitData unitData = new UnitData(rst.getInt("id")
+  					,rst.getString("description")
+  					,rst.getInt("customerId")
+  					,rst.getInt("warehouseId")
+  					,rst.getInt("occupied")
+  					,rst.getString("dateReceived")
+  					,rst.getString("pickupDate")
+  					,rst.getInt("inQueue")
   					);
   			UnitsList.add(unitData);
   		}
@@ -332,20 +346,17 @@ public class Unit extends DatabaseHandler{
 		
 	// adds a customer and their belongings to a unit
 	public boolean fillUnit(String description, int customerId, String pickupDate, int unitId){
-		boolean status = false;
 		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 		Calendar cal = Calendar.getInstance();
 		String date = dateFormat.format(cal.getTime());
-		
 		try {
 			st.executeUpdate("UPDATE units SET description ='" + description + 
 							 "', customerId = " + customerId + ", occupied = 1, dateReceived ='" +
 							 date + "', pickupDate ='" + pickupDate + "'WHERE id =" + unitId + ";");	
-			status = true;
-			return status;
+			return true;
 		}catch (SQLException e) {
 			e.printStackTrace();
-			return status;
+			return false;
 		}finally{
   			try{
   				rs.close();
@@ -353,7 +364,7 @@ public class Unit extends DatabaseHandler{
   				}
   			catch(Exception e){
   			}
-  		}	
+  		}
 	}
 	
 	
@@ -669,95 +680,5 @@ public class Unit extends DatabaseHandler{
 	  		}		
 			
 		}
-	/**
-	 * @param number
-	 */
-	public Unit(int number) {
-		this.number = number;
-		this.descriptionOfItems = null;
-		this.deliveryDate = null;
-		this.occupied = false;
-		this.inQueue = false;
-	}
-	
-	/**
-	 */
-	public Unit() {
-		this.number = number;
-		this.descriptionOfItems = descriptionOfItems;
-		this.deliveryDate = deliveryDate;
-		this.occupied = false;
-		this.inQueue = false;
-	}
-	
-	/**
-	 * @return 
-	 */
-	public int getNumber() {
-		return number;
-	}
-	
-	/**
-	 * @param 
-	 */
-	public void setNumber(int number) {
-		this.number = number;
-	}
-	
-	/**
-	 * @return 
-	 */
-	public String getDescriptionOfItems() {
-		return descriptionOfItems;
-	}
-	
-	/**
-	 * @param 
-	 */
-	public void setDescriptionOfItems(String descriptionOfItems) {
-		this.descriptionOfItems = descriptionOfItems;
-	}
-	
-	/**
-	 * @return 
-	 */
-	public Date getDeliveryDate() {
-		return deliveryDate;
-	}
-	
-	/**
-	 * @param 
-	 */
-	public void setDeliveryDate(Date deliveryDate) {
-		this.deliveryDate = deliveryDate;
-	}
-	
-	/**
-	 * @return
-	 */
-	public boolean isOccupied() {
-	    return occupied;
-	}
-	
-	/**
-	 * @param 
-	 */
-	public void setOccupied(boolean occupied) {
-		this.occupied = occupied;
-	}
-	
-	/**
-	 * @return
-	 */
-	public boolean isInQueue() {
-	    return inQueue;
-	}
-	
-	/**
-	 * @param 
-	 */
-	public void setInQueue(boolean inQueue) {
-		this.inQueue = inQueue;
-	}
 
 }

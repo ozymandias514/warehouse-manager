@@ -145,7 +145,7 @@ public class CustomerAddRemove extends JFrame{
 							 theUnit.emptyUnitByCustomer(customerId);
 						 }
 						 
-						 boolean answer = theCustomer.deleteCustomer(customerId);	
+						 boolean answer = theCustomer.deleteCustomer(customerId);
 						 if(answer = true){
 							 JOptionPane.showMessageDialog(CustomerAddRemove.this,"The customer deletion succesful",
 									 "Solution", JOptionPane.INFORMATION_MESSAGE);

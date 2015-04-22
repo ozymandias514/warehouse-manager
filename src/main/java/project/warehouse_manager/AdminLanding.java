@@ -17,6 +17,11 @@ import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+import java.util.PriorityQueue;
+import java.util.Queue;
+
 
 public class AdminLanding extends JFrame{
 
@@ -25,6 +30,8 @@ public class AdminLanding extends JFrame{
 	int userSession;
 	String[] userSessionData = new String[5];
 	Unit theUnit = new Unit();
+	
+	Queue<UnitData> queue;
 	
 	public AdminLanding(int userId, String[] userData){
 		
@@ -78,7 +85,6 @@ public class AdminLanding extends JFrame{
 		gridConstraints.gridy = 3;
 		thePanel.add(runQueue, gridConstraints);
 		
-		
 		this.add(thePanel);
 		
 		this.setVisible(true);		
@@ -98,14 +104,48 @@ public class AdminLanding extends JFrame{
 			}else if(e.getSource() == runQueue){
 				
 				 try {
-					ArrayList<UnitData> UnitList = null;
-					UnitList = theUnit.getAllUnits();
+					queue = new PriorityQueue<UnitData>(5, new UnitDataComparator());
+					
+					ArrayList<UnitData> largeWarehouseUnitList = theUnit.getAllLargeWarehouseUnits();
+					ArrayList<UnitData> smallWarehouseUnitList = theUnit.getAllSmallWarehouseUnits();
+					
+					for (UnitData unit : largeWarehouseUnitList) {
+						if (unit.getPickUpDate().getTime() <= Calendar.getInstance().getTimeInMillis()) {
+							queue.add(unit);
+							//unit.setInQueue(1); //set to "true"
+						}
+					}
+
+					List<Integer> openUnits = new ArrayList<Integer>();
+					for (UnitData unit : smallWarehouseUnitList) {
+						if (unit.getOccupied() == 0) {
+							openUnits.add(unit.getId());
+						}
+					}
+					
+					for (int i=0; i<queue.size(); i++) {
+						if (openUnits.size() > 0) {
+							UnitData largeWarehouseUnit = queue.remove();
+							int customerId = largeWarehouseUnit.getCustomerId();
+							String description = largeWarehouseUnit.getDescription();
+							//largeWarehouseUnit.setInQueue(0);
+							largeWarehouseUnit.setOccupied(0); //set to "false"
+							
+							UnitData smallWarehouseUnit = null;
+							for (UnitData unit : smallWarehouseUnitList) {
+								if (unit.getId() == openUnits.get(0)) {
+									smallWarehouseUnit = unit;
+								}
+							}
+							
+							smallWarehouseUnit.setCustomerId(customerId);
+							smallWarehouseUnit.setDescription(description);
+							smallWarehouseUnit.setOccupied(1); //set to "true"
+						}
+					}
 					
 	
-					
-	
-			        
-			        for (UnitData unitData : UnitList) {
+			        for (UnitData unitData : queue) {
 			        	/*
 			            Object rowData[] = {unitData.getId(), 
 						            		unitData.getDescription(), 
@@ -118,21 +158,15 @@ public class AdminLanding extends JFrame{
 						            		unitData.getInQueue(),
 						            		unitData.getPositionInQueue()};
 			            */
-
-			  
 			        	System.out.println("Unit Number: " + unitData.getId());
 			        	System.out.println(unitData.getDescription());
 			        	System.out.print(unitData.getCustomerId() + " ");
 			        	System.out.print(unitData.getWarehouseId() + " Occupied: ");
 			        	System.out.print(unitData.getOccupied());
-			        	
 			        	System.out.println();
-			        	
 			        	System.out.print("date received: " + unitData.getDateReceived());
 			        	System.out.print(" Pick up date: " + unitData.getPickUpDate());
-			        	
 			        	System.out.println();
-			        	
 			        	System.out.print("priority: " + unitData.getPriority());
 			        	System.out.print("  inQueue: " + unitData.getInQueue());
 			        	System.out.print(" Position In Queue: " + unitData.getPositionInQueue());
