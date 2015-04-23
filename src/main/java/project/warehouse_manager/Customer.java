@@ -10,7 +10,7 @@ public class Customer extends DatabaseHandler{
 	}
 	
 	//obtains all the data from all customers
-  	public void getDataFromCustomer(){
+  	public boolean getDataFromCustomer(){
   		try {
   			rs = st.executeQuery("SELECT * FROM customer;");
   			System.out.println("id    firstName         lastName        email");
@@ -24,8 +24,10 @@ public class Customer extends DatabaseHandler{
   				  System.out.printf("%d     %s		%s		%s", id, firstName, lastName, email);
   				  System.out.println();
   				}
+  			return true;
   		} catch (SQLException e) {
   			e.printStackTrace();
+  			return false;
   		}finally{
   			try{
   				rs.close();
@@ -64,17 +66,16 @@ public class Customer extends DatabaseHandler{
   	}
   	
   	//adds a customer to the system
-  	public String addCustomer(String firstName, String lastName, String email){
-  		String taskAchieved = "failed";
+  	public boolean addCustomer(String firstName, String lastName, String email){
+  		
   		//String emailExtension = "@gmail.com";
   		try {  			
   			st.executeUpdate("INSERT INTO customer(firstName, lastName, email) VALUES ('"+
   					firstName + "', '" + lastName + "', '"+ email + "');");	
-  			taskAchieved = "was a success";
-  			return taskAchieved;
+  			return true;
   		}catch (SQLException e) {
   			e.printStackTrace();
-  			return taskAchieved;
+  			return false;
   		}finally{
   			try{
   				rs.close();
@@ -84,11 +85,46 @@ public class Customer extends DatabaseHandler{
   				
   			}
   		}	
-  		
+  	}
+  	
+  	//adds a customer to the system
+  	public boolean addCustomerWithId(int id, String firstName, String lastName, String email){
+  		String taskAchieved = "failed";
+  		//String emailExtension = "@gmail.com";
+  		try {  			
+  			st.executeUpdate("INSERT INTO customer(id, firstName, lastName, email) VALUES (" + id+ ", '"+
+  					firstName + "', '" + lastName + "', '"+ email + "');");	
+  			return true;
+  		}catch (SQLException e) {
+  			e.printStackTrace();
+  			return false;
+  		}finally{
+  			try{
+  				rs.close();
+  				st.close();
+  				}
+  			catch(Exception e){
+  				
+  			}
+  		}	
   	}
   	
   	//deletes a customer
   	public boolean deleteCustomer(int customerId){
+  		Connection con;
+  		Statement st = null;
+  		ResultSet rs = null;
+  		
+  		try {
+  			Class.forName("org.sqlite.JDBC");
+  			con = DriverManager.getConnection("jdbc:sqlite:warehouse.db");
+  			st = con.createStatement();
+  		}catch(Exception e){
+  			
+  			System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+  			System.exit(0);
+  			}
+  			
   		boolean taskAchieved = false;
   		try {
   			//empties the units associated with the customer first
@@ -101,36 +137,88 @@ public class Customer extends DatabaseHandler{
   		}catch (SQLException e) {
   			e.printStackTrace();
   			return taskAchieved;
+  		}finally{
+  			try{
+  				rs.close();
+  				st.close();
+  				}
+  			catch(Exception e){
+  				System.out.println("Error closing the database");
+  			}
   		}
   	}
   	
   	//sets a new first name for an existing customer
-  	public void changeCustomerFirstName(int customerId, String newFirstName){
+  	public boolean changeCustomerFirstName(int customerId, String newFirstName){
   		try {
   			st.executeUpdate("UPDATE customer SET firstName = '"+ newFirstName +
-  					"' WHERE id = "+ customerId +";");			
+  					"' WHERE id = "+ customerId +";");		
+  			return true;
   		}catch (SQLException e) {
   			e.printStackTrace();
-  		}
+  			return false;
+  		}finally{
+  			try{
+  				rs.close();
+  				st.close();
+  				}
+  			catch(Exception e){
+  				System.out.println("Error closing the database");
+  			}
+  		}	
   	}
   	
   	//sets a new last name for an existing customer
-  	public void changeCustomerLastName(int customerId, String newLastName){
+  	public boolean changeCustomerLastName(int customerId, String newLastName){
   		try {
   			st.executeUpdate("UPDATE customer SET lastName = '"+ newLastName +
   					"' WHERE id = "+ customerId +";");			
+  			return true;
   		}catch (SQLException e) {
   			e.printStackTrace();
-  		}  		
+  			return false;
+  		} finally{
+  			try{
+  				rs.close();
+  				st.close();
+  				}
+  			catch(Exception e){
+  				System.out.println("Error closing the database");
+  			}
+  		}	 		
   	}
   	
   	//sets a new email for an existing customer
-  	public void changeCustomerEmail(int customerId, String newEmail){
+  	public boolean changeCustomerEmail(int customerId, String newEmail){
+  		Connection con;
+  		Statement st = null;
+  		ResultSet rs = null;
+  		
+  		try {
+  			Class.forName("org.sqlite.JDBC");
+  			con = DriverManager.getConnection("jdbc:sqlite:warehouse.db");
+  			st = con.createStatement();
+  		}catch(Exception e){
+  			
+  			System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+  			System.exit(0);
+  			}
+  		
   		try {
   			st.executeUpdate("UPDATE customer SET email = '"+ newEmail +
   					"' WHERE id = "+ customerId +";");			
+  			return true;
   		}catch (SQLException e) {
   			e.printStackTrace();
+  			return false;
+  		}finally{
+  			try{
+  				rs.close();
+  				st.close();
+  				}
+  			catch(Exception e){
+  				System.out.println("Error closing the database");
+  			}
   		}	
   	}
   	
@@ -175,6 +263,14 @@ public class Customer extends DatabaseHandler{
   		} catch (SQLException e) {
   			e.printStackTrace();
   			return userId;
+  		}finally{
+  			try{
+  				rs.close();
+  				st.close();
+  				}
+  			catch(Exception e){
+  				System.out.println("Error closing the database");
+  			}
   		}  		
   	}
   	

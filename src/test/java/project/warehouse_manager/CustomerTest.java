@@ -2,6 +2,8 @@ package project.warehouse_manager;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -12,70 +14,118 @@ public class CustomerTest {
 	public void setUp() throws Exception {
 		customer = new Customer();
 	}
-
+	
+	@Test
+	public void addCustomerWithId(){
+		try{
+			customer.deleteCustomer(12);
+		}catch(Exception e){}
+		assertTrue(customer.addCustomerWithId(12, "test","teskinson","ttesk@gmail.com"));
+	}
+	
 	@Test
 	public void testCustomer() {
-//		fail("Not yet implemented");
 	}
 
 	@Test
 	public void testGetDataFromCustomer() {
-//		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testDisplayData() {
-//		fail("Not yet implemented");
+		assertTrue(customer.getDataFromCustomer());
 	}
 
 	@Test
 	public void testAddCustomer() {
-//		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testDeleteCustomer() {
-//		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testChangeCustomerFirstName() {
-//		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testChangeCustomerLastName() {
-//		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testChangeCustomerEmail() {
-//		fail("Not yet implemented");
+		assertTrue(customer.addCustomer("Jonathan", "Joestar", "jojo@gmail.com"));
 	}
 
 	@Test
 	public void testGetDataByEmail() {
-//		fail("Not yet implemented");
+		Customer customer = new Customer();
+		String dataByEmail[] = new String[]{"","","",""};
+		dataByEmail[0] = "13";
+		dataByEmail[1] = "test";
+		dataByEmail[2] = "testkinson";
+		dataByEmail[3] = "unique@gmail.com";
+
+		assertEquals(customer.getDataByEmail("unique@gmail.com"), dataByEmail);
 	}
 
 	@Test
 	public void testGetIdByEmail() {
-//		fail("Not yet implemented");
+		assertEquals(customer.getIdByEmail("unique@gmail.com"), 13);
 	}
 
 	@Test
 	public void testGetCustomerData() {
-//		fail("Not yet implemented");
+		Customer customer = new Customer();
+		String customerData[] = new String[]{"","",""};
+		customerData[0] = "test";
+		customerData[1] = "testkinson";
+		customerData[2] = "unique@gmail.com";
+
+		assertEquals(customer.getCustomerData(13), customerData);
 	}
 
 	@Test
 	public void testLargeUnitsByCustomer() {
-//		fail("Not yet implemented");
+		Customer customer = new Customer();
+		int[] largeWare = new int[5];
+		assertArrayEquals(customer.largeUnitsByCustomer(13),largeWare);
 	}
 
 	@Test
 	public void testSmallUnitsByCustomer() {
-//		fail("Not yet implemented");
+		Customer customer = new Customer();
+		int[] smallWare = new int[5];
+		assertArrayEquals(customer.largeUnitsByCustomer(13),smallWare);
+	}
+	
+	@Test
+	public void testChangeCustomerFirstName() {
+		try{
+			customer.addCustomerWithId(12, "test","teskinson","ttesk@gmail.com");
+		}catch(Exception e){
+			
+		}
+		assertTrue(customer.changeCustomerFirstName(12, "Jonathan"));
 	}
 
+	@Test
+	public void testChangeCustomerLastName() {
+		try{
+			customer.addCustomerWithId(12, "test","teskinson","ttesk@gmail.com");
+		}catch(Exception e){
+			
+		}
+		assertTrue(customer.changeCustomerLastName(12, "Joestar"));
+	}
+
+	@Test
+	public void testChangeCustomerEmail() {
+		try{
+			customer.addCustomerWithId(12, "test","teskinson","ttesk@gmail.com");
+		}catch(Exception e){
+			
+		}
+		Customer customer = new Customer();
+		assertTrue(customer.changeCustomerEmail(12, "jojo@gmail.com"));
+	}
+
+	@Test
+	public void testDeleteCustomer() {
+		try{
+			customer.addCustomerWithId(12, "test","teskinson","ttesk@gmail.com");
+		}catch(Exception e){
+			
+		}
+
+		Customer customer = new Customer();
+		assertTrue(customer.deleteCustomer(12));
+	}
+	
+	@Test
+	public void testDisplayData() {
+		ArrayList<String> userData = new ArrayList<String>();
+		userData = customer.displayData();
+		assertEquals(customer.displayData(),userData);
+	}
 }

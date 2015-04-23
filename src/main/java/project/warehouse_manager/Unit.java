@@ -118,7 +118,7 @@ public class Unit extends DatabaseHandler{
   		}
   	}
 	//gets all data from units
-	public void getData(){
+	public boolean getData(){
 		try {
 			rs = st.executeQuery("SELECT * FROM units;");
 			while (rs.next()) {
@@ -145,9 +145,12 @@ public class Unit extends DatabaseHandler{
 						  			+ "\ninQueue		: " + inQueue
 						  			+ "\npositionInQueue	: " + positionInQueue
 						  			+ "\n--------------------------------------");
+				  
 				}
+			return true;
 		}catch (SQLException e) {
 			e.printStackTrace();
+			return false;
 		}finally{
   			try{
   				rs.close();
@@ -522,9 +525,9 @@ public class Unit extends DatabaseHandler{
 	}
 	
 	//retrieves all the items currently in queue
-	public void itemsInQueue(){
+	public boolean itemsInQueue(){
 		try {
-			rs = st.executeQuery("SELECT * FROM units WHERE itemInQueue = 1;");
+			rs = st.executeQuery("SELECT * FROM units WHERE inQueue = 1;");
 			while (rs.next()) {
 				  int id 				= rs.getInt("id");
 				  int customerId 		= rs.getInt("customerId");
@@ -539,8 +542,10 @@ public class Unit extends DatabaseHandler{
 						  			+ "\npositionInQueue	: " + positionInQueue
 						  			+ "\n--------------------------------------");
 				}
+			return true;
 		}catch (SQLException e) {
 			e.printStackTrace();
+			return false;
 		}finally{
   			try{
   				rs.close();
@@ -617,45 +622,15 @@ public class Unit extends DatabaseHandler{
 	}
 
 		
-		//increases the priority in the row
-		public void increasePriority(int unitId){
-			try {
-				rs = st.executeQuery("SELECT priority FROM units WHERE id = " + unitId + ";");
-				
-				int priority = rs.getInt("priority");
-				priority +=1;
-				st.executeUpdate("UPDATE units SET priority = " + priority + " WHERE id=" + unitId + ";");
-					  		
-			}catch (SQLException e) {
-				e.printStackTrace();
-			}finally{
-	  			try{
-	  				rs.close();
-	  	//			st.close();
-	  				}
-	  			catch(Exception e){
-	  				
-	  			}
-	  		}	
-			
-		}
-		
-		//changes the position in Queue for an item
-		public void changePosition(int newPositionInQueue, int unitId){
-			try {
-				st.executeUpdate("UPDATE units SET positionInQueue = " + newPositionInQueue + " WHERE id=" + unitId + ";");			
-					  		
-			}catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}	
-		
+
 		//changes whether the item is in queue or not
-		public void changeQueueStatus(int queueStatus, int unitId){
+		public boolean changeQueueStatus(int queueStatus, int unitId){
 			try {
 				st.executeUpdate("UPDATE units SET inQueue = " + queueStatus + " WHERE id=" + unitId + ";");
+				return true;
 			} catch (SQLException e) {
 				e.printStackTrace();
+				return false;
 			}finally{
 	  			try{
 	  				rs.close();
@@ -667,6 +642,7 @@ public class Unit extends DatabaseHandler{
 	  		}				
 		}
 		
+		/*
 		// moves an item from a large warehouse unit to a small one
 		public void moveToSmall(int largeUnitId, int smallUnitId){
 			try {
@@ -697,7 +673,7 @@ public class Unit extends DatabaseHandler{
 	  			}
 	  		}	
 		}
-		
+		*/
 		//empties all units pertaining to a specific customer
 		public boolean emptyUnitByCustomer(int customerId){
 			try {

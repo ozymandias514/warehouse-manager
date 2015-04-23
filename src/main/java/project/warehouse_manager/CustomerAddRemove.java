@@ -123,9 +123,15 @@ public class CustomerAddRemove extends JFrame{
 					String userFirstName = firstNameField.getText();
 					String userLastName = lastNameField.getText();
 					String userEmail = emailField.getText();
-					String answer = theCustomer.addCustomer(userFirstName, userLastName, userEmail);
-					 JOptionPane.showMessageDialog(CustomerAddRemove.this,"The customer insertion " + answer,
+					boolean answer = theCustomer.addCustomer(userFirstName, userLastName, userEmail);
+					if(answer == true){
+					 JOptionPane.showMessageDialog(CustomerAddRemove.this,"The customer insertion was succesful",
 							 "Solution", JOptionPane.INFORMATION_MESSAGE);
+					}else{
+						JOptionPane.showMessageDialog(CustomerAddRemove.this,
+								"Something went wrong in the database, please try again later",
+								"Error" , JOptionPane.ERROR_MESSAGE);
+					}
 				}
 				
 				//delete customer button---------------------------

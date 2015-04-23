@@ -3,7 +3,7 @@ package project.warehouse_manager;
 import java.util.Date;
 import java.util.Calendar;
 
-public class UnitData {
+public class UnitData{
 	private int id;
 	private String description;
 	private int customerId;
@@ -24,10 +24,20 @@ public class UnitData {
 		this.warehouseId = warehouseId;
 		this.occupied = occupied;
 		this.dateReceived = dateReceived;
+		
+
+		
 		if (pickUpDate == null || pickUpDate.equals("null")) {
 			this.pickUpDate = null;
 		} else {
 			this.pickUpDate = pickUpDate;
+
+			String[] splitDate = pickUpDate.split("/");
+			int day   = Integer.parseInt(splitDate[0]);
+			int month = Integer.parseInt(splitDate[1]);
+			int year  = Integer.parseInt(splitDate[2]);
+			int totalTime = day + month*30 + year * 360;
+			this.priority = totalTime;
 		}
 		this.inQueue = inQueue;
 	}
@@ -123,4 +133,5 @@ public class UnitData {
 	public int getPositionInQueue(){
 		return positionInQueue;
 	}
+	
 }
