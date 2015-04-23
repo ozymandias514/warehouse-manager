@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>CustomerAddRemove.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">warehouse-manager</a> &gt; <a href="index.source.html" class="el_package">project.warehouse_manager</a> &gt; <span class="el_source">CustomerAddRemove.java</span></div><h1>CustomerAddRemove.java</h1><pre class="source lang-java linenums">package project.warehouse_manager;
+
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+
+//add remove section ----------------------------------------------
+public class CustomerAddRemove extends JFrame{
+	
+	JButton addCustomerBut, deleteBut, goBackBut, clearAll;
+	JTextField firstNameField,lastNameField, emailField, idField, emailFieldErase;
+	
+	int userSession;
+<span class="nc" id="L23">	String[] userSessionData = new String[5];</span>
+	
+<span class="nc" id="L25">	Customer theCustomer = new Customer();</span>
+<span class="nc" id="L26">	Unit theUnit = new Unit();</span>
+	
+<span class="nc" id="L28">	public CustomerAddRemove(int userId,  String[] userData){</span>
+		
+<span class="nc" id="L30">		System.arraycopy(userData, 0, userSessionData, 0, userData.length);</span>
+<span class="nc" id="L31">		userSession = userId;</span>
+<span class="nc" id="L32">		this.setSize(500,300);</span>
+<span class="nc" id="L33">		this.setLocationRelativeTo(null);</span>
+<span class="nc" id="L34">		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);</span>
+<span class="nc" id="L35">		this.setTitle(&quot;customer add and remove&quot;);</span>
+		
+<span class="nc" id="L37">		JPanel thePanel = new JPanel();</span>
+		
+<span class="nc" id="L39">		thePanel.setLayout(new GridBagLayout());</span>
+		
+<span class="nc" id="L41">		GridBagConstraints gridConstraints = new GridBagConstraints();</span>
+		
+<span class="nc" id="L43">		gridConstraints.gridx = 1;</span>
+<span class="nc" id="L44">		gridConstraints.gridy = 1;</span>
+<span class="nc" id="L45">		gridConstraints.gridwidth = 1; </span>
+<span class="nc" id="L46">		gridConstraints.gridheight = 1;</span>
+<span class="nc" id="L47">		gridConstraints.weightx = 50;</span>
+<span class="nc" id="L48">		gridConstraints.weighty = 100;</span>
+<span class="nc" id="L49">		gridConstraints.insets = new Insets(5,5,5,5);</span>
+<span class="nc" id="L50">		gridConstraints.anchor = gridConstraints.CENTER;</span>
+<span class="nc" id="L51">		gridConstraints.fill = gridConstraints.BOTH;</span>
+		
+<span class="nc" id="L53">		ListenForButton lForButton = new ListenForButton();</span>
+		
+<span class="nc" id="L55">		idField = new JTextField(&quot;ID&quot;,3);</span>
+<span class="nc" id="L56">		firstNameField = new JTextField(&quot;First Name&quot;,10);</span>
+<span class="nc" id="L57">		lastNameField = new JTextField(&quot;Last Name&quot;,10);</span>
+<span class="nc" id="L58">		emailField = new JTextField(&quot;email&quot;,10);</span>
+<span class="nc" id="L59">		emailFieldErase = new JTextField(&quot;email&quot;, 10);</span>
+		
+<span class="nc" id="L61">		addCustomerBut = new JButton(&quot;add customer&quot;);</span>
+<span class="nc" id="L62">		deleteBut = new JButton(&quot;delete customer&quot;);</span>
+<span class="nc" id="L63">		goBackBut = new JButton(&quot;go back&quot;);</span>
+<span class="nc" id="L64">		clearAll = new JButton(&quot;Clear All&quot;);</span>
+		
+<span class="nc" id="L66">		addCustomerBut.addActionListener(lForButton);</span>
+<span class="nc" id="L67">		deleteBut.addActionListener(lForButton);</span>
+<span class="nc" id="L68">		goBackBut.addActionListener(lForButton);</span>
+<span class="nc" id="L69">		clearAll.addActionListener(lForButton);</span>
+		
+<span class="nc" id="L71">		gridConstraints.gridwidth = 1;</span>
+<span class="nc" id="L72">		gridConstraints.gridy = 1;</span>
+<span class="nc" id="L73">		gridConstraints.gridx = 1;</span>
+<span class="nc" id="L74">		thePanel.add(firstNameField, gridConstraints);</span>
+<span class="nc" id="L75">		gridConstraints.gridx = 5;</span>
+<span class="nc" id="L76">		thePanel.add(lastNameField, gridConstraints);</span>
+<span class="nc" id="L77">		gridConstraints.gridx = 9;</span>
+<span class="nc" id="L78">		thePanel.add(emailField, gridConstraints);</span>
+<span class="nc" id="L79">		gridConstraints.gridwidth = 1;</span>
+<span class="nc" id="L80">		gridConstraints.gridy = 2;</span>
+<span class="nc" id="L81">		gridConstraints.gridx = 1;</span>
+<span class="nc" id="L82">		thePanel.add(clearAll, gridConstraints);</span>
+<span class="nc" id="L83">		gridConstraints.gridwidth = 10;</span>
+<span class="nc" id="L84">		gridConstraints.gridx = 5;</span>
+<span class="nc" id="L85">		thePanel.add(addCustomerBut, gridConstraints);</span>
+<span class="nc" id="L86">		gridConstraints.gridwidth = 1;</span>
+<span class="nc" id="L87">		gridConstraints.gridy = 3;</span>
+<span class="nc" id="L88">		gridConstraints.gridx = 1;</span>
+<span class="nc" id="L89">		thePanel.add(idField, gridConstraints);</span>
+<span class="nc" id="L90">		gridConstraints.gridwidth = 1;</span>
+<span class="nc" id="L91">		gridConstraints.gridx = 5;</span>
+<span class="nc" id="L92">		thePanel.add(emailFieldErase, gridConstraints);</span>
+<span class="nc" id="L93">		gridConstraints.gridwidth = 1;</span>
+<span class="nc" id="L94">		gridConstraints.gridx = 9;</span>
+<span class="nc" id="L95">		thePanel.add(deleteBut, gridConstraints);</span>
+<span class="nc" id="L96">		gridConstraints.gridwidth = 20;</span>
+<span class="nc" id="L97">		gridConstraints.gridy = 4;</span>
+<span class="nc" id="L98">		gridConstraints.gridx = 1;</span>
+<span class="nc" id="L99">		thePanel.add(goBackBut, gridConstraints);</span>
+		
+<span class="nc" id="L101">		this.add(thePanel);</span>
+		
+<span class="nc" id="L103">		this.setVisible(true);</span>
+		
+<span class="nc" id="L105">		idField.requestFocus();</span>
+<span class="nc" id="L106">	}</span>
+	
+<span class="nc" id="L108">	private class ListenForButton implements ActionListener{</span>
+
+		public void actionPerformed(ActionEvent e) {
+				//go back button -----------------------------
+<span class="nc bnc" id="L112" title="All 2 branches missed.">			if(e.getSource() == goBackBut){</span>
+<span class="nc" id="L113">				dispose();</span>
+<span class="nc" id="L114">				new CustomerLanding(userSession, userSessionData);</span>
+				//add customer button-------------------------
+<span class="nc bnc" id="L116" title="All 2 branches missed.">			}else if(e.getSource() == addCustomerBut){</span>
+
+<span class="nc bnc" id="L118" title="All 6 branches missed.">				if(firstNameField.getText().isEmpty() || lastNameField.getText().isEmpty() || emailField.getText().isEmpty()){</span>
+<span class="nc" id="L119">					JOptionPane.showMessageDialog(CustomerAddRemove.this,</span>
+							&quot;Fields cannot be empty, Input required: First Name, Last Name, Email&quot;,
+							&quot;Error&quot; , JOptionPane.ERROR_MESSAGE);
+				}else{
+<span class="nc" id="L123">					String userFirstName = firstNameField.getText();</span>
+<span class="nc" id="L124">					String userLastName = lastNameField.getText();</span>
+<span class="nc" id="L125">					String userEmail = emailField.getText();</span>
+<span class="nc" id="L126">					boolean answer = theCustomer.addCustomer(userFirstName, userLastName, userEmail);</span>
+<span class="nc bnc" id="L127" title="All 2 branches missed.">					if(answer == true){</span>
+<span class="nc" id="L128">					 JOptionPane.showMessageDialog(CustomerAddRemove.this,&quot;The customer insertion was succesful&quot;,</span>
+							 &quot;Solution&quot;, JOptionPane.INFORMATION_MESSAGE);
+					}else{
+<span class="nc" id="L131">						JOptionPane.showMessageDialog(CustomerAddRemove.this,</span>
+								&quot;Something went wrong in the database, please try again later&quot;,
+								&quot;Error&quot; , JOptionPane.ERROR_MESSAGE);
+					}
+<span class="nc" id="L135">				}</span>
+				
+				//delete customer button---------------------------
+<span class="nc bnc" id="L138" title="All 2 branches missed.">			}else if(e.getSource() == deleteBut){</span>
+				
+<span class="nc bnc" id="L140" title="All 4 branches missed.">				if(idField.getText().isEmpty() &amp;&amp; emailFieldErase.getText().isEmpty()){</span>
+<span class="nc" id="L141">					JOptionPane.showMessageDialog(CustomerAddRemove.this,</span>
+							&quot;Both Fields cannot be empty atleast one input is required, Input required: ID, or Email&quot;,
+							&quot;Error&quot; , JOptionPane.ERROR_MESSAGE);
+<span class="nc bnc" id="L144" title="All 8 branches missed.">				}else if(!idField.getText().isEmpty() &amp;&amp; emailFieldErase.getText().isEmpty() || !idField.getText().isEmpty() &amp;&amp; !emailFieldErase.getText().isEmpty()){</span>
+					try{
+						
+<span class="nc" id="L147">						 int customerId = Integer.parseInt(idField.getText());</span>
+<span class="nc" id="L148">						 int totalUnits = theUnit.totalUnitsByCustomer(customerId);</span>
+						 
+<span class="nc bnc" id="L150" title="All 2 branches missed.">						 if(totalUnits &gt; 0){</span>
+<span class="nc" id="L151">							 theUnit.emptyUnitByCustomer(customerId);</span>
+						 }
+						 
+<span class="nc" id="L154">						 boolean answer = theCustomer.deleteCustomer(customerId);</span>
+<span class="nc bnc" id="L155" title="All 2 branches missed.">						 if(answer = true){</span>
+<span class="nc" id="L156">							 JOptionPane.showMessageDialog(CustomerAddRemove.this,&quot;The customer deletion succesful&quot;,</span>
+									 &quot;Solution&quot;, JOptionPane.INFORMATION_MESSAGE);
+						 }else{
+<span class="nc" id="L159">							JOptionPane.showMessageDialog(CustomerAddRemove.this,</span>
+									&quot;We are currently experiencing database problems please try again later&quot;,
+									&quot;Error&quot; , JOptionPane.ERROR_MESSAGE);
+						 }
+<span class="nc" id="L163">				 }catch(Exception NumberFormatException){</span>
+<span class="nc" id="L164">						JOptionPane.showMessageDialog(CustomerAddRemove.this,</span>
+								&quot;Field Cannot be a string, Input Required: Customer ID&quot;,
+								&quot;Error&quot; , JOptionPane.ERROR_MESSAGE);
+<span class="nc" id="L167">				 	}</span>
+<span class="nc bnc" id="L168" title="All 4 branches missed.">				}else if(idField.getText().isEmpty() &amp;&amp; !emailFieldErase.getText().isEmpty()){</span>
+<span class="nc" id="L169">					String customerEmail = emailFieldErase.getText();</span>
+<span class="nc" id="L170">					int customerId = theCustomer.getIdByEmail(customerEmail);</span>
+<span class="nc" id="L171">					int totalUnits = theUnit.totalUnitsByCustomer(customerId);</span>
+					
+<span class="nc bnc" id="L173" title="All 2 branches missed.">					if(totalUnits &gt; 0){</span>
+<span class="nc" id="L174">						theUnit.emptyUnitByCustomer(customerId);</span>
+					}
+					
+<span class="nc" id="L177">					boolean answer = theCustomer.deleteCustomer(customerId);</span>
+<span class="nc bnc" id="L178" title="All 2 branches missed.">					 if(answer == true){</span>
+<span class="nc" id="L179">						 JOptionPane.showMessageDialog(CustomerAddRemove.this,&quot;The customer deletion was sucesful&quot;,</span>
+								 &quot;Solution&quot;, JOptionPane.INFORMATION_MESSAGE);
+					 }else{
+<span class="nc" id="L182">						JOptionPane.showMessageDialog(CustomerAddRemove.this,</span>
+								&quot;We are currently experiencing database problems please try again later&quot;,
+								&quot;Error&quot; , JOptionPane.ERROR_MESSAGE);
+					 }	
+<span class="nc" id="L186">				}</span>
+<span class="nc bnc" id="L187" title="All 2 branches missed.">			}else if(e.getSource() == clearAll){</span>
+<span class="nc" id="L188">				 firstNameField.setText(&quot;&quot;);</span>
+<span class="nc" id="L189">				 lastNameField.setText(&quot;&quot;);</span>
+<span class="nc" id="L190">				 emailField.setText(&quot;&quot;);</span>
+<span class="nc" id="L191">				 idField.setText(&quot;&quot;);</span>
+<span class="nc" id="L192">				 emailFieldErase.setText(&quot;&quot;);</span>
+<span class="nc" id="L193">				 JOptionPane.showMessageDialog(CustomerAddRemove.this,&quot;All fields have now been cleared&quot;,</span>
+						 &quot;Solution&quot;, JOptionPane.INFORMATION_MESSAGE);
+			}
+<span class="nc" id="L196">		}</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>

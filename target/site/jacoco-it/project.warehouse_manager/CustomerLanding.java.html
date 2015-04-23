@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>CustomerLanding.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">warehouse-manager</a> &gt; <a href="index.source.html" class="el_package">project.warehouse_manager</a> &gt; <span class="el_source">CustomerLanding.java</span></div><h1>CustomerLanding.java</h1><pre class="source lang-java linenums">package project.warehouse_manager;
+
+import javax.swing.*;
+
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.GridLayout;
+import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+public class CustomerLanding extends JFrame {
+
+	JButton emailButton, idButton, listButton, 
+	alterButton, addRemoveBut, clearFields, 
+	goBackBut;
+	
+	JTextField textResult;
+	
+	JTextArea textArea1;
+	
+	int userSession;
+<span class="nc" id="L27">	String[] userSessionData = new String[5];</span>
+	
+<span class="nc" id="L29">	Customer theCustomer = new Customer();</span>
+<span class="nc" id="L30">	Users theUser = new Users();</span>
+	
+<span class="nc" id="L32">	public CustomerLanding(int userId, String[] userData){</span>
+		// clone the data array
+		
+<span class="nc" id="L35">		System.arraycopy(userData, 0, userSessionData, 0, userData.length );</span>
+		
+<span class="nc" id="L37">		userSession = userId;</span>
+<span class="nc" id="L38">		this.setSize(500,600);</span>
+<span class="nc" id="L39">		this.setLocationRelativeTo(null);</span>
+<span class="nc" id="L40">		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);</span>
+<span class="nc" id="L41">		this.setTitle(&quot;Customer page&quot;);</span>
+		
+<span class="nc" id="L43">		JPanel thePanel = new JPanel();</span>
+		
+<span class="nc" id="L45">		thePanel.setLayout(new GridBagLayout());</span>
+		
+<span class="nc" id="L47">		GridBagConstraints gridConstraints = new GridBagConstraints();</span>
+		
+<span class="nc" id="L49">		gridConstraints.gridx = 1;</span>
+<span class="nc" id="L50">		gridConstraints.gridy = 1;</span>
+<span class="nc" id="L51">		gridConstraints.gridwidth = 1; </span>
+<span class="nc" id="L52">		gridConstraints.gridheight = 1;</span>
+<span class="nc" id="L53">		gridConstraints.weightx = 50;</span>
+<span class="nc" id="L54">		gridConstraints.weighty = 100;</span>
+<span class="nc" id="L55">		gridConstraints.insets = new Insets(5,5,5,5);</span>
+<span class="nc" id="L56">		gridConstraints.anchor = gridConstraints.CENTER;</span>
+<span class="nc" id="L57">		gridConstraints.fill = gridConstraints.BOTH;</span>
+		
+<span class="nc" id="L59">		textResult = new JTextField(&quot;&quot;,20);</span>
+<span class="nc" id="L60">		textArea1 = new JTextArea(15,20);</span>
+<span class="nc" id="L61">		textArea1.setLineWrap(true);</span>
+<span class="nc" id="L62">		textArea1.setWrapStyleWord(true);</span>
+<span class="nc" id="L63">		JScrollPane scrollbar1 = new JScrollPane(textArea1, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);</span>
+<span class="nc" id="L64">		Font font = new Font(&quot;Helvetica&quot;, Font.PLAIN, 18);</span>
+		
+<span class="nc" id="L66">		ListenForButton lForButton = new ListenForButton();</span>
+		
+<span class="nc" id="L68">		emailButton = new JButton(&quot;Find By Email&quot;);</span>
+<span class="nc" id="L69">		emailButton.setToolTipText(&quot;finds a user id with his email&quot;);</span>
+<span class="nc" id="L70">		idButton = new JButton(&quot;Find By Id&quot;);</span>
+<span class="nc" id="L71">		idButton.setToolTipText(&quot;allows you to find a customers data with his id&quot;);</span>
+<span class="nc" id="L72">		listButton = new JButton(&quot;display List&quot;);</span>
+<span class="nc" id="L73">		alterButton = new JButton(&quot;Alter records&quot;);</span>
+<span class="nc" id="L74">		alterButton.setToolTipText(&quot;allows you to change First name, Last name, or email&quot;);</span>
+<span class="nc" id="L75">		addRemoveBut = new JButton(&quot;Add/Delete customer&quot;);</span>
+<span class="nc" id="L76">		clearFields = new JButton(&quot;Clear Fields&quot;);</span>
+<span class="nc" id="L77">		goBackBut = new JButton(&quot;Go Back&quot;);</span>
+<span class="nc" id="L78">		goBackBut.setToolTipText(&quot;sends you back to the previous screen&quot;);</span>
+		
+<span class="nc" id="L80">		emailButton.addActionListener(lForButton);</span>
+<span class="nc" id="L81">		idButton.addActionListener(lForButton);</span>
+<span class="nc" id="L82">		listButton.addActionListener(lForButton);</span>
+<span class="nc" id="L83">		alterButton.addActionListener(lForButton);</span>
+<span class="nc" id="L84">		addRemoveBut.addActionListener(lForButton);</span>
+<span class="nc" id="L85">		clearFields.addActionListener(lForButton);</span>
+<span class="nc" id="L86">		goBackBut.addActionListener(lForButton);</span>
+
+		
+<span class="nc" id="L89">		gridConstraints.gridwidth = 20;</span>
+<span class="nc" id="L90">		gridConstraints.gridx = 1;</span>
+<span class="nc" id="L91">		gridConstraints.gridy = 1;</span>
+<span class="nc" id="L92">		thePanel.add(textResult, gridConstraints);</span>
+<span class="nc" id="L93">		gridConstraints.gridwidth = 1;</span>
+<span class="nc" id="L94">		gridConstraints.gridx = 1;</span>
+<span class="nc" id="L95">		gridConstraints.gridy = 2;</span>
+<span class="nc" id="L96">		thePanel.add(emailButton,gridConstraints);</span>
+<span class="nc" id="L97">		gridConstraints.gridx = 5;</span>
+<span class="nc" id="L98">		thePanel.add(idButton,gridConstraints);</span>
+<span class="nc" id="L99">		gridConstraints.gridx = 9;</span>
+<span class="nc" id="L100">		thePanel.add(listButton,gridConstraints);</span>
+<span class="nc" id="L101">		gridConstraints.gridx = 1;</span>
+<span class="nc" id="L102">		gridConstraints.gridy = 3;</span>
+<span class="nc" id="L103">		thePanel.add(alterButton,gridConstraints);</span>
+<span class="nc" id="L104">		gridConstraints.gridx = 5;</span>
+<span class="nc" id="L105">		thePanel.add(addRemoveBut,gridConstraints);</span>
+<span class="nc" id="L106">		gridConstraints.gridx = 9;</span>
+<span class="nc" id="L107">		thePanel.add(clearFields,gridConstraints);</span>
+<span class="nc" id="L108">		gridConstraints.gridwidth = 20;</span>
+<span class="nc" id="L109">		gridConstraints.gridx = 1;</span>
+<span class="nc" id="L110">		gridConstraints.gridy = 4;</span>
+<span class="nc" id="L111">		thePanel.add(scrollbar1,gridConstraints);</span>
+<span class="nc" id="L112">		gridConstraints.gridwidth = 20;</span>
+<span class="nc" id="L113">		gridConstraints.gridx = 1;</span>
+<span class="nc" id="L114">		gridConstraints.gridy = 5;</span>
+<span class="nc" id="L115">		thePanel.add(goBackBut,gridConstraints);</span>
+		
+<span class="nc" id="L117">		this.add(thePanel);</span>
+		
+<span class="nc" id="L119">		this.setVisible(true);</span>
+		
+<span class="nc" id="L121">		textResult.requestFocus();		</span>
+		
+<span class="nc" id="L123">	}</span>
+	
+<span class="nc" id="L125">	private class ListenForButton implements ActionListener{</span>
+
+		public void actionPerformed(ActionEvent e) {
+				//go back button -----------------------------------
+<span class="nc bnc" id="L129" title="All 2 branches missed.">			if(e.getSource() == goBackBut){</span>
+<span class="nc" id="L130">				dispose();</span>
+<span class="nc" id="L131">				new LoggedInFrame(userSession, userSessionData);</span>
+				// add and remove button ------------------------------
+<span class="nc bnc" id="L133" title="All 2 branches missed.">			}else if(e.getSource() == addRemoveBut){</span>
+<span class="nc" id="L134">				dispose();</span>
+<span class="nc" id="L135">				new CustomerAddRemove(userSession, userSessionData);</span>
+				// take to alter screen button ------------------------
+<span class="nc bnc" id="L137" title="All 2 branches missed.">			}else if(e.getSource() == alterButton){</span>
+<span class="nc" id="L138">				dispose();</span>
+<span class="nc" id="L139">				new CustomerAlter(userSession, userSessionData);</span>
+				// list all items button ------------------------------
+<span class="nc bnc" id="L141" title="All 2 branches missed.">			}else if(e.getSource() == listButton){</span>
+<span class="nc" id="L142">				ArrayList&lt;String&gt; userData = new ArrayList&lt;String&gt;();</span>
+<span class="nc" id="L143">				userData = theCustomer.displayData();</span>
+			
+<span class="nc" id="L145">		  		textArea1.setText(&quot;Customers in the system\n&quot;);</span>
+<span class="nc" id="L146">		  		textArea1.append(&quot;-----------------------------------------------------------&quot;);</span>
+					
+<span class="nc bnc" id="L148" title="All 2 branches missed.">		  		for(int i = 0; i &lt; userData.size(); i++){</span>
+<span class="nc" id="L149">	  				textArea1.append(&quot;\nid	:  &quot; + userData.get(i));</span>
+<span class="nc" id="L150">	  				i++;</span>
+<span class="nc" id="L151">	  				textArea1.append(&quot;\nfirst Name	:  &quot; + userData.get(i));</span>
+<span class="nc" id="L152">	  				i++;</span>
+<span class="nc" id="L153">	  				textArea1.append(&quot;\nLast Name	:  &quot; + userData.get(i));</span>
+<span class="nc" id="L154">	  				i++;</span>
+<span class="nc" id="L155">	  				textArea1.append(&quot;\nemail	:  &quot; + userData.get(i));</span>
+<span class="nc" id="L156">	  				textArea1.append(&quot;\n-----------------------------------------------------------&quot;);</span>
+		  		}
+		  		
+		  				//int id = rs.getInt(&quot;id&quot;);
+		  				//String firstName = rs.getString(&quot;firstName&quot;);
+		  				//String lastName = rs.getString(&quot;lastName&quot;);
+		  				//String email = rs.getString(&quot;email&quot;);
+		  				//textArea1.append(&quot;\nid	:  &quot; + id 
+				  	//		+ &quot;\nfirst Name	:  &quot; + firstName
+				  	//		+ &quot;\nLast Name	:  &quot; + lastName
+				  	//		+ &quot;\nemail	:  &quot; + email
+				  	//		+ &quot;\n-----------------------------------------------------------&quot;);
+					
+		
+				//get by email button ------------------------------------------
+<span class="nc bnc" id="L171" title="All 2 branches missed.">			}else if(e.getSource() == emailButton){</span>
+				
+<span class="nc bnc" id="L173" title="All 2 branches missed.">				if(textResult.getText().isEmpty()){</span>
+<span class="nc" id="L174">					JOptionPane.showMessageDialog(CustomerLanding.this, &quot;Fields cannot be empty, Input required: email&quot;, &quot;Error&quot;</span>
+							, JOptionPane.ERROR_MESSAGE);
+				}else{
+<span class="nc" id="L177">					String email = textResult.getText();</span>
+<span class="nc" id="L178">					String data[] = theCustomer.getDataByEmail(email);</span>
+<span class="nc" id="L179">					textArea1.setText(&quot;The user id pertaining to that email is: &quot; + data[0] +</span>
+						&quot;\nFirst Name: &quot; + data[1] + &quot;\nLast Name: &quot; + data[2] + &quot;\nemail: &quot; + data[3]);	
+<span class="nc" id="L181">				}</span>
+				// get by id button ----------------------------------
+<span class="nc bnc" id="L183" title="All 2 branches missed.">			}else if(e.getSource() == idButton){</span>
+				
+				
+<span class="nc bnc" id="L186" title="All 2 branches missed.">				if(textResult.getText().isEmpty()){</span>
+<span class="nc" id="L187">					JOptionPane.showMessageDialog(CustomerLanding.this, &quot;Fields cannot be empty, Input required: Customer ID&quot;, &quot;Error&quot;</span>
+							, JOptionPane.ERROR_MESSAGE);
+				}else{
+					try{
+<span class="nc" id="L191">						int userId = Integer.parseInt(textResult.getText());</span>
+<span class="nc" id="L192">						int[] largeWare= theCustomer.largeUnitsByCustomer(userId);</span>
+<span class="nc" id="L193">						int[] smallWare= theCustomer.smallUnitsByCustomer(userId);</span>
+<span class="nc" id="L194">						String[] customerData = theCustomer.getCustomerData(userId);</span>
+<span class="nc" id="L195">						int largeLength = largeWare.length;</span>
+<span class="nc" id="L196">						int smallLength = smallWare.length;</span>
+						
+<span class="nc" id="L198">						textArea1.setText(&quot;First Name: &quot;+ customerData[0] + &quot;\nLast Name : &quot; </span>
+						+ customerData[1] + &quot;\nemail: &quot; +customerData[2]);
+						
+<span class="nc" id="L201">						textArea1.append(&quot;\nLarge Units owned by this customer: &quot;);</span>
+<span class="nc" id="L202">						int zero= 0;</span>
+<span class="nc bnc" id="L203" title="All 2 branches missed.">						for(int x = 0;x &lt; largeLength; x++){</span>
+<span class="nc bnc" id="L204" title="All 2 branches missed.">							if(largeWare[x] != 0){</span>
+<span class="nc" id="L205">								zero++;</span>
+<span class="nc" id="L206">								textArea1.append(largeWare[x] + &quot;, &quot;);</span>
+							}
+						}
+<span class="nc bnc" id="L209" title="All 2 branches missed.">						if(zero == 0){</span>
+<span class="nc" id="L210">							textArea1.append(&quot;none&quot;);</span>
+						}
+						
+<span class="nc" id="L213">						textArea1.append(&quot;\nSmall Units owned by this customer: &quot;);</span>
+<span class="nc" id="L214">						int zero2= 0;</span>
+<span class="nc bnc" id="L215" title="All 2 branches missed.">						for(int y = 0;y &lt; smallLength; y++){</span>
+<span class="nc bnc" id="L216" title="All 2 branches missed.">							if(smallWare[y] != 0){</span>
+<span class="nc" id="L217">								zero2++;</span>
+<span class="nc" id="L218">								textArea1.append(smallWare[y] + &quot;, &quot;);</span>
+							}
+						}
+<span class="nc bnc" id="L221" title="All 2 branches missed.">						if(zero2 == 0){</span>
+<span class="nc" id="L222">							textArea1.append(&quot;none&quot;);</span>
+						}
+<span class="nc" id="L224">					}catch(Exception numberFormatException){</span>
+<span class="nc" id="L225">						JOptionPane.showMessageDialog(CustomerLanding.this, &quot;Field cannot be string, Input required: Customer ID&quot;, &quot;Error&quot;</span>
+								, JOptionPane.ERROR_MESSAGE);
+<span class="nc" id="L227">					}</span>
+				}
+					// clear screen button ------------------------------------
+<span class="nc bnc" id="L230" title="All 2 branches missed.">				}else if(e.getSource() == clearFields){</span>
+<span class="nc" id="L231">					textArea1.setText(&quot;&quot;);</span>
+<span class="nc" id="L232">					textResult.setText(&quot;&quot;);</span>
+<span class="nc" id="L233">					 JOptionPane.showMessageDialog(CustomerLanding.this,&quot;All fields have now been cleared&quot;,</span>
+							 &quot;Solution&quot;, JOptionPane.INFORMATION_MESSAGE);
+				}
+<span class="nc" id="L236">		}</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>

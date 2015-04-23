@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="project.warehouse_manager.CustomerTest" time="0.374" tests="13" errors="0" skipped="0" failures="0">
+<testsuite name="project.warehouse_manager.UsersTest" time="0" tests="3" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.7.0_51\jre\bin"/>
@@ -59,17 +59,7 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase name="testGetCustomerData" classname="project.warehouse_manager.CustomerTest" time="0.29"/>
-  <testcase name="testChangeCustomerFirstName" classname="project.warehouse_manager.CustomerTest" time="0.019"/>
-  <testcase name="testLargeUnitsByCustomer" classname="project.warehouse_manager.CustomerTest" time="0"/>
-  <testcase name="testChangeCustomerLastName" classname="project.warehouse_manager.CustomerTest" time="0.026"/>
-  <testcase name="testGetDataFromCustomer" classname="project.warehouse_manager.CustomerTest" time="0.035"/>
-  <testcase name="testAddCustomer" classname="project.warehouse_manager.CustomerTest" time="0"/>
-  <testcase name="addCustomerWithId" classname="project.warehouse_manager.CustomerTest" time="0"/>
-  <testcase name="testGetIdByEmail" classname="project.warehouse_manager.CustomerTest" time="0"/>
-  <testcase name="testSmallUnitsByCustomer" classname="project.warehouse_manager.CustomerTest" time="0"/>
-  <testcase name="testDisplayData" classname="project.warehouse_manager.CustomerTest" time="0"/>
-  <testcase name="testGetDataByEmail" classname="project.warehouse_manager.CustomerTest" time="0"/>
-  <testcase name="testDeleteCustomer" classname="project.warehouse_manager.CustomerTest" time="0.003"/>
-  <testcase name="testChangeCustomerEmail" classname="project.warehouse_manager.CustomerTest" time="0.001"/>
+  <testcase name="testGetDataFromId" classname="project.warehouse_manager.UsersTest" time="0"/>
+  <testcase name="testGetIdFromUsername" classname="project.warehouse_manager.UsersTest" time="0"/>
+  <testcase name="testAuthenticate" classname="project.warehouse_manager.UsersTest" time="0"/>
 </testsuite>

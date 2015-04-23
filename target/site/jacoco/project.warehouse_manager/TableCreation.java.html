@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>TableCreation.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">warehouse-manager</a> &gt; <a href="index.source.html" class="el_package">project.warehouse_manager</a> &gt; <span class="el_source">TableCreation.java</span></div><h1>TableCreation.java</h1><pre class="source lang-java linenums">package project.warehouse_manager;
+
+<span class="nc" id="L3">public class TableCreation {</span>
+	
+	// System users
+<span class="nc" id="L6">	static String[] usersTable = {&quot;firstName&quot;,&quot;lastName&quot;,&quot;username&quot;,&quot;password&quot;};</span>
+<span class="nc" id="L7">	static String[][] users = {</span>
+								{&quot;Fernando&quot;,&quot;Gonzales&quot;,&quot;jfgonzal&quot;,&quot;pass&quot;},
+								{&quot;Carson&quot;,&quot;Kirkpatrick&quot;,&quot;kirk&quot;,&quot;pass&quot;}
+								};
+	// Customers
+<span class="nc" id="L12">	static String[] customerTable = {&quot;firstName&quot;,&quot;lastName&quot;,&quot;email&quot;};</span>
+<span class="nc" id="L13">	static String[][] customers = {</span>
+								{&quot;John&quot;,&quot;Doe&quot;,&quot;jdoe@gmail.com&quot;},
+								{&quot;Jane&quot;,&quot;Dorian&quot;,&quot;jdor@gmail.com&quot;},
+								{&quot;Harry&quot;,&quot;Harriot&quot;,&quot;hhar@gmail.com&quot;},
+								{&quot;Jericho&quot;,&quot;Swain&quot;,&quot;jswa@gmail.com&quot;},
+								{&quot;Annie&quot;,&quot;Hastur&quot;,&quot;ahas@gmail.com&quot;},
+								{&quot;Malcom&quot;,&quot;Graves&quot;,&quot;mgra@gmail.com&quot;},
+								{&quot;Sarah&quot;,&quot;Fortune&quot;,&quot;sfor@gmail.com&quot;},
+								{&quot;Shauna&quot;,&quot;Vayne&quot;,&quot;svay@gmail.com&quot;},
+								{&quot;Edmundo&quot;,&quot;Mundo&quot;,&quot;emun@gmail.com&quot;},
+								{&quot;Fiora&quot;,&quot;Laurent&quot;,&quot;flau@gmail.com&quot;}
+								};
+	
+<span class="nc" id="L26">	static String[] unitsTable = {&quot;description&quot;,&quot;customerId&quot;,&quot;warehouseId&quot;,&quot;occupied&quot;,&quot;dateReceived&quot;,&quot;pickupDate&quot;,&quot;priority&quot;,&quot;inQueue&quot;,&quot;positionInQueue&quot;};</span>
+	
+	public void generateLargeWarehouseUnitsInsertStatements(){
+		
+<span class="nc bnc" id="L30" title="All 2 branches missed.">		for(int i = 1; i&lt;=20; i++){</span>
+<span class="nc" id="L31">			System.out.println(&quot;INSERT INTO units(id, description, customerId, warehouseId, occupied, dateReceived, pickupDate, priority, inQueue, positionInQueue) values(&quot;</span>
+					+ i + &quot;, 'empty unit',0,1,0,'null','null',0,0,0);&quot;);
+		}
+<span class="nc" id="L34">	}</span>
+	
+	public void generateSmallWarehouseUnitsInsertStatements(){
+		
+<span class="nc bnc" id="L38" title="All 2 branches missed.">		for(int i = 200; i&lt;=205; i++){</span>
+<span class="nc" id="L39">			System.out.println(&quot;INSERT INTO units(id, description, customerId, warehouseId, occupied, dateReceived, pickupDate, priority, inQueue, positionInQueue) values(&quot;</span>
+					+ i + &quot;, 'empty unit',0,2,0,'null','null',0,0,0);&quot;);
+		}
+<span class="nc" id="L42">	}</span>
+	
+	public void generateUserInsertStatements(){
+		
+<span class="nc bnc" id="L46" title="All 2 branches missed.">		for(String[] user : users){</span>
+<span class="nc" id="L47">		System.out.println(&quot;INSERT INTO users(&quot;+ usersTable[0]+ </span>
+				&quot;, &quot; + usersTable[1] + &quot;, &quot; + usersTable[2]  + &quot;, &quot; + usersTable[3] +
+				&quot;) VALUES('&quot;+ user[0] + &quot;', '&quot; + user[1] + &quot;', '&quot; + user[2] + &quot;', '&quot; + user[3] + &quot;');&quot;);	
+		}
+<span class="nc" id="L51">	}</span>
+	
+	public void generateCustomerInsertStatements(){
+		
+<span class="nc bnc" id="L55" title="All 2 branches missed.">		for(String[] customer : customers){</span>
+<span class="nc" id="L56">		System.out.println(&quot;INSERT INTO customer(&quot;+ customerTable[0]+ </span>
+				&quot;, &quot; + customerTable[1] + &quot;, &quot; + customerTable[2] +
+				&quot;) VALUES('&quot;+ customer[0] + &quot;', '&quot; + customer[1] +
+				&quot;', '&quot; + customer[2] + &quot;');&quot;);	
+		}
+<span class="nc" id="L61">	}</span>
+	
+	
+}
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>

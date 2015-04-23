@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Users.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">warehouse-manager</a> &gt; <a href="index.source.html" class="el_package">project.warehouse_manager</a> &gt; <span class="el_source">Users.java</span></div><h1>Users.java</h1><pre class="source lang-java linenums">package project.warehouse_manager;
+
+import java.sql.*;
+
+<span class="fc" id="L5">public class Users extends DatabaseHandler{</span>
+
+	// prints out all data pertaining to users
+	public void displayDataFromUsers(){
+		try {
+<span class="nc" id="L10">			rs = st.executeQuery(&quot;SELECT * FROM users;&quot;);</span>
+<span class="nc" id="L11">			System.out.println(&quot;id    firstName         lastName        username     password&quot;);</span>
+<span class="nc" id="L12">			System.out.print(&quot;---   ------------      -----------     ----------   --------&quot;);</span>
+<span class="nc" id="L13">			System.out.println();</span>
+<span class="nc bnc" id="L14" title="All 2 branches missed.">			while (rs.next()) {</span>
+<span class="nc" id="L15">				  int id = rs.getInt(&quot;id&quot;);</span>
+<span class="nc" id="L16">				  String firstName = rs.getString(&quot;firstName&quot;);</span>
+<span class="nc" id="L17">				  String lastName = rs.getString(&quot;lastName&quot;);</span>
+<span class="nc" id="L18">				  String username = rs.getString(&quot;username&quot;);</span>
+<span class="nc" id="L19">				  String password = rs.getString(&quot;password&quot;);</span>
+<span class="nc" id="L20">				  System.out.printf(&quot;%d     %s		%s	%s         %s&quot;, id, firstName, lastName, username, password);</span>
+<span class="nc" id="L21">				  System.out.println();</span>
+<span class="nc" id="L22">				}</span>
+<span class="nc" id="L23">		} catch (SQLException e) {</span>
+<span class="nc" id="L24">			e.printStackTrace();</span>
+		}finally{
+<span class="nc" id="L26">  			try{</span>
+<span class="nc" id="L27">  				rs.close();</span>
+<span class="nc" id="L28">  				st.close();</span>
+  				}
+<span class="nc" id="L30">  			catch(Exception e){</span>
+<span class="nc" id="L31">  				System.out.println(&quot;Error closing the database&quot;);</span>
+<span class="nc" id="L32">  			}</span>
+<span class="nc" id="L33">  		}	</span>
+<span class="nc" id="L34">	}</span>
+	
+	//authenticate the user
+	public boolean authenticate(String username, String password){
+		try{
+<span class="fc" id="L39">			rs = st.executeQuery(&quot;SELECT COUNT(*) AS total FROM users WHERE username ='&quot; +</span>
+									username + &quot;' AND password = '&quot;+ password + &quot;';&quot;);
+<span class="fc" id="L41">			int total = rs.getInt(&quot;total&quot;);</span>
+
+<span class="fc bfc" id="L43" title="All 2 branches covered.">			if(total != 0)	{</span>
+<span class="fc" id="L44">				return true;</span>
+			}else{
+<span class="fc" id="L46">				return false;</span>
+			}
+<span class="nc" id="L48">		}catch (SQLException e){</span>
+<span class="nc" id="L49">			e.printStackTrace();</span>
+<span class="nc" id="L50">			return false;</span>
+		}finally{
+<span class="nc" id="L52">  			try{</span>
+<span class="pc" id="L53">  				rs.close();</span>
+<span class="pc" id="L54">  				st.close();</span>
+  				}
+<span class="nc" id="L56">  			catch(Exception e){</span>
+<span class="nc" id="L57">  				System.out.println(&quot;Error closing the database&quot;);</span>
+<span class="pc" id="L58">  			}</span>
+  		}	
+	}
+	
+	// gets the user id from the username
+	public int getIdFromUsername(String username){
+		
+		try {
+<span class="fc" id="L66">			rs = st.executeQuery(&quot;SELECT id FROM users WHERE username ='&quot; +</span>
+					username + &quot;';&quot;);
+<span class="fc" id="L68">			int userId = rs.getInt(&quot;id&quot;) ;</span>
+<span class="fc" id="L69">			return userId;</span>
+<span class="nc" id="L70">		} catch (SQLException e) {</span>
+<span class="nc" id="L71">			e.printStackTrace();</span>
+		}finally{
+<span class="nc" id="L73">  			try{</span>
+<span class="pc" id="L74">  				rs.close();</span>
+<span class="pc" id="L75">  				st.close();</span>
+  				}
+<span class="nc" id="L77">  			catch(Exception e){</span>
+<span class="nc" id="L78">  				System.out.println(&quot;Error closing the database&quot;);</span>
+<span class="pc" id="L79">  			}</span>
+<span class="nc" id="L80">  		}	</span>
+<span class="nc" id="L81">			return 0;</span>
+	}
+	
+	// gets the user data from the user id
+	public String[] getDataFromId(int userId){
+
+<span class="fc" id="L87">		String[] fluke = null;</span>
+		try {
+<span class="fc" id="L89">			rs = st.executeQuery(&quot;SELECT * FROM users WHERE id =&quot; + userId + &quot;;&quot;);</span>
+<span class="fc" id="L90">			String[] data = {rs.getString(&quot;firstName&quot;),rs.getString(&quot;lastName&quot;),rs.getString(&quot;username&quot;),rs.getString(&quot;password&quot;)};</span>
+<span class="fc" id="L91">			return data;</span>
+<span class="nc" id="L92">		} catch (SQLException e) {</span>
+<span class="nc" id="L93">			e.printStackTrace();</span>
+		}finally{
+<span class="nc" id="L95">  			try{</span>
+  				
+<span class="pc" id="L97">  				rs.close();</span>
+<span class="pc" id="L98">  				st.close();</span>
+  				}
+<span class="nc" id="L100">  			catch(Exception e){</span>
+<span class="nc" id="L101">  				System.out.println(&quot;Error closing the database&quot;);</span>
+<span class="pc" id="L102">  			}</span>
+<span class="nc" id="L103">  		}	</span>
+<span class="nc" id="L104">			return fluke;</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>

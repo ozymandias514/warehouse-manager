@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>AdminLanding.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">warehouse-manager</a> &gt; <a href="index.source.html" class="el_package">project.warehouse_manager</a> &gt; <span class="el_source">AdminLanding.java</span></div><h1>AdminLanding.java</h1><pre class="source lang-java linenums">package project.warehouse_manager;
+
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+
+import javax.swing.*;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+import java.util.PriorityQueue;
+import java.util.Queue;
+
+
+public class AdminLanding extends JFrame{
+
+	JButton goBackBut, purgeSmallBut, runQueue;
+	
+	int userSession;
+<span class="nc" id="L24">	String[] userSessionData = new String[5];</span>
+<span class="nc" id="L25">	Unit theUnit = new Unit();</span>
+	
+	Queue&lt;UnitData&gt; queue;
+	
+<span class="nc" id="L29">	public AdminLanding(int userId, String[] userData){</span>
+		
+<span class="nc" id="L31">		System.arraycopy(userData, 0, userSessionData, 0, userData.length );</span>
+		
+<span class="nc" id="L33">		userSession = userId;</span>
+<span class="nc" id="L34">		this.setSize(300,300);</span>
+<span class="nc" id="L35">		this.setLocationRelativeTo(null);</span>
+<span class="nc" id="L36">		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);</span>
+<span class="nc" id="L37">		this.setTitle(&quot;Admin Page&quot;);</span>
+		
+<span class="nc" id="L39">		JPanel thePanel = new JPanel();</span>
+		
+<span class="nc" id="L41">		thePanel.setLayout(new GridBagLayout());</span>
+		
+<span class="nc" id="L43">		GridBagConstraints gridConstraints = new GridBagConstraints();</span>
+		
+<span class="nc" id="L45">		gridConstraints.gridx = 1;</span>
+<span class="nc" id="L46">		gridConstraints.gridy = 1;</span>
+<span class="nc" id="L47">		gridConstraints.gridwidth = 1; </span>
+<span class="nc" id="L48">		gridConstraints.gridheight = 1;</span>
+<span class="nc" id="L49">		gridConstraints.weightx = 50;</span>
+<span class="nc" id="L50">		gridConstraints.weighty = 100;</span>
+<span class="nc" id="L51">		gridConstraints.insets = new Insets(5,5,5,5);</span>
+<span class="nc" id="L52">		gridConstraints.anchor = gridConstraints.CENTER;</span>
+<span class="nc" id="L53">		gridConstraints.fill = gridConstraints.BOTH;</span>
+		
+<span class="nc" id="L55">		ListenForButton lForButton = new ListenForButton();</span>
+		
+<span class="nc" id="L57">		goBackBut = new JButton(&quot;Go Back&quot;);</span>
+<span class="nc" id="L58">		goBackBut.setToolTipText(&quot;sends you back to the previous screen&quot;);</span>
+<span class="nc" id="L59">		purgeSmallBut = new JButton(&quot;Purge Small warehouse&quot;);</span>
+<span class="nc" id="L60">		purgeSmallBut.setToolTipText(&quot;Will purge all items from the small warehouse&quot;);</span>
+<span class="nc" id="L61">		runQueue = new JButton(&quot;Run Queue&quot;);</span>
+<span class="nc" id="L62">		runQueue.setToolTipText(&quot;Will run the queue algorithm to decide which item will go next to the small warehouse&quot;);</span>
+		
+<span class="nc" id="L64">		goBackBut.addActionListener(lForButton);</span>
+<span class="nc" id="L65">		purgeSmallBut.addActionListener(lForButton);</span>
+<span class="nc" id="L66">		runQueue.addActionListener(lForButton);</span>
+		
+<span class="nc" id="L68">		gridConstraints.gridwidth = 20;</span>
+<span class="nc" id="L69">		gridConstraints.gridx = 1;</span>
+<span class="nc" id="L70">		gridConstraints.gridy = 1;</span>
+<span class="nc" id="L71">		thePanel.add(goBackBut, gridConstraints);</span>
+<span class="nc" id="L72">		gridConstraints.gridwidth = 20;</span>
+<span class="nc" id="L73">		gridConstraints.gridx = 1;</span>
+<span class="nc" id="L74">		gridConstraints.gridy = 2;</span>
+<span class="nc" id="L75">		thePanel.add(purgeSmallBut, gridConstraints);</span>
+<span class="nc" id="L76">		gridConstraints.gridwidth = 20;</span>
+<span class="nc" id="L77">		gridConstraints.gridx = 1;</span>
+<span class="nc" id="L78">		gridConstraints.gridy = 3;</span>
+<span class="nc" id="L79">		thePanel.add(runQueue, gridConstraints);</span>
+		
+<span class="nc" id="L81">		this.add(thePanel);</span>
+		
+<span class="nc" id="L83">		this.setVisible(true);		</span>
+		
+<span class="nc" id="L85">	}</span>
+	
+<span class="nc" id="L87">	private class ListenForButton implements ActionListener{</span>
+
+		public void actionPerformed(ActionEvent e) {
+<span class="nc bnc" id="L90" title="All 2 branches missed.">			if(e.getSource() == goBackBut){</span>
+<span class="nc" id="L91">				dispose();</span>
+<span class="nc" id="L92">				new LoggedInFrame(userSession, userSessionData);</span>
+<span class="nc bnc" id="L93" title="All 2 branches missed.">			}else if(e.getSource() == purgeSmallBut){</span>
+<span class="nc" id="L94">					theUnit.purgeSmall();</span>
+<span class="nc" id="L95">					 JOptionPane.showMessageDialog(AdminLanding.this,&quot;Small warehouse has been emptied&quot;,</span>
+							 &quot;Solution&quot;, JOptionPane.INFORMATION_MESSAGE);
+<span class="nc bnc" id="L97" title="All 2 branches missed.">			}else if(e.getSource() == runQueue){</span>
+				 try {
+<span class="nc" id="L99">					queue = new PriorityQueue&lt;UnitData&gt;(6, new UnitDataComparator());</span>
+<span class="nc" id="L100">					List&lt;UnitData&gt; largeWarehouseUnitList = theUnit.getAllLargeWarehouseUnits();</span>
+<span class="nc" id="L101">					List&lt;UnitData&gt; smallWarehouseUnitList = theUnit.getAllSmallWarehouseUnits();</span>
+<span class="nc" id="L102">					List&lt;Integer&gt; openUnits = new ArrayList&lt;Integer&gt;();</span>
+<span class="nc" id="L103">					Calendar calendar = Calendar.getInstance();</span>
+					
+<span class="nc bnc" id="L105" title="All 2 branches missed.">					for (UnitData unit : largeWarehouseUnitList) {</span>
+<span class="nc bnc" id="L106" title="All 2 branches missed.">						if (!(unit.getPickUpDate() == null)) {</span>
+<span class="nc bnc" id="L107" title="All 2 branches missed.">							if (unit.getPickUpDate().getTimeInMillis() &lt;= calendar.getTimeInMillis()) {</span>
+<span class="nc" id="L108">								queue.add(unit);</span>
+<span class="nc" id="L109">								unit.setInQueue(1); //set to &quot;true&quot;</span>
+							}
+						}
+<span class="nc" id="L112">					}</span>
+					
+<span class="nc bnc" id="L114" title="All 2 branches missed.">					for (UnitData unit : smallWarehouseUnitList) {</span>
+<span class="nc bnc" id="L115" title="All 2 branches missed.">						if (unit.getOccupied() == 0) {</span>
+<span class="nc" id="L116">							openUnits.add(unit.getId());</span>
+						}
+<span class="nc" id="L118">					}</span>
+					
+<span class="nc" id="L120">					int size = queue.size();</span>
+<span class="nc bnc" id="L121" title="All 2 branches missed.">					for (int i=0; i&lt;size; i++) {</span>
+<span class="nc bnc" id="L122" title="All 2 branches missed.">						if (openUnits.size() &gt; 0) {</span>
+<span class="nc" id="L123">							UnitData largeWarehouseUnit = queue.remove();</span>
+<span class="nc" id="L124">							int customerId = largeWarehouseUnit.getCustomerId();</span>
+<span class="nc" id="L125">							String description = largeWarehouseUnit.getDescription();</span>
+<span class="nc" id="L126">							String dateReceived = largeWarehouseUnit.getDateReceived();</span>
+							
+<span class="nc" id="L128">							largeWarehouseUnit.setInQueue(0);  //set to &quot;false&quot;</span>
+<span class="nc" id="L129">							largeWarehouseUnit.setOccupied(0); //set to &quot;false&quot;</span>
+<span class="nc" id="L130">							largeWarehouseUnit.setDescription(&quot;empty unit&quot;);</span>
+<span class="nc" id="L131">							largeWarehouseUnit.setDateReceived(&quot;null&quot;);</span>
+<span class="nc" id="L132">							largeWarehouseUnit.setCustomerId(0);</span>
+<span class="nc" id="L133">							largeWarehouseUnit.setPickUpDate(null);</span>
+							
+<span class="nc" id="L135">							UnitData smallWarehouseUnit = null;</span>
+<span class="nc bnc" id="L136" title="All 2 branches missed.">							for (UnitData unit : smallWarehouseUnitList) {</span>
+<span class="nc bnc" id="L137" title="All 2 branches missed.">								if (unit.getId() == openUnits.get(0)) {</span>
+<span class="nc" id="L138">									smallWarehouseUnit = unit;</span>
+<span class="nc" id="L139">									openUnits.remove(0);</span>
+<span class="nc" id="L140">									break;</span>
+								}
+<span class="nc" id="L142">							}</span>
+							
+<span class="nc" id="L144">							smallWarehouseUnit.setCustomerId(customerId);</span>
+<span class="nc" id="L145">							smallWarehouseUnit.setDescription(description);</span>
+<span class="nc" id="L146">							smallWarehouseUnit.setDateReceived(dateReceived);</span>
+<span class="nc" id="L147">							smallWarehouseUnit.setOccupied(1); //set to &quot;true&quot;</span>
+						}
+					}
+					
+<span class="nc" id="L151">					theUnit.repopulateTables(largeWarehouseUnitList, smallWarehouseUnitList);</span>
+					
+<span class="nc" id="L153">				} catch (ClassNotFoundException e1) {</span>
+<span class="nc" id="L154">					e1.printStackTrace();</span>
+<span class="nc" id="L155">				} catch (SQLException e1) {</span>
+<span class="nc" id="L156">					e1.printStackTrace();</span>
+<span class="nc" id="L157">				}</span>
+			}
+<span class="nc" id="L159">		}</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>

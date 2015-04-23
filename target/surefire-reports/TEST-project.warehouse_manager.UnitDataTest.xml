@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="project.warehouse_manager.CustomerTest" time="0.374" tests="13" errors="0" skipped="0" failures="0">
+<testsuite name="project.warehouse_manager.UnitDataTest" time="0" tests="21" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.7.0_51\jre\bin"/>
@@ -59,17 +59,25 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase name="testGetCustomerData" classname="project.warehouse_manager.CustomerTest" time="0.29"/>
-  <testcase name="testChangeCustomerFirstName" classname="project.warehouse_manager.CustomerTest" time="0.019"/>
-  <testcase name="testLargeUnitsByCustomer" classname="project.warehouse_manager.CustomerTest" time="0"/>
-  <testcase name="testChangeCustomerLastName" classname="project.warehouse_manager.CustomerTest" time="0.026"/>
-  <testcase name="testGetDataFromCustomer" classname="project.warehouse_manager.CustomerTest" time="0.035"/>
-  <testcase name="testAddCustomer" classname="project.warehouse_manager.CustomerTest" time="0"/>
-  <testcase name="addCustomerWithId" classname="project.warehouse_manager.CustomerTest" time="0"/>
-  <testcase name="testGetIdByEmail" classname="project.warehouse_manager.CustomerTest" time="0"/>
-  <testcase name="testSmallUnitsByCustomer" classname="project.warehouse_manager.CustomerTest" time="0"/>
-  <testcase name="testDisplayData" classname="project.warehouse_manager.CustomerTest" time="0"/>
-  <testcase name="testGetDataByEmail" classname="project.warehouse_manager.CustomerTest" time="0"/>
-  <testcase name="testDeleteCustomer" classname="project.warehouse_manager.CustomerTest" time="0.003"/>
-  <testcase name="testChangeCustomerEmail" classname="project.warehouse_manager.CustomerTest" time="0.001"/>
+  <testcase name="testGetOccupied" classname="project.warehouse_manager.UnitDataTest" time="0"/>
+  <testcase name="testGetInQueue" classname="project.warehouse_manager.UnitDataTest" time="0"/>
+  <testcase name="testGetWarehouseId" classname="project.warehouse_manager.UnitDataTest" time="0"/>
+  <testcase name="testSetPositionInQueue" classname="project.warehouse_manager.UnitDataTest" time="0"/>
+  <testcase name="testGetId" classname="project.warehouse_manager.UnitDataTest" time="0"/>
+  <testcase name="testSetId" classname="project.warehouse_manager.UnitDataTest" time="0"/>
+  <testcase name="testSetDescription" classname="project.warehouse_manager.UnitDataTest" time="0"/>
+  <testcase name="testGetDateReceived" classname="project.warehouse_manager.UnitDataTest" time="0"/>
+  <testcase name="testGetPickUpDate" classname="project.warehouse_manager.UnitDataTest" time="0"/>
+  <testcase name="testSetInQueue" classname="project.warehouse_manager.UnitDataTest" time="0"/>
+  <testcase name="testSetDateReceived" classname="project.warehouse_manager.UnitDataTest" time="0"/>
+  <testcase name="testGetCustomerId" classname="project.warehouse_manager.UnitDataTest" time="0"/>
+  <testcase name="testSetPriority" classname="project.warehouse_manager.UnitDataTest" time="0"/>
+  <testcase name="testGetPriority" classname="project.warehouse_manager.UnitDataTest" time="0"/>
+  <testcase name="testSetPickUpDate" classname="project.warehouse_manager.UnitDataTest" time="0"/>
+  <testcase name="testGetDescription" classname="project.warehouse_manager.UnitDataTest" time="0"/>
+  <testcase name="testSetCustomerId" classname="project.warehouse_manager.UnitDataTest" time="0"/>
+  <testcase name="testSetWarehouseId" classname="project.warehouse_manager.UnitDataTest" time="0"/>
+  <testcase name="testGetPositionInQueue" classname="project.warehouse_manager.UnitDataTest" time="0"/>
+  <testcase name="testConstructor" classname="project.warehouse_manager.UnitDataTest" time="0"/>
+  <testcase name="testSetOccupied" classname="project.warehouse_manager.UnitDataTest" time="0"/>
 </testsuite>

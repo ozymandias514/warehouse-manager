@@ -142,15 +142,6 @@
 	                  </execution>
 	                  <execution>
 	                      <id>jacoco-report</id>
-							<configuration>
-								<excludes>
-									<exclude>**/CustomerAlreadyExistsException*</exclude>
-									<exclude>**/CustomerNotFoundException*</exclude>
-									<exclude>**/UnitAlreadyOwnedException*</exclude>
-									<exclude>**/UnitDoesNotExistException*</exclude>
-									<exclude>**/UnitNotOwnedException*</exclude>
-								</excludes>
-							</configuration>
 	                      <goals>
 	                          <goal>report</goal>
 	                      </goals>
@@ -160,15 +151,6 @@
 	                      <goals>
 	                          <goal>report-integration</goal>
 	                      </goals>
-	                      <configuration>
-								<excludes>
-									<exclude>**/CustomerAlreadyExistsException*</exclude>
-									<exclude>**/CustomerNotFoundException*</exclude>
-									<exclude>**/UnitAlreadyOwnedException*</exclude>
-									<exclude>**/UnitDoesNotExistException*</exclude>
-									<exclude>**/UnitNotOwnedException*</exclude>
-								</excludes>
-							</configuration>
 	                  </execution>
 	                  <execution>
 	                      <id>jacoco-check</id>
