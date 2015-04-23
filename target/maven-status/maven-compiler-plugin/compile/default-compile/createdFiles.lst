@@ -1,5 +1,3 @@
-project\warehouse_manager\exceptions\CustomerAlreadyExistsException.class
-project\warehouse_manager\exceptions\CustomerNotFoundException.class
 project\warehouse_manager\CustomerLanding$1.class
 project\warehouse_manager\UnitFill.class
 project\warehouse_manager\TableCreation.class
@@ -11,10 +9,8 @@ project\warehouse_manager\LoggedInFrame$ListenForButton.class
 project\warehouse_manager\UnitAlter.class
 project\warehouse_manager\AdminLanding$ListenForButton.class
 project\warehouse_manager\UnitFill$ListenForButton.class
-project\warehouse_manager\exceptions\UnitNotOwnedException.class
 project\warehouse_manager\LoggedInFrame.class
 project\warehouse_manager\UnitLanding.class
-project\warehouse_manager\exceptions\UnitDoesNotExistException.class
 project\warehouse_manager\CustomerAlter$ListenForButton.class
 project\warehouse_manager\CustomerAlter$1.class
 project\warehouse_manager\AdminLanding$1.class
@@ -30,7 +26,6 @@ project\warehouse_manager\CustomerAddRemove$1.class
 project\warehouse_manager\UnitFill$1.class
 project\warehouse_manager\CustomerAddRemove.class
 project\warehouse_manager\Main.class
-project\warehouse_manager\exceptions\UnitAlreadyOwnedException.class
 project\warehouse_manager\Unit.class
 project\warehouse_manager\Customer.class
 project\warehouse_manager\UnitAlter$ListenForButton.class

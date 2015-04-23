@@ -9,11 +9,8 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Queue;
@@ -98,122 +95,66 @@ public class AdminLanding extends JFrame{
 					 JOptionPane.showMessageDialog(AdminLanding.this,"Small warehouse has been emptied",
 							 "Solution", JOptionPane.INFORMATION_MESSAGE);
 			}else if(e.getSource() == runQueue){
-				
 				 try {
 					queue = new PriorityQueue<UnitData>(6, new UnitDataComparator());
+					List<UnitData> largeWarehouseUnitList = theUnit.getAllLargeWarehouseUnits();
+					List<UnitData> smallWarehouseUnitList = theUnit.getAllSmallWarehouseUnits();
+					List<Integer> openUnits = new ArrayList<Integer>();
+					Calendar calendar = Calendar.getInstance();
 					
-					ArrayList<UnitData> largeWarehouseUnitList = theUnit.getAllLargeWarehouseUnits();
-					ArrayList<UnitData> smallWarehouseUnitList = theUnit.getAllSmallWarehouseUnits();
-					Date now = new Date();
-					DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-					Calendar cal = Calendar.getInstance();
-					String date = dateFormat.format(cal.getTime());
-					
-					String[] splitDate = date.split("/");
-					int day   = Integer.parseInt(splitDate[0]);
-					int month = Integer.parseInt(splitDate[1]);
-					int year  = Integer.parseInt(splitDate[2]);
-					
-					int totalTime = day + month*30 + year * 360;
-
 					for (UnitData unit : largeWarehouseUnitList) {
-						if (!(unit.getPickUpDate() == null)){
-							String pickUpDateUnit = unit.getPickUpDate();
-							String[] pickSplitDate = pickUpDateUnit.split("/");
-							int pickDay   = Integer.parseInt(pickSplitDate[0]);
-							int pickMonth = Integer.parseInt(pickSplitDate[1]);
-							int pickYear  = Integer.parseInt(pickSplitDate[2]);
-							int pickTotalTime = pickDay + pickMonth * 30 + pickYear*12 * 30;
-							
-							
-							/*
-							System.out.println("Regular Times");
-							System.out.println("day " + day+" month " + month + " year "+ year);
-							System.out.println("total Time: " + totalTime);
-							System.out.println("Pick up times");
-							System.out.println("day " + pickDay+" month " + pickMonth + " year "+ pickYear);
-							System.out.println("total Time: " + pickTotalTime);
-							*/
-							if (pickTotalTime <= totalTime) {
-								System.out.println("Id: " + unit.getId());
-								System.out.println("Has been added to the queue");
-								System.out.println();
+						if (!(unit.getPickUpDate() == null)) {
+							if (unit.getPickUpDate().getTimeInMillis() <= calendar.getTimeInMillis()) {
 								queue.add(unit);
-								//unit.setInQueue(1); //set to "true"
+								unit.setInQueue(1); //set to "true"
 							}
 						}
 					}
-
-					List<Integer> openUnits = new ArrayList<Integer>();
+					
 					for (UnitData unit : smallWarehouseUnitList) {
 						if (unit.getOccupied() == 0) {
 							openUnits.add(unit.getId());
-							
 						}
 					}
 					
-					System.out.println("There are " + openUnits.size() + " unoccupied units");
-					
-					int totalOpenUnits = 0;
-					//totalOpenUnits = openUnits.size();
-					UnitData smallWarehouseUnit = null;
-					
-					for (int i=0; i<queue.size(); i++) {
+					int size = queue.size();
+					for (int i=0; i<size; i++) {
 						if (openUnits.size() > 0) {
-							
 							UnitData largeWarehouseUnit = queue.remove();
 							int customerId = largeWarehouseUnit.getCustomerId();
 							String description = largeWarehouseUnit.getDescription();
-							//largeWarehouseUnit.setInQueue(0);
+							String dateReceived = largeWarehouseUnit.getDateReceived();
+							
+							largeWarehouseUnit.setInQueue(0);  //set to "false"
 							largeWarehouseUnit.setOccupied(0); //set to "false"
 							largeWarehouseUnit.setDescription("empty unit");
 							largeWarehouseUnit.setDateReceived("null");
 							largeWarehouseUnit.setCustomerId(0);
-							largeWarehouseUnit.setPickUpDate("null");
+							largeWarehouseUnit.setPickUpDate(null);
 							
-							
-							
+							UnitData smallWarehouseUnit = null;
 							for (UnitData unit : smallWarehouseUnitList) {
-								if (unit.getId() == openUnits.get(totalOpenUnits)) {
+								if (unit.getId() == openUnits.get(0)) {
 									smallWarehouseUnit = unit;
+									openUnits.remove(0);
+									break;
 								}
 							}
-							totalOpenUnits++;
+							
 							smallWarehouseUnit.setCustomerId(customerId);
 							smallWarehouseUnit.setDescription(description);
+							smallWarehouseUnit.setDateReceived(dateReceived);
 							smallWarehouseUnit.setOccupied(1); //set to "true"
 						}
 					}
 					
 					theUnit.repopulateTables(largeWarehouseUnitList, smallWarehouseUnitList);
 					
-					for (UnitData unitData : queue) {
-			       /* 	System.out.println("Unit Number: " + unitData.getId());
-			        	System.out.println(unitData.getDescription());
-			        	System.out.print(unitData.getCustomerId() + " ");
-			        	System.out.print(unitData.getWarehouseId() + " Occupied: ");
-			        	System.out.print(unitData.getOccupied());
-			        	System.out.println();
-			        	System.out.print("date received: " + unitData.getDateReceived());
-			        	System.out.print(" Pick up date: " + unitData.getPickUpDate());
-			        	System.out.println();
-			        	System.out.print("priority: " + unitData.getPriority());
-			        	System.out.print("  inQueue: " + unitData.getInQueue());
-			        	System.out.print(" Position In Queue: " + unitData.getPositionInQueue());
-			        	System.out.println();
-			        	System.out.println();
-			        	*/
-					}
-					
-					
 				} catch (ClassNotFoundException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				
 			}
 		}
 	}
