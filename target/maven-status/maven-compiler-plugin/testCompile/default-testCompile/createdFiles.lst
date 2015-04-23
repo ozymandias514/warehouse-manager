@@ -2,4 +2,3 @@ project\warehouse_manager\DatabaseHandlerTest.class
 project\warehouse_manager\CustomerTest.class
 project\warehouse_manager\UnitTest.class
 project\warehouse_manager\UsersTest.class
-project\warehouse_manager\LoginScreenUITest.class
