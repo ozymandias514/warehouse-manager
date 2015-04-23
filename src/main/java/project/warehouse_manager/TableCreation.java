@@ -1,6 +1,6 @@
 package project.warehouse_manager;
 
-public class tableCreation {
+public class TableCreation {
 	
 	// System users
 	static String[] usersTable = {"firstName","lastName","username","password"};

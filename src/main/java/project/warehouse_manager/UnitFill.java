@@ -115,9 +115,9 @@ class UnitFill extends JFrame{
 				dispose();
 				new UnitLanding(userSession, userSessionData);
 			}else if(e.getSource() == submitBut){
-				Date todaysDate = new Date();
+				//Date todaysDate = new Date();
+				//Calendar cal = Calendar.getInstance();
 				DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-				Calendar cal = Calendar.getInstance();
 				
 				if(unitIdField.getText().isEmpty() || customerIdField.getText().isEmpty() || descriptionField.getText().isEmpty()){
 					JOptionPane.showMessageDialog(UnitFill.this,

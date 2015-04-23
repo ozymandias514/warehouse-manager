@@ -5,16 +5,9 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 
-import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.GridLayout;
-import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;

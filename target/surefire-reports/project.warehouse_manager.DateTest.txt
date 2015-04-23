@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: project.warehouse_manager.DateTest
--------------------------------------------------------------------------------
-Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.001 sec - in project.warehouse_manager.DateTest

@@ -7,14 +7,15 @@ C:\Users\Carson\My Stuff\Projects\Eclipse\warehouse-manager\src\main\java\projec
 C:\Users\Carson\My Stuff\Projects\Eclipse\warehouse-manager\src\main\java\project\warehouse_manager\LoggedInFrame.java
 C:\Users\Carson\My Stuff\Projects\Eclipse\warehouse-manager\src\main\java\project\warehouse_manager\UnitAlter.java
 C:\Users\Carson\My Stuff\Projects\Eclipse\warehouse-manager\src\main\java\project\warehouse_manager\exceptions\UnitNotOwnedException.java
+C:\Users\Carson\My Stuff\Projects\Eclipse\warehouse-manager\src\main\java\project\warehouse_manager\UnitData.java
 C:\Users\Carson\My Stuff\Projects\Eclipse\warehouse-manager\src\main\java\project\warehouse_manager\UnitFill.java
 C:\Users\Carson\My Stuff\Projects\Eclipse\warehouse-manager\src\main\java\project\warehouse_manager\exceptions\UnitDoesNotExistException.java
 C:\Users\Carson\My Stuff\Projects\Eclipse\warehouse-manager\src\main\java\project\warehouse_manager\Customer.java
 C:\Users\Carson\My Stuff\Projects\Eclipse\warehouse-manager\src\main\java\project\warehouse_manager\Users.java
-C:\Users\Carson\My Stuff\Projects\Eclipse\warehouse-manager\src\main\java\project\warehouse_manager\Date.java
-C:\Users\Carson\My Stuff\Projects\Eclipse\warehouse-manager\src\main\java\project\warehouse_manager\tableCreation.java
+C:\Users\Carson\My Stuff\Projects\Eclipse\warehouse-manager\src\main\java\project\warehouse_manager\TableCreation.java
 C:\Users\Carson\My Stuff\Projects\Eclipse\warehouse-manager\src\main\java\project\warehouse_manager\Unit.java
 C:\Users\Carson\My Stuff\Projects\Eclipse\warehouse-manager\src\main\java\project\warehouse_manager\UnitLanding.java
 C:\Users\Carson\My Stuff\Projects\Eclipse\warehouse-manager\src\main\java\project\warehouse_manager\exceptions\CustomerNotFoundException.java
+C:\Users\Carson\My Stuff\Projects\Eclipse\warehouse-manager\src\main\java\project\warehouse_manager\UnitDataComparator.java
 C:\Users\Carson\My Stuff\Projects\Eclipse\warehouse-manager\src\main\java\project\warehouse_manager\exceptions\UnitAlreadyOwnedException.java
 C:\Users\Carson\My Stuff\Projects\Eclipse\warehouse-manager\src\main\java\project\warehouse_manager\Main.java

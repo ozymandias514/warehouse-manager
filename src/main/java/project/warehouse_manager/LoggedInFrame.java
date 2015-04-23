@@ -82,10 +82,6 @@ public class LoggedInFrame extends JFrame{
 				new UnitLanding(userSession, userSessionData);
 				
 			}else if(e.getSource() == adminButton){
-				
-				
-				
-				
 				dispose();
 				
 				new AdminLanding(userSession, userSessionData);

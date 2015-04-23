@@ -2,8 +2,9 @@ project\warehouse_manager\exceptions\CustomerAlreadyExistsException.class
 project\warehouse_manager\exceptions\CustomerNotFoundException.class
 project\warehouse_manager\CustomerLanding$1.class
 project\warehouse_manager\UnitFill.class
-project\warehouse_manager\Date.class
+project\warehouse_manager\TableCreation.class
 project\warehouse_manager\CustomerLanding$ListenForButton.class
+project\warehouse_manager\UnitDataComparator.class
 project\warehouse_manager\LoggedInFrame$1.class
 project\warehouse_manager\Users.class
 project\warehouse_manager\LoggedInFrame$ListenForButton.class
@@ -22,8 +23,8 @@ project\warehouse_manager\AdminLanding.class
 project\warehouse_manager\Main$1.class
 project\warehouse_manager\CustomerLanding.class
 project\warehouse_manager\UnitAlter$1.class
+project\warehouse_manager\UnitData.class
 project\warehouse_manager\Main$ListenForButton.class
-project\warehouse_manager\tableCreation.class
 project\warehouse_manager\UnitLanding$1.class
 project\warehouse_manager\CustomerAddRemove$1.class
 project\warehouse_manager\UnitFill$1.class

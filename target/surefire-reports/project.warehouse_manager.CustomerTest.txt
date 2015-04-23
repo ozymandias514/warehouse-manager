@@ -1,28 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: project.warehouse_manager.CustomerTest
 -------------------------------------------------------------------------------
-Tests run: 11, Failures: 3, Errors: 0, Skipped: 0, Time elapsed: 0.31 sec <<< FAILURE! - in project.warehouse_manager.CustomerTest
-testGetEmail(project.warehouse_manager.CustomerTest)  Time elapsed: 0.302 sec  <<< FAILURE!
-java.lang.AssertionError: expected:<null> but was:<cdkirkpa@eagle.fgcu.edu>
-	at org.junit.Assert.fail(Assert.java:88)
-	at org.junit.Assert.failNotEquals(Assert.java:743)
-	at org.junit.Assert.assertEquals(Assert.java:118)
-	at org.junit.Assert.assertEquals(Assert.java:144)
-	at project.warehouse_manager.CustomerTest.testGetEmail(CustomerTest.java:53)
-
-testGetName(project.warehouse_manager.CustomerTest)  Time elapsed: 0.001 sec  <<< FAILURE!
-java.lang.AssertionError: expected:<null> but was:<Carson Kirkpatrick>
-	at org.junit.Assert.fail(Assert.java:88)
-	at org.junit.Assert.failNotEquals(Assert.java:743)
-	at org.junit.Assert.assertEquals(Assert.java:118)
-	at org.junit.Assert.assertEquals(Assert.java:144)
-	at project.warehouse_manager.CustomerTest.testGetName(CustomerTest.java:39)
-
-testConstructor(project.warehouse_manager.CustomerTest)  Time elapsed: 0.001 sec  <<< FAILURE!
-java.lang.AssertionError: expected:<null> but was:<Carson Kirkpatrick>
-	at org.junit.Assert.fail(Assert.java:88)
-	at org.junit.Assert.failNotEquals(Assert.java:743)
-	at org.junit.Assert.assertEquals(Assert.java:118)
-	at org.junit.Assert.assertEquals(Assert.java:144)
-	at project.warehouse_manager.CustomerTest.testConstructor(CustomerTest.java:32)
-
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.346 sec - in project.warehouse_manager.CustomerTest

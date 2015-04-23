@@ -6,8 +6,11 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-
 public class Unit extends DatabaseHandler{
+	
+	public Unit() { 
+		
+	}
 	
   	public ArrayList<String> displayLargeWarehouseData(){
   		ArrayList<String> largeUnitData = new ArrayList<String>();

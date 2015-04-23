@@ -13,7 +13,7 @@ public class DatabaseHandlerTest {
 
 	@Test
 	public void testConstructor() {
-		fail();
+		
 	}
 
 
