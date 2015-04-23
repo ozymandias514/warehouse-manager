@@ -17,11 +17,6 @@ public class UnitTest {
 	}
 
 	@Test
-	public void testUnit() {
-//		fail("Not yet implemented");
-	}
-
-	@Test
 	public void testDisplayLargeWarehouseData() {
 		ArrayList<String> largeUnitData = new ArrayList<String>();
 		largeUnitData = unit.displayLargeWarehouseData();
@@ -149,7 +144,7 @@ public class UnitTest {
 
 	@Test
 	public void testChangeDescription() {
-		assertTrue(unit.changePickupDate("A lot of pizza", 19));
+		assertTrue(unit.changeDescription("A lot of pizza", 19));
 	}
 
 	@Test

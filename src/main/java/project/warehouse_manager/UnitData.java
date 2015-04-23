@@ -1,48 +1,43 @@
 package project.warehouse_manager;
 
-import java.util.Date;
 import java.util.Calendar;
 
-public class UnitData{
+public class UnitData {
 	private int id;
 	private String description;
 	private int customerId;
 	private int warehouseId;
 	private int occupied;
 	private String dateReceived;
-	private String pickUpDate;
-	private int priority;
+	private Calendar pickUpDate;
 	private int inQueue;
 	private int positionInQueue;
+	private int priority;
 	
 	public UnitData(int id, String description, int customerId, int warehouseId, int occupied, 
-			String dateReceived, String pickUpDate, int inQueue){
-		
+			String dateReceived, String pickUpDateString, int inQueue){
 		this.id = id;
 		this.description = description;
 		this.customerId = customerId;
 		this.warehouseId = warehouseId;
 		this.occupied = occupied;
 		this.dateReceived = dateReceived;
-		
-
-		
-		if (pickUpDate == null || pickUpDate.equals("null")) {
+		if (pickUpDateString == null || pickUpDateString.equals("null")) {
 			this.pickUpDate = null;
 		} else {
-			this.pickUpDate = pickUpDate;
-
-			String[] splitDate = pickUpDate.split("/");
-			int day   = Integer.parseInt(splitDate[0]);
-			int month = Integer.parseInt(splitDate[1]);
-			int year  = Integer.parseInt(splitDate[2]);
-			int totalTime = day + month*30 + year * 360;
-			this.priority = totalTime;
+			String[] s = pickUpDateString.split("/");
+			int day   = Integer.parseInt(s[0]);
+			int month = Integer.parseInt(s[1]);
+			int year  = Integer.parseInt(s[2]);
+			pickUpDate = Calendar.getInstance();
+			pickUpDate.set(year, month-1, day);
 		}
 		this.inQueue = inQueue;
+		this.positionInQueue = 0;
+		this.priority = 0;
+		
 	}
 
-	// unit id methods ------------------------------------------------------
 	public void setId(int id) {
 	    this.id = id;
 	}
@@ -51,7 +46,6 @@ public class UnitData{
 	    return id;
 	}
 	
-	// description methods -------------------------------------------------
 	public void setDescription(String description){
 		this.description = description;
 	}
@@ -60,7 +54,6 @@ public class UnitData{
 	    return description;
 	}
 	
-	// customer Id methods -------------------------------------------------
 	public void setCustomerId(int customerId){
 		this.customerId = customerId;
 	}
@@ -69,7 +62,6 @@ public class UnitData{
 		return customerId;
 	}
 	
-	// warehouseId methods-------------------------------------------------
 	public void setWarehouseId(int warehouseId){
 		this.warehouseId = warehouseId;
 	}
@@ -78,7 +70,6 @@ public class UnitData{
 		return warehouseId;
 	}
 	
-	// occupied methods ---------------------------------------------------
 	public void setOccupied(int occupied){
 		this.occupied = occupied;
 	}
@@ -87,7 +78,6 @@ public class UnitData{
 		return occupied;
 	}
 	
-	// date received methods ----------------------------------------------
 	public void setDateReceived(String dateReceived){
 		this.dateReceived = dateReceived;
 	}
@@ -96,27 +86,14 @@ public class UnitData{
 		return dateReceived;
 	}
 	
-	// pick up date methods ----------------------------------------------
-	public void setPickUpDate(String pickUpDate){
-		//this.pickUpDate = new Date(pickUpDate);
-		//this.pickUpDate.setTime(Date.parse(date));
+	public void setPickUpDate(Calendar pickUpDate){
 		this.pickUpDate = pickUpDate;
 	}
 	
-	public String getPickUpDate(){
+	public Calendar getPickUpDate(){
 		return pickUpDate;
 	}
 	
-	// priority methods ----------------------------------------------
-	public void setPriority(int priority){
-		this.priority = priority;
-	}
-	
-	public int getPriority(){
-		return priority;
-	}
-	
-	// inQueue methods ----------------------------------------------
 	public void setInQueue(int inQueue){
 		this.inQueue = inQueue;
 	}
@@ -124,13 +101,20 @@ public class UnitData{
 	public int getInQueue(){
 		return inQueue;
 	}
-	
-	// position In Queue methods ----------------------------------------------
-	public void setPositionInQueue(int positionInQueue){
+
+	public void setPriority(int priority) {
+		this.priority = priority;
+	}
+
+	public int getPriority() {
+		return priority;
+	}
+
+	public void setPositionInQueue(int positionInQueue) {
 		this.positionInQueue = positionInQueue;
 	}
-	
-	public int getPositionInQueue(){
+
+	public int getPositionInQueue() {
 		return positionInQueue;
 	}
 	

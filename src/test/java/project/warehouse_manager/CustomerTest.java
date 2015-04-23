@@ -22,10 +22,6 @@ public class CustomerTest {
 		}catch(Exception e){}
 		assertTrue(customer.addCustomerWithId(12, "test","teskinson","ttesk@gmail.com"));
 	}
-	
-	@Test
-	public void testCustomer() {
-	}
 
 	@Test
 	public void testGetDataFromCustomer() {

@@ -5,6 +5,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 public class Unit extends DatabaseHandler{
 	
@@ -374,22 +375,38 @@ public class Unit extends DatabaseHandler{
 	}
 	
 	// adds a customer and their belongings to a unit
-	public boolean repopulateTables(ArrayList<UnitData> largeWarehouseUnitList,
-			ArrayList<UnitData> smallWarehouseUnitList){
+	public boolean repopulateTables(List<UnitData> largeWarehouseUnitList,
+			List<UnitData> smallWarehouseUnitList){
 			
 		try {
-
+			
 			for (UnitData unitData : largeWarehouseUnitList) {
+				//converting the date into a string
+				DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+				String date;
+				if (unitData.getPickUpDate() == null) {
+					date = "null";
+				} else {
+					date = dateFormat.format(unitData.getPickUpDate().getTime());
+				}
 				st.executeUpdate("UPDATE units SET description ='" + unitData.getDescription() + 
 						 "', customerId = " + unitData.getCustomerId() + ", occupied = " + unitData.getOccupied() 
-						 + ", dateReceived ='" + unitData.getDateReceived() + "', pickUpDate = '" + unitData.getPickUpDate() 
+						 + ", dateReceived ='" + unitData.getDateReceived() + "', pickUpDate = '" + date 
 						 + "' WHERE id =" + unitData.getId() + ";");
 			}
 			
 			for (UnitData unitData : smallWarehouseUnitList) {
+				//converting the date into a string
+				DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+				String date;
+				if (unitData.getPickUpDate() == null) {
+					date = "null";
+				} else {
+					date = dateFormat.format(unitData.getPickUpDate().getTime());
+				}
 				st.executeUpdate("UPDATE units SET description ='" + unitData.getDescription() + 
 						 "', customerId = " + unitData.getCustomerId() + ", occupied = " + unitData.getOccupied() 
-						 + ", dateReceived ='" + unitData.getDateReceived() + "', pickUpDate = '" + unitData.getPickUpDate() 
+						 + ", dateReceived ='" + unitData.getDateReceived() + "', pickUpDate = '" + date 
 						 + "' WHERE id =" + unitData.getId() + ";");
 			}
 			
