@@ -8,6 +8,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class UnitLanding extends JFrame{
@@ -224,7 +225,12 @@ public class UnitLanding extends JFrame{
 				//get data button---------------------
 			}else if(e.getSource() == getDataBut){
 				ArrayList<String> largeUnitData = new ArrayList<String>();
-				largeUnitData = theUnit.displayLargeWarehouseData();
+				try {
+					largeUnitData = theUnit.displayLargeWarehouseData();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 							
 		  		textArea1.setText("Large Units in the system\n");
 		  		textArea1.append("-----------------------------------------------------------");
@@ -253,7 +259,12 @@ public class UnitLanding extends JFrame{
 		  		}
 		  		
 				ArrayList<String> smallUnitData = new ArrayList<String>();
-				smallUnitData = theUnit.displaySmallWarehouseData();
+				try {
+					smallUnitData = theUnit.displaySmallWarehouseData();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				
 		  		textArea1.append("\nSmall Units in the system\n");
 		  		
@@ -283,7 +294,12 @@ public class UnitLanding extends JFrame{
 				// find small vacants button-----------
 			}else if(e.getSource() == vacantSmallBut){
 				ArrayList<Integer> smallUnitEmpty = new ArrayList<Integer>();
-				smallUnitEmpty = theUnit.getEmptyUnitsInSmall();
+				try {
+					smallUnitEmpty = theUnit.getEmptyUnitsInSmall();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				textArea1.setText("The following units are empty in the small warehouse: \n");
 				for(int i = 0; i < smallUnitEmpty.size(); i++){
 					textArea1.append(smallUnitEmpty.get(i) + ", ");
@@ -291,7 +307,12 @@ public class UnitLanding extends JFrame{
 				//find large vacants button------------
 			}else if(e.getSource() == vacantLargeBut){
 				ArrayList<Integer> largeUnitEmpty = new ArrayList<Integer>();
-				largeUnitEmpty = theUnit.getEmptyUnitsInLarge();
+				try {
+					largeUnitEmpty = theUnit.getEmptyUnitsInLarge();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				textArea1.setText("The following units are empty in the large warehouse: \n");
 				for(int i = 0; i < largeUnitEmpty.size(); i++){
 					textArea1.append(largeUnitEmpty.get(i) + ", ");

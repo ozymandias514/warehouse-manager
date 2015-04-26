@@ -10,8 +10,8 @@ public class Customer extends DatabaseHandler{
 	}
 	
 	//obtains all the data from all customers
-  	public boolean getDataFromCustomer(){
-  		try {
+  	public boolean getDataFromCustomer() throws SQLException{
+  	
   			rs = st.executeQuery("SELECT * FROM customer;");
   			System.out.println("id    firstName         lastName        email");
   			System.out.print("---   ------------      -----------     ----------");
@@ -24,25 +24,19 @@ public class Customer extends DatabaseHandler{
   				  System.out.printf("%d     %s		%s		%s", id, firstName, lastName, email);
   				  System.out.println();
   				}
-  			return true;
-  		} catch (SQLException e) {
-  			e.printStackTrace();
-  			return false;
-  		}finally{
   			try{
-  				rs.close();
-  				st.close();
-  				}
-  			catch(Exception e){
-  				System.out.println("Error closing the database");
+  			rs.close();
+			st.close();
+  			}catch(Exception e){
+  				
   			}
-  		}			
+  			return true;
   	}
   	
     //obtains all data from customers and returns the resultSet
-  	public ArrayList<String> displayData(){
+  	public ArrayList<String> displayData() throws SQLException{
   		ArrayList<String> userData = new ArrayList<String>();
-  		try {
+  	
   			rs = st.executeQuery("SELECT * FROM customer;");
   			while(rs.next()){
   			 userData.add(rs.getString("id"));
@@ -50,19 +44,14 @@ public class Customer extends DatabaseHandler{
 			 userData.add(rs.getString("lastName"));
 			 userData.add(rs.getString("email"));
   			}
-  			return userData;
-  		} catch (SQLException e) {
-  			e.printStackTrace();
-  			return null;
-  		}finally{
   			try{
-  				rs.close();
+  	  			rs.close();
   				st.close();
-  				}
-  			catch(Exception e){
-  				System.out.println("Error closing the database");
-  			}
-  		}
+  	  			}catch(Exception e){
+  	  				
+  	  			}
+  			return userData;
+		
   	}
   	
   	//adds a customer to the system
@@ -121,8 +110,6 @@ public class Customer extends DatabaseHandler{
   			st = con.createStatement();
   		}catch(Exception e){
   			
-  			System.err.println( e.getClass().getName() + ": " + e.getMessage() );
-  			System.exit(0);
   			}
   			
   		boolean taskAchieved = false;
@@ -135,16 +122,13 @@ public class Customer extends DatabaseHandler{
   			taskAchieved = true;
   			return taskAchieved;
   		}catch (SQLException e) {
-  			e.printStackTrace();
   			return taskAchieved;
   		}finally{
   			try{
   				rs.close();
   				st.close();
   				}
-  			catch(Exception e){
-  				System.out.println("Error closing the database");
-  			}
+  			catch(Exception e){	}
   		}
   	}
   	
@@ -155,16 +139,13 @@ public class Customer extends DatabaseHandler{
   					"' WHERE id = "+ customerId +";");		
   			return true;
   		}catch (SQLException e) {
-  			e.printStackTrace();
   			return false;
   		}finally{
   			try{
   				rs.close();
   				st.close();
   				}
-  			catch(Exception e){
-  				System.out.println("Error closing the database");
-  			}
+  			catch(Exception e){	}
   		}	
   	}
   	
@@ -175,16 +156,13 @@ public class Customer extends DatabaseHandler{
   					"' WHERE id = "+ customerId +";");			
   			return true;
   		}catch (SQLException e) {
-  			e.printStackTrace();
   			return false;
   		} finally{
   			try{
   				rs.close();
   				st.close();
   				}
-  			catch(Exception e){
-  				System.out.println("Error closing the database");
-  			}
+  			catch(Exception e){	}
   		}	 		
   	}
   	
@@ -198,34 +176,27 @@ public class Customer extends DatabaseHandler{
   			Class.forName("org.sqlite.JDBC");
   			con = DriverManager.getConnection("jdbc:sqlite:warehouse.db");
   			st = con.createStatement();
-  		}catch(Exception e){
-  			
-  			System.err.println( e.getClass().getName() + ": " + e.getMessage() );
-  			System.exit(0);
-  			}
+  		}catch(Exception e){}
   		
   		try {
   			st.executeUpdate("UPDATE customer SET email = '"+ newEmail +
   					"' WHERE id = "+ customerId +";");			
   			return true;
   		}catch (SQLException e) {
-  			e.printStackTrace();
   			return false;
   		}finally{
   			try{
   				rs.close();
   				st.close();
   				}
-  			catch(Exception e){
-  				System.out.println("Error closing the database");
-  			}
+  			catch(Exception e){	}
   		}	
   	}
   	
   	//gets the customer id with the email
-  	public String[] getDataByEmail(String email){
+  	public String[] getDataByEmail(String email) throws SQLException{
   		String dataByEmail[] = new String[]{"","","",""};
-  		try {
+  	
   			rs = st.executeQuery("SELECT * FROM customer WHERE email = '" + email + "';");
   			System.out.println();
   			dataByEmail[0] = rs.getString("id");
@@ -235,126 +206,91 @@ public class Customer extends DatabaseHandler{
   			//int id =rs.getInt("id");
   			//System.out.printf("id: "+ id);
   			
-  			return dataByEmail;
-  		
-  		} catch (SQLException e) {
-  			e.printStackTrace();
-  		}finally{
   			try{
   				rs.close();
   				st.close();
   				}
-  			catch(Exception e){
-  				System.out.println("Error closing the database");
-  			}
-  		}
-  		return dataByEmail;
+  			catch(Exception e){ }
+  			
+  			return dataByEmail;
+  		
   	}
   	
   //gets the customer id with the email
-  	public int getIdByEmail(String email){
+  	public int getIdByEmail(String email) throws SQLException{
   		int userId= 0;
-  		try {
+  
   			rs = st.executeQuery("SELECT * FROM customer WHERE email = '" + email + "';");
   			System.out.println();
   			userId = rs.getInt("id");
-  			return userId;
   		
-  		} catch (SQLException e) {
-  			e.printStackTrace();
-  			return userId;
-  		}finally{
-  			try{
+			try{
   				rs.close();
   				st.close();
   				}
-  			catch(Exception e){
-  				System.out.println("Error closing the database");
-  			}
-  		}  		
+  			catch(Exception e){	}
+  			return userId;
+	 		
   	}
   	
   	//retrieves all customer data with an id
-  	public String[] getCustomerData(int customerId){
+  	public String[] getCustomerData(int customerId) throws SQLException{
   		String[] customerDataString = {"","",""};
-  		try {
-  			
+  	
   			rs = st.executeQuery("SELECT * FROM customer WHERE id = " + customerId + ";");
   			
   			customerDataString[0] =  rs.getString("firstName");
   			customerDataString[1] = rs.getString("lastName");
   			customerDataString[2] = rs.getString("email");
-  						
-  			return customerDataString;
-  		} catch (SQLException e) {
-  			e.printStackTrace();
-  		}finally{
+  
   			try{
   				rs.close();
   				st.close();
   				}
-  			catch(Exception e){
-  				System.out.println("Error closing the database");
-  			}
-  		}
+  			catch(Exception e){	}
+  			
+  			return customerDataString;
   		
-  		return customerDataString;
   	}    
     
 	// retrieving a unit by customer ID
-	public int[] largeUnitsByCustomer(int customerId){
+	public int[] largeUnitsByCustomer(int customerId) throws SQLException{
 		int[] largeWare = new int[5];
 		int[] empty = new int[]{0};
 		int i=0;
-		try {
+		
 			rs = st.executeQuery("SELECT * FROM units WHERE customerId = " + customerId  +" AND warehouseId = 1;");
 			while(rs.next()){
 				largeWare[i] = rs.getInt("warehouseId");
 				i++;
-			}
-			return largeWare;
-		}catch (SQLException e) {
-			
-			e.printStackTrace();
-			return empty;
-		}finally{
+			}	
+
   			try{
   				rs.close();
   				st.close();
   				}
-  			catch(Exception e){
-  				System.out.println("Error closing the database");
-  			}
-  		}
-	
+  			catch(Exception e){	}
+  			return largeWare;
 	}
   	
 	// retrieving a unit by customer ID
-	public int[] smallUnitsByCustomer(int customerId){
+	public int[] smallUnitsByCustomer(int customerId) throws SQLException{
 		int[] smallWare = new int[10];
 		int[] empty = new int[]{0};
 		int i=0;
-		try {
+	
 			rs = st.executeQuery("SELECT * FROM units WHERE customerId = " + customerId  +" AND warehouseId = 2;");
 			while(rs.next()){
 				smallWare[i] = rs.getInt("warehouseId");
 				i++;
 				System.out.println(i);
 			}
-			return smallWare;
-		}catch (SQLException e) {
-			e.printStackTrace();
-			return empty;
-		}finally{
+			
   			try{
   				rs.close();
   				st.close();
   				}
-  			catch(Exception e){
-  				System.out.println("Error closing the database");
-  			}
-  		}
-	
-	}  
-
+  			catch(Exception e){	}
+  			return smallWare;
+	}
 }

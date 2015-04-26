@@ -13,9 +13,9 @@ public class Unit extends DatabaseHandler{
 		
 	}
 	
-  	public ArrayList<String> displayLargeWarehouseData(){
+  	public ArrayList<String> displayLargeWarehouseData() throws SQLException{
   		ArrayList<String> largeUnitData = new ArrayList<String>();
-  		try {
+  
   			rs = st.executeQuery("SELECT * FROM units WHERE warehouseId = 1;");
   			while(rs.next()){ 
   				largeUnitData.add(rs.getString("id"));
@@ -29,19 +29,13 @@ public class Unit extends DatabaseHandler{
   				largeUnitData.add(rs.getString("inQueue"));
   				largeUnitData.add(rs.getString("positionInQueue"));
   			}
-  			return largeUnitData;
-  		} catch (SQLException e) {
-  			e.printStackTrace();
-  			return null;
-  		}finally{
   			try{
   				rs.close();
-  				//st.close();
+  				st.close();
   				}
   			catch(Exception e){
-  				System.out.println("Error closing the database");
   			}
-  		}
+  			return largeUnitData;
   	}
   	
   	public ArrayList<UnitData> getAllLargeWarehouseUnits() throws ClassNotFoundException, SQLException{
@@ -62,7 +56,6 @@ public class Unit extends DatabaseHandler{
   					);
   			UnitsList.add(unitData);
   		}
-  		
   		return UnitsList;
   	}
   	
@@ -88,9 +81,9 @@ public class Unit extends DatabaseHandler{
   		return UnitsList;
   	}
   	
-  	public ArrayList<String> displaySmallWarehouseData(){
+  	public ArrayList<String> displaySmallWarehouseData() throws SQLException{
   		ArrayList<String> smallUnitData = new ArrayList<String>();
-  		try {
+  
   			rs = st.executeQuery("SELECT * FROM units WHERE warehouseId = 2;");
   			while(rs.next()){ 
   				smallUnitData.add(rs.getString("id"));
@@ -104,251 +97,157 @@ public class Unit extends DatabaseHandler{
   				smallUnitData.add(rs.getString("inQueue"));
   				smallUnitData.add(rs.getString("positionInQueue"));
   			}
+  			
+  			try{
+  				rs.close();
+  				//st.close();
+  				}
+  			catch(Exception e){
+  				System.out.println("Error closing the database");
+  			}
   			return smallUnitData;
-  		} catch (SQLException e) {
-  			e.printStackTrace();
-  			return null;
-  		}finally{
-  			try{
-  				rs.close();
-  				//st.close();
-  				}
-  			catch(Exception e){
-  				System.out.println("Error closing the database");
-  			}
-  		}
   	}
-	//gets all data from units
-	public boolean getData(){
-		try {
-			rs = st.executeQuery("SELECT * FROM units;");
-			while (rs.next()) {
-				
-				  int id 				= rs.getInt("id");
-				  String description 	= rs.getString("description");
-				  int customerId 		= rs.getInt("customerId");
-				  int warehouseId 		= rs.getInt("warehouseId");
-				  int occupied 			= rs.getInt("occupied");
-				  String dateReceived 	= rs.getString("dateReceived");
-				  String pickupDate		= rs.getString("pickupDate");
-				  int priority 			= rs.getInt("priority");
-				  int inQueue 			= rs.getInt("inQueue");
-				  int positionInQueue 	= rs.getInt("positionInQueue");
-				  
-				  System.out.println( "\nid		: " + id 
-						  			+ "\ndescription	: " + description
-						  			+ "\ncustomerId	: " + customerId
-						  			+ "\nwarehouseId	: " + warehouseId
-						  			+ "\noccupied	: " + occupied
-						  			+ "\ndateReceived	: " + dateReceived
-						  			+ "\npickupDate	: " + pickupDate
-						  			+ "\npriority	: " + priority
-						  			+ "\ninQueue		: " + inQueue
-						  			+ "\npositionInQueue	: " + positionInQueue
-						  			+ "\n--------------------------------------");
-				  
-				}
-			return true;
-		}catch (SQLException e) {
-			e.printStackTrace();
-			return false;
-		}finally{
-  			try{
-  				rs.close();
-  				//st.close();
-  				}
-  			catch(Exception e){
-  				System.out.println("Error closing the database");
-  			}
-  		}
-	}
-	
 	
 	//displays the empty units in the large warehouse
-	public ArrayList<Integer> getEmptyUnitsInLarge(){
+	public ArrayList<Integer> getEmptyUnitsInLarge() throws SQLException{
 		ArrayList<Integer> largeUnitEmpty = new ArrayList<Integer>();
-		try {
+
 			rs = st.executeQuery("SELECT * FROM units WHERE warehouseID = 1 AND occupied = 0;");
 			while (rs.next()) {
 				largeUnitEmpty.add(rs.getInt("id"));
 				  
 			}
-			return largeUnitEmpty;
-		}catch (SQLException e) {
-			e.printStackTrace();
-			return null;
-		}finally{
+			
+	
   			try{
   				rs.close();
   			//	st.close();
   				}
-  			catch(Exception e){
-  				System.out.println("Error closing the database");
-  			}
-  		}
+  			catch(Exception e){	}
+  			return largeUnitEmpty;
 	}
 	
 	//displays the empty units in the large warehouse
-	public ArrayList<Integer> getEmptyUnitsInSmall(){
+	public ArrayList<Integer> getEmptyUnitsInSmall() throws SQLException{
 		ArrayList<Integer> smallUnitEmpty = new ArrayList<Integer>();
-		try {
+	
 			rs = st.executeQuery("SELECT * FROM units WHERE warehouseID = 2 AND occupied = 0;");
 			while (rs.next()) {
 				smallUnitEmpty.add(rs.getInt("id"));
 				  
 			}
-			return smallUnitEmpty;
-		}catch (SQLException e) {
-			e.printStackTrace();
-			return null;
-		}finally{
+	
   			try{
   				rs.close();
   			//	st.close();
   				}
   			catch(Exception e){
   			}
-  		}
+  			return smallUnitEmpty;
 	}
 	
 	// Customer units in small
-	public ArrayList<Integer> getCustomerUnitsInSmall(int customerId){
+	public ArrayList<Integer> getCustomerUnitsInSmall(int customerId) throws SQLException{
 		ArrayList<Integer> smallUnitEmpty = new ArrayList<Integer>();
-		try {
+	
 			rs = st.executeQuery("SELECT * FROM units WHERE warehouseID = 2 AND customerId = " + customerId + ";");
 			while (rs.next()) {
 				smallUnitEmpty.add(rs.getInt("id"));
 				  
 			}
-			return smallUnitEmpty;
-		}catch (SQLException e) {
-			e.printStackTrace();
-			return null;
-		}finally{
+
   			try{
   				rs.close();
   			//	st.close();
   				}
   			catch(Exception e){
   			}
-  		}
+  			
+  			return smallUnitEmpty;
 	}
 	
 	//customer units in large
-	public ArrayList<Integer> getCustomerUnitsInLarge(int customerId){
+	public ArrayList<Integer> getCustomerUnitsInLarge(int customerId) throws SQLException{
 		ArrayList<Integer> smallUnitEmpty = new ArrayList<Integer>();
-		try {
+	
 			rs = st.executeQuery("SELECT * FROM units WHERE warehouseID = 1 AND customerId = " + customerId + ";");
 			while (rs.next()) {
 				smallUnitEmpty.add(rs.getInt("id"));
 				  
 			}
-			return smallUnitEmpty;
-		}catch (SQLException e) {
-			e.printStackTrace();
-			return null;
-		}finally{
+			
   			try{
   				rs.close();
-  			//	st.close();
+  				st.close();
   				}
   			catch(Exception e){
   			}
-  		}
+  			return smallUnitEmpty;
 	}
 	
 	// returns the amount of large warehouse units that are currently empty
-	public int getNumberOfEmptyUnitsInLarge(){
+	public int getNumberOfEmptyUnitsInLarge() throws SQLException{
 		int emptyLargeWare = 0;
-		try {
+
 			rs = st.executeQuery("SELECT COUNT(*) AS total FROM units WHERE warehouseID = 1 AND occupied = 0;");
 			emptyLargeWare = rs.getInt("total");
-			
-			return emptyLargeWare;
-		}catch (SQLException e) {
-			e.printStackTrace();
-			return emptyLargeWare;
-		}finally{
+
   			try{
   				rs.close();
-  			//	st.close();
+  				st.close();
   				}
   			catch(Exception e){
-  				System.out.println("Error closing the database");
   			}
-  		}
+  			return emptyLargeWare;
 	}
 	
 	// returns the amount of small warehouses that are currently empty
-	public int getNumberOfEmptyUnitsInSmall(){
+	public int getNumberOfEmptyUnitsInSmall() throws SQLException{
 		int emptySmallWare = 0;
-		try {
 			rs = st.executeQuery("SELECT COUNT(*) AS total FROM units WHERE warehouseID = 2 AND occupied = 0;");
 
 			emptySmallWare = rs.getInt("total");
 			
-			return emptySmallWare;
 			
-		}catch (SQLException e) {
-			e.printStackTrace();
-			return emptySmallWare;
-		}finally{
+			
+
   			try{
   				rs.close();
-  			//	st.close();
+  				st.close();
   				}
   			catch(Exception e){
   				System.out.println("Error closing the database");
   			}
-  		}
+  			return emptySmallWare;
 	}
 		
 	//small units per customer id
-	public int getNumberOfUnitsOwnedInSmallByCustomerId(int customerId){
+	public int getNumberOfUnitsOwnedInSmallByCustomerId(int customerId) throws SQLException{
 		int unitsInSmall = 0;
-		try {
+	
 			rs = st.executeQuery("SELECT Count(*) AS total FROM units WHERE customerId = " + customerId  +" AND warehouseId = 2;");
 			unitsInSmall = rs.getInt("total");
-		
-			return unitsInSmall;
-			
-		}catch (SQLException e) {
-			e.printStackTrace();
-			
-			return unitsInSmall;
-		}finally{
   			try{
   				rs.close();
-  			//	st.close();
+  				st.close();
   				}
-  			catch(Exception e){
-  				System.out.println("Error closing the database");
-  			}
-  		}
+  			catch(Exception e){	}
+  			return unitsInSmall;
 	}
 	
 	//small units per customer id
-	public int getNumberOfUnitsOwnedInLargeByCustomerId(int customerId){
+	public int getNumberOfUnitsOwnedInLargeByCustomerId(int customerId) throws SQLException{
 		int unitsInSmall = 0;
-		try {
+		
 			rs = st.executeQuery("SELECT Count(*) AS total FROM units WHERE customerId = " + customerId  +" AND warehouseId = 1;");
 			unitsInSmall = rs.getInt("total");
 		
-			return unitsInSmall;
-			
-		}catch (SQLException e) {
-			e.printStackTrace();
-			
-			return unitsInSmall;
-		}finally{
   			try{
   				rs.close();
-  			//	st.close();
+  				st.close();
   				}
-  			catch(Exception e){
-  				System.out.println("Error closing the database");
-  			}
-  		}
+  			catch(Exception e){	}
+  			return unitsInSmall;
 	}
 		
 	// adds a customer and their belongings to a unit
@@ -447,31 +346,26 @@ public class Unit extends DatabaseHandler{
 	}
 	
 	// retrieving a unit by customer ID
-	public int totalUnitsByCustomer(int customerId){
+	public int totalUnitsByCustomer(int customerId) throws SQLException{
 		int totalUnits = 0;
-		try {
+	
 			rs = st.executeQuery("SELECT COUNT(*) AS total FROM units WHERE customerId = " + customerId  +";");
 			totalUnits = rs.getInt("total");
 
-			return totalUnits;
-		}catch (SQLException e) {
-			e.printStackTrace();
-			return totalUnits;
-		}finally{
   			try{
   				rs.close();
-  			//	st.close();
+  				st.close();
   				}
   			catch(Exception e){
  
   			}
-  		}
+  			return totalUnits;
 	}
 	
 	// retrieving a unit by unit ID
-	public ArrayList<String> unitsById(int unitId){
+	public ArrayList<String> unitsById(int unitId) throws SQLException{
 		ArrayList<String> unitData = new ArrayList<String>();
-		try {
+	
 			rs = st.executeQuery("SELECT * FROM units WHERE id = " + unitId  +";");
 				  unitData.add(rs.getString("description"));
 				  unitData.add(rs.getString("warehouseId"));
@@ -482,19 +376,13 @@ public class Unit extends DatabaseHandler{
 				  unitData.add(rs.getString("inQueue"));
 				  unitData.add(rs.getString("positionInQueue"));
 				  
-				  return unitData;
-		}catch (SQLException e) {
-			e.printStackTrace();
-			return unitData;
-		}finally{
+			
   			try{
   				rs.close();
-  			//	st.close();
+  				st.close();
   				}
-  			catch(Exception e){
-  				
-  			}
-  		}
+  			catch(Exception e){	}
+  			return unitData;
 	}
 	
 	
@@ -512,11 +400,9 @@ public class Unit extends DatabaseHandler{
 		}finally{
   			try{
   				rs.close();
-  			//	st.close();
+  				st.close();
   				}
-  			catch(Exception e){
-  				
-  			}
+  			catch(Exception e){	}
   		}	
 	}
 	
@@ -541,66 +427,24 @@ public class Unit extends DatabaseHandler{
   		}			
 	}
 	
-	//retrieves all the items currently in queue
-	public boolean itemsInQueue(){
-		try {
-			rs = st.executeQuery("SELECT * FROM units WHERE inQueue = 1;");
-			while (rs.next()) {
-				  int id 				= rs.getInt("id");
-				  int customerId 		= rs.getInt("customerId");
-				  int priority 			= rs.getInt("priority");
-				  int inQueue 			= rs.getInt("inQueue");
-				  int positionInQueue 	= rs.getInt("positionInQueue");
-				  
-				  System.out.println( "\nid		: " + id 
-						  			+ "\ncustomerId	: " + customerId
-						  			+ "\npriority	: " + priority
-						  			+ "\ninQueue		: " + inQueue
-						  			+ "\npositionInQueue	: " + positionInQueue
-						  			+ "\n--------------------------------------");
-				}
-			return true;
-		}catch (SQLException e) {
-			e.printStackTrace();
-			return false;
-		}finally{
-  			try{
-  				rs.close();
-  			//	st.close();
-  				}
-  			catch(Exception e){
-  				
-  			}
-  		}
-		
-	}
-	
-	public int numberOfItemsInQueue(){
+	public int numberOfItemsInQueue() throws SQLException{
 		int queued = 9000;
-		try {
 			rs = st.executeQuery("SELECT COUNT(*)  AS total FROM units WHERE inQueue = 1;");
 			queued = rs.getInt("total");
-			return queued;
-		}catch (SQLException e) {
-			e.printStackTrace();
-			return queued;
-		}finally{
   			try{
   				rs.close();
-  		//		st.close();
+  				st.close();
   				}
-  			catch(Exception e){
-  				
-  			}
-  		}
-		
+  			catch(Exception e){	}
+  			return queued;
 	}
 	
 	// empties the small warehouse
 	public boolean purgeSmall(){
 		boolean success = false;
 		try {
-			st.executeUpdate("UPDATE units SET description = 'empty unit', customerId = 0, occupied = 0, dateReceived = 'null', pickupDate = 'null' WHERE warehouseId = 2;");
+			//st.executeUpdate("UPDATE units SET description = 'empty unit', customerId = 0, occupied = 0, dateReceived = 'null', pickupDate = 'null' WHERE warehouseId = 2;");
+			rs = st.executeQuery("SELECT * FROM units WHERE warehouseId = 1;");
 			success = true;
 			return success;
 		}catch (SQLException e) {
@@ -617,30 +461,8 @@ public class Unit extends DatabaseHandler{
   		}
 	}
 	
-	// empties the large warehouse
-	public boolean purgeLarge(){
-		boolean success = false;
-		try {
-			st.executeUpdate("UPDATE units SET description = 'empty unit', customerId = 0, occupied = 0, dateReceived = 'null', pickupDate = 'null' WHERE warehouseId = 1;");
-			success = true;
-			return success;
-		}catch (SQLException e) {
-			e.printStackTrace();
-			return success;
-		}finally{
-  			try{
-  				rs.close();
-  			//	st.close();
-  				}
-  			catch(Exception e){
- 
-  			}
-  		}
-	}
-
-		
-
 		//changes whether the item is in queue or not
+	/*
 		public boolean changeQueueStatus(int queueStatus, int unitId){
 			try {
 				st.executeUpdate("UPDATE units SET inQueue = " + queueStatus + " WHERE id=" + unitId + ";");
@@ -658,7 +480,7 @@ public class Unit extends DatabaseHandler{
 	  			}
 	  		}				
 		}
-		
+		*/
 		/*
 		// moves an item from a large warehouse unit to a small one
 		public void moveToSmall(int largeUnitId, int smallUnitId){

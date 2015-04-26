@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -42,9 +43,24 @@ public class LoggedInFrame extends JFrame{
 		loggedPanel.setLayout(new BorderLayout());
 		
 		
-		queuedUnits = theUnit.numberOfItemsInQueue();
-		smallEmpty= theUnit.getNumberOfEmptyUnitsInSmall();
-		largeEmpty = theUnit.getNumberOfEmptyUnitsInLarge();
+		try {
+			queuedUnits = theUnit.numberOfItemsInQueue();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			smallEmpty= theUnit.getNumberOfEmptyUnitsInSmall();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			largeEmpty = theUnit.getNumberOfEmptyUnitsInLarge();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		username = new JLabel("Logged in as: " + userSessionData[2] + "          	           	  " + "       Today's date is: " + date);
 		emptyUnits = new JLabel("Empty Large Units: " + largeEmpty  +"     Empty Small Units: " + smallEmpty + "     Items in Queue: " + queuedUnits);

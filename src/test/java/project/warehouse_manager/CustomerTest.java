@@ -2,6 +2,7 @@ package project.warehouse_manager;
 
 import static org.junit.Assert.*;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import org.junit.Before;
@@ -24,7 +25,7 @@ public class CustomerTest {
 	}
 
 	@Test
-	public void testGetDataFromCustomer() {
+	public void testGetDataFromCustomer() throws SQLException {
 		assertTrue(customer.getDataFromCustomer());
 	}
 
@@ -34,24 +35,24 @@ public class CustomerTest {
 	}
 
 	@Test
-	public void testGetDataByEmail() {
+	public void testGetDataByEmail() throws SQLException {
 		Customer customer = new Customer();
 		String dataByEmail[] = new String[]{"","","",""};
-		dataByEmail[0] = "13";
-		dataByEmail[1] = "test";
-		dataByEmail[2] = "testkinson";
-		dataByEmail[3] = "unique@gmail.com";
+		dataByEmail[0] = "1";
+		dataByEmail[1] = "John";
+		dataByEmail[2] = "Doe";
+		dataByEmail[3] = "jdoe@gmail.com";
 
-		assertEquals(customer.getDataByEmail("unique@gmail.com"), dataByEmail);
+		assertEquals(customer.getDataByEmail("jdoe@gmail.com"), dataByEmail);
 	}
 
 	@Test
-	public void testGetIdByEmail() {
+	public void testGetIdByEmail() throws SQLException {
 		assertEquals(customer.getIdByEmail("unique@gmail.com"), 13);
 	}
 
 	@Test
-	public void testGetCustomerData() {
+	public void testGetCustomerData() throws SQLException {
 		Customer customer = new Customer();
 		String customerData[] = new String[]{"","",""};
 		customerData[0] = "test";
@@ -62,14 +63,14 @@ public class CustomerTest {
 	}
 
 	@Test
-	public void testLargeUnitsByCustomer() {
+	public void testLargeUnitsByCustomer() throws SQLException {
 		Customer customer = new Customer();
 		int[] largeWare = new int[5];
 		assertArrayEquals(customer.largeUnitsByCustomer(13),largeWare);
 	}
 
 	@Test
-	public void testSmallUnitsByCustomer() {
+	public void testSmallUnitsByCustomer() throws SQLException {
 		Customer customer = new Customer();
 		int[] smallWare = new int[5];
 		assertArrayEquals(customer.largeUnitsByCustomer(13),smallWare);
@@ -99,9 +100,7 @@ public class CustomerTest {
 	public void testChangeCustomerEmail() {
 		try{
 			customer.addCustomerWithId(12, "test","teskinson","ttesk@gmail.com");
-		}catch(Exception e){
-			
-		}
+		}catch(Exception e){}
 		Customer customer = new Customer();
 		assertTrue(customer.changeCustomerEmail(12, "jojo@gmail.com"));
 	}
@@ -110,16 +109,14 @@ public class CustomerTest {
 	public void testDeleteCustomer() {
 		try{
 			customer.addCustomerWithId(12, "test","teskinson","ttesk@gmail.com");
-		}catch(Exception e){
-			
-		}
+		}catch(Exception e){}
 
 		Customer customer = new Customer();
 		assertTrue(customer.deleteCustomer(12));
 	}
 	
 	@Test
-	public void testDisplayData() {
+	public void testDisplayData() throws SQLException {
 		ArrayList<String> userData = new ArrayList<String>();
 		userData = customer.displayData();
 		assertEquals(customer.displayData(),userData);

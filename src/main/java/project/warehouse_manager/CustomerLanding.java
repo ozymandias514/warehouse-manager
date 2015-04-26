@@ -140,7 +140,12 @@ public class CustomerLanding extends JFrame {
 				// list all items button ------------------------------
 			}else if(e.getSource() == listButton){
 				ArrayList<String> userData = new ArrayList<String>();
-				userData = theCustomer.displayData();
+				try {
+					userData = theCustomer.displayData();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			
 		  		textArea1.setText("Customers in the system\n");
 		  		textArea1.append("-----------------------------------------------------------");
@@ -175,7 +180,13 @@ public class CustomerLanding extends JFrame {
 							, JOptionPane.ERROR_MESSAGE);
 				}else{
 					String email = textResult.getText();
-					String data[] = theCustomer.getDataByEmail(email);
+					String data[] = null;
+					try {
+						data = theCustomer.getDataByEmail(email);
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 					textArea1.setText("The user id pertaining to that email is: " + data[0] +
 						"\nFirst Name: " + data[1] + "\nLast Name: " + data[2] + "\nemail: " + data[3]);	
 				}

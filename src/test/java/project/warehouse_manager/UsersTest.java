@@ -2,6 +2,8 @@ package project.warehouse_manager;
 
 import static org.junit.Assert.*;
 
+import java.sql.SQLException;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -24,20 +26,20 @@ public class UsersTest {
 	}
 
 	@Test
-	public void testAuthenticate() {
+	public void testAuthenticate() throws SQLException {
 		assertFalse(users.authenticate("dahaiguo", "fgcu"));
 		assertTrue(users.authenticate("kirk", "pass"));
 		assertTrue(users.authenticate("jfgonzal", "pass"));
 	}
 
 	@Test
-	public void testGetIdFromUsername() {
+	public void testGetIdFromUsername() throws SQLException {
 		assertEquals(users.getIdFromUsername("jfgonzal"), 1);
 		assertEquals(users.getIdFromUsername("kirk"), 2);
 	}
 
 	@Test
-	public void testGetDataFromId() {
+	public void testGetDataFromId() throws SQLException {
 		assertEquals(users.getDataFromId(1), userData1);
 		assertEquals(users.getDataFromId(2), userData2);
 	}

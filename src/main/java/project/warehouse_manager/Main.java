@@ -3,6 +3,7 @@ package project.warehouse_manager;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 import javax.swing.*;
 
@@ -15,7 +16,7 @@ public class Main extends JFrame{
 	JPanel mainPanel, loginPanel, loggedPanel;
 	String outputString, password, username;
 	Users theUser = new Users();
-	Customer theCustomer = new Customer();
+	static Customer theCustomer = new Customer();
 	Unit theUnit = new Unit();
 	
 	public static void main(String[] args) {
@@ -67,20 +68,40 @@ public class Main extends JFrame{
 					if(username.length() <= 0 || password.length() <= 0){
 	   					JOptionPane.showMessageDialog(Main.this, "The fields cannot be empty", "Error", JOptionPane.ERROR_MESSAGE);
 					}else{
-						if(theUser.authenticate(username, password)){
-							int userId = theUser.getIdFromUsername(username);
-							String[] data = theUser.getDataFromId(userId);
-							outputString = "Welcome back " + data[0]+ " " + data[1]+ " Hope you are having a good day";
-							JOptionPane.showMessageDialog(Main.this, outputString, "Information", JOptionPane.INFORMATION_MESSAGE);
-							outputString = "";
-							
-							dispose();
-							new LoggedInFrame(userId, data);
-						}else{
-							outputString = "Invalid login id or password, please try again";
-							JOptionPane.showMessageDialog(Main.this, outputString, "Information", JOptionPane.INFORMATION_MESSAGE);
-							outputString = "";
-					}
+						try {
+							if(theUser.authenticate(username, password)){
+								int userId = 0;
+								try {
+									userId = theUser.getIdFromUsername(username);
+								} catch (SQLException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}
+								String[] data = null;
+								try {
+									data = theUser.getDataFromId(userId);
+								} catch (SQLException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}
+								outputString = "Welcome back " + data[0]+ " " + data[1]+ " Hope you are having a good day";
+								JOptionPane.showMessageDialog(Main.this, outputString, "Information", JOptionPane.INFORMATION_MESSAGE);
+								outputString = "";
+								
+								dispose();
+								new LoggedInFrame(userId, data);
+							}else{
+								outputString = "Invalid login id or password, please try again";
+								JOptionPane.showMessageDialog(Main.this, outputString, "Information", JOptionPane.INFORMATION_MESSAGE);
+								outputString = "";
+}
+						} catch (HeadlessException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						} catch (SQLException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
 				}
 			}
 		}

@@ -5,6 +5,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -167,8 +168,20 @@ public class CustomerAddRemove extends JFrame{
 				 	}
 				}else if(idField.getText().isEmpty() && !emailFieldErase.getText().isEmpty()){
 					String customerEmail = emailFieldErase.getText();
-					int customerId = theCustomer.getIdByEmail(customerEmail);
-					int totalUnits = theUnit.totalUnitsByCustomer(customerId);
+					int customerId = 0;
+					try {
+						customerId = theCustomer.getIdByEmail(customerEmail);
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					int totalUnits = 0;
+					try {
+						totalUnits = theUnit.totalUnitsByCustomer(customerId);
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 					
 					if(totalUnits > 0){
 						theUnit.emptyUnitByCustomer(customerId);
