@@ -158,18 +158,7 @@ public class CustomerLanding extends JFrame {
 	  				textArea1.append("\nemail	:  " + userData.get(i));
 	  				textArea1.append("\n-----------------------------------------------------------");
 		  		}
-		  		
-		  				//int id = rs.getInt("id");
-		  				//String firstName = rs.getString("firstName");
-		  				//String lastName = rs.getString("lastName");
-		  				//String email = rs.getString("email");
-		  				//textArea1.append("\nid	:  " + id 
-				  	//		+ "\nfirst Name	:  " + firstName
-				  	//		+ "\nLast Name	:  " + lastName
-				  	//		+ "\nemail	:  " + email
-				  	//		+ "\n-----------------------------------------------------------");
-					
-		
+		  				
 				//get by email button ------------------------------------------
 			}else if(e.getSource() == emailButton){
 				

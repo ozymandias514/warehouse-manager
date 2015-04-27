@@ -232,8 +232,6 @@ public class UnitLanding extends JFrame{
 				try {
 					largeUnitData = theUnit.displayLargeWarehouseData();
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
 				}
 							
 		  		textArea1.setText("Large Units in the system\n");
@@ -266,8 +264,6 @@ public class UnitLanding extends JFrame{
 				try {
 					smallUnitData = theUnit.displaySmallWarehouseData();
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
 				}
 				
 		  		textArea1.append("\nSmall Units in the system\n");
@@ -301,8 +297,6 @@ public class UnitLanding extends JFrame{
 				try {
 					smallUnitEmpty = theUnit.getEmptyUnitsInSmall();
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
 				}
 				textArea1.setText("The following units are empty in the small warehouse: \n");
 				for(int i = 0; i < smallUnitEmpty.size(); i++){
@@ -325,14 +319,10 @@ public class UnitLanding extends JFrame{
 				}else{
 					try{
 					int unitId = Integer.parseInt(text.getText());
-					boolean check = theUnit.removeUnit(unitId);
-					if(check == true){
+					theUnit.removeUnit(unitId);
 						 JOptionPane.showMessageDialog(UnitLanding.this,"The unit was sucessfully cleared ",
 								 "Solution", JOptionPane.INFORMATION_MESSAGE);
-					}else{
-						JOptionPane.showMessageDialog(UnitLanding.this, "Something went wrong in the database, please try again later", "Error"
-								, JOptionPane.ERROR_MESSAGE);
-					}
+			
 					}catch(Exception NumberFormatException){
 						JOptionPane.showMessageDialog(UnitLanding.this, "Fields cannot strings, Input required: Unit ID (integer)", "Error"
 								, JOptionPane.ERROR_MESSAGE);

@@ -60,10 +60,22 @@ public class UnitScreenUITest extends UITestCaseSwing {
 		ui.wait(new WindowShowingCondition("Solution"));
 		ui.click(new JButtonLocator("OK"));
 		ui.wait(new WindowDisposedCondition("Solution"));
+		
 		ui.click(new JTextComponentLocator(JTextField.class));
 		ui.enterText("1");
 		ui.click(new JButtonLocator("Find by unit Id"));
 		ui.click(new JButtonLocator("Find By customer id"));
+		
+		ui.click(new JButtonLocator("Clear All"));
+		ui.wait(new WindowShowingCondition("Solution"));
+		ui.click(new JButtonLocator("OK"));
+		ui.wait(new WindowDisposedCondition("Solution"));
+		
+		ui.click(new JTextComponentLocator(JTextField.class));
+		ui.enterText("7");
+		ui.click(new JButtonLocator("Find by unit Id"));
+		ui.click(new JButtonLocator("Find By customer id"));
+		
 		ui.click(new JButtonLocator("alter"));
 		ui.click(new JButtonLocator("Change Description"));
 		ui.wait(new WindowShowingCondition("Error"));
@@ -143,8 +155,8 @@ public class UnitScreenUITest extends UITestCaseSwing {
 		ui.click(new JButtonLocator("remove"));
 		ui.wait(new WindowShowingCondition("Solution"));
 		ui.click(new JButtonLocator("OK"));
-		ui.wait(new WindowDisposedCondition("Solution"));
-		
+		ui.click(new JButtonLocator("go back"));
+		ui.wait(new WindowDisposedCondition("Warehouse"));		
 	}
 
 }

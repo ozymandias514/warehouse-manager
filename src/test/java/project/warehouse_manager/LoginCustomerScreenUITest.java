@@ -236,7 +236,8 @@ public class LoginCustomerScreenUITest extends UITestCaseSwing {
 		ui.click(new JButtonLocator("OK"));
 		ui.wait(new WindowDisposedCondition("Solution"));
 		ui.click(new JButtonLocator("go back"));
-		ui.wait(new WindowDisposedCondition("customer add and remove"));
+		ui.click(new JButtonLocator("Go Back"));
+		ui.wait(new WindowDisposedCondition("Customer page"));
 	}
 
 }
