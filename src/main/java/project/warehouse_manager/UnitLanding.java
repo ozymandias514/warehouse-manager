@@ -15,7 +15,7 @@ public class UnitLanding extends JFrame{
 
 	JButton byIdBut, byCustomerBut, getDataBut, 
 	vacantSmallBut, vacantLargeBut, alterBut, 
-			removeBut, fillBut, goBackBut;
+			removeBut, fillBut, goBackBut, clearAll;
 	
 	JTextField text;
 	
@@ -75,6 +75,7 @@ public class UnitLanding extends JFrame{
 		removeBut = new JButton("remove");
 		fillBut = new JButton("Fill Unit");
 		goBackBut = new JButton("go back");
+		clearAll = new JButton("Clear All");
 		
 		byIdBut.addActionListener(lForButton);
 		byCustomerBut.addActionListener(lForButton);
@@ -84,7 +85,7 @@ public class UnitLanding extends JFrame{
 		fillBut.addActionListener(lForButton);
 		alterBut.addActionListener(lForButton);
 		removeBut.addActionListener(lForButton);
-		
+		clearAll.addActionListener(lForButton);
 		goBackBut.addActionListener(lForButton);
 		
 		//thePanel.add(clearAll, gridConstraints);
@@ -110,9 +111,12 @@ public class UnitLanding extends JFrame{
 		gridConstraints.gridx = 1;
 		gridConstraints.gridy = 4;
 		thePanel.add(removeBut,gridConstraints);
-		gridConstraints.gridwidth = 10;
+		gridConstraints.gridwidth = 1;
 		gridConstraints.gridx = 5;
 		thePanel.add(fillBut,gridConstraints);
+		gridConstraints.gridwidth = 1;
+		gridConstraints.gridx = 9;
+		thePanel.add(clearAll,gridConstraints);
 		gridConstraints.gridwidth = 20;
 		gridConstraints.gridx = 1;
 		gridConstraints.gridy = 5;
@@ -309,10 +313,7 @@ public class UnitLanding extends JFrame{
 				ArrayList<Integer> largeUnitEmpty = new ArrayList<Integer>();
 				try {
 					largeUnitEmpty = theUnit.getEmptyUnitsInLarge();
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+				} catch (SQLException e1) {	}
 				textArea1.setText("The following units are empty in the large warehouse: \n");
 				for(int i = 0; i < largeUnitEmpty.size(); i++){
 					textArea1.append(largeUnitEmpty.get(i) + ", ");
@@ -322,6 +323,7 @@ public class UnitLanding extends JFrame{
 					JOptionPane.showMessageDialog(UnitLanding.this, "Fields cannot be empty, Input required: Unit ID", "Error"
 							, JOptionPane.ERROR_MESSAGE);
 				}else{
+					try{
 					int unitId = Integer.parseInt(text.getText());
 					boolean check = theUnit.removeUnit(unitId);
 					if(check == true){
@@ -331,7 +333,17 @@ public class UnitLanding extends JFrame{
 						JOptionPane.showMessageDialog(UnitLanding.this, "Something went wrong in the database, please try again later", "Error"
 								, JOptionPane.ERROR_MESSAGE);
 					}
+					}catch(Exception NumberFormatException){
+						JOptionPane.showMessageDialog(UnitLanding.this, "Fields cannot strings, Input required: Unit ID (integer)", "Error"
+								, JOptionPane.ERROR_MESSAGE);
+					}
 				}
+					
+			}else if(e.getSource() == clearAll){
+				 text.setText("");
+				 textArea1.setText("");
+				 JOptionPane.showMessageDialog(UnitLanding.this,"All fields have now been cleared",
+						 "Solution", JOptionPane.INFORMATION_MESSAGE);
 			}
 		}
 	}
