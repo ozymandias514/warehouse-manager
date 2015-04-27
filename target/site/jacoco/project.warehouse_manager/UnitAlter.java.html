@@ -23,145 +23,145 @@ class UnitAlter extends JFrame{
 	JTextField idField,valueField;
 	JSpinner spinner;
 	
-<span class="nc" id="L26">	Unit theUnit = new Unit();</span>
+<span class="fc" id="L26">	Unit theUnit = new Unit();</span>
 	
 	int userSession;
-<span class="nc" id="L29">	String[] userSessionData = new String[5];</span>
+<span class="fc" id="L29">	String[] userSessionData = new String[5];</span>
 	
-<span class="nc" id="L31">	public UnitAlter(int userId, String[] userData){</span>
+<span class="fc" id="L31">	public UnitAlter(int userId, String[] userData){</span>
 		
-<span class="nc" id="L33">		System.arraycopy(userData, 0, userSessionData, 0, userData.length);</span>
-<span class="nc" id="L34">		this.setSize(500,300);</span>
-<span class="nc" id="L35">		this.setLocationRelativeTo(null);</span>
-<span class="nc" id="L36">		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);</span>
-<span class="nc" id="L37">		this.setTitle(&quot;Warehouse&quot;);</span>
+<span class="fc" id="L33">		System.arraycopy(userData, 0, userSessionData, 0, userData.length);</span>
+<span class="fc" id="L34">		this.setSize(500,300);</span>
+<span class="fc" id="L35">		this.setLocationRelativeTo(null);</span>
+<span class="fc" id="L36">		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);</span>
+<span class="fc" id="L37">		this.setTitle(&quot;Warehouse&quot;);</span>
 		
-<span class="nc" id="L39">		JPanel thePanel = new JPanel();</span>
+<span class="fc" id="L39">		JPanel thePanel = new JPanel();</span>
 		
-<span class="nc" id="L41">		thePanel.setLayout(new GridBagLayout());</span>
+<span class="fc" id="L41">		thePanel.setLayout(new GridBagLayout());</span>
 		
-<span class="nc" id="L43">		GridBagConstraints gridConstraints = new GridBagConstraints();</span>
+<span class="fc" id="L43">		GridBagConstraints gridConstraints = new GridBagConstraints();</span>
 		
-<span class="nc" id="L45">		gridConstraints.gridx = 1;</span>
-<span class="nc" id="L46">		gridConstraints.gridy = 1;</span>
-<span class="nc" id="L47">		gridConstraints.gridwidth = 1; </span>
-<span class="nc" id="L48">		gridConstraints.gridheight = 1;</span>
-<span class="nc" id="L49">		gridConstraints.weightx = 50;</span>
-<span class="nc" id="L50">		gridConstraints.weighty = 100;</span>
-<span class="nc" id="L51">		gridConstraints.insets = new Insets(5,5,5,5);</span>
-<span class="nc" id="L52">		gridConstraints.anchor = gridConstraints.CENTER;</span>
-<span class="nc" id="L53">		gridConstraints.fill = gridConstraints.BOTH;</span>
+<span class="fc" id="L45">		gridConstraints.gridx = 1;</span>
+<span class="fc" id="L46">		gridConstraints.gridy = 1;</span>
+<span class="fc" id="L47">		gridConstraints.gridwidth = 1; </span>
+<span class="fc" id="L48">		gridConstraints.gridheight = 1;</span>
+<span class="fc" id="L49">		gridConstraints.weightx = 50;</span>
+<span class="fc" id="L50">		gridConstraints.weighty = 100;</span>
+<span class="fc" id="L51">		gridConstraints.insets = new Insets(5,5,5,5);</span>
+<span class="fc" id="L52">		gridConstraints.anchor = gridConstraints.CENTER;</span>
+<span class="fc" id="L53">		gridConstraints.fill = gridConstraints.BOTH;</span>
 		
-<span class="nc" id="L55">		ListenForButton lForButton = new ListenForButton();</span>
+<span class="fc" id="L55">		ListenForButton lForButton = new ListenForButton();</span>
 		
-<span class="nc" id="L57">		Date todaysDate = new Date();</span>
-<span class="nc" id="L58">		spinner = new JSpinner(new SpinnerDateModel(todaysDate, null, null, Calendar.DAY_OF_MONTH));</span>
+<span class="fc" id="L57">		Date todaysDate = new Date();</span>
+<span class="fc" id="L58">		spinner = new JSpinner(new SpinnerDateModel(todaysDate, null, null, Calendar.DAY_OF_MONTH));</span>
 		
-<span class="nc" id="L60">		JSpinner.DateEditor dateEditor = new JSpinner.DateEditor(spinner, &quot;dd/MM/yyyy&quot;);</span>
-<span class="nc" id="L61">		dateEditor.getTextField().setEditable(false);</span>
-<span class="nc" id="L62">		spinner.setEditor(dateEditor);</span>
+<span class="fc" id="L60">		JSpinner.DateEditor dateEditor = new JSpinner.DateEditor(spinner, &quot;dd/MM/yyyy&quot;);</span>
+<span class="fc" id="L61">		dateEditor.getTextField().setEditable(false);</span>
+<span class="fc" id="L62">		spinner.setEditor(dateEditor);</span>
 		
-<span class="nc" id="L64">		idField = new JTextField(&quot;ID&quot;,3);</span>
-<span class="nc" id="L65">		valueField = new JTextField(&quot;value field&quot;,40);</span>
+<span class="fc" id="L64">		idField = new JTextField(&quot;ID&quot;,3);</span>
+<span class="fc" id="L65">		valueField = new JTextField(&quot;value field&quot;,40);</span>
 		
-<span class="nc" id="L67">		clearBut = new JButton(&quot;Clear Fields&quot;);</span>
-<span class="nc" id="L68">		changeDescBut = new JButton(&quot;Change Description&quot;);</span>
-<span class="nc" id="L69">		changePickBut = new JButton(&quot;Change pickup&quot;);</span>
-<span class="nc" id="L70">		goBackBut = new JButton(&quot;go back&quot;);</span>
+<span class="fc" id="L67">		clearBut = new JButton(&quot;Clear Fields&quot;);</span>
+<span class="fc" id="L68">		changeDescBut = new JButton(&quot;Change Description&quot;);</span>
+<span class="fc" id="L69">		changePickBut = new JButton(&quot;Change pickup&quot;);</span>
+<span class="fc" id="L70">		goBackBut = new JButton(&quot;go back&quot;);</span>
 		
-<span class="nc" id="L72">		changeDescBut.addActionListener(lForButton);</span>
-<span class="nc" id="L73">		changePickBut.addActionListener(lForButton);</span>
-<span class="nc" id="L74">		goBackBut.addActionListener(lForButton);</span>
-<span class="nc" id="L75">		clearBut.addActionListener(lForButton);</span>
+<span class="fc" id="L72">		changeDescBut.addActionListener(lForButton);</span>
+<span class="fc" id="L73">		changePickBut.addActionListener(lForButton);</span>
+<span class="fc" id="L74">		goBackBut.addActionListener(lForButton);</span>
+<span class="fc" id="L75">		clearBut.addActionListener(lForButton);</span>
 		
-<span class="nc" id="L77">		gridConstraints.gridwidth = 20;</span>
-<span class="nc" id="L78">		gridConstraints.gridx = 1;</span>
-<span class="nc" id="L79">		gridConstraints.gridy = 1;</span>
-<span class="nc" id="L80">		thePanel.add(valueField,gridConstraints);</span>
-<span class="nc" id="L81">		gridConstraints.gridwidth = 1;</span>
-<span class="nc" id="L82">		gridConstraints.gridy = 2;</span>
-<span class="nc" id="L83">		gridConstraints.gridx = 1;</span>
-<span class="nc" id="L84">		thePanel.add(idField,gridConstraints);</span>
-<span class="nc" id="L85">		gridConstraints.gridwidth = 1;</span>
-<span class="nc" id="L86">		gridConstraints.gridx = 5;</span>
-<span class="nc" id="L87">		thePanel.add(changeDescBut,gridConstraints);</span>
-<span class="nc" id="L88">		gridConstraints.gridwidth = 1;</span>
-<span class="nc" id="L89">		gridConstraints.gridx = 9;</span>
-<span class="nc" id="L90">		thePanel.add(clearBut,gridConstraints);</span>
-<span class="nc" id="L91">		gridConstraints.gridwidth = 1;</span>
-<span class="nc" id="L92">		gridConstraints.gridy = 3;</span>
-<span class="nc" id="L93">		gridConstraints.gridx = 1;</span>
-<span class="nc" id="L94">		thePanel.add(spinner,gridConstraints);</span>
-<span class="nc" id="L95">		gridConstraints.gridx = 5;</span>
-<span class="nc" id="L96">		thePanel.add(changePickBut,gridConstraints);</span>
-<span class="nc" id="L97">		gridConstraints.gridwidth = 1;</span>
-<span class="nc" id="L98">		gridConstraints.gridx = 9;</span>
-<span class="nc" id="L99">		thePanel.add(goBackBut,gridConstraints);</span>
+<span class="fc" id="L77">		gridConstraints.gridwidth = 20;</span>
+<span class="fc" id="L78">		gridConstraints.gridx = 1;</span>
+<span class="fc" id="L79">		gridConstraints.gridy = 1;</span>
+<span class="fc" id="L80">		thePanel.add(valueField,gridConstraints);</span>
+<span class="fc" id="L81">		gridConstraints.gridwidth = 1;</span>
+<span class="fc" id="L82">		gridConstraints.gridy = 2;</span>
+<span class="fc" id="L83">		gridConstraints.gridx = 1;</span>
+<span class="fc" id="L84">		thePanel.add(idField,gridConstraints);</span>
+<span class="fc" id="L85">		gridConstraints.gridwidth = 1;</span>
+<span class="fc" id="L86">		gridConstraints.gridx = 5;</span>
+<span class="fc" id="L87">		thePanel.add(changeDescBut,gridConstraints);</span>
+<span class="fc" id="L88">		gridConstraints.gridwidth = 1;</span>
+<span class="fc" id="L89">		gridConstraints.gridx = 9;</span>
+<span class="fc" id="L90">		thePanel.add(clearBut,gridConstraints);</span>
+<span class="fc" id="L91">		gridConstraints.gridwidth = 1;</span>
+<span class="fc" id="L92">		gridConstraints.gridy = 3;</span>
+<span class="fc" id="L93">		gridConstraints.gridx = 1;</span>
+<span class="fc" id="L94">		thePanel.add(spinner,gridConstraints);</span>
+<span class="fc" id="L95">		gridConstraints.gridx = 5;</span>
+<span class="fc" id="L96">		thePanel.add(changePickBut,gridConstraints);</span>
+<span class="fc" id="L97">		gridConstraints.gridwidth = 1;</span>
+<span class="fc" id="L98">		gridConstraints.gridx = 9;</span>
+<span class="fc" id="L99">		thePanel.add(goBackBut,gridConstraints);</span>
 		
-<span class="nc" id="L101">		this.add(thePanel);</span>
+<span class="fc" id="L101">		this.add(thePanel);</span>
 		
-<span class="nc" id="L103">		this.setVisible(true);</span>
+<span class="fc" id="L103">		this.setVisible(true);</span>
 		
-<span class="nc" id="L105">		idField.requestFocus();</span>
-<span class="nc" id="L106">	}</span>
+<span class="fc" id="L105">		idField.requestFocus();</span>
+<span class="fc" id="L106">	}</span>
 	
-<span class="nc" id="L108">	private class ListenForButton implements ActionListener{</span>
+<span class="fc" id="L108">	private class ListenForButton implements ActionListener{</span>
 
 		public void actionPerformed(ActionEvent e) {
-<span class="nc bnc" id="L111" title="All 2 branches missed.">			if(e.getSource() == goBackBut){</span>
-<span class="nc" id="L112">				dispose();</span>
-<span class="nc" id="L113">				new UnitLanding(userSession, userSessionData);</span>
-<span class="nc bnc" id="L114" title="All 2 branches missed.">			}else if(e.getSource() == changeDescBut){</span>
-<span class="nc bnc" id="L115" title="All 4 branches missed.">				if(idField.getText().isEmpty() || valueField.getText().isEmpty()){</span>
-<span class="nc" id="L116">					JOptionPane.showMessageDialog(UnitAlter.this, &quot;Fields cannot be empty, Input required: ID, Description&quot;, &quot;Error&quot;</span>
+<span class="fc bfc" id="L111" title="All 2 branches covered.">			if(e.getSource() == goBackBut){</span>
+<span class="fc" id="L112">				dispose();</span>
+<span class="fc" id="L113">				new UnitLanding(userSession, userSessionData);</span>
+<span class="fc bfc" id="L114" title="All 2 branches covered.">			}else if(e.getSource() == changeDescBut){</span>
+<span class="pc bpc" id="L115" title="1 of 4 branches missed.">				if(idField.getText().isEmpty() || valueField.getText().isEmpty()){</span>
+<span class="fc" id="L116">					JOptionPane.showMessageDialog(UnitAlter.this, &quot;Fields cannot be empty, Input required: ID, Description&quot;, &quot;Error&quot;</span>
 							, JOptionPane.ERROR_MESSAGE);
 				}else{
 					try{					
-<span class="nc" id="L120">						int unitId = Integer.parseInt(idField.getText());</span>
-<span class="nc" id="L121">						String newDescription = valueField.getText();</span>
-<span class="nc" id="L122">						boolean check = theUnit.changeDescription(newDescription, unitId);</span>
-<span class="nc bnc" id="L123" title="All 2 branches missed.">						if(check == true){</span>
-<span class="nc" id="L124">							JOptionPane.showMessageDialog(UnitAlter.this, &quot;The description for Unit &quot; + unitId + &quot; was sucesfully updated&quot;, &quot;Information&quot;, JOptionPane.INFORMATION_MESSAGE);</span>
+<span class="fc" id="L120">						int unitId = Integer.parseInt(idField.getText());</span>
+<span class="fc" id="L121">						String newDescription = valueField.getText();</span>
+<span class="fc" id="L122">						boolean check = theUnit.changeDescription(newDescription, unitId);</span>
+<span class="pc bpc" id="L123" title="1 of 2 branches missed.">						if(check == true){</span>
+<span class="fc" id="L124">							JOptionPane.showMessageDialog(UnitAlter.this, &quot;The description for Unit &quot; + unitId + &quot; was sucesfully updated&quot;, &quot;Information&quot;, JOptionPane.INFORMATION_MESSAGE);</span>
 						}else{
 <span class="nc" id="L126">							JOptionPane.showMessageDialog(UnitAlter.this, &quot;There was an error connecting to the database, Please try again&quot;, &quot;Error&quot;</span>
 									, JOptionPane.ERROR_MESSAGE);
 						}
-<span class="nc" id="L129">					}catch(Exception NumberFormatException){</span>
-<span class="nc" id="L130">						JOptionPane.showMessageDialog(UnitAlter.this, &quot;ID field must be numeric: ID&quot;, &quot;Error&quot;</span>
+<span class="fc" id="L129">					}catch(Exception NumberFormatException){</span>
+<span class="fc" id="L130">						JOptionPane.showMessageDialog(UnitAlter.this, &quot;ID field must be numeric: ID&quot;, &quot;Error&quot;</span>
 								, JOptionPane.ERROR_MESSAGE);
-<span class="nc" id="L132">					}</span>
+<span class="fc" id="L132">					}</span>
 				}
-<span class="nc bnc" id="L134" title="All 2 branches missed.">			}else if(e.getSource() == changePickBut){</span>
-<span class="nc" id="L135">				Date todaysDate = new Date();</span>
-<span class="nc" id="L136">				DateFormat dateFormat = new SimpleDateFormat(&quot;dd/MM/yyyy&quot;);</span>
-<span class="nc" id="L137">				Calendar cal = Calendar.getInstance();</span>
+<span class="fc bfc" id="L134" title="All 2 branches covered.">			}else if(e.getSource() == changePickBut){</span>
+<span class="fc" id="L135">				Date todaysDate = new Date();</span>
+<span class="fc" id="L136">				DateFormat dateFormat = new SimpleDateFormat(&quot;dd/MM/yyyy&quot;);</span>
+<span class="fc" id="L137">				Calendar cal = Calendar.getInstance();</span>
 				
-<span class="nc bnc" id="L139" title="All 2 branches missed.">				if(idField.getText().isEmpty()){</span>
+<span class="pc bpc" id="L139" title="1 of 2 branches missed.">				if(idField.getText().isEmpty()){</span>
 <span class="nc" id="L140">					JOptionPane.showMessageDialog(UnitAlter.this, &quot;Field cannot be empty, Input required: ID&quot;, &quot;Error&quot;</span>
 							, JOptionPane.ERROR_MESSAGE);
 				}else{
 					try{
-<span class="nc" id="L144">						String newPickupDate = dateFormat.format((spinner.getValue()));</span>
-<span class="nc" id="L145">						int unitId = Integer.parseInt(idField.getText());</span>
-<span class="nc" id="L146">						boolean check = theUnit.changePickupDate(newPickupDate, unitId);</span>
-<span class="nc bnc" id="L147" title="All 2 branches missed.">						if(check == true){</span>
-<span class="nc" id="L148">							JOptionPane.showMessageDialog(UnitAlter.this, &quot;The pick up date for Unit &quot; + unitId + &quot; was sucesfully updated&quot;, &quot;Information&quot;, JOptionPane.INFORMATION_MESSAGE);</span>
+<span class="fc" id="L144">						String newPickupDate = dateFormat.format((spinner.getValue()));</span>
+<span class="fc" id="L145">						int unitId = Integer.parseInt(idField.getText());</span>
+<span class="fc" id="L146">						boolean check = theUnit.changePickupDate(newPickupDate, unitId);</span>
+<span class="pc bpc" id="L147" title="1 of 2 branches missed.">						if(check == true){</span>
+<span class="fc" id="L148">							JOptionPane.showMessageDialog(UnitAlter.this, &quot;The pick up date for Unit &quot; + unitId + &quot; was sucesfully updated&quot;, &quot;Information&quot;, JOptionPane.INFORMATION_MESSAGE);</span>
 						}else{
 <span class="nc" id="L150">							JOptionPane.showMessageDialog(UnitAlter.this, &quot;There was an error connecting to the database, Please try again&quot;, &quot;Error&quot;</span>
 									, JOptionPane.ERROR_MESSAGE);
 						}
-<span class="nc" id="L153">					}catch(Exception NumberFormatException){</span>
-<span class="nc" id="L154">						JOptionPane.showMessageDialog(UnitAlter.this, &quot;ID field must be numeric: ID&quot;, &quot;Error&quot;</span>
+<span class="fc" id="L153">					}catch(Exception NumberFormatException){</span>
+<span class="fc" id="L154">						JOptionPane.showMessageDialog(UnitAlter.this, &quot;ID field must be numeric: ID&quot;, &quot;Error&quot;</span>
 								, JOptionPane.ERROR_MESSAGE);
-<span class="nc" id="L156">					}	</span>
+<span class="fc" id="L156">					}	</span>
 				}
-<span class="nc bnc" id="L158" title="All 2 branches missed.">			}else if(e.getSource() == clearBut){</span>
-<span class="nc" id="L159">				idField.setText(&quot;&quot;);</span>
-<span class="nc" id="L160">				valueField.setText(&quot;&quot;);</span>
-<span class="nc" id="L161">				 JOptionPane.showMessageDialog(UnitAlter.this,&quot;All fields have now been cleared&quot;,</span>
+<span class="pc bpc" id="L158" title="1 of 2 branches missed.">			}else if(e.getSource() == clearBut){</span>
+<span class="fc" id="L159">				idField.setText(&quot;&quot;);</span>
+<span class="fc" id="L160">				valueField.setText(&quot;&quot;);</span>
+<span class="fc" id="L161">				 JOptionPane.showMessageDialog(UnitAlter.this,&quot;All fields have now been cleared&quot;,</span>
 						 &quot;Solution&quot;, JOptionPane.INFORMATION_MESSAGE);
 			}
-<span class="nc" id="L164">		}</span>
+<span class="fc" id="L164">		}</span>
 	}
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>

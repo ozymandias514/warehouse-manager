@@ -140,100 +140,96 @@ public class CustomerLanding extends JFrame {
 				// list all items button ------------------------------
 <span class="nc bnc" id="L141" title="All 2 branches missed.">			}else if(e.getSource() == listButton){</span>
 <span class="nc" id="L142">				ArrayList&lt;String&gt; userData = new ArrayList&lt;String&gt;();</span>
-<span class="nc" id="L143">				userData = theCustomer.displayData();</span>
+				try {
+<span class="nc" id="L144">					userData = theCustomer.displayData();</span>
+<span class="nc" id="L145">				} catch (SQLException e1) {</span>
+<span class="nc" id="L146">				}</span>
 			
-<span class="nc" id="L145">		  		textArea1.setText(&quot;Customers in the system\n&quot;);</span>
-<span class="nc" id="L146">		  		textArea1.append(&quot;-----------------------------------------------------------&quot;);</span>
+<span class="nc" id="L148">		  		textArea1.setText(&quot;Customers in the system\n&quot;);</span>
+<span class="nc" id="L149">		  		textArea1.append(&quot;-----------------------------------------------------------&quot;);</span>
 					
-<span class="nc bnc" id="L148" title="All 2 branches missed.">		  		for(int i = 0; i &lt; userData.size(); i++){</span>
-<span class="nc" id="L149">	  				textArea1.append(&quot;\nid	:  &quot; + userData.get(i));</span>
-<span class="nc" id="L150">	  				i++;</span>
-<span class="nc" id="L151">	  				textArea1.append(&quot;\nfirst Name	:  &quot; + userData.get(i));</span>
-<span class="nc" id="L152">	  				i++;</span>
-<span class="nc" id="L153">	  				textArea1.append(&quot;\nLast Name	:  &quot; + userData.get(i));</span>
-<span class="nc" id="L154">	  				i++;</span>
-<span class="nc" id="L155">	  				textArea1.append(&quot;\nemail	:  &quot; + userData.get(i));</span>
-<span class="nc" id="L156">	  				textArea1.append(&quot;\n-----------------------------------------------------------&quot;);</span>
+<span class="nc bnc" id="L151" title="All 2 branches missed.">		  		for(int i = 0; i &lt; userData.size(); i++){</span>
+<span class="nc" id="L152">	  				textArea1.append(&quot;\nid	:  &quot; + userData.get(i));</span>
+<span class="nc" id="L153">	  				i++;</span>
+<span class="nc" id="L154">	  				textArea1.append(&quot;\nfirst Name	:  &quot; + userData.get(i));</span>
+<span class="nc" id="L155">	  				i++;</span>
+<span class="nc" id="L156">	  				textArea1.append(&quot;\nLast Name	:  &quot; + userData.get(i));</span>
+<span class="nc" id="L157">	  				i++;</span>
+<span class="nc" id="L158">	  				textArea1.append(&quot;\nemail	:  &quot; + userData.get(i));</span>
+<span class="nc" id="L159">	  				textArea1.append(&quot;\n-----------------------------------------------------------&quot;);</span>
 		  		}
-		  		
-		  				//int id = rs.getInt(&quot;id&quot;);
-		  				//String firstName = rs.getString(&quot;firstName&quot;);
-		  				//String lastName = rs.getString(&quot;lastName&quot;);
-		  				//String email = rs.getString(&quot;email&quot;);
-		  				//textArea1.append(&quot;\nid	:  &quot; + id 
-				  	//		+ &quot;\nfirst Name	:  &quot; + firstName
-				  	//		+ &quot;\nLast Name	:  &quot; + lastName
-				  	//		+ &quot;\nemail	:  &quot; + email
-				  	//		+ &quot;\n-----------------------------------------------------------&quot;);
-					
-		
+		  				
 				//get by email button ------------------------------------------
-<span class="nc bnc" id="L171" title="All 2 branches missed.">			}else if(e.getSource() == emailButton){</span>
+<span class="nc bnc" id="L163" title="All 2 branches missed.">			}else if(e.getSource() == emailButton){</span>
 				
-<span class="nc bnc" id="L173" title="All 2 branches missed.">				if(textResult.getText().isEmpty()){</span>
-<span class="nc" id="L174">					JOptionPane.showMessageDialog(CustomerLanding.this, &quot;Fields cannot be empty, Input required: email&quot;, &quot;Error&quot;</span>
+<span class="nc bnc" id="L165" title="All 2 branches missed.">				if(textResult.getText().isEmpty()){</span>
+<span class="nc" id="L166">					JOptionPane.showMessageDialog(CustomerLanding.this, &quot;Fields cannot be empty, Input required: email&quot;, &quot;Error&quot;</span>
 							, JOptionPane.ERROR_MESSAGE);
 				}else{
-<span class="nc" id="L177">					String email = textResult.getText();</span>
-<span class="nc" id="L178">					String data[] = theCustomer.getDataByEmail(email);</span>
-<span class="nc" id="L179">					textArea1.setText(&quot;The user id pertaining to that email is: &quot; + data[0] +</span>
+<span class="nc" id="L169">					String email = textResult.getText();</span>
+<span class="nc" id="L170">					String data[] = null;</span>
+					try {
+<span class="nc" id="L172">						data = theCustomer.getDataByEmail(email);</span>
+<span class="nc" id="L173">					} catch (SQLException e1) {</span>
+<span class="nc" id="L174">					}</span>
+<span class="nc" id="L175">					textArea1.setText(&quot;The user id pertaining to that email is: &quot; + data[0] +</span>
 						&quot;\nFirst Name: &quot; + data[1] + &quot;\nLast Name: &quot; + data[2] + &quot;\nemail: &quot; + data[3]);	
-<span class="nc" id="L181">				}</span>
+<span class="nc" id="L177">				}</span>
 				// get by id button ----------------------------------
-<span class="nc bnc" id="L183" title="All 2 branches missed.">			}else if(e.getSource() == idButton){</span>
+<span class="nc bnc" id="L179" title="All 2 branches missed.">			}else if(e.getSource() == idButton){</span>
 				
 				
-<span class="nc bnc" id="L186" title="All 2 branches missed.">				if(textResult.getText().isEmpty()){</span>
-<span class="nc" id="L187">					JOptionPane.showMessageDialog(CustomerLanding.this, &quot;Fields cannot be empty, Input required: Customer ID&quot;, &quot;Error&quot;</span>
+<span class="nc bnc" id="L182" title="All 2 branches missed.">				if(textResult.getText().isEmpty()){</span>
+<span class="nc" id="L183">					JOptionPane.showMessageDialog(CustomerLanding.this, &quot;Fields cannot be empty, Input required: Customer ID&quot;, &quot;Error&quot;</span>
 							, JOptionPane.ERROR_MESSAGE);
 				}else{
 					try{
-<span class="nc" id="L191">						int userId = Integer.parseInt(textResult.getText());</span>
-<span class="nc" id="L192">						int[] largeWare= theCustomer.largeUnitsByCustomer(userId);</span>
-<span class="nc" id="L193">						int[] smallWare= theCustomer.smallUnitsByCustomer(userId);</span>
-<span class="nc" id="L194">						String[] customerData = theCustomer.getCustomerData(userId);</span>
-<span class="nc" id="L195">						int largeLength = largeWare.length;</span>
-<span class="nc" id="L196">						int smallLength = smallWare.length;</span>
+<span class="nc" id="L187">						int userId = Integer.parseInt(textResult.getText());</span>
+<span class="nc" id="L188">						int[] largeWare= theCustomer.largeUnitsByCustomer(userId);</span>
+<span class="nc" id="L189">						int[] smallWare= theCustomer.smallUnitsByCustomer(userId);</span>
+<span class="nc" id="L190">						String[] customerData = theCustomer.getCustomerData(userId);</span>
+<span class="nc" id="L191">						int largeLength = largeWare.length;</span>
+<span class="nc" id="L192">						int smallLength = smallWare.length;</span>
 						
-<span class="nc" id="L198">						textArea1.setText(&quot;First Name: &quot;+ customerData[0] + &quot;\nLast Name : &quot; </span>
+<span class="nc" id="L194">						textArea1.setText(&quot;First Name: &quot;+ customerData[0] + &quot;\nLast Name : &quot; </span>
 						+ customerData[1] + &quot;\nemail: &quot; +customerData[2]);
 						
-<span class="nc" id="L201">						textArea1.append(&quot;\nLarge Units owned by this customer: &quot;);</span>
-<span class="nc" id="L202">						int zero= 0;</span>
-<span class="nc bnc" id="L203" title="All 2 branches missed.">						for(int x = 0;x &lt; largeLength; x++){</span>
-<span class="nc bnc" id="L204" title="All 2 branches missed.">							if(largeWare[x] != 0){</span>
-<span class="nc" id="L205">								zero++;</span>
-<span class="nc" id="L206">								textArea1.append(largeWare[x] + &quot;, &quot;);</span>
+<span class="nc" id="L197">						textArea1.append(&quot;\nLarge Units owned by this customer: &quot;);</span>
+<span class="nc" id="L198">						int zero= 0;</span>
+<span class="nc bnc" id="L199" title="All 2 branches missed.">						for(int x = 0;x &lt; largeLength; x++){</span>
+<span class="nc bnc" id="L200" title="All 2 branches missed.">							if(largeWare[x] != 0){</span>
+<span class="nc" id="L201">								zero++;</span>
+<span class="nc" id="L202">								textArea1.append(largeWare[x] + &quot;, &quot;);</span>
 							}
 						}
-<span class="nc bnc" id="L209" title="All 2 branches missed.">						if(zero == 0){</span>
-<span class="nc" id="L210">							textArea1.append(&quot;none&quot;);</span>
+<span class="nc bnc" id="L205" title="All 2 branches missed.">						if(zero == 0){</span>
+<span class="nc" id="L206">							textArea1.append(&quot;none&quot;);</span>
 						}
 						
-<span class="nc" id="L213">						textArea1.append(&quot;\nSmall Units owned by this customer: &quot;);</span>
-<span class="nc" id="L214">						int zero2= 0;</span>
-<span class="nc bnc" id="L215" title="All 2 branches missed.">						for(int y = 0;y &lt; smallLength; y++){</span>
-<span class="nc bnc" id="L216" title="All 2 branches missed.">							if(smallWare[y] != 0){</span>
-<span class="nc" id="L217">								zero2++;</span>
-<span class="nc" id="L218">								textArea1.append(smallWare[y] + &quot;, &quot;);</span>
+<span class="nc" id="L209">						textArea1.append(&quot;\nSmall Units owned by this customer: &quot;);</span>
+<span class="nc" id="L210">						int zero2= 0;</span>
+<span class="nc bnc" id="L211" title="All 2 branches missed.">						for(int y = 0;y &lt; smallLength; y++){</span>
+<span class="nc bnc" id="L212" title="All 2 branches missed.">							if(smallWare[y] != 0){</span>
+<span class="nc" id="L213">								zero2++;</span>
+<span class="nc" id="L214">								textArea1.append(smallWare[y] + &quot;, &quot;);</span>
 							}
 						}
-<span class="nc bnc" id="L221" title="All 2 branches missed.">						if(zero2 == 0){</span>
-<span class="nc" id="L222">							textArea1.append(&quot;none&quot;);</span>
+<span class="nc bnc" id="L217" title="All 2 branches missed.">						if(zero2 == 0){</span>
+<span class="nc" id="L218">							textArea1.append(&quot;none&quot;);</span>
 						}
-<span class="nc" id="L224">					}catch(Exception numberFormatException){</span>
-<span class="nc" id="L225">						JOptionPane.showMessageDialog(CustomerLanding.this, &quot;Field cannot be string, Input required: Customer ID&quot;, &quot;Error&quot;</span>
+<span class="nc" id="L220">					}catch(Exception numberFormatException){</span>
+<span class="nc" id="L221">						JOptionPane.showMessageDialog(CustomerLanding.this, &quot;Field cannot be string, Input required: Customer ID&quot;, &quot;Error&quot;</span>
 								, JOptionPane.ERROR_MESSAGE);
-<span class="nc" id="L227">					}</span>
+<span class="nc" id="L223">					}</span>
 				}
 					// clear screen button ------------------------------------
-<span class="nc bnc" id="L230" title="All 2 branches missed.">				}else if(e.getSource() == clearFields){</span>
-<span class="nc" id="L231">					textArea1.setText(&quot;&quot;);</span>
-<span class="nc" id="L232">					textResult.setText(&quot;&quot;);</span>
-<span class="nc" id="L233">					 JOptionPane.showMessageDialog(CustomerLanding.this,&quot;All fields have now been cleared&quot;,</span>
+<span class="nc bnc" id="L226" title="All 2 branches missed.">				}else if(e.getSource() == clearFields){</span>
+<span class="nc" id="L227">					textArea1.setText(&quot;&quot;);</span>
+<span class="nc" id="L228">					textResult.setText(&quot;&quot;);</span>
+<span class="nc" id="L229">					 JOptionPane.showMessageDialog(CustomerLanding.this,&quot;All fields have now been cleared&quot;,</span>
 							 &quot;Solution&quot;, JOptionPane.INFORMATION_MESSAGE);
 				}
-<span class="nc" id="L236">		}</span>
+<span class="nc" id="L232">		}</span>
 	}
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>

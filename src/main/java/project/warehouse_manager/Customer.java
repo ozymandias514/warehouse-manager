@@ -8,30 +8,6 @@ public class Customer extends DatabaseHandler{
 	public Customer() {
 		
 	}
-	
-	//obtains all the data from all customers
-  	public boolean getDataFromCustomer() throws SQLException{
-  	
-  			rs = st.executeQuery("SELECT * FROM customer;");
-  			System.out.println("id    firstName         lastName        email");
-  			System.out.print("---   ------------      -----------     ----------");
-  			System.out.println();
-  			while (rs.next()) {
-  				  int id = rs.getInt("id");
-  				  String firstName = rs.getString("firstName");
-  				  String lastName = rs.getString("lastName");
-  				  String email = rs.getString("email");
-  				  System.out.printf("%d     %s		%s		%s", id, firstName, lastName, email);
-  				  System.out.println();
-  				}
-  			try{
-  			rs.close();
-			st.close();
-  			}catch(Exception e){
-  				
-  			}
-  			return true;
-  	}
   	
     //obtains all data from customers and returns the resultSet
   	public ArrayList<String> displayData() throws SQLException{

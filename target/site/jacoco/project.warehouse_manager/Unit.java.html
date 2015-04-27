@@ -13,9 +13,9 @@ public class Unit extends DatabaseHandler{
 		
 <span class="fc" id="L14">	}</span>
 	
-  	public ArrayList&lt;String&gt; displayLargeWarehouseData(){
+  	public ArrayList&lt;String&gt; displayLargeWarehouseData() throws SQLException{
 <span class="fc" id="L17">  		ArrayList&lt;String&gt; largeUnitData = new ArrayList&lt;String&gt;();</span>
-  		try {
+  
 <span class="fc" id="L19">  			rs = st.executeQuery(&quot;SELECT * FROM units WHERE warehouseId = 1;&quot;);</span>
 <span class="fc bfc" id="L20" title="All 2 branches covered.">  			while(rs.next()){ </span>
 <span class="fc" id="L21">  				largeUnitData.add(rs.getString(&quot;id&quot;));</span>
@@ -29,29 +29,23 @@ public class Unit extends DatabaseHandler{
 <span class="fc" id="L29">  				largeUnitData.add(rs.getString(&quot;inQueue&quot;));</span>
 <span class="fc" id="L30">  				largeUnitData.add(rs.getString(&quot;positionInQueue&quot;));</span>
   			}
-<span class="fc" id="L32">  			return largeUnitData;</span>
-<span class="nc" id="L33">  		} catch (SQLException e) {</span>
-<span class="nc" id="L34">  			e.printStackTrace();</span>
-<span class="nc" id="L35">  			return null;</span>
-  		}finally{
-<span class="nc" id="L37">  			try{</span>
-<span class="pc" id="L38">  				rs.close();</span>
-  				//st.close();
+  			try{
+<span class="fc" id="L33">  				rs.close();</span>
+<span class="fc" id="L34">  				st.close();</span>
   				}
-<span class="nc" id="L41">  			catch(Exception e){</span>
-<span class="nc" id="L42">  				System.out.println(&quot;Error closing the database&quot;);</span>
-<span class="pc" id="L43">  			}</span>
-  		}
+<span class="nc" id="L36">  			catch(Exception e){</span>
+<span class="fc" id="L37">  			}</span>
+<span class="fc" id="L38">  			return largeUnitData;</span>
   	}
   	
   	public ArrayList&lt;UnitData&gt; getAllLargeWarehouseUnits() throws ClassNotFoundException, SQLException{
 		
-<span class="fc" id="L49">  		String sql = &quot;SELECT * FROM units WHERE warehouseId = 1&quot;;</span>
+<span class="fc" id="L43">  		String sql = &quot;SELECT * FROM units WHERE warehouseId = 1&quot;;</span>
   	    ResultSet rst;
-<span class="fc" id="L51">  	    rst = st.executeQuery(sql);</span>
-<span class="fc" id="L52">  	    ArrayList&lt;UnitData&gt; UnitsList = new ArrayList&lt;UnitData&gt;();</span>
-<span class="fc bfc" id="L53" title="All 2 branches covered.">  		while(rst.next()){</span>
-<span class="fc" id="L54">  			UnitData unitData = new UnitData(rst.getInt(&quot;id&quot;)</span>
+<span class="fc" id="L45">  	    rst = st.executeQuery(sql);</span>
+<span class="fc" id="L46">  	    ArrayList&lt;UnitData&gt; UnitsList = new ArrayList&lt;UnitData&gt;();</span>
+<span class="fc bfc" id="L47" title="All 2 branches covered.">  		while(rst.next()){</span>
+<span class="fc" id="L48">  			UnitData unitData = new UnitData(rst.getInt(&quot;id&quot;)</span>
   					,rst.getString(&quot;description&quot;)
   					,rst.getInt(&quot;customerId&quot;)
   					,rst.getInt(&quot;warehouseId&quot;)
@@ -60,20 +54,19 @@ public class Unit extends DatabaseHandler{
   					,rst.getString(&quot;pickupDate&quot;)
   					,rst.getInt(&quot;inQueue&quot;)
   					);
-<span class="fc" id="L63">  			UnitsList.add(unitData);</span>
-<span class="fc" id="L64">  		}</span>
-  		
-<span class="fc" id="L66">  		return UnitsList;</span>
+<span class="fc" id="L57">  			UnitsList.add(unitData);</span>
+<span class="fc" id="L58">  		}</span>
+<span class="fc" id="L59">  		return UnitsList;</span>
   	}
   	
   	public ArrayList&lt;UnitData&gt; getAllSmallWarehouseUnits() throws ClassNotFoundException, SQLException{
 		
-<span class="fc" id="L71">  		String sql = &quot;SELECT * FROM units WHERE warehouseId = 2&quot;;</span>
+<span class="fc" id="L64">  		String sql = &quot;SELECT * FROM units WHERE warehouseId = 2&quot;;</span>
   	    ResultSet rst;
-<span class="fc" id="L73">  	    rst = st.executeQuery(sql);</span>
-<span class="fc" id="L74">  	    ArrayList&lt;UnitData&gt; UnitsList = new ArrayList&lt;UnitData&gt;();</span>
-<span class="fc bfc" id="L75" title="All 2 branches covered.">  		while(rst.next()){</span>
-<span class="fc" id="L76">  			UnitData unitData = new UnitData(rst.getInt(&quot;id&quot;)</span>
+<span class="fc" id="L66">  	    rst = st.executeQuery(sql);</span>
+<span class="fc" id="L67">  	    ArrayList&lt;UnitData&gt; UnitsList = new ArrayList&lt;UnitData&gt;();</span>
+<span class="fc bfc" id="L68" title="All 2 branches covered.">  		while(rst.next()){</span>
+<span class="fc" id="L69">  			UnitData unitData = new UnitData(rst.getInt(&quot;id&quot;)</span>
   					,rst.getString(&quot;description&quot;)
   					,rst.getInt(&quot;customerId&quot;)
   					,rst.getInt(&quot;warehouseId&quot;)
@@ -82,295 +75,201 @@ public class Unit extends DatabaseHandler{
   					,rst.getString(&quot;pickupDate&quot;)
   					,rst.getInt(&quot;inQueue&quot;)
   					);
-<span class="fc" id="L85">  			UnitsList.add(unitData);</span>
-<span class="fc" id="L86">  		}</span>
+<span class="fc" id="L78">  			UnitsList.add(unitData);</span>
+<span class="fc" id="L79">  		}</span>
   		
-<span class="fc" id="L88">  		return UnitsList;</span>
+<span class="fc" id="L81">  		return UnitsList;</span>
   	}
   	
-  	public ArrayList&lt;String&gt; displaySmallWarehouseData(){
-<span class="fc" id="L92">  		ArrayList&lt;String&gt; smallUnitData = new ArrayList&lt;String&gt;();</span>
-  		try {
-<span class="fc" id="L94">  			rs = st.executeQuery(&quot;SELECT * FROM units WHERE warehouseId = 2;&quot;);</span>
-<span class="fc bfc" id="L95" title="All 2 branches covered.">  			while(rs.next()){ </span>
-<span class="fc" id="L96">  				smallUnitData.add(rs.getString(&quot;id&quot;));</span>
-<span class="fc" id="L97">  				smallUnitData.add(rs.getString(&quot;description&quot;));</span>
-<span class="fc" id="L98">  				smallUnitData.add(rs.getString(&quot;customerId&quot;));</span>
-<span class="fc" id="L99">  				smallUnitData.add(rs.getString(&quot;warehouseId&quot;));</span>
-<span class="fc" id="L100">  				smallUnitData.add(rs.getString(&quot;occupied&quot;));</span>
-<span class="fc" id="L101">  				smallUnitData.add(rs.getString(&quot;dateReceived&quot;));</span>
-<span class="fc" id="L102">  				smallUnitData.add(rs.getString(&quot;pickupDate&quot;));</span>
-<span class="fc" id="L103">  				smallUnitData.add(rs.getString(&quot;priority&quot;));</span>
-<span class="fc" id="L104">  				smallUnitData.add(rs.getString(&quot;inQueue&quot;));</span>
-<span class="fc" id="L105">  				smallUnitData.add(rs.getString(&quot;positionInQueue&quot;));</span>
+  	public ArrayList&lt;String&gt; displaySmallWarehouseData() throws SQLException{
+<span class="fc" id="L85">  		ArrayList&lt;String&gt; smallUnitData = new ArrayList&lt;String&gt;();</span>
+  
+<span class="fc" id="L87">  			rs = st.executeQuery(&quot;SELECT * FROM units WHERE warehouseId = 2;&quot;);</span>
+<span class="fc bfc" id="L88" title="All 2 branches covered.">  			while(rs.next()){ </span>
+<span class="fc" id="L89">  				smallUnitData.add(rs.getString(&quot;id&quot;));</span>
+<span class="fc" id="L90">  				smallUnitData.add(rs.getString(&quot;description&quot;));</span>
+<span class="fc" id="L91">  				smallUnitData.add(rs.getString(&quot;customerId&quot;));</span>
+<span class="fc" id="L92">  				smallUnitData.add(rs.getString(&quot;warehouseId&quot;));</span>
+<span class="fc" id="L93">  				smallUnitData.add(rs.getString(&quot;occupied&quot;));</span>
+<span class="fc" id="L94">  				smallUnitData.add(rs.getString(&quot;dateReceived&quot;));</span>
+<span class="fc" id="L95">  				smallUnitData.add(rs.getString(&quot;pickupDate&quot;));</span>
+<span class="fc" id="L96">  				smallUnitData.add(rs.getString(&quot;priority&quot;));</span>
+<span class="fc" id="L97">  				smallUnitData.add(rs.getString(&quot;inQueue&quot;));</span>
+<span class="fc" id="L98">  				smallUnitData.add(rs.getString(&quot;positionInQueue&quot;));</span>
   			}
-<span class="fc" id="L107">  			return smallUnitData;</span>
-<span class="nc" id="L108">  		} catch (SQLException e) {</span>
-<span class="nc" id="L109">  			e.printStackTrace();</span>
-<span class="nc" id="L110">  			return null;</span>
-  		}finally{
-<span class="nc" id="L112">  			try{</span>
-<span class="pc" id="L113">  				rs.close();</span>
+  			
+  			try{
+<span class="fc" id="L102">  				rs.close();</span>
   				//st.close();
   				}
-<span class="nc" id="L116">  			catch(Exception e){</span>
-<span class="nc" id="L117">  				System.out.println(&quot;Error closing the database&quot;);</span>
-<span class="pc" id="L118">  			}</span>
-  		}
+<span class="nc" id="L105">  			catch(Exception e){</span>
+<span class="nc" id="L106">  				System.out.println(&quot;Error closing the database&quot;);</span>
+<span class="fc" id="L107">  			}</span>
+<span class="fc" id="L108">  			return smallUnitData;</span>
   	}
-	//gets all data from units
-	public boolean getData(){
-		try {
-<span class="fc" id="L124">			rs = st.executeQuery(&quot;SELECT * FROM units;&quot;);</span>
-<span class="fc bfc" id="L125" title="All 2 branches covered.">			while (rs.next()) {</span>
-				
-<span class="fc" id="L127">				  int id 				= rs.getInt(&quot;id&quot;);</span>
-<span class="fc" id="L128">				  String description 	= rs.getString(&quot;description&quot;);</span>
-<span class="fc" id="L129">				  int customerId 		= rs.getInt(&quot;customerId&quot;);</span>
-<span class="fc" id="L130">				  int warehouseId 		= rs.getInt(&quot;warehouseId&quot;);</span>
-<span class="fc" id="L131">				  int occupied 			= rs.getInt(&quot;occupied&quot;);</span>
-<span class="fc" id="L132">				  String dateReceived 	= rs.getString(&quot;dateReceived&quot;);</span>
-<span class="fc" id="L133">				  String pickupDate		= rs.getString(&quot;pickupDate&quot;);</span>
-<span class="fc" id="L134">				  int priority 			= rs.getInt(&quot;priority&quot;);</span>
-<span class="fc" id="L135">				  int inQueue 			= rs.getInt(&quot;inQueue&quot;);</span>
-<span class="fc" id="L136">				  int positionInQueue 	= rs.getInt(&quot;positionInQueue&quot;);</span>
-				  
-<span class="fc" id="L138">				  System.out.println( &quot;\nid		: &quot; + id </span>
-						  			+ &quot;\ndescription	: &quot; + description
-						  			+ &quot;\ncustomerId	: &quot; + customerId
-						  			+ &quot;\nwarehouseId	: &quot; + warehouseId
-						  			+ &quot;\noccupied	: &quot; + occupied
-						  			+ &quot;\ndateReceived	: &quot; + dateReceived
-						  			+ &quot;\npickupDate	: &quot; + pickupDate
-						  			+ &quot;\npriority	: &quot; + priority
-						  			+ &quot;\ninQueue		: &quot; + inQueue
-						  			+ &quot;\npositionInQueue	: &quot; + positionInQueue
-						  			+ &quot;\n--------------------------------------&quot;);
-				  
-<span class="fc" id="L150">				}</span>
-<span class="fc" id="L151">			return true;</span>
-<span class="nc" id="L152">		}catch (SQLException e) {</span>
-<span class="nc" id="L153">			e.printStackTrace();</span>
-<span class="nc" id="L154">			return false;</span>
-		}finally{
-<span class="nc" id="L156">  			try{</span>
-<span class="pc" id="L157">  				rs.close();</span>
-  				//st.close();
-  				}
-<span class="nc" id="L160">  			catch(Exception e){</span>
-<span class="nc" id="L161">  				System.out.println(&quot;Error closing the database&quot;);</span>
-<span class="pc" id="L162">  			}</span>
-  		}
-	}
-	
 	
 	//displays the empty units in the large warehouse
-	public ArrayList&lt;Integer&gt; getEmptyUnitsInLarge(){
-<span class="fc" id="L169">		ArrayList&lt;Integer&gt; largeUnitEmpty = new ArrayList&lt;Integer&gt;();</span>
-		try {
-<span class="fc" id="L171">			rs = st.executeQuery(&quot;SELECT * FROM units WHERE warehouseID = 1 AND occupied = 0;&quot;);</span>
-<span class="fc bfc" id="L172" title="All 2 branches covered.">			while (rs.next()) {</span>
-<span class="fc" id="L173">				largeUnitEmpty.add(rs.getInt(&quot;id&quot;));</span>
+	public ArrayList&lt;Integer&gt; getEmptyUnitsInLarge() throws SQLException{
+<span class="fc" id="L113">		ArrayList&lt;Integer&gt; largeUnitEmpty = new ArrayList&lt;Integer&gt;();</span>
+
+<span class="fc" id="L115">			rs = st.executeQuery(&quot;SELECT * FROM units WHERE warehouseID = 1 AND occupied = 0;&quot;);</span>
+<span class="fc bfc" id="L116" title="All 2 branches covered.">			while (rs.next()) {</span>
+<span class="fc" id="L117">				largeUnitEmpty.add(rs.getInt(&quot;id&quot;));</span>
 				  
 			}
-<span class="fc" id="L176">			return largeUnitEmpty;</span>
-<span class="nc" id="L177">		}catch (SQLException e) {</span>
-<span class="nc" id="L178">			e.printStackTrace();</span>
-<span class="nc" id="L179">			return null;</span>
-		}finally{
-<span class="nc" id="L181">  			try{</span>
-<span class="pc" id="L182">  				rs.close();</span>
+			
+	
+  			try{
+<span class="fc" id="L123">  				rs.close();</span>
   			//	st.close();
   				}
-<span class="nc" id="L185">  			catch(Exception e){</span>
-<span class="nc" id="L186">  				System.out.println(&quot;Error closing the database&quot;);</span>
-<span class="pc" id="L187">  			}</span>
-  		}
+<span class="pc" id="L126">  			catch(Exception e){	}</span>
+<span class="fc" id="L127">  			return largeUnitEmpty;</span>
 	}
 	
 	//displays the empty units in the large warehouse
-	public ArrayList&lt;Integer&gt; getEmptyUnitsInSmall(){
-<span class="fc" id="L193">		ArrayList&lt;Integer&gt; smallUnitEmpty = new ArrayList&lt;Integer&gt;();</span>
-		try {
-<span class="fc" id="L195">			rs = st.executeQuery(&quot;SELECT * FROM units WHERE warehouseID = 2 AND occupied = 0;&quot;);</span>
-<span class="fc bfc" id="L196" title="All 2 branches covered.">			while (rs.next()) {</span>
-<span class="fc" id="L197">				smallUnitEmpty.add(rs.getInt(&quot;id&quot;));</span>
+	public ArrayList&lt;Integer&gt; getEmptyUnitsInSmall() throws SQLException{
+<span class="fc" id="L132">		ArrayList&lt;Integer&gt; smallUnitEmpty = new ArrayList&lt;Integer&gt;();</span>
+	
+<span class="fc" id="L134">			rs = st.executeQuery(&quot;SELECT * FROM units WHERE warehouseID = 2 AND occupied = 0;&quot;);</span>
+<span class="fc bfc" id="L135" title="All 2 branches covered.">			while (rs.next()) {</span>
+<span class="fc" id="L136">				smallUnitEmpty.add(rs.getInt(&quot;id&quot;));</span>
 				  
 			}
-<span class="fc" id="L200">			return smallUnitEmpty;</span>
-<span class="nc" id="L201">		}catch (SQLException e) {</span>
-<span class="nc" id="L202">			e.printStackTrace();</span>
-<span class="nc" id="L203">			return null;</span>
-		}finally{
-<span class="nc" id="L205">  			try{</span>
-<span class="pc" id="L206">  				rs.close();</span>
+	
+  			try{
+<span class="fc" id="L141">  				rs.close();</span>
   			//	st.close();
   				}
-<span class="nc" id="L209">  			catch(Exception e){</span>
-<span class="pc" id="L210">  			}</span>
-  		}
+<span class="nc" id="L144">  			catch(Exception e){</span>
+<span class="fc" id="L145">  			}</span>
+<span class="fc" id="L146">  			return smallUnitEmpty;</span>
 	}
 	
 	// Customer units in small
-	public ArrayList&lt;Integer&gt; getCustomerUnitsInSmall(int customerId){
-<span class="fc" id="L216">		ArrayList&lt;Integer&gt; smallUnitEmpty = new ArrayList&lt;Integer&gt;();</span>
-		try {
-<span class="fc" id="L218">			rs = st.executeQuery(&quot;SELECT * FROM units WHERE warehouseID = 2 AND customerId = &quot; + customerId + &quot;;&quot;);</span>
-<span class="pc bpc" id="L219" title="1 of 2 branches missed.">			while (rs.next()) {</span>
-<span class="nc" id="L220">				smallUnitEmpty.add(rs.getInt(&quot;id&quot;));</span>
+	public ArrayList&lt;Integer&gt; getCustomerUnitsInSmall(int customerId) throws SQLException{
+<span class="fc" id="L151">		ArrayList&lt;Integer&gt; smallUnitEmpty = new ArrayList&lt;Integer&gt;();</span>
+	
+<span class="fc" id="L153">			rs = st.executeQuery(&quot;SELECT * FROM units WHERE warehouseID = 2 AND customerId = &quot; + customerId + &quot;;&quot;);</span>
+<span class="fc bfc" id="L154" title="All 2 branches covered.">			while (rs.next()) {</span>
+<span class="fc" id="L155">				smallUnitEmpty.add(rs.getInt(&quot;id&quot;));</span>
 				  
 			}
-<span class="fc" id="L223">			return smallUnitEmpty;</span>
-<span class="nc" id="L224">		}catch (SQLException e) {</span>
-<span class="nc" id="L225">			e.printStackTrace();</span>
-<span class="nc" id="L226">			return null;</span>
-		}finally{
-<span class="nc" id="L228">  			try{</span>
-<span class="pc" id="L229">  				rs.close();</span>
+
+  			try{
+<span class="fc" id="L160">  				rs.close();</span>
   			//	st.close();
   				}
-<span class="nc" id="L232">  			catch(Exception e){</span>
-<span class="pc" id="L233">  			}</span>
-  		}
+<span class="nc" id="L163">  			catch(Exception e){</span>
+<span class="fc" id="L164">  			}</span>
+  			
+<span class="fc" id="L166">  			return smallUnitEmpty;</span>
 	}
 	
 	//customer units in large
-	public ArrayList&lt;Integer&gt; getCustomerUnitsInLarge(int customerId){
-<span class="fc" id="L239">		ArrayList&lt;Integer&gt; smallUnitEmpty = new ArrayList&lt;Integer&gt;();</span>
-		try {
-<span class="fc" id="L241">			rs = st.executeQuery(&quot;SELECT * FROM units WHERE warehouseID = 1 AND customerId = &quot; + customerId + &quot;;&quot;);</span>
-<span class="pc bpc" id="L242" title="1 of 2 branches missed.">			while (rs.next()) {</span>
-<span class="nc" id="L243">				smallUnitEmpty.add(rs.getInt(&quot;id&quot;));</span>
+	public ArrayList&lt;Integer&gt; getCustomerUnitsInLarge(int customerId) throws SQLException{
+<span class="fc" id="L171">		ArrayList&lt;Integer&gt; smallUnitEmpty = new ArrayList&lt;Integer&gt;();</span>
+	
+<span class="fc" id="L173">			rs = st.executeQuery(&quot;SELECT * FROM units WHERE warehouseID = 1 AND customerId = &quot; + customerId + &quot;;&quot;);</span>
+<span class="fc bfc" id="L174" title="All 2 branches covered.">			while (rs.next()) {</span>
+<span class="fc" id="L175">				smallUnitEmpty.add(rs.getInt(&quot;id&quot;));</span>
 				  
 			}
-<span class="fc" id="L246">			return smallUnitEmpty;</span>
-<span class="nc" id="L247">		}catch (SQLException e) {</span>
-<span class="nc" id="L248">			e.printStackTrace();</span>
-<span class="nc" id="L249">			return null;</span>
-		}finally{
-<span class="nc" id="L251">  			try{</span>
-<span class="pc" id="L252">  				rs.close();</span>
-  			//	st.close();
+			
+  			try{
+<span class="fc" id="L180">  				rs.close();</span>
+<span class="fc" id="L181">  				st.close();</span>
   				}
-<span class="nc" id="L255">  			catch(Exception e){</span>
-<span class="pc" id="L256">  			}</span>
-  		}
+<span class="nc" id="L183">  			catch(Exception e){</span>
+<span class="fc" id="L184">  			}</span>
+<span class="fc" id="L185">  			return smallUnitEmpty;</span>
 	}
 	
 	// returns the amount of large warehouse units that are currently empty
-	public int getNumberOfEmptyUnitsInLarge(){
-<span class="fc" id="L262">		int emptyLargeWare = 0;</span>
-		try {
-<span class="fc" id="L264">			rs = st.executeQuery(&quot;SELECT COUNT(*) AS total FROM units WHERE warehouseID = 1 AND occupied = 0;&quot;);</span>
-<span class="fc" id="L265">			emptyLargeWare = rs.getInt(&quot;total&quot;);</span>
-			
-<span class="fc" id="L267">			return emptyLargeWare;</span>
-<span class="nc" id="L268">		}catch (SQLException e) {</span>
-<span class="nc" id="L269">			e.printStackTrace();</span>
-<span class="nc" id="L270">			return emptyLargeWare;</span>
-		}finally{
-<span class="nc" id="L272">  			try{</span>
-<span class="pc" id="L273">  				rs.close();</span>
-  			//	st.close();
+	public int getNumberOfEmptyUnitsInLarge() throws SQLException{
+<span class="fc" id="L190">		int emptyLargeWare = 0;</span>
+
+<span class="fc" id="L192">			rs = st.executeQuery(&quot;SELECT COUNT(*) AS total FROM units WHERE warehouseID = 1 AND occupied = 0;&quot;);</span>
+<span class="fc" id="L193">			emptyLargeWare = rs.getInt(&quot;total&quot;);</span>
+
+  			try{
+<span class="fc" id="L196">  				rs.close();</span>
+<span class="fc" id="L197">  				st.close();</span>
   				}
-<span class="nc" id="L276">  			catch(Exception e){</span>
-<span class="nc" id="L277">  				System.out.println(&quot;Error closing the database&quot;);</span>
-<span class="pc" id="L278">  			}</span>
-  		}
+<span class="nc" id="L199">  			catch(Exception e){</span>
+<span class="fc" id="L200">  			}</span>
+<span class="fc" id="L201">  			return emptyLargeWare;</span>
 	}
 	
 	// returns the amount of small warehouses that are currently empty
-	public int getNumberOfEmptyUnitsInSmall(){
-<span class="fc" id="L284">		int emptySmallWare = 0;</span>
-		try {
-<span class="fc" id="L286">			rs = st.executeQuery(&quot;SELECT COUNT(*) AS total FROM units WHERE warehouseID = 2 AND occupied = 0;&quot;);</span>
+	public int getNumberOfEmptyUnitsInSmall() throws SQLException{
+<span class="fc" id="L206">		int emptySmallWare = 0;</span>
+<span class="fc" id="L207">			rs = st.executeQuery(&quot;SELECT COUNT(*) AS total FROM units WHERE warehouseID = 2 AND occupied = 0;&quot;);</span>
 
-<span class="fc" id="L288">			emptySmallWare = rs.getInt(&quot;total&quot;);</span>
+<span class="fc" id="L209">			emptySmallWare = rs.getInt(&quot;total&quot;);</span>
 			
-<span class="fc" id="L290">			return emptySmallWare;</span>
 			
-<span class="nc" id="L292">		}catch (SQLException e) {</span>
-<span class="nc" id="L293">			e.printStackTrace();</span>
-<span class="nc" id="L294">			return emptySmallWare;</span>
-		}finally{
-<span class="nc" id="L296">  			try{</span>
-<span class="pc" id="L297">  				rs.close();</span>
-  			//	st.close();
+			
+
+  			try{
+<span class="fc" id="L215">  				rs.close();</span>
+<span class="fc" id="L216">  				st.close();</span>
   				}
-<span class="nc" id="L300">  			catch(Exception e){</span>
-<span class="nc" id="L301">  				System.out.println(&quot;Error closing the database&quot;);</span>
-<span class="pc" id="L302">  			}</span>
-  		}
+<span class="nc" id="L218">  			catch(Exception e){</span>
+<span class="nc" id="L219">  				System.out.println(&quot;Error closing the database&quot;);</span>
+<span class="fc" id="L220">  			}</span>
+<span class="fc" id="L221">  			return emptySmallWare;</span>
 	}
 		
 	//small units per customer id
-	public int getNumberOfUnitsOwnedInSmallByCustomerId(int customerId){
-<span class="fc" id="L308">		int unitsInSmall = 0;</span>
-		try {
-<span class="fc" id="L310">			rs = st.executeQuery(&quot;SELECT Count(*) AS total FROM units WHERE customerId = &quot; + customerId  +&quot; AND warehouseId = 2;&quot;);</span>
-<span class="fc" id="L311">			unitsInSmall = rs.getInt(&quot;total&quot;);</span>
-		
-<span class="fc" id="L313">			return unitsInSmall;</span>
-			
-<span class="nc" id="L315">		}catch (SQLException e) {</span>
-<span class="nc" id="L316">			e.printStackTrace();</span>
-			
-<span class="nc" id="L318">			return unitsInSmall;</span>
-		}finally{
-<span class="nc" id="L320">  			try{</span>
-<span class="pc" id="L321">  				rs.close();</span>
-  			//	st.close();
+	public int getNumberOfUnitsOwnedInSmallByCustomerId(int customerId) throws SQLException{
+<span class="fc" id="L226">		int unitsInSmall = 0;</span>
+	
+<span class="fc" id="L228">			rs = st.executeQuery(&quot;SELECT Count(*) AS total FROM units WHERE customerId = &quot; + customerId  +&quot; AND warehouseId = 2;&quot;);</span>
+<span class="fc" id="L229">			unitsInSmall = rs.getInt(&quot;total&quot;);</span>
+  			try{
+<span class="fc" id="L231">  				rs.close();</span>
+<span class="fc" id="L232">  				st.close();</span>
   				}
-<span class="nc" id="L324">  			catch(Exception e){</span>
-<span class="nc" id="L325">  				System.out.println(&quot;Error closing the database&quot;);</span>
-<span class="pc" id="L326">  			}</span>
-  		}
+<span class="pc" id="L234">  			catch(Exception e){	}</span>
+<span class="fc" id="L235">  			return unitsInSmall;</span>
 	}
 	
 	//small units per customer id
-	public int getNumberOfUnitsOwnedInLargeByCustomerId(int customerId){
-<span class="fc" id="L332">		int unitsInSmall = 0;</span>
-		try {
-<span class="fc" id="L334">			rs = st.executeQuery(&quot;SELECT Count(*) AS total FROM units WHERE customerId = &quot; + customerId  +&quot; AND warehouseId = 1;&quot;);</span>
-<span class="fc" id="L335">			unitsInSmall = rs.getInt(&quot;total&quot;);</span>
+	public int getNumberOfUnitsOwnedInLargeByCustomerId(int customerId) throws SQLException{
+<span class="fc" id="L240">		int unitsInSmall = 0;</span>
 		
-<span class="fc" id="L337">			return unitsInSmall;</span>
-			
-<span class="nc" id="L339">		}catch (SQLException e) {</span>
-<span class="nc" id="L340">			e.printStackTrace();</span>
-			
-<span class="nc" id="L342">			return unitsInSmall;</span>
-		}finally{
-<span class="nc" id="L344">  			try{</span>
-<span class="pc" id="L345">  				rs.close();</span>
-  			//	st.close();
+<span class="fc" id="L242">			rs = st.executeQuery(&quot;SELECT Count(*) AS total FROM units WHERE customerId = &quot; + customerId  +&quot; AND warehouseId = 1;&quot;);</span>
+<span class="fc" id="L243">			unitsInSmall = rs.getInt(&quot;total&quot;);</span>
+		
+  			try{
+<span class="fc" id="L246">  				rs.close();</span>
+<span class="fc" id="L247">  				st.close();</span>
   				}
-<span class="nc" id="L348">  			catch(Exception e){</span>
-<span class="nc" id="L349">  				System.out.println(&quot;Error closing the database&quot;);</span>
-<span class="pc" id="L350">  			}</span>
-  		}
+<span class="pc" id="L249">  			catch(Exception e){	}</span>
+<span class="fc" id="L250">  			return unitsInSmall;</span>
 	}
 		
 	// adds a customer and their belongings to a unit
 	public boolean fillUnit(String description, int customerId, String pickupDate, int unitId){
-<span class="fc" id="L356">		DateFormat dateFormat = new SimpleDateFormat(&quot;dd/MM/yyyy&quot;);</span>
-<span class="fc" id="L357">		Calendar cal = Calendar.getInstance();</span>
-<span class="fc" id="L358">		String date = dateFormat.format(cal.getTime());</span>
+<span class="fc" id="L255">		DateFormat dateFormat = new SimpleDateFormat(&quot;dd/MM/yyyy&quot;);</span>
+<span class="fc" id="L256">		Calendar cal = Calendar.getInstance();</span>
+<span class="fc" id="L257">		String date = dateFormat.format(cal.getTime());</span>
 		try {
-<span class="fc" id="L360">			st.executeUpdate(&quot;UPDATE units SET description ='&quot; + description + </span>
+<span class="fc" id="L259">			st.executeUpdate(&quot;UPDATE units SET description ='&quot; + description + </span>
 							 &quot;', customerId = &quot; + customerId + &quot;, occupied = 1, dateReceived ='&quot; +
 							 date + &quot;', pickupDate ='&quot; + pickupDate + &quot;'WHERE id =&quot; + unitId + &quot;;&quot;);	
-<span class="fc" id="L363">			return true;</span>
-<span class="nc" id="L364">		}catch (SQLException e) {</span>
-<span class="nc" id="L365">			e.printStackTrace();</span>
-<span class="nc" id="L366">			return false;</span>
+<span class="fc" id="L262">			return true;</span>
+<span class="nc" id="L263">		}catch (SQLException e) {</span>
+<span class="nc" id="L264">			e.printStackTrace();</span>
+<span class="nc" id="L265">			return false;</span>
 		}finally{
-<span class="nc" id="L368">  			try{</span>
-<span class="nc" id="L369">  				rs.close();</span>
+<span class="nc" id="L267">  			try{</span>
+<span class="nc" id="L268">  				rs.close();</span>
   				//st.close();
   				}
-<span class="pc" id="L372">  			catch(Exception e){</span>
-<span class="pc" id="L373">  			}</span>
+<span class="pc" id="L271">  			catch(Exception e){</span>
+<span class="pc" id="L272">  			}</span>
   		}
 	}
 	
@@ -380,285 +279,208 @@ public class Unit extends DatabaseHandler{
 			
 		try {
 			
-<span class="fc bfc" id="L383" title="All 2 branches covered.">			for (UnitData unitData : largeWarehouseUnitList) {</span>
+<span class="fc bfc" id="L282" title="All 2 branches covered.">			for (UnitData unitData : largeWarehouseUnitList) {</span>
 				//converting the date into a string
-<span class="fc" id="L385">				DateFormat dateFormat = new SimpleDateFormat(&quot;dd/MM/yyyy&quot;);</span>
+<span class="fc" id="L284">				DateFormat dateFormat = new SimpleDateFormat(&quot;dd/MM/yyyy&quot;);</span>
 				String date;
-<span class="fc bfc" id="L387" title="All 2 branches covered.">				if (unitData.getPickUpDate() == null) {</span>
-<span class="fc" id="L388">					date = &quot;null&quot;;</span>
+<span class="fc bfc" id="L286" title="All 2 branches covered.">				if (unitData.getPickUpDate() == null) {</span>
+<span class="fc" id="L287">					date = &quot;null&quot;;</span>
 				} else {
-<span class="fc" id="L390">					date = dateFormat.format(unitData.getPickUpDate().getTime());</span>
+<span class="fc" id="L289">					date = dateFormat.format(unitData.getPickUpDate().getTime());</span>
 				}
-<span class="fc" id="L392">				st.executeUpdate(&quot;UPDATE units SET description ='&quot; + unitData.getDescription() + </span>
+<span class="fc" id="L291">				st.executeUpdate(&quot;UPDATE units SET description ='&quot; + unitData.getDescription() + </span>
 						 &quot;', customerId = &quot; + unitData.getCustomerId() + &quot;, occupied = &quot; + unitData.getOccupied() 
 						 + &quot;, dateReceived ='&quot; + unitData.getDateReceived() + &quot;', pickUpDate = '&quot; + date 
 						 + &quot;' WHERE id =&quot; + unitData.getId() + &quot;;&quot;);
-<span class="fc" id="L396">			}</span>
+<span class="fc" id="L295">			}</span>
 			
-<span class="fc bfc" id="L398" title="All 2 branches covered.">			for (UnitData unitData : smallWarehouseUnitList) {</span>
+<span class="fc bfc" id="L297" title="All 2 branches covered.">			for (UnitData unitData : smallWarehouseUnitList) {</span>
 				//converting the date into a string
-<span class="fc" id="L400">				DateFormat dateFormat = new SimpleDateFormat(&quot;dd/MM/yyyy&quot;);</span>
+<span class="fc" id="L299">				DateFormat dateFormat = new SimpleDateFormat(&quot;dd/MM/yyyy&quot;);</span>
 				String date;
-<span class="pc bpc" id="L402" title="1 of 2 branches missed.">				if (unitData.getPickUpDate() == null) {</span>
-<span class="fc" id="L403">					date = &quot;null&quot;;</span>
+<span class="pc bpc" id="L301" title="1 of 2 branches missed.">				if (unitData.getPickUpDate() == null) {</span>
+<span class="fc" id="L302">					date = &quot;null&quot;;</span>
 				} else {
-<span class="nc" id="L405">					date = dateFormat.format(unitData.getPickUpDate().getTime());</span>
+<span class="nc" id="L304">					date = dateFormat.format(unitData.getPickUpDate().getTime());</span>
 				}
-<span class="fc" id="L407">				st.executeUpdate(&quot;UPDATE units SET description ='&quot; + unitData.getDescription() + </span>
+<span class="fc" id="L306">				st.executeUpdate(&quot;UPDATE units SET description ='&quot; + unitData.getDescription() + </span>
 						 &quot;', customerId = &quot; + unitData.getCustomerId() + &quot;, occupied = &quot; + unitData.getOccupied() 
 						 + &quot;, dateReceived ='&quot; + unitData.getDateReceived() + &quot;', pickUpDate = '&quot; + date 
 						 + &quot;' WHERE id =&quot; + unitData.getId() + &quot;;&quot;);
-<span class="fc" id="L411">			}</span>
+<span class="fc" id="L310">			}</span>
 			
 						
-<span class="fc" id="L414">			return true;</span>
-<span class="nc" id="L415">		}catch (SQLException e) {</span>
-<span class="nc" id="L416">			e.printStackTrace();</span>
-<span class="nc" id="L417">			return false;</span>
+<span class="fc" id="L313">			return true;</span>
+<span class="nc" id="L314">		}catch (SQLException e) {</span>
+<span class="nc" id="L315">			e.printStackTrace();</span>
+<span class="nc" id="L316">			return false;</span>
 		}finally{
-<span class="nc" id="L419">  			try{</span>
-<span class="nc" id="L420">  				rs.close();</span>
+<span class="nc" id="L318">  			try{</span>
+<span class="nc" id="L319">  				rs.close();</span>
   				//st.close();
   				}
-<span class="pc" id="L423">  			catch(Exception e){</span>
-<span class="pc" id="L424">  			}</span>
+<span class="pc" id="L322">  			catch(Exception e){</span>
+<span class="pc" id="L323">  			}</span>
   		}
 	}
 	
 	//empties a unit, leaving it ready for more items
 	public boolean removeUnit(int unitId){
-<span class="fc" id="L430">		boolean success = false;</span>
+<span class="fc" id="L329">		boolean success = false;</span>
 		try {
-<span class="fc" id="L432">			st.executeUpdate(&quot;UPDATE units SET description = 'empty unit', customerId = 0, occupied = 0, dateReceived = 'null', pickupDate = 'null' WHERE id =&quot; + unitId + &quot;;&quot;);</span>
-<span class="fc" id="L433">			success = true;</span>
-<span class="fc" id="L434">			return success;</span>
-<span class="nc" id="L435">		}catch (SQLException e) {</span>
-<span class="nc" id="L436">			e.printStackTrace();</span>
-<span class="nc" id="L437">			return success;</span>
+<span class="fc" id="L331">			st.executeUpdate(&quot;UPDATE units SET description = 'empty unit', customerId = 0, occupied = 0, dateReceived = 'null', pickupDate = 'null' WHERE id =&quot; + unitId + &quot;;&quot;);</span>
+<span class="fc" id="L332">			success = true;</span>
+<span class="fc" id="L333">			return success;</span>
+<span class="nc" id="L334">		}catch (SQLException e) {</span>
+<span class="nc" id="L335">			e.printStackTrace();</span>
+<span class="nc" id="L336">			return success;</span>
 		}finally{
-<span class="nc" id="L439">  			try{</span>
-<span class="nc" id="L440">  				rs.close();</span>
+<span class="nc" id="L338">  			try{</span>
+<span class="nc" id="L339">  				rs.close();</span>
   			//	st.close();
   				}
-<span class="pc" id="L443">  			catch(Exception e){</span>
+<span class="pc" id="L342">  			catch(Exception e){</span>
  
-<span class="pc" id="L445">  			}</span>
+<span class="pc" id="L344">  			}</span>
   		}
 	}
 	
 	// retrieving a unit by customer ID
-	public int totalUnitsByCustomer(int customerId){
-<span class="fc" id="L451">		int totalUnits = 0;</span>
-		try {
-<span class="fc" id="L453">			rs = st.executeQuery(&quot;SELECT COUNT(*) AS total FROM units WHERE customerId = &quot; + customerId  +&quot;;&quot;);</span>
-<span class="fc" id="L454">			totalUnits = rs.getInt(&quot;total&quot;);</span>
+	public int totalUnitsByCustomer(int customerId) throws SQLException{
+<span class="fc" id="L350">		int totalUnits = 0;</span>
+	
+<span class="fc" id="L352">			rs = st.executeQuery(&quot;SELECT COUNT(*) AS total FROM units WHERE customerId = &quot; + customerId  +&quot;;&quot;);</span>
+<span class="fc" id="L353">			totalUnits = rs.getInt(&quot;total&quot;);</span>
 
-<span class="fc" id="L456">			return totalUnits;</span>
-<span class="nc" id="L457">		}catch (SQLException e) {</span>
-<span class="nc" id="L458">			e.printStackTrace();</span>
-<span class="nc" id="L459">			return totalUnits;</span>
-		}finally{
-<span class="nc" id="L461">  			try{</span>
-<span class="pc" id="L462">  				rs.close();</span>
-  			//	st.close();
+  			try{
+<span class="fc" id="L356">  				rs.close();</span>
+<span class="fc" id="L357">  				st.close();</span>
   				}
-<span class="nc" id="L465">  			catch(Exception e){</span>
+<span class="nc" id="L359">  			catch(Exception e){</span>
  
-<span class="pc" id="L467">  			}</span>
-  		}
+<span class="fc" id="L361">  			}</span>
+<span class="fc" id="L362">  			return totalUnits;</span>
 	}
 	
 	// retrieving a unit by unit ID
-	public ArrayList&lt;String&gt; unitsById(int unitId){
-<span class="fc" id="L473">		ArrayList&lt;String&gt; unitData = new ArrayList&lt;String&gt;();</span>
-		try {
-<span class="fc" id="L475">			rs = st.executeQuery(&quot;SELECT * FROM units WHERE id = &quot; + unitId  +&quot;;&quot;);</span>
-<span class="fc" id="L476">				  unitData.add(rs.getString(&quot;description&quot;));</span>
-<span class="fc" id="L477">				  unitData.add(rs.getString(&quot;warehouseId&quot;));</span>
-<span class="fc" id="L478">				  unitData.add(rs.getString(&quot;occupied&quot;));</span>
-<span class="fc" id="L479">				  unitData.add(rs.getString(&quot;dateReceived&quot;));</span>
-<span class="fc" id="L480">				  unitData.add(rs.getString(&quot;pickupDate&quot;));</span>
-<span class="fc" id="L481">				  unitData.add(rs.getString(&quot;priority&quot;));</span>
-<span class="fc" id="L482">				  unitData.add(rs.getString(&quot;inQueue&quot;));</span>
-<span class="fc" id="L483">				  unitData.add(rs.getString(&quot;positionInQueue&quot;));</span>
+	public ArrayList&lt;String&gt; unitsById(int unitId) throws SQLException{
+<span class="fc" id="L367">		ArrayList&lt;String&gt; unitData = new ArrayList&lt;String&gt;();</span>
+	
+<span class="fc" id="L369">			rs = st.executeQuery(&quot;SELECT * FROM units WHERE id = &quot; + unitId  +&quot;;&quot;);</span>
+<span class="fc" id="L370">				  unitData.add(rs.getString(&quot;description&quot;));</span>
+<span class="fc" id="L371">				  unitData.add(rs.getString(&quot;warehouseId&quot;));</span>
+<span class="fc" id="L372">				  unitData.add(rs.getString(&quot;occupied&quot;));</span>
+<span class="fc" id="L373">				  unitData.add(rs.getString(&quot;dateReceived&quot;));</span>
+<span class="fc" id="L374">				  unitData.add(rs.getString(&quot;pickupDate&quot;));</span>
+<span class="fc" id="L375">				  unitData.add(rs.getString(&quot;priority&quot;));</span>
+<span class="fc" id="L376">				  unitData.add(rs.getString(&quot;inQueue&quot;));</span>
+<span class="fc" id="L377">				  unitData.add(rs.getString(&quot;positionInQueue&quot;));</span>
 				  
-<span class="fc" id="L485">				  return unitData;</span>
-<span class="nc" id="L486">		}catch (SQLException e) {</span>
-<span class="nc" id="L487">			e.printStackTrace();</span>
-<span class="nc" id="L488">			return unitData;</span>
-		}finally{
-<span class="nc" id="L490">  			try{</span>
-<span class="pc" id="L491">  				rs.close();</span>
-  			//	st.close();
+			
+  			try{
+<span class="fc" id="L381">  				rs.close();</span>
+<span class="fc" id="L382">  				st.close();</span>
   				}
-<span class="nc" id="L494">  			catch(Exception e){</span>
-  				
-<span class="pc" id="L496">  			}</span>
-  		}
+<span class="pc" id="L384">  			catch(Exception e){	}</span>
+<span class="fc" id="L385">  			return unitData;</span>
 	}
 	
 	
 	
 	// alters the pickup date of a occupied unit
 	public boolean changePickupDate(String pickupDate, int unitId){
-<span class="fc" id="L504">		boolean status = false;</span>
+<span class="fc" id="L392">		boolean status = false;</span>
 		try {
-<span class="fc" id="L506">			st.executeUpdate(&quot;UPDATE units SET pickupDate ='&quot; + pickupDate + &quot;' WHERE id = &quot; + unitId + &quot;;&quot;);	</span>
-<span class="fc" id="L507">			status = true;</span>
-<span class="fc" id="L508">			return status;</span>
-<span class="nc" id="L509">		}catch (SQLException e) {</span>
-<span class="nc" id="L510">			e.printStackTrace();</span>
-<span class="nc" id="L511">			return status;</span>
+<span class="fc" id="L394">			st.executeUpdate(&quot;UPDATE units SET pickupDate ='&quot; + pickupDate + &quot;' WHERE id = &quot; + unitId + &quot;;&quot;);	</span>
+<span class="fc" id="L395">			status = true;</span>
+<span class="fc" id="L396">			return status;</span>
+<span class="nc" id="L397">		}catch (SQLException e) {</span>
+<span class="nc" id="L398">			e.printStackTrace();</span>
+<span class="nc" id="L399">			return status;</span>
 		}finally{
-<span class="nc" id="L513">  			try{</span>
-<span class="nc" id="L514">  				rs.close();</span>
-  			//	st.close();
+<span class="nc" id="L401">  			try{</span>
+<span class="nc" id="L402">  				rs.close();</span>
+<span class="nc" id="L403">  				st.close();</span>
   				}
-<span class="pc" id="L517">  			catch(Exception e){</span>
-  				
-<span class="pc" id="L519">  			}</span>
+<span class="pc" id="L405">  			catch(Exception e){	}</span>
   		}	
 	}
 	
 	//allows for the altering of description
 	public boolean changeDescription(String description, int unitId){
-<span class="fc" id="L525">		boolean status = false;</span>
+<span class="fc" id="L411">		boolean status = false;</span>
 		try {
-<span class="fc" id="L527">			st.executeUpdate(&quot;UPDATE units SET description ='&quot; + description + &quot;' WHERE id = &quot; + unitId + &quot;;&quot;);	</span>
-<span class="fc" id="L528">			status = true;</span>
-<span class="fc" id="L529">			return status;</span>
-<span class="nc" id="L530">		}catch (SQLException e) {</span>
-<span class="nc" id="L531">			e.printStackTrace();</span>
-<span class="nc" id="L532">			return status;</span>
+<span class="fc" id="L413">			st.executeUpdate(&quot;UPDATE units SET description ='&quot; + description + &quot;' WHERE id = &quot; + unitId + &quot;;&quot;);	</span>
+<span class="fc" id="L414">			status = true;</span>
+<span class="fc" id="L415">			return status;</span>
+<span class="nc" id="L416">		}catch (SQLException e) {</span>
+<span class="nc" id="L417">			e.printStackTrace();</span>
+<span class="nc" id="L418">			return status;</span>
 		}finally{
-<span class="nc" id="L534">  			try{</span>
-<span class="nc" id="L535">  				rs.close();</span>
+<span class="nc" id="L420">  			try{</span>
+<span class="nc" id="L421">  				rs.close();</span>
   			//	st.close();
   				}
-<span class="pc" id="L538">  			catch(Exception e){</span>
+<span class="pc" id="L424">  			catch(Exception e){</span>
   				
-<span class="pc" id="L540">  			}</span>
+<span class="pc" id="L426">  			}</span>
   		}			
 	}
 	
-	//retrieves all the items currently in queue
-	public boolean itemsInQueue(){
-		try {
-<span class="fc" id="L547">			rs = st.executeQuery(&quot;SELECT * FROM units WHERE inQueue = 1;&quot;);</span>
-<span class="pc bpc" id="L548" title="1 of 2 branches missed.">			while (rs.next()) {</span>
-<span class="nc" id="L549">				  int id 				= rs.getInt(&quot;id&quot;);</span>
-<span class="nc" id="L550">				  int customerId 		= rs.getInt(&quot;customerId&quot;);</span>
-<span class="nc" id="L551">				  int priority 			= rs.getInt(&quot;priority&quot;);</span>
-<span class="nc" id="L552">				  int inQueue 			= rs.getInt(&quot;inQueue&quot;);</span>
-<span class="nc" id="L553">				  int positionInQueue 	= rs.getInt(&quot;positionInQueue&quot;);</span>
-				  
-<span class="nc" id="L555">				  System.out.println( &quot;\nid		: &quot; + id </span>
-						  			+ &quot;\ncustomerId	: &quot; + customerId
-						  			+ &quot;\npriority	: &quot; + priority
-						  			+ &quot;\ninQueue		: &quot; + inQueue
-						  			+ &quot;\npositionInQueue	: &quot; + positionInQueue
-						  			+ &quot;\n--------------------------------------&quot;);
-<span class="nc" id="L561">				}</span>
-<span class="fc" id="L562">			return true;</span>
-<span class="nc" id="L563">		}catch (SQLException e) {</span>
-<span class="nc" id="L564">			e.printStackTrace();</span>
-<span class="nc" id="L565">			return false;</span>
-		}finally{
-<span class="nc" id="L567">  			try{</span>
-<span class="pc" id="L568">  				rs.close();</span>
-  			//	st.close();
+	public int numberOfItemsInQueue() throws SQLException{
+<span class="fc" id="L431">		int queued = 9000;</span>
+<span class="fc" id="L432">			rs = st.executeQuery(&quot;SELECT COUNT(*)  AS total FROM units WHERE inQueue = 1;&quot;);</span>
+<span class="fc" id="L433">			queued = rs.getInt(&quot;total&quot;);</span>
+  			try{
+<span class="fc" id="L435">  				rs.close();</span>
+<span class="fc" id="L436">  				st.close();</span>
   				}
-<span class="nc" id="L571">  			catch(Exception e){</span>
-  				
-<span class="pc" id="L573">  			}</span>
-  		}
-		
-	}
-	
-	public int numberOfItemsInQueue(){
-<span class="fc" id="L579">		int queued = 9000;</span>
-		try {
-<span class="fc" id="L581">			rs = st.executeQuery(&quot;SELECT COUNT(*)  AS total FROM units WHERE inQueue = 1;&quot;);</span>
-<span class="fc" id="L582">			queued = rs.getInt(&quot;total&quot;);</span>
-<span class="fc" id="L583">			return queued;</span>
-<span class="nc" id="L584">		}catch (SQLException e) {</span>
-<span class="nc" id="L585">			e.printStackTrace();</span>
-<span class="nc" id="L586">			return queued;</span>
-		}finally{
-<span class="nc" id="L588">  			try{</span>
-<span class="pc" id="L589">  				rs.close();</span>
-  		//		st.close();
-  				}
-<span class="nc" id="L592">  			catch(Exception e){</span>
-  				
-<span class="pc" id="L594">  			}</span>
-  		}
-		
+<span class="pc" id="L438">  			catch(Exception e){	}</span>
+<span class="fc" id="L439">  			return queued;</span>
 	}
 	
 	// empties the small warehouse
 	public boolean purgeSmall(){
-<span class="nc" id="L601">		boolean success = false;</span>
+<span class="fc" id="L444">		boolean success = false;</span>
 		try {
-<span class="nc" id="L603">			st.executeUpdate(&quot;UPDATE units SET description = 'empty unit', customerId = 0, occupied = 0, dateReceived = 'null', pickupDate = 'null' WHERE warehouseId = 2;&quot;);</span>
-<span class="nc" id="L604">			success = true;</span>
-<span class="nc" id="L605">			return success;</span>
-<span class="nc" id="L606">		}catch (SQLException e) {</span>
-<span class="nc" id="L607">			e.printStackTrace();</span>
-<span class="nc" id="L608">			return success;</span>
+			//st.executeUpdate(&quot;UPDATE units SET description = 'empty unit', customerId = 0, occupied = 0, dateReceived = 'null', pickupDate = 'null' WHERE warehouseId = 2;&quot;);
+<span class="fc" id="L447">			rs = st.executeQuery(&quot;SELECT * FROM units WHERE warehouseId = 1;&quot;);</span>
+<span class="fc" id="L448">			success = true;</span>
+<span class="fc" id="L449">			return success;</span>
+<span class="nc" id="L450">		}catch (SQLException e) {</span>
+<span class="nc" id="L451">			e.printStackTrace();</span>
+<span class="nc" id="L452">			return success;</span>
 		}finally{
-<span class="nc" id="L610">  			try{</span>
-<span class="nc" id="L611">  				rs.close();</span>
+<span class="nc" id="L454">  			try{</span>
+<span class="pc" id="L455">  				rs.close();</span>
   			//	st.close();
   				}
-<span class="nc" id="L614">  			catch(Exception e){</span>
+<span class="nc" id="L458">  			catch(Exception e){</span>
  
-<span class="nc" id="L616">  			}</span>
+<span class="pc" id="L460">  			}</span>
   		}
 	}
 	
-	// empties the large warehouse
-	public boolean purgeLarge(){
-<span class="nc" id="L622">		boolean success = false;</span>
-		try {
-<span class="nc" id="L624">			st.executeUpdate(&quot;UPDATE units SET description = 'empty unit', customerId = 0, occupied = 0, dateReceived = 'null', pickupDate = 'null' WHERE warehouseId = 1;&quot;);</span>
-<span class="nc" id="L625">			success = true;</span>
-<span class="nc" id="L626">			return success;</span>
-<span class="nc" id="L627">		}catch (SQLException e) {</span>
-<span class="nc" id="L628">			e.printStackTrace();</span>
-<span class="nc" id="L629">			return success;</span>
-		}finally{
-<span class="nc" id="L631">  			try{</span>
-<span class="nc" id="L632">  				rs.close();</span>
-  			//	st.close();
-  				}
-<span class="nc" id="L635">  			catch(Exception e){</span>
- 
-<span class="nc" id="L637">  			}</span>
-  		}
-	}
-
-		
-
 		//changes whether the item is in queue or not
+	/*
 		public boolean changeQueueStatus(int queueStatus, int unitId){
 			try {
-<span class="fc" id="L646">				st.executeUpdate(&quot;UPDATE units SET inQueue = &quot; + queueStatus + &quot; WHERE id=&quot; + unitId + &quot;;&quot;);</span>
-<span class="fc" id="L647">				return true;</span>
-<span class="nc" id="L648">			} catch (SQLException e) {</span>
-<span class="nc" id="L649">				e.printStackTrace();</span>
-<span class="nc" id="L650">				return false;</span>
+				st.executeUpdate(&quot;UPDATE units SET inQueue = &quot; + queueStatus + &quot; WHERE id=&quot; + unitId + &quot;;&quot;);
+				return true;
+			} catch (SQLException e) {
+				e.printStackTrace();
+				return false;
 			}finally{
-<span class="nc" id="L652">	  			try{</span>
-<span class="nc" id="L653">	  				rs.close();</span>
+	  			try{
+	  				rs.close();
 	  	//			st.close();
 	  				}
-<span class="pc" id="L656">	  			catch(Exception e){</span>
+	  			catch(Exception e){
 	  			
-<span class="pc" id="L658">	  			}</span>
+	  			}
 	  		}				
 		}
-		
+		*/
 		/*
 		// moves an item from a large warehouse unit to a small one
 		public void moveToSmall(int largeUnitId, int smallUnitId){
@@ -694,19 +516,19 @@ public class Unit extends DatabaseHandler{
 		//empties all units pertaining to a specific customer
 		public boolean emptyUnitByCustomer(int customerId){
 			try {
-<span class="nc" id="L697">				st.executeUpdate(&quot;UPDATE units SET description = 'empty unit', occupied = 0, dateReceived = 'null', pickupDate = 'null' WHERE customerId =&quot; + customerId + &quot;;&quot;);</span>
-<span class="nc" id="L698">				return true;</span>
-<span class="nc" id="L699">			}catch (SQLException e) {</span>
-<span class="nc" id="L700">				e.printStackTrace();</span>
-<span class="nc" id="L701">				return false;</span>
+<span class="fc" id="L519">				st.executeUpdate(&quot;UPDATE units SET description = 'empty unit', occupied = 0, dateReceived = 'null', pickupDate = 'null' WHERE customerId =&quot; + customerId + &quot;;&quot;);</span>
+<span class="fc" id="L520">				return true;</span>
+<span class="nc" id="L521">			}catch (SQLException e) {</span>
+<span class="nc" id="L522">				e.printStackTrace();</span>
+<span class="nc" id="L523">				return false;</span>
 			}finally{
-<span class="nc" id="L703">	  			try{</span>
-<span class="nc" id="L704">	  				rs.close();</span>
+<span class="nc" id="L525">	  			try{</span>
+<span class="nc" id="L526">	  				rs.close();</span>
 	  	//			st.close();
 	  				}
-<span class="nc" id="L707">	  			catch(Exception e){</span>
-<span class="nc" id="L708">	  				System.out.println(&quot;Error closing the database&quot;);</span>
-<span class="nc" id="L709">	  			}</span>
+<span class="pc" id="L529">	  			catch(Exception e){</span>
+<span class="pc" id="L530">	  				System.out.println(&quot;Error closing the database&quot;);</span>
+<span class="pc" id="L531">	  			}</span>
 	  		}		
 			
 		}

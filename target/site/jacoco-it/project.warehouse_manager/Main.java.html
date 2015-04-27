@@ -3,6 +3,7 @@
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 import javax.swing.*;
 
@@ -14,76 +15,96 @@ public class Main extends JFrame{
 	JButton acceptButton;
 	JPanel mainPanel, loginPanel, loggedPanel;
 	String outputString, password, username;
-<span class="nc" id="L17">	Users theUser = new Users();</span>
-<span class="nc" id="L18">	Customer theCustomer = new Customer();</span>
-<span class="nc" id="L19">	Unit theUnit = new Unit();</span>
+<span class="nc" id="L18">	Users theUser = new Users();</span>
+<span class="nc" id="L19">	static Customer theCustomer = new Customer();</span>
+<span class="nc" id="L20">	Unit theUnit = new Unit();</span>
 	
 	public static void main(String[] args) {
 
-<span class="nc" id="L23">		new Main();		</span>
+<span class="nc" id="L24">		new Main();		</span>
 
-<span class="nc" id="L25">	}</span>
+<span class="nc" id="L26">	}</span>
 	
-<span class="nc" id="L27">	public Main(){</span>
+<span class="nc" id="L28">	public Main(){</span>
 		
-<span class="nc" id="L29">		this.setSize(600,100);</span>
-<span class="nc" id="L30">		this.setLocationRelativeTo(null);</span>
-<span class="nc" id="L31">		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);</span>
-<span class="nc" id="L32">		this.setTitle(&quot;Warehouse Management&quot;);</span>
+<span class="nc" id="L30">		this.setSize(600,100);</span>
+<span class="nc" id="L31">		this.setLocationRelativeTo(null);</span>
+<span class="nc" id="L32">		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);</span>
+<span class="nc" id="L33">		this.setTitle(&quot;Warehouse Management&quot;);</span>
 		// creating the panels ----------------------------
 		
-<span class="nc" id="L35">		mainPanel = new JPanel();</span>
-<span class="nc" id="L36">		mainPanel.setPreferredSize(new Dimension(300, 300));</span>
-<span class="nc" id="L37">		loginPanel = new JPanel();</span>
-<span class="nc" id="L38">		loginPanel.setPreferredSize(new Dimension(280,280));</span>
+<span class="nc" id="L36">		mainPanel = new JPanel();</span>
+<span class="nc" id="L37">		mainPanel.setPreferredSize(new Dimension(300, 300));</span>
+<span class="nc" id="L38">		loginPanel = new JPanel();</span>
+<span class="nc" id="L39">		loginPanel.setPreferredSize(new Dimension(280,280));</span>
 		// adding the button ------------------------------
-<span class="nc" id="L40">		acceptButton = new JButton(&quot;OK&quot;);</span>
-<span class="nc" id="L41">		ListenForButton lForButton = new ListenForButton();</span>
-<span class="nc" id="L42">		acceptButton.addActionListener(lForButton);</span>
+<span class="nc" id="L41">		acceptButton = new JButton(&quot;OK&quot;);</span>
+<span class="nc" id="L42">		ListenForButton lForButton = new ListenForButton();</span>
+<span class="nc" id="L43">		acceptButton.addActionListener(lForButton);</span>
 		
 		// adding the user Label
-<span class="nc" id="L45">		userLabel = new JLabel(&quot;Username&quot;);</span>
-<span class="nc" id="L46">		passwordLabel = new JLabel(&quot;Password&quot;);</span>
+<span class="nc" id="L46">		userLabel = new JLabel(&quot;Username&quot;);</span>
+<span class="nc" id="L47">		passwordLabel = new JLabel(&quot;Password&quot;);</span>
 		
 		// adding the username  and password textfield
-<span class="nc" id="L49">		userTextField = new JTextField(&quot;&quot;, 15);		</span>
-<span class="nc" id="L50">		passwordField = new JPasswordField(&quot;&quot;, 15);</span>
+<span class="nc" id="L50">		userTextField = new JTextField(&quot;&quot;, 15);		</span>
+<span class="nc" id="L51">		passwordField = new JPasswordField(&quot;&quot;, 15);</span>
 		
-<span class="nc" id="L52">		loginPanel.add(userLabel);</span>
-<span class="nc" id="L53">		loginPanel.add(userTextField);</span>
-<span class="nc" id="L54">		loginPanel.add(passwordLabel);</span>
-<span class="nc" id="L55">		loginPanel.add(passwordField);</span>
-<span class="nc" id="L56">		loginPanel.add(acceptButton);</span>
-<span class="nc" id="L57">		this.add(loginPanel);</span>
-<span class="nc" id="L58">		this.setVisible(true);</span>
-<span class="nc" id="L59">	}</span>
+<span class="nc" id="L53">		loginPanel.add(userLabel);</span>
+<span class="nc" id="L54">		loginPanel.add(userTextField);</span>
+<span class="nc" id="L55">		loginPanel.add(passwordLabel);</span>
+<span class="nc" id="L56">		loginPanel.add(passwordField);</span>
+<span class="nc" id="L57">		loginPanel.add(acceptButton);</span>
+<span class="nc" id="L58">		this.add(loginPanel);</span>
+<span class="nc" id="L59">		this.setVisible(true);</span>
+<span class="nc" id="L60">	}</span>
 	
-<span class="nc" id="L61">	private class ListenForButton implements ActionListener{</span>
+<span class="nc" id="L62">	private class ListenForButton implements ActionListener{</span>
 
 		public void actionPerformed(ActionEvent e) {
-<span class="nc bnc" id="L64" title="All 2 branches missed.">			if(e.getSource() == acceptButton){</span>
-<span class="nc" id="L65">					username = userTextField.getText();</span>
-<span class="nc" id="L66">					password = passwordField.getText();</span>
-<span class="nc bnc" id="L67" title="All 4 branches missed.">					if(username.length() &lt;= 0 || password.length() &lt;= 0){</span>
-<span class="nc" id="L68">	   					JOptionPane.showMessageDialog(Main.this, &quot;The fields cannot be empty&quot;, &quot;Error&quot;, JOptionPane.ERROR_MESSAGE);</span>
+<span class="nc bnc" id="L65" title="All 2 branches missed.">			if(e.getSource() == acceptButton){</span>
+<span class="nc" id="L66">					username = userTextField.getText();</span>
+<span class="nc" id="L67">					password = passwordField.getText();</span>
+<span class="nc bnc" id="L68" title="All 4 branches missed.">					if(username.length() &lt;= 0 || password.length() &lt;= 0){</span>
+<span class="nc" id="L69">	   					JOptionPane.showMessageDialog(Main.this, &quot;The fields cannot be empty&quot;, &quot;Error&quot;, JOptionPane.ERROR_MESSAGE);</span>
 					}else{
-<span class="nc bnc" id="L70" title="All 2 branches missed.">						if(theUser.authenticate(username, password)){</span>
-<span class="nc" id="L71">							int userId = theUser.getIdFromUsername(username);</span>
-<span class="nc" id="L72">							String[] data = theUser.getDataFromId(userId);</span>
-<span class="nc" id="L73">							outputString = &quot;Welcome back &quot; + data[0]+ &quot; &quot; + data[1]+ &quot; Hope you are having a good day&quot;;</span>
-<span class="nc" id="L74">							JOptionPane.showMessageDialog(Main.this, outputString, &quot;Information&quot;, JOptionPane.INFORMATION_MESSAGE);</span>
-<span class="nc" id="L75">							outputString = &quot;&quot;;</span>
-							
-<span class="nc" id="L77">							dispose();</span>
-<span class="nc" id="L78">							new LoggedInFrame(userId, data);</span>
-<span class="nc" id="L79">						}else{</span>
-<span class="nc" id="L80">							outputString = &quot;Invalid login id or password, please try again&quot;;</span>
-<span class="nc" id="L81">							JOptionPane.showMessageDialog(Main.this, outputString, &quot;Information&quot;, JOptionPane.INFORMATION_MESSAGE);</span>
-<span class="nc" id="L82">							outputString = &quot;&quot;;</span>
-					}
+						try {
+<span class="nc bnc" id="L72" title="All 2 branches missed.">							if(theUser.authenticate(username, password)){</span>
+<span class="nc" id="L73">								int userId = 0;</span>
+								try {
+<span class="nc" id="L75">									userId = theUser.getIdFromUsername(username);</span>
+<span class="nc" id="L76">								} catch (SQLException e1) {</span>
+									// TODO Auto-generated catch block
+<span class="nc" id="L78">									e1.printStackTrace();</span>
+<span class="nc" id="L79">								}</span>
+<span class="nc" id="L80">								String[] data = null;</span>
+								try {
+<span class="nc" id="L82">									data = theUser.getDataFromId(userId);</span>
+<span class="nc" id="L83">								} catch (SQLException e1) {</span>
+									// TODO Auto-generated catch block
+<span class="nc" id="L85">									e1.printStackTrace();</span>
+<span class="nc" id="L86">								}</span>
+<span class="nc" id="L87">								outputString = &quot;Welcome back &quot; + data[0]+ &quot; &quot; + data[1]+ &quot; Hope you are having a good day&quot;;</span>
+<span class="nc" id="L88">								JOptionPane.showMessageDialog(Main.this, outputString, &quot;Information&quot;, JOptionPane.INFORMATION_MESSAGE);</span>
+<span class="nc" id="L89">								outputString = &quot;&quot;;</span>
+								
+<span class="nc" id="L91">								dispose();</span>
+<span class="nc" id="L92">								new LoggedInFrame(userId, data);</span>
+<span class="nc" id="L93">							}else{</span>
+<span class="nc" id="L94">								outputString = &quot;Invalid login id or password, please try again&quot;;</span>
+<span class="nc" id="L95">								JOptionPane.showMessageDialog(Main.this, outputString, &quot;Information&quot;, JOptionPane.INFORMATION_MESSAGE);</span>
+<span class="nc" id="L96">								outputString = &quot;&quot;;</span>
+}
+<span class="nc" id="L98">						} catch (HeadlessException e1) {</span>
+							// TODO Auto-generated catch block
+<span class="nc" id="L100">							e1.printStackTrace();</span>
+<span class="nc" id="L101">						} catch (SQLException e1) {</span>
+							// TODO Auto-generated catch block
+<span class="nc" id="L103">							e1.printStackTrace();</span>
+<span class="nc" id="L104">						}</span>
 				}
 			}
-<span class="nc" id="L86">		}</span>
+<span class="nc" id="L107">		}</span>
 	}
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>

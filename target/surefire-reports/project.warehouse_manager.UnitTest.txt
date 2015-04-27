@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: project.warehouse_manager.UnitTest
 -------------------------------------------------------------------------------
-Tests run: 25, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.103 sec - in project.warehouse_manager.UnitTest
+Tests run: 22, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.444 sec - in project.warehouse_manager.UnitTest

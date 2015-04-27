@@ -8,311 +8,334 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class UnitLanding extends JFrame{
 
 	JButton byIdBut, byCustomerBut, getDataBut, 
 	vacantSmallBut, vacantLargeBut, alterBut, 
-			removeBut, fillBut, goBackBut;
+			removeBut, fillBut, goBackBut, clearAll;
 	
 	JTextField text;
 	
 	JTextArea textArea1;
 	
 	int userSession;
-<span class="nc" id="L24">	String[] userSessionData = new String[5];</span>
+<span class="nc" id="L25">	String[] userSessionData = new String[5];</span>
 	
-<span class="nc" id="L26">	Unit theUnit = new Unit();</span>
-<span class="nc" id="L27">	Customer theCustomer = new Customer();</span>
-<span class="nc" id="L28">	Users theUser = new Users();</span>
+<span class="nc" id="L27">	Unit theUnit = new Unit();</span>
+<span class="nc" id="L28">	Customer theCustomer = new Customer();</span>
+<span class="nc" id="L29">	Users theUser = new Users();</span>
 	
-<span class="nc" id="L30">	public UnitLanding(int userId, String[] userData){</span>
+<span class="nc" id="L31">	public UnitLanding(int userId, String[] userData){</span>
 		
-<span class="nc" id="L32">		System.arraycopy(userData, 0, userSessionData, 0, userData.length );</span>
-<span class="nc" id="L33">		userSession=userId;</span>
+<span class="nc" id="L33">		System.arraycopy(userData, 0, userSessionData, 0, userData.length );</span>
+<span class="nc" id="L34">		userSession=userId;</span>
 		
-<span class="nc" id="L35">		this.setSize(500,600);</span>
-<span class="nc" id="L36">		this.setLocationRelativeTo(null);</span>
-<span class="nc" id="L37">		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);</span>
-<span class="nc" id="L38">		this.setTitle(&quot;Warehouse&quot;);</span>
+<span class="nc" id="L36">		this.setSize(500,600);</span>
+<span class="nc" id="L37">		this.setLocationRelativeTo(null);</span>
+<span class="nc" id="L38">		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);</span>
+<span class="nc" id="L39">		this.setTitle(&quot;Warehouse&quot;);</span>
 		
-<span class="nc" id="L40">		JPanel thePanel = new JPanel();</span>
+<span class="nc" id="L41">		JPanel thePanel = new JPanel();</span>
 		
-<span class="nc" id="L42">		thePanel.setLayout(new GridBagLayout());</span>
+<span class="nc" id="L43">		thePanel.setLayout(new GridBagLayout());</span>
 		
-<span class="nc" id="L44">		GridBagConstraints gridConstraints = new GridBagConstraints();</span>
+<span class="nc" id="L45">		GridBagConstraints gridConstraints = new GridBagConstraints();</span>
 		
-<span class="nc" id="L46">		gridConstraints.gridx = 1;</span>
-<span class="nc" id="L47">		gridConstraints.gridy = 1;</span>
-<span class="nc" id="L48">		gridConstraints.gridwidth = 1; </span>
-<span class="nc" id="L49">		gridConstraints.gridheight = 1;</span>
-<span class="nc" id="L50">		gridConstraints.weightx = 50;</span>
-<span class="nc" id="L51">		gridConstraints.weighty = 100;</span>
-<span class="nc" id="L52">		gridConstraints.insets = new Insets(5,5,5,5);</span>
-<span class="nc" id="L53">		gridConstraints.anchor = gridConstraints.CENTER;</span>
-<span class="nc" id="L54">		gridConstraints.fill = gridConstraints.BOTH;</span>
+<span class="nc" id="L47">		gridConstraints.gridx = 1;</span>
+<span class="nc" id="L48">		gridConstraints.gridy = 1;</span>
+<span class="nc" id="L49">		gridConstraints.gridwidth = 1; </span>
+<span class="nc" id="L50">		gridConstraints.gridheight = 1;</span>
+<span class="nc" id="L51">		gridConstraints.weightx = 50;</span>
+<span class="nc" id="L52">		gridConstraints.weighty = 100;</span>
+<span class="nc" id="L53">		gridConstraints.insets = new Insets(5,5,5,5);</span>
+<span class="nc" id="L54">		gridConstraints.anchor = gridConstraints.CENTER;</span>
+<span class="nc" id="L55">		gridConstraints.fill = gridConstraints.BOTH;</span>
 		
-<span class="nc" id="L56">		text = new JTextField(&quot;&quot;,20);</span>
-<span class="nc" id="L57">		textArea1 = new JTextArea(15,20);</span>
-<span class="nc" id="L58">		textArea1.setLineWrap(true);</span>
-<span class="nc" id="L59">		textArea1.setWrapStyleWord(true);</span>
-<span class="nc" id="L60">		JScrollPane scrollbar1 = new JScrollPane(textArea1, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);</span>
-<span class="nc" id="L61">		Font font = new Font(&quot;Helvetica&quot;, Font.PLAIN, 18);</span>
+<span class="nc" id="L57">		text = new JTextField(&quot;&quot;,20);</span>
+<span class="nc" id="L58">		textArea1 = new JTextArea(15,20);</span>
+<span class="nc" id="L59">		textArea1.setLineWrap(true);</span>
+<span class="nc" id="L60">		textArea1.setWrapStyleWord(true);</span>
+<span class="nc" id="L61">		JScrollPane scrollbar1 = new JScrollPane(textArea1, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);</span>
+<span class="nc" id="L62">		Font font = new Font(&quot;Helvetica&quot;, Font.PLAIN, 18);</span>
 		
-<span class="nc" id="L63">		ListenForButton lForButton = new ListenForButton();</span>
+<span class="nc" id="L64">		ListenForButton lForButton = new ListenForButton();</span>
 		
-<span class="nc" id="L65">		byIdBut = new JButton(&quot;Find by unit Id&quot;);</span>
-<span class="nc" id="L66">		byCustomerBut = new JButton(&quot;Find By customer id&quot;);</span>
-<span class="nc" id="L67">		getDataBut = new JButton(&quot;get data&quot;);</span>
+<span class="nc" id="L66">		byIdBut = new JButton(&quot;Find by unit Id&quot;);</span>
+<span class="nc" id="L67">		byCustomerBut = new JButton(&quot;Find By customer id&quot;);</span>
+<span class="nc" id="L68">		getDataBut = new JButton(&quot;get data&quot;);</span>
 		
-<span class="nc" id="L69">		vacantSmallBut = new JButton(&quot;find small vacant&quot;);</span>
-<span class="nc" id="L70">		vacantSmallBut.setToolTipText(&quot;Find empty units in the small warehouse&quot;);</span>
+<span class="nc" id="L70">		vacantSmallBut = new JButton(&quot;find small vacant&quot;);</span>
+<span class="nc" id="L71">		vacantSmallBut.setToolTipText(&quot;Find empty units in the small warehouse&quot;);</span>
 		
-<span class="nc" id="L72">		vacantLargeBut = new JButton(&quot;find large vacant&quot;);</span>
-<span class="nc" id="L73">		alterBut = new JButton(&quot;alter&quot;);</span>
-<span class="nc" id="L74">		removeBut = new JButton(&quot;remove&quot;);</span>
-<span class="nc" id="L75">		fillBut = new JButton(&quot;Fill Unit&quot;);</span>
-<span class="nc" id="L76">		goBackBut = new JButton(&quot;go back&quot;);</span>
+<span class="nc" id="L73">		vacantLargeBut = new JButton(&quot;find large vacant&quot;);</span>
+<span class="nc" id="L74">		alterBut = new JButton(&quot;alter&quot;);</span>
+<span class="nc" id="L75">		removeBut = new JButton(&quot;remove&quot;);</span>
+<span class="nc" id="L76">		fillBut = new JButton(&quot;Fill Unit&quot;);</span>
+<span class="nc" id="L77">		goBackBut = new JButton(&quot;go back&quot;);</span>
+<span class="nc" id="L78">		clearAll = new JButton(&quot;Clear All&quot;);</span>
 		
-<span class="nc" id="L78">		byIdBut.addActionListener(lForButton);</span>
-<span class="nc" id="L79">		byCustomerBut.addActionListener(lForButton);</span>
-<span class="nc" id="L80">		getDataBut.addActionListener(lForButton);</span>
-<span class="nc" id="L81">		vacantSmallBut.addActionListener(lForButton);</span>
-<span class="nc" id="L82">		vacantLargeBut.addActionListener(lForButton);</span>
-<span class="nc" id="L83">		fillBut.addActionListener(lForButton);</span>
-<span class="nc" id="L84">		alterBut.addActionListener(lForButton);</span>
-<span class="nc" id="L85">		removeBut.addActionListener(lForButton);</span>
-		
-<span class="nc" id="L87">		goBackBut.addActionListener(lForButton);</span>
+<span class="nc" id="L80">		byIdBut.addActionListener(lForButton);</span>
+<span class="nc" id="L81">		byCustomerBut.addActionListener(lForButton);</span>
+<span class="nc" id="L82">		getDataBut.addActionListener(lForButton);</span>
+<span class="nc" id="L83">		vacantSmallBut.addActionListener(lForButton);</span>
+<span class="nc" id="L84">		vacantLargeBut.addActionListener(lForButton);</span>
+<span class="nc" id="L85">		fillBut.addActionListener(lForButton);</span>
+<span class="nc" id="L86">		alterBut.addActionListener(lForButton);</span>
+<span class="nc" id="L87">		removeBut.addActionListener(lForButton);</span>
+<span class="nc" id="L88">		clearAll.addActionListener(lForButton);</span>
+<span class="nc" id="L89">		goBackBut.addActionListener(lForButton);</span>
 		
 		//thePanel.add(clearAll, gridConstraints);
-<span class="nc" id="L90">		gridConstraints.gridwidth = 20;</span>
-<span class="nc" id="L91">		gridConstraints.gridx = 1;</span>
-<span class="nc" id="L92">		gridConstraints.gridy = 1;</span>
-<span class="nc" id="L93">		thePanel.add(text, gridConstraints);</span>
-<span class="nc" id="L94">		gridConstraints.gridwidth = 1;</span>
-<span class="nc" id="L95">		gridConstraints.gridx = 1;</span>
-<span class="nc" id="L96">		gridConstraints.gridy = 2;</span>
-<span class="nc" id="L97">		thePanel.add(byIdBut,gridConstraints);</span>
-<span class="nc" id="L98">		gridConstraints.gridx = 5;</span>
-<span class="nc" id="L99">		thePanel.add(byCustomerBut,gridConstraints);</span>
-<span class="nc" id="L100">		gridConstraints.gridx = 9;</span>
-<span class="nc" id="L101">		thePanel.add(getDataBut,gridConstraints);</span>
-<span class="nc" id="L102">		gridConstraints.gridx = 1;</span>
-<span class="nc" id="L103">		gridConstraints.gridy = 3;</span>
-<span class="nc" id="L104">		thePanel.add(vacantSmallBut,gridConstraints);</span>
-<span class="nc" id="L105">		gridConstraints.gridx = 5;</span>
-<span class="nc" id="L106">		thePanel.add(vacantLargeBut,gridConstraints);</span>
-<span class="nc" id="L107">		gridConstraints.gridx = 9;</span>
-<span class="nc" id="L108">		thePanel.add(alterBut,gridConstraints);</span>
-<span class="nc" id="L109">		gridConstraints.gridx = 1;</span>
-<span class="nc" id="L110">		gridConstraints.gridy = 4;</span>
-<span class="nc" id="L111">		thePanel.add(removeBut,gridConstraints);</span>
-<span class="nc" id="L112">		gridConstraints.gridwidth = 10;</span>
-<span class="nc" id="L113">		gridConstraints.gridx = 5;</span>
-<span class="nc" id="L114">		thePanel.add(fillBut,gridConstraints);</span>
-<span class="nc" id="L115">		gridConstraints.gridwidth = 20;</span>
-<span class="nc" id="L116">		gridConstraints.gridx = 1;</span>
-<span class="nc" id="L117">		gridConstraints.gridy = 5;</span>
-<span class="nc" id="L118">		thePanel.add(scrollbar1,gridConstraints);</span>
-<span class="nc" id="L119">		gridConstraints.gridwidth = 20;</span>
-<span class="nc" id="L120">		gridConstraints.gridx = 1;</span>
-<span class="nc" id="L121">		gridConstraints.gridy = 6;</span>
-<span class="nc" id="L122">		thePanel.add(goBackBut,gridConstraints);</span>
+<span class="nc" id="L92">		gridConstraints.gridwidth = 20;</span>
+<span class="nc" id="L93">		gridConstraints.gridx = 1;</span>
+<span class="nc" id="L94">		gridConstraints.gridy = 1;</span>
+<span class="nc" id="L95">		thePanel.add(text, gridConstraints);</span>
+<span class="nc" id="L96">		gridConstraints.gridwidth = 1;</span>
+<span class="nc" id="L97">		gridConstraints.gridx = 1;</span>
+<span class="nc" id="L98">		gridConstraints.gridy = 2;</span>
+<span class="nc" id="L99">		thePanel.add(byIdBut,gridConstraints);</span>
+<span class="nc" id="L100">		gridConstraints.gridx = 5;</span>
+<span class="nc" id="L101">		thePanel.add(byCustomerBut,gridConstraints);</span>
+<span class="nc" id="L102">		gridConstraints.gridx = 9;</span>
+<span class="nc" id="L103">		thePanel.add(getDataBut,gridConstraints);</span>
+<span class="nc" id="L104">		gridConstraints.gridx = 1;</span>
+<span class="nc" id="L105">		gridConstraints.gridy = 3;</span>
+<span class="nc" id="L106">		thePanel.add(vacantSmallBut,gridConstraints);</span>
+<span class="nc" id="L107">		gridConstraints.gridx = 5;</span>
+<span class="nc" id="L108">		thePanel.add(vacantLargeBut,gridConstraints);</span>
+<span class="nc" id="L109">		gridConstraints.gridx = 9;</span>
+<span class="nc" id="L110">		thePanel.add(alterBut,gridConstraints);</span>
+<span class="nc" id="L111">		gridConstraints.gridx = 1;</span>
+<span class="nc" id="L112">		gridConstraints.gridy = 4;</span>
+<span class="nc" id="L113">		thePanel.add(removeBut,gridConstraints);</span>
+<span class="nc" id="L114">		gridConstraints.gridwidth = 1;</span>
+<span class="nc" id="L115">		gridConstraints.gridx = 5;</span>
+<span class="nc" id="L116">		thePanel.add(fillBut,gridConstraints);</span>
+<span class="nc" id="L117">		gridConstraints.gridwidth = 1;</span>
+<span class="nc" id="L118">		gridConstraints.gridx = 9;</span>
+<span class="nc" id="L119">		thePanel.add(clearAll,gridConstraints);</span>
+<span class="nc" id="L120">		gridConstraints.gridwidth = 20;</span>
+<span class="nc" id="L121">		gridConstraints.gridx = 1;</span>
+<span class="nc" id="L122">		gridConstraints.gridy = 5;</span>
+<span class="nc" id="L123">		thePanel.add(scrollbar1,gridConstraints);</span>
+<span class="nc" id="L124">		gridConstraints.gridwidth = 20;</span>
+<span class="nc" id="L125">		gridConstraints.gridx = 1;</span>
+<span class="nc" id="L126">		gridConstraints.gridy = 6;</span>
+<span class="nc" id="L127">		thePanel.add(goBackBut,gridConstraints);</span>
 
 		
-<span class="nc" id="L125">		this.add(thePanel);</span>
+<span class="nc" id="L130">		this.add(thePanel);</span>
 		
-<span class="nc" id="L127">		this.setVisible(true);</span>
+<span class="nc" id="L132">		this.setVisible(true);</span>
 		
-<span class="nc" id="L129">		text.requestFocus();</span>
+<span class="nc" id="L134">		text.requestFocus();</span>
 		
-<span class="nc" id="L131">	}</span>
+<span class="nc" id="L136">	}</span>
 
-<span class="nc" id="L133">	private class ListenForButton implements ActionListener{</span>
+<span class="nc" id="L138">	private class ListenForButton implements ActionListener{</span>
 
 		public void actionPerformed(ActionEvent e) {
 				//go back button----------------------
-<span class="nc bnc" id="L137" title="All 2 branches missed.">			if(e.getSource() == goBackBut){</span>
-<span class="nc" id="L138">				dispose();</span>
-<span class="nc" id="L139">				new LoggedInFrame(userSession, userSessionData);</span>
+<span class="nc bnc" id="L142" title="All 2 branches missed.">			if(e.getSource() == goBackBut){</span>
+<span class="nc" id="L143">				dispose();</span>
+<span class="nc" id="L144">				new LoggedInFrame(userSession, userSessionData);</span>
 				//fill unit button--------------------
-<span class="nc bnc" id="L141" title="All 2 branches missed.">			}else if(e.getSource() == fillBut){</span>
-<span class="nc" id="L142">				dispose();</span>
-<span class="nc" id="L143">				new UnitFill(userSession, userSessionData);</span>
+<span class="nc bnc" id="L146" title="All 2 branches missed.">			}else if(e.getSource() == fillBut){</span>
+<span class="nc" id="L147">				dispose();</span>
+<span class="nc" id="L148">				new UnitFill(userSession, userSessionData);</span>
 				//alter unit button-------------------
-<span class="nc bnc" id="L145" title="All 2 branches missed.">			}else if(e.getSource() == alterBut){</span>
-<span class="nc" id="L146">				dispose();</span>
-<span class="nc" id="L147">				new UnitAlter(userSession, userSessionData);</span>
+<span class="nc bnc" id="L150" title="All 2 branches missed.">			}else if(e.getSource() == alterBut){</span>
+<span class="nc" id="L151">				dispose();</span>
+<span class="nc" id="L152">				new UnitAlter(userSession, userSessionData);</span>
 				//find unit by id button--------------
-<span class="nc bnc" id="L149" title="All 2 branches missed.">			}else if(e.getSource() == byIdBut){</span>
-<span class="nc bnc" id="L150" title="All 2 branches missed.">				if(text.getText().isEmpty()){</span>
-<span class="nc" id="L151">					 JOptionPane.showMessageDialog(UnitLanding.this,&quot;Fields cannot be empty, Input required: unit ID &quot;,</span>
+<span class="nc bnc" id="L154" title="All 2 branches missed.">			}else if(e.getSource() == byIdBut){</span>
+<span class="nc bnc" id="L155" title="All 2 branches missed.">				if(text.getText().isEmpty()){</span>
+<span class="nc" id="L156">					 JOptionPane.showMessageDialog(UnitLanding.this,&quot;Fields cannot be empty, Input required: unit ID &quot;,</span>
 							 &quot;Solution&quot;, JOptionPane.INFORMATION_MESSAGE);
 				}else{
 					try{
-<span class="nc" id="L155">						int unitId = Integer.parseInt(text.getText());</span>
-<span class="nc" id="L156">						ArrayList&lt;String&gt; unitData = new ArrayList&lt;String&gt;();</span>
-<span class="nc" id="L157">						unitData = theUnit.unitsById(unitId);</span>
+<span class="nc" id="L160">						int unitId = Integer.parseInt(text.getText());</span>
+<span class="nc" id="L161">						ArrayList&lt;String&gt; unitData = new ArrayList&lt;String&gt;();</span>
+<span class="nc" id="L162">						unitData = theUnit.unitsById(unitId);</span>
 							
 						// unit id
-<span class="nc" id="L160">						textArea1.setText(&quot;Unit id	: &quot; + unitId);</span>
+<span class="nc" id="L165">						textArea1.setText(&quot;Unit id	: &quot; + unitId);</span>
 			  			//description
-<span class="nc" id="L162">		  				textArea1.append(&quot;\nDescription	:  &quot; + unitData.get(0));</span>
+<span class="nc" id="L167">		  				textArea1.append(&quot;\nDescription	:  &quot; + unitData.get(0));</span>
 		  				//warehouse Id
-<span class="nc" id="L164">		  				textArea1.append(&quot;\nwarehouse Id	:  &quot; + unitData.get(1));</span>
+<span class="nc" id="L169">		  				textArea1.append(&quot;\nwarehouse Id	:  &quot; + unitData.get(1));</span>
 		  				// occupied
-<span class="nc" id="L166">		  				textArea1.append(&quot;\noccupied	:  &quot; + unitData.get(2));</span>
+<span class="nc" id="L171">		  				textArea1.append(&quot;\noccupied	:  &quot; + unitData.get(2));</span>
 		  				// date Received
-<span class="nc" id="L168">		  				textArea1.append(&quot;\ndate Received	:  &quot; + unitData.get(3));</span>
+<span class="nc" id="L173">		  				textArea1.append(&quot;\ndate Received	:  &quot; + unitData.get(3));</span>
 		  				// pickup date
-<span class="nc" id="L170">		  				textArea1.append(&quot;\nPickup Date	:  &quot; + unitData.get(4));</span>
+<span class="nc" id="L175">		  				textArea1.append(&quot;\nPickup Date	:  &quot; + unitData.get(4));</span>
 		  				// priority
-<span class="nc" id="L172">		  				textArea1.append(&quot;\nPriority	:  &quot; + unitData.get(5));</span>
+<span class="nc" id="L177">		  				textArea1.append(&quot;\nPriority	:  &quot; + unitData.get(5));</span>
 		  				// inQueue
-<span class="nc" id="L174">		  				textArea1.append(&quot;\ninQueue	:  &quot; + unitData.get(6));</span>
+<span class="nc" id="L179">		  				textArea1.append(&quot;\ninQueue	:  &quot; + unitData.get(6));</span>
 		  				// position in queue
-<span class="nc" id="L176">		  				textArea1.append(&quot;\nplace In Queue	:  &quot; + unitData.get(7));</span>
-<span class="nc" id="L177">					}catch(Exception NumberFormatException){</span>
-<span class="nc" id="L178">						 JOptionPane.showMessageDialog(UnitLanding.this,&quot;Fields cannot be Strings, Input required: unit ID &quot;,</span>
+<span class="nc" id="L181">		  				textArea1.append(&quot;\nplace In Queue	:  &quot; + unitData.get(7));</span>
+<span class="nc" id="L182">					}catch(Exception NumberFormatException){</span>
+<span class="nc" id="L183">						 JOptionPane.showMessageDialog(UnitLanding.this,&quot;Fields cannot be Strings, Input required: unit ID &quot;,</span>
 								 &quot;Error&quot;, JOptionPane.INFORMATION_MESSAGE);
-<span class="nc" id="L180">					}</span>
+<span class="nc" id="L185">					}</span>
 				}
 				
 				//find by customer id button----------
-<span class="nc bnc" id="L184" title="All 2 branches missed.">			}else if(e.getSource() == byCustomerBut){</span>
-<span class="nc bnc" id="L185" title="All 2 branches missed.">				if(text.getText().isEmpty()){</span>
-<span class="nc" id="L186">					JOptionPane.showMessageDialog(UnitLanding.this, &quot;Fields cannot be empty, or strings, Input required: Customer ID (integer)&quot;, &quot;Error&quot;</span>
+<span class="nc bnc" id="L189" title="All 2 branches missed.">			}else if(e.getSource() == byCustomerBut){</span>
+<span class="nc bnc" id="L190" title="All 2 branches missed.">				if(text.getText().isEmpty()){</span>
+<span class="nc" id="L191">					JOptionPane.showMessageDialog(UnitLanding.this, &quot;Fields cannot be empty, or strings, Input required: Customer ID (integer)&quot;, &quot;Error&quot;</span>
 							, JOptionPane.ERROR_MESSAGE);
 				}else{
 					try{
-<span class="nc" id="L190">						ArrayList&lt;Integer&gt; customerSmallUnits = new ArrayList&lt;Integer&gt;();</span>
-<span class="nc" id="L191">						ArrayList&lt;Integer&gt; customerLargeUnits = new ArrayList&lt;Integer&gt;();</span>
-<span class="nc" id="L192">						String[] customerData = new String[]{&quot;&quot;,&quot;&quot;,&quot;&quot;};</span>
-<span class="nc" id="L193">						int customerId = Integer.parseInt(text.getText());</span>
-<span class="nc" id="L194">						int numberOfLargeOwned = theUnit.getNumberOfUnitsOwnedInLargeByCustomerId(customerId);</span>
-<span class="nc" id="L195">						int numberOfSmallOwned = theUnit.getNumberOfUnitsOwnedInSmallByCustomerId(customerId);</span>
-<span class="nc" id="L196">						customerSmallUnits = theUnit.getCustomerUnitsInSmall(customerId);</span>
-<span class="nc" id="L197">						customerLargeUnits = theUnit.getCustomerUnitsInLarge(customerId);</span>
-<span class="nc" id="L198">						customerData = theCustomer.getCustomerData(customerId);</span>
+<span class="nc" id="L195">						ArrayList&lt;Integer&gt; customerSmallUnits = new ArrayList&lt;Integer&gt;();</span>
+<span class="nc" id="L196">						ArrayList&lt;Integer&gt; customerLargeUnits = new ArrayList&lt;Integer&gt;();</span>
+<span class="nc" id="L197">						String[] customerData = new String[]{&quot;&quot;,&quot;&quot;,&quot;&quot;};</span>
+<span class="nc" id="L198">						int customerId = Integer.parseInt(text.getText());</span>
+<span class="nc" id="L199">						int numberOfLargeOwned = theUnit.getNumberOfUnitsOwnedInLargeByCustomerId(customerId);</span>
+<span class="nc" id="L200">						int numberOfSmallOwned = theUnit.getNumberOfUnitsOwnedInSmallByCustomerId(customerId);</span>
+<span class="nc" id="L201">						customerSmallUnits = theUnit.getCustomerUnitsInSmall(customerId);</span>
+<span class="nc" id="L202">						customerLargeUnits = theUnit.getCustomerUnitsInLarge(customerId);</span>
+<span class="nc" id="L203">						customerData = theCustomer.getCustomerData(customerId);</span>
 						
-<span class="nc" id="L200">						textArea1.setText(&quot;Customer # &quot; + customerId + &quot;\n&quot; + customerData[0] + &quot; &quot;  + customerData[1] + &quot;\n&quot; +</span>
+<span class="nc" id="L205">						textArea1.setText(&quot;Customer # &quot; + customerId + &quot;\n&quot; + customerData[0] + &quot; &quot;  + customerData[1] + &quot;\n&quot; +</span>
 								customerData[2]);
-<span class="nc" id="L202">						textArea1.append(&quot;\nCurrently owns &quot; + numberOfLargeOwned + &quot; in the large warehouse&quot;);</span>
-<span class="nc" id="L203">						textArea1.append(&quot;\nCurrently owns &quot; + numberOfSmallOwned + &quot; in the small warehouse&quot;);</span>
+<span class="nc" id="L207">						textArea1.append(&quot;\nCurrently owns &quot; + numberOfLargeOwned + &quot; in the large warehouse&quot;);</span>
+<span class="nc" id="L208">						textArea1.append(&quot;\nCurrently owns &quot; + numberOfSmallOwned + &quot; in the small warehouse&quot;);</span>
 						
-<span class="nc bnc" id="L205" title="All 2 branches missed.">						if(numberOfLargeOwned &gt; 0){</span>
-<span class="nc" id="L206">							textArea1.append(&quot;\nLarge units owned: &quot;);</span>
-<span class="nc bnc" id="L207" title="All 2 branches missed.">							for(int i = 0; i &lt; customerLargeUnits.size(); i++){</span>
-<span class="nc" id="L208">								textArea1.append(customerLargeUnits.get(i) + &quot;, &quot;);</span>
+<span class="nc bnc" id="L210" title="All 2 branches missed.">						if(numberOfLargeOwned &gt; 0){</span>
+<span class="nc" id="L211">							textArea1.append(&quot;\nLarge units owned: &quot;);</span>
+<span class="nc bnc" id="L212" title="All 2 branches missed.">							for(int i = 0; i &lt; customerLargeUnits.size(); i++){</span>
+<span class="nc" id="L213">								textArea1.append(customerLargeUnits.get(i) + &quot;, &quot;);</span>
 							}
 						}
 						
-<span class="nc bnc" id="L212" title="All 2 branches missed.">						if(numberOfSmallOwned &gt; 0){</span>
-<span class="nc" id="L213">							textArea1.append(&quot;\nSmall units owned: &quot;);</span>
-<span class="nc bnc" id="L214" title="All 2 branches missed.">							for(int i = 0; i &lt; customerSmallUnits.size(); i++){</span>
-<span class="nc" id="L215">								textArea1.append(customerSmallUnits.get(i) + &quot;, &quot;);</span>
+<span class="nc bnc" id="L217" title="All 2 branches missed.">						if(numberOfSmallOwned &gt; 0){</span>
+<span class="nc" id="L218">							textArea1.append(&quot;\nSmall units owned: &quot;);</span>
+<span class="nc bnc" id="L219" title="All 2 branches missed.">							for(int i = 0; i &lt; customerSmallUnits.size(); i++){</span>
+<span class="nc" id="L220">								textArea1.append(customerSmallUnits.get(i) + &quot;, &quot;);</span>
 							}
 						}
-<span class="nc" id="L218">					}catch(Exception NumberFormatException){</span>
-<span class="nc" id="L219">						JOptionPane.showMessageDialog(UnitLanding.this, &quot;Fields cannot strings, Input required: Customer ID (integer)&quot;, &quot;Error&quot;</span>
+<span class="nc" id="L223">					}catch(Exception NumberFormatException){</span>
+<span class="nc" id="L224">						JOptionPane.showMessageDialog(UnitLanding.this, &quot;Fields cannot strings, Input required: Customer ID (integer)&quot;, &quot;Error&quot;</span>
 								, JOptionPane.ERROR_MESSAGE);
-<span class="nc" id="L221">					}</span>
+<span class="nc" id="L226">					}</span>
 				}
 				
 				//get data button---------------------
-<span class="nc bnc" id="L225" title="All 2 branches missed.">			}else if(e.getSource() == getDataBut){</span>
-<span class="nc" id="L226">				ArrayList&lt;String&gt; largeUnitData = new ArrayList&lt;String&gt;();</span>
-<span class="nc" id="L227">				largeUnitData = theUnit.displayLargeWarehouseData();</span>
+<span class="nc bnc" id="L230" title="All 2 branches missed.">			}else if(e.getSource() == getDataBut){</span>
+<span class="nc" id="L231">				ArrayList&lt;String&gt; largeUnitData = new ArrayList&lt;String&gt;();</span>
+				try {
+<span class="nc" id="L233">					largeUnitData = theUnit.displayLargeWarehouseData();</span>
+<span class="nc" id="L234">				} catch (SQLException e1) {</span>
+<span class="nc" id="L235">				}</span>
 							
-<span class="nc" id="L229">		  		textArea1.setText(&quot;Large Units in the system\n&quot;);</span>
-<span class="nc" id="L230">		  		textArea1.append(&quot;-----------------------------------------------------------&quot;);</span>
+<span class="nc" id="L237">		  		textArea1.setText(&quot;Large Units in the system\n&quot;);</span>
+<span class="nc" id="L238">		  		textArea1.append(&quot;-----------------------------------------------------------&quot;);</span>
 					
-<span class="nc bnc" id="L232" title="All 2 branches missed.">		  		for(int i = 0; i &lt; largeUnitData.size(); i++){</span>
-<span class="nc" id="L233">	  				textArea1.append(&quot;\nid	:  &quot; + largeUnitData.get(i));</span>
-<span class="nc" id="L234">	  				i++;</span>
-<span class="nc" id="L235">	  				textArea1.append(&quot;\ndescription	:  &quot; + largeUnitData.get(i));</span>
-<span class="nc" id="L236">	  				i++;</span>
-<span class="nc" id="L237">	  				textArea1.append(&quot;\ncustomer Id	:  &quot; + largeUnitData.get(i));</span>
-<span class="nc" id="L238">	  				i++;</span>
-<span class="nc" id="L239">	  				textArea1.append(&quot;\nwarehouse Id	:  &quot; + largeUnitData.get(i));</span>
-<span class="nc" id="L240">	  				i++;</span>
-<span class="nc" id="L241">	  				textArea1.append(&quot;\noccupied	:  &quot; + largeUnitData.get(i));</span>
+<span class="nc bnc" id="L240" title="All 2 branches missed.">		  		for(int i = 0; i &lt; largeUnitData.size(); i++){</span>
+<span class="nc" id="L241">	  				textArea1.append(&quot;\nid	:  &quot; + largeUnitData.get(i));</span>
 <span class="nc" id="L242">	  				i++;</span>
-<span class="nc" id="L243">	  				textArea1.append(&quot;\ndate Received	:  &quot; + largeUnitData.get(i));</span>
+<span class="nc" id="L243">	  				textArea1.append(&quot;\ndescription	:  &quot; + largeUnitData.get(i));</span>
 <span class="nc" id="L244">	  				i++;</span>
-<span class="nc" id="L245">	  				textArea1.append(&quot;\nPickup date	:  &quot; + largeUnitData.get(i));</span>
+<span class="nc" id="L245">	  				textArea1.append(&quot;\ncustomer Id	:  &quot; + largeUnitData.get(i));</span>
 <span class="nc" id="L246">	  				i++;</span>
-<span class="nc" id="L247">	  				textArea1.append(&quot;\nPriority	:  &quot; + largeUnitData.get(i));</span>
+<span class="nc" id="L247">	  				textArea1.append(&quot;\nwarehouse Id	:  &quot; + largeUnitData.get(i));</span>
 <span class="nc" id="L248">	  				i++;</span>
-<span class="nc" id="L249">	  				textArea1.append(&quot;\ninQueue	:  &quot; + largeUnitData.get(i));</span>
+<span class="nc" id="L249">	  				textArea1.append(&quot;\noccupied	:  &quot; + largeUnitData.get(i));</span>
 <span class="nc" id="L250">	  				i++;</span>
-<span class="nc" id="L251">	  				textArea1.append(&quot;\nnPlaceInQueue	:  &quot; + largeUnitData.get(i));</span>
-<span class="nc" id="L252">	  				textArea1.append(&quot;\n-----------------------------------------------------------&quot;);</span>
+<span class="nc" id="L251">	  				textArea1.append(&quot;\ndate Received	:  &quot; + largeUnitData.get(i));</span>
+<span class="nc" id="L252">	  				i++;</span>
+<span class="nc" id="L253">	  				textArea1.append(&quot;\nPickup date	:  &quot; + largeUnitData.get(i));</span>
+<span class="nc" id="L254">	  				i++;</span>
+<span class="nc" id="L255">	  				textArea1.append(&quot;\nPriority	:  &quot; + largeUnitData.get(i));</span>
+<span class="nc" id="L256">	  				i++;</span>
+<span class="nc" id="L257">	  				textArea1.append(&quot;\ninQueue	:  &quot; + largeUnitData.get(i));</span>
+<span class="nc" id="L258">	  				i++;</span>
+<span class="nc" id="L259">	  				textArea1.append(&quot;\nnPlaceInQueue	:  &quot; + largeUnitData.get(i));</span>
+<span class="nc" id="L260">	  				textArea1.append(&quot;\n-----------------------------------------------------------&quot;);</span>
 		  		}
 		  		
-<span class="nc" id="L255">				ArrayList&lt;String&gt; smallUnitData = new ArrayList&lt;String&gt;();</span>
-<span class="nc" id="L256">				smallUnitData = theUnit.displaySmallWarehouseData();</span>
+<span class="nc" id="L263">				ArrayList&lt;String&gt; smallUnitData = new ArrayList&lt;String&gt;();</span>
+				try {
+<span class="nc" id="L265">					smallUnitData = theUnit.displaySmallWarehouseData();</span>
+<span class="nc" id="L266">				} catch (SQLException e1) {</span>
+<span class="nc" id="L267">				}</span>
 				
-<span class="nc" id="L258">		  		textArea1.append(&quot;\nSmall Units in the system\n&quot;);</span>
+<span class="nc" id="L269">		  		textArea1.append(&quot;\nSmall Units in the system\n&quot;);</span>
 		  		
-<span class="nc bnc" id="L260" title="All 2 branches missed.">		  		for(int i = 0; i &lt; smallUnitData.size(); i++){</span>
-<span class="nc" id="L261">	  				textArea1.append(&quot;\nid	:  &quot; + smallUnitData.get(i));</span>
-<span class="nc" id="L262">	  				i++;</span>
-<span class="nc" id="L263">	  				textArea1.append(&quot;\ndescription	:  &quot; + smallUnitData.get(i));</span>
-<span class="nc" id="L264">	  				i++;</span>
-<span class="nc" id="L265">	  				textArea1.append(&quot;\ncustomer Id	:  &quot; + smallUnitData.get(i));</span>
-<span class="nc" id="L266">	  				i++;</span>
-<span class="nc" id="L267">	  				textArea1.append(&quot;\nwarehouse Id	:  &quot; + smallUnitData.get(i));</span>
-<span class="nc" id="L268">	  				i++;</span>
-<span class="nc" id="L269">	  				textArea1.append(&quot;\noccupied	:  &quot; + smallUnitData.get(i));</span>
-<span class="nc" id="L270">	  				i++;</span>
-<span class="nc" id="L271">	  				textArea1.append(&quot;\ndate Received	:  &quot; + smallUnitData.get(i));</span>
-<span class="nc" id="L272">	  				i++;</span>
-<span class="nc" id="L273">	  				textArea1.append(&quot;\nPickup date	:  &quot; + smallUnitData.get(i));</span>
-<span class="nc" id="L274">	  				i++;</span>
-<span class="nc" id="L275">	  				textArea1.append(&quot;\nPriority	:  &quot; + smallUnitData.get(i));</span>
-<span class="nc" id="L276">	  				i++;</span>
-<span class="nc" id="L277">	  				textArea1.append(&quot;\ninQueue	:  &quot; + smallUnitData.get(i));</span>
-<span class="nc" id="L278">	  				i++;</span>
-<span class="nc" id="L279">	  				textArea1.append(&quot;\nPlaceInQueue	:  &quot; + smallUnitData.get(i));</span>
-<span class="nc" id="L280">	  				textArea1.append(&quot;\n-----------------------------------------------------------&quot;);</span>
+<span class="nc bnc" id="L271" title="All 2 branches missed.">		  		for(int i = 0; i &lt; smallUnitData.size(); i++){</span>
+<span class="nc" id="L272">	  				textArea1.append(&quot;\nid	:  &quot; + smallUnitData.get(i));</span>
+<span class="nc" id="L273">	  				i++;</span>
+<span class="nc" id="L274">	  				textArea1.append(&quot;\ndescription	:  &quot; + smallUnitData.get(i));</span>
+<span class="nc" id="L275">	  				i++;</span>
+<span class="nc" id="L276">	  				textArea1.append(&quot;\ncustomer Id	:  &quot; + smallUnitData.get(i));</span>
+<span class="nc" id="L277">	  				i++;</span>
+<span class="nc" id="L278">	  				textArea1.append(&quot;\nwarehouse Id	:  &quot; + smallUnitData.get(i));</span>
+<span class="nc" id="L279">	  				i++;</span>
+<span class="nc" id="L280">	  				textArea1.append(&quot;\noccupied	:  &quot; + smallUnitData.get(i));</span>
+<span class="nc" id="L281">	  				i++;</span>
+<span class="nc" id="L282">	  				textArea1.append(&quot;\ndate Received	:  &quot; + smallUnitData.get(i));</span>
+<span class="nc" id="L283">	  				i++;</span>
+<span class="nc" id="L284">	  				textArea1.append(&quot;\nPickup date	:  &quot; + smallUnitData.get(i));</span>
+<span class="nc" id="L285">	  				i++;</span>
+<span class="nc" id="L286">	  				textArea1.append(&quot;\nPriority	:  &quot; + smallUnitData.get(i));</span>
+<span class="nc" id="L287">	  				i++;</span>
+<span class="nc" id="L288">	  				textArea1.append(&quot;\ninQueue	:  &quot; + smallUnitData.get(i));</span>
+<span class="nc" id="L289">	  				i++;</span>
+<span class="nc" id="L290">	  				textArea1.append(&quot;\nPlaceInQueue	:  &quot; + smallUnitData.get(i));</span>
+<span class="nc" id="L291">	  				textArea1.append(&quot;\n-----------------------------------------------------------&quot;);</span>
 		  		}
 		  		
 				// find small vacants button-----------
-<span class="nc bnc" id="L284" title="All 2 branches missed.">			}else if(e.getSource() == vacantSmallBut){</span>
-<span class="nc" id="L285">				ArrayList&lt;Integer&gt; smallUnitEmpty = new ArrayList&lt;Integer&gt;();</span>
-<span class="nc" id="L286">				smallUnitEmpty = theUnit.getEmptyUnitsInSmall();</span>
-<span class="nc" id="L287">				textArea1.setText(&quot;The following units are empty in the small warehouse: \n&quot;);</span>
-<span class="nc bnc" id="L288" title="All 2 branches missed.">				for(int i = 0; i &lt; smallUnitEmpty.size(); i++){</span>
-<span class="nc" id="L289">					textArea1.append(smallUnitEmpty.get(i) + &quot;, &quot;);</span>
+<span class="nc bnc" id="L295" title="All 2 branches missed.">			}else if(e.getSource() == vacantSmallBut){</span>
+<span class="nc" id="L296">				ArrayList&lt;Integer&gt; smallUnitEmpty = new ArrayList&lt;Integer&gt;();</span>
+				try {
+<span class="nc" id="L298">					smallUnitEmpty = theUnit.getEmptyUnitsInSmall();</span>
+<span class="nc" id="L299">				} catch (SQLException e1) {</span>
+<span class="nc" id="L300">				}</span>
+<span class="nc" id="L301">				textArea1.setText(&quot;The following units are empty in the small warehouse: \n&quot;);</span>
+<span class="nc bnc" id="L302" title="All 2 branches missed.">				for(int i = 0; i &lt; smallUnitEmpty.size(); i++){</span>
+<span class="nc" id="L303">					textArea1.append(smallUnitEmpty.get(i) + &quot;, &quot;);</span>
 				}
 				//find large vacants button------------
-<span class="nc bnc" id="L292" title="All 2 branches missed.">			}else if(e.getSource() == vacantLargeBut){</span>
-<span class="nc" id="L293">				ArrayList&lt;Integer&gt; largeUnitEmpty = new ArrayList&lt;Integer&gt;();</span>
-<span class="nc" id="L294">				largeUnitEmpty = theUnit.getEmptyUnitsInLarge();</span>
-<span class="nc" id="L295">				textArea1.setText(&quot;The following units are empty in the large warehouse: \n&quot;);</span>
-<span class="nc bnc" id="L296" title="All 2 branches missed.">				for(int i = 0; i &lt; largeUnitEmpty.size(); i++){</span>
-<span class="nc" id="L297">					textArea1.append(largeUnitEmpty.get(i) + &quot;, &quot;);</span>
+<span class="nc bnc" id="L306" title="All 2 branches missed.">			}else if(e.getSource() == vacantLargeBut){</span>
+<span class="nc" id="L307">				ArrayList&lt;Integer&gt; largeUnitEmpty = new ArrayList&lt;Integer&gt;();</span>
+				try {
+<span class="nc" id="L309">					largeUnitEmpty = theUnit.getEmptyUnitsInLarge();</span>
+<span class="nc" id="L310">				} catch (SQLException e1) {	}</span>
+<span class="nc" id="L311">				textArea1.setText(&quot;The following units are empty in the large warehouse: \n&quot;);</span>
+<span class="nc bnc" id="L312" title="All 2 branches missed.">				for(int i = 0; i &lt; largeUnitEmpty.size(); i++){</span>
+<span class="nc" id="L313">					textArea1.append(largeUnitEmpty.get(i) + &quot;, &quot;);</span>
 				}
-<span class="nc bnc" id="L299" title="All 2 branches missed.">			}else if(e.getSource() == removeBut){</span>
-<span class="nc bnc" id="L300" title="All 2 branches missed.">				if(text.getText().isEmpty()){</span>
-<span class="nc" id="L301">					JOptionPane.showMessageDialog(UnitLanding.this, &quot;Fields cannot be empty, Input required: Unit ID&quot;, &quot;Error&quot;</span>
+<span class="nc bnc" id="L315" title="All 2 branches missed.">			}else if(e.getSource() == removeBut){</span>
+<span class="nc bnc" id="L316" title="All 2 branches missed.">				if(text.getText().isEmpty()){</span>
+<span class="nc" id="L317">					JOptionPane.showMessageDialog(UnitLanding.this, &quot;Fields cannot be empty, Input required: Unit ID&quot;, &quot;Error&quot;</span>
 							, JOptionPane.ERROR_MESSAGE);
 				}else{
-<span class="nc" id="L304">					int unitId = Integer.parseInt(text.getText());</span>
-<span class="nc" id="L305">					boolean check = theUnit.removeUnit(unitId);</span>
-<span class="nc bnc" id="L306" title="All 2 branches missed.">					if(check == true){</span>
-<span class="nc" id="L307">						 JOptionPane.showMessageDialog(UnitLanding.this,&quot;The unit was sucessfully cleared &quot;,</span>
+					try{
+<span class="nc" id="L321">					int unitId = Integer.parseInt(text.getText());</span>
+<span class="nc" id="L322">					theUnit.removeUnit(unitId);</span>
+<span class="nc" id="L323">						 JOptionPane.showMessageDialog(UnitLanding.this,&quot;The unit was sucessfully cleared &quot;,</span>
 								 &quot;Solution&quot;, JOptionPane.INFORMATION_MESSAGE);
-					}else{
-<span class="nc" id="L310">						JOptionPane.showMessageDialog(UnitLanding.this, &quot;Something went wrong in the database, please try again later&quot;, &quot;Error&quot;</span>
+			
+<span class="nc" id="L326">					}catch(Exception NumberFormatException){</span>
+<span class="nc" id="L327">						JOptionPane.showMessageDialog(UnitLanding.this, &quot;Fields cannot strings, Input required: Unit ID (integer)&quot;, &quot;Error&quot;</span>
 								, JOptionPane.ERROR_MESSAGE);
-					}
+<span class="nc" id="L329">					}</span>
 				}
+					
+<span class="nc bnc" id="L332" title="All 2 branches missed.">			}else if(e.getSource() == clearAll){</span>
+<span class="nc" id="L333">				 text.setText(&quot;&quot;);</span>
+<span class="nc" id="L334">				 textArea1.setText(&quot;&quot;);</span>
+<span class="nc" id="L335">				 JOptionPane.showMessageDialog(UnitLanding.this,&quot;All fields have now been cleared&quot;,</span>
+						 &quot;Solution&quot;, JOptionPane.INFORMATION_MESSAGE);
 			}
-<span class="nc" id="L315">		}</span>
+<span class="nc" id="L338">		}</span>
 	}
 }
 

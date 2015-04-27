@@ -46,20 +46,16 @@ public class LoggedInFrame extends JFrame{
 		try {
 			queuedUnits = theUnit.numberOfItemsInQueue();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 		try {
 			smallEmpty= theUnit.getNumberOfEmptyUnitsInSmall();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+
 		}
 		try {
 			largeEmpty = theUnit.getNumberOfEmptyUnitsInLarge();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+
 		}
 		
 		username = new JLabel("Logged in as: " + userSessionData[2] + "          	           	  " + "       Today's date is: " + date);

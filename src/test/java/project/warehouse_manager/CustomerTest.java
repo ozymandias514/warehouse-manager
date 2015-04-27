@@ -25,11 +25,6 @@ public class CustomerTest {
 	}
 
 	@Test
-	public void testGetDataFromCustomer() throws SQLException {
-		assertTrue(customer.getDataFromCustomer());
-	}
-
-	@Test
 	public void testAddCustomer() {
 		assertTrue(customer.addCustomer("Jonathan", "Joestar", "jojo@gmail.com"));
 	}
