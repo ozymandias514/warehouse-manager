@@ -143,8 +143,6 @@ public class CustomerLanding extends JFrame {
 				try {
 					userData = theCustomer.displayData();
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
 				}
 			
 		  		textArea1.setText("Customers in the system\n");
@@ -184,8 +182,6 @@ public class CustomerLanding extends JFrame {
 					try {
 						data = theCustomer.getDataByEmail(email);
 					} catch (SQLException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
 					}
 					textArea1.setText("The user id pertaining to that email is: " + data[0] +
 						"\nFirst Name: " + data[1] + "\nLast Name: " + data[2] + "\nemail: " + data[3]);	

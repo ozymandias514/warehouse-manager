@@ -124,15 +124,11 @@ public class CustomerAddRemove extends JFrame{
 					String userFirstName = firstNameField.getText();
 					String userLastName = lastNameField.getText();
 					String userEmail = emailField.getText();
-					boolean answer = theCustomer.addCustomer(userFirstName, userLastName, userEmail);
-					if(answer == true){
+					theCustomer.addCustomer(userFirstName, userLastName, userEmail);
+				
 					 JOptionPane.showMessageDialog(CustomerAddRemove.this,"The customer insertion was succesful",
 							 "Solution", JOptionPane.INFORMATION_MESSAGE);
-					}else{
-						JOptionPane.showMessageDialog(CustomerAddRemove.this,
-								"Something went wrong in the database, please try again later",
-								"Error" , JOptionPane.ERROR_MESSAGE);
-					}
+		
 				}
 				
 				//delete customer button---------------------------
@@ -152,15 +148,11 @@ public class CustomerAddRemove extends JFrame{
 							 theUnit.emptyUnitByCustomer(customerId);
 						 }
 						 
-						 boolean answer = theCustomer.deleteCustomer(customerId);
-						 if(answer = true){
+						theCustomer.deleteCustomer(customerId);
+					
 							 JOptionPane.showMessageDialog(CustomerAddRemove.this,"The customer deletion succesful",
 									 "Solution", JOptionPane.INFORMATION_MESSAGE);
-						 }else{
-							JOptionPane.showMessageDialog(CustomerAddRemove.this,
-									"We are currently experiencing database problems please try again later",
-									"Error" , JOptionPane.ERROR_MESSAGE);
-						 }
+				
 				 }catch(Exception NumberFormatException){
 						JOptionPane.showMessageDialog(CustomerAddRemove.this,
 								"Field Cannot be a string, Input Required: Customer ID",
@@ -171,31 +163,21 @@ public class CustomerAddRemove extends JFrame{
 					int customerId = 0;
 					try {
 						customerId = theCustomer.getIdByEmail(customerEmail);
-					} catch (SQLException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
+					} catch (SQLException e1) {	}
 					int totalUnits = 0;
 					try {
 						totalUnits = theUnit.totalUnitsByCustomer(customerId);
-					} catch (SQLException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
+					} catch (SQLException e1) {	}
 					
 					if(totalUnits > 0){
 						theUnit.emptyUnitByCustomer(customerId);
 					}
 					
-					boolean answer = theCustomer.deleteCustomer(customerId);
-					 if(answer == true){
+					theCustomer.deleteCustomer(customerId);
+					
 						 JOptionPane.showMessageDialog(CustomerAddRemove.this,"The customer deletion was sucesful",
 								 "Solution", JOptionPane.INFORMATION_MESSAGE);
-					 }else{
-						JOptionPane.showMessageDialog(CustomerAddRemove.this,
-								"We are currently experiencing database problems please try again later",
-								"Error" , JOptionPane.ERROR_MESSAGE);
-					 }	
+			
 				}
 			}else if(e.getSource() == clearAll){
 				 firstNameField.setText("");
